@@ -1,0 +1,30 @@
+{
+	"name": "free-mermaid",
+	"version": "1.0.0",
+	"private": true,
+	"scripts": {
+		"build": "nuxt build",
+		"dev": "nuxt dev",
+		"generate": "nuxt generate",
+		"preview": "nuxt preview",
+		"postinstall": "nuxt prepare"
+	},
+	"devDependencies": {
+		"@nuxt/devtools": "latest",
+		"@nuxtjs/tailwindcss": "^6.8.0",
+		"nuxt": "^3.7.3"
+	},
+	"dependencies": {
+		"@codemirror/lang-javascript": "^6.2.1",
+		"@codemirror/language": "^6.9.1",
+		"@codemirror/state": "^6.2.1",
+		"@codemirror/view": "^6.21.3",
+		"@headlessui/vue": "^1.7.16",
+		"@heroicons/vue": "^2.0.18",
+		"codemirror": "^6.0.1",
+		"file-saver": "^2.0.5",
+		"html-to-image": "^1.11.11",
+		"mermaid": "^10.5.0",
+		"vue-codemirror": "^6.1.1"
+	}
+}
