@@ -187,9 +187,9 @@
 		{
 			name: '实体关系图',
 			code: `erDiagram
-    顾客 ||--o{ 订单 : 下单
-    订单 ||--|{ 订单项 : 包含
-    顾客 }|..|{ 支付 : 支付`
+    CUSTOMER ||--o{ ORDER : places
+    ORDER ||--|{ LINE-ITEM : contains
+    CUSTOMER }|..|{ DELIVERY-ADDRESS : uses`
 		},
 		{
 			name: '甘特图',
