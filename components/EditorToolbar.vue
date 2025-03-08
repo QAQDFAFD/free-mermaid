@@ -40,7 +40,12 @@
 					v-for="example in examples"
 					:key="example.name"
 					@click="loadExample(example.code)"
-					class="px-2 py-1 text-sm text-gray-700 hover:bg-gray-100 rounded">
+					:class="[
+						'px-2 py-1 text-sm rounded transition-colors duration-200',
+						isCurrentType(example.code)
+							? 'bg-blue-100 text-blue-700 font-medium'
+							: 'text-gray-700 hover:bg-gray-100'
+					]">
 					{{ example.name }}
 				</button>
 			</div>
@@ -128,12 +133,20 @@
 </template>
 
 <script setup lang="ts">
-	import { ref, onMounted, onUnmounted } from 'vue'
+	import { ref, onMounted, onUnmounted, computed, watch } from 'vue'
 	import { exportAsPng, exportAsSvg } from '~/utils/exportUtils'
+
+	const props = defineProps({
+		modelValue: {
+			type: String,
+			default: ''
+		}
+	})
 
 	const emit = defineEmits(['update:code'])
 
 	const isExportMenuOpen = ref(false)
+	const currentCode = ref(props.modelValue || '')
 
 	// 示例图表
 	const examples = [
@@ -213,14 +226,26 @@
 		}
 	]
 
+	// 检查当前代码是否匹配某个示例类型
+	const isCurrentType = (exampleCode: string) => {
+		// 获取当前代码和示例代码的第一行（图表类型声明）
+		const currentFirstLine = currentCode.value.trim().split('\n')[0]?.trim() || ''
+		const exampleFirstLine = exampleCode.trim().split('\n')[0]?.trim() || ''
+
+		// 比较第一行来确定图表类型
+		return currentFirstLine === exampleFirstLine
+	}
+
 	// 加载示例
 	const loadExample = (code: string) => {
+		currentCode.value = code
 		emit('update:code', code)
 		isExportMenuOpen.value = false
 	}
 
 	// 清空编辑器
 	const clearEditor = () => {
+		currentCode.value = ''
 		emit('update:code', '')
 		isExportMenuOpen.value = false
 	}
@@ -242,6 +267,16 @@
 			isExportMenuOpen.value = false
 		}
 	}
+
+	// 监听代码变化
+	watch(
+		() => props.modelValue,
+		newValue => {
+			if (newValue !== undefined) {
+				currentCode.value = newValue
+			}
+		}
+	)
 
 	onMounted(() => {
 		document.addEventListener('click', closeExportMenu)

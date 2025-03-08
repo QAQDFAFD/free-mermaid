@@ -1,7 +1,7 @@
 <template>
 	<div class="flex flex-col h-screen bg-gray-50">
 		<!-- 工具栏 -->
-		<EditorToolbar @update:code="updateCode" />
+		<EditorToolbar @update:code="updateCode" :model-value="code" />
 
 		<!-- 主内容区域 -->
 		<div class="flex flex-col md:flex-row flex-1 overflow-hidden relative">
