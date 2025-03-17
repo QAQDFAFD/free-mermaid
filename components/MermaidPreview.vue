@@ -11,7 +11,7 @@
 					</svg>
 				</div>
 				<div class="ml-3 flex-1">
-					<h3 class="text-sm font-medium text-red-800">语法错误</h3>
+					<h3 class="text-sm font-medium text-red-800">Mermaid Drawing Syntax Error</h3>
 					<div class="mt-1 text-sm text-red-700">
 						<p>{{ formatErrorMessage(error) }}</p>
 					</div>
@@ -19,24 +19,24 @@
 						<button
 							@click="showHelp = !showHelp"
 							class="text-xs text-blue-600 hover:text-blue-800 underline">
-							{{ showHelp ? '隐藏帮助' : '查看帮助' }}
+							{{ showHelp ? 'Hide Help' : 'View Help' }}
 						</button>
 					</div>
 					<div v-if="showHelp" class="mt-2 text-xs text-gray-700 bg-gray-50 p-2 rounded">
-						<p class="font-medium mb-1">常见错误修复建议：</p>
+						<p class="font-medium mb-1">Common Mermaid Drawing Error Fixing Suggestions:</p>
 						<ul class="list-disc pl-4 space-y-1">
-							<li>确保图表类型正确（如 graph TD, sequenceDiagram 等）</li>
-							<li>检查节点定义和连接语法是否正确</li>
-							<li>确保所有括号、引号都已正确闭合</li>
-							<li>检查是否有未定义的节点被引用</li>
-							<li>尝试简化复杂的图表结构</li>
+							<li>Ensure the chart type is correct (e.g. graph TD, sequenceDiagram, etc.)</li>
+							<li>Check if node definitions and connection syntax are correct</li>
+							<li>Make sure all brackets and quotes are properly closed</li>
+							<li>Check if there are any undefined nodes being referenced</li>
+							<li>Try simplifying complex chart structures</li>
 						</ul>
 						<p class="mt-2">
 							<a
 								href="https://mermaid.js.org/syntax/flowchart.html"
 								target="_blank"
 								class="text-blue-600 hover:underline">
-								查看 Mermaid 语法文档 →
+								View Mermaid Drawing Syntax Documentation →
 							</a>
 						</p>
 					</div>
@@ -140,7 +140,7 @@
 				resetView(false)
 			} catch (parseErr: any) {
 				// 解析或渲染错误
-				error.value = parseErr.message || '图表语法错误'
+				error.value = parseErr.message || 'Mermaid drawing syntax error'
 
 				// 显示错误提示，但保留编辑器内容
 				if (diagramRef.value) {
@@ -150,17 +150,17 @@
 								<svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
 								</svg>
-								<p class="mt-2">语法错误，请修正后重试</p>
+								<p class="mt-2">Syntax error in your mermaid drawing, please correct and try again</p>
 							</div>
 						</div>
 					`
 				}
 
-				console.error('Mermaid 解析错误:', parseErr)
+				console.error('Mermaid drawing parsing error:', parseErr)
 			}
 		} catch (err: any) {
-			error.value = err.message || '图表渲染失败'
-			console.error('Mermaid 渲染错误:', err)
+			error.value = err.message || 'Mermaid drawing rendering failed'
+			console.error('Mermaid drawing rendering error:', err)
 		}
 	}
 
@@ -257,7 +257,7 @@
 			} else {
 				if (diagramRef.value) {
 					diagramRef.value.innerHTML =
-						'<div class="flex items-center justify-center h-full w-full text-gray-400">在左侧编辑器输入 Mermaid 代码以查看预览</div>'
+						'<div class="flex items-center justify-center h-full w-full text-gray-400">Enter your mermaid drawing code in the editor to see the preview</div>'
 				}
 				error.value = null
 				showHelp.value = false
@@ -272,7 +272,7 @@
 		} else {
 			if (diagramRef.value) {
 				diagramRef.value.innerHTML =
-					'<div class="flex items-center justify-center h-full w-full text-gray-400">在左侧编辑器输入 Mermaid 代码以查看预览</div>'
+					'<div class="flex items-center justify-center h-full w-full text-gray-400">Enter your mermaid drawing code in the editor to see the preview</div>'
 			}
 		}
 	})

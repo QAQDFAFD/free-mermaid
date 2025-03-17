@@ -32,7 +32,7 @@
 						stroke-linecap="round"
 						stroke-linejoin="round" />
 				</svg>
-				<h1 class="text-xl font-bold text-gray-900">Free Mermaid</h1>
+				<h1 class="text-xl font-bold text-gray-900">Mermaid Drawing</h1>
 			</div>
 
 			<div class="hidden md:flex space-x-2">
@@ -67,7 +67,7 @@
 						stroke-width="2"
 						d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
 				</svg>
-				清空
+				Clear
 			</button>
 
 			<div class="relative">
@@ -86,7 +86,7 @@
 							stroke-width="2"
 							d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
 					</svg>
-					导出
+					Export Drawing
 				</button>
 
 				<div
@@ -107,7 +107,7 @@
 									stroke-width="2"
 									d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
 							</svg>
-							导出为 PNG 图片
+							Export Mermaid Drawing as PNG
 						</button>
 						<button
 							@click="exportDiagram('svg')"
@@ -123,7 +123,7 @@
 									stroke-width="2"
 									d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
 							</svg>
-							导出为 SVG 矢量图
+							Export Mermaid Drawing as SVG
 						</button>
 					</div>
 				</div>
@@ -151,28 +151,28 @@
 	// 示例图表
 	const examples = [
 		{
-			name: '流程图',
+			name: 'Flowchart',
 			code: `graph TD
-    A[开始] --> B{是否已登录?}
-    B -->|是| C[显示主页]
-    B -->|否| D[显示登录页]
-    C --> E[结束]
+    A[Start] --> B{Logged in?}
+    B -->|Yes| C[Show Homepage]
+    B -->|No| D[Show Login Page]
+    C --> E[End]
     D --> E`
 		},
 		{
-			name: '时序图',
+			name: 'Sequence Diagram',
 			code: `sequenceDiagram
-    participant 用户
-    participant 系统
-    participant 数据库
+    participant User
+    participant System
+    participant Database
     
-    用户->>系统: 登录请求
-    系统->>数据库: 验证凭据
-    数据库-->>系统: 验证结果
-    系统-->>用户: 登录响应`
+    User->>System: Login Request
+    System->>Database: Verify Credentials
+    Database-->>System: Verification Result
+    System-->>User: Login Response`
 		},
 		{
-			name: '类图',
+			name: 'Class Diagram',
 			code: `classDiagram
     class Animal {
       +String name
@@ -188,41 +188,41 @@
     Animal <|-- Cat`
 		},
 		{
-			name: '状态图',
+			name: 'State Diagram',
 			code: `stateDiagram-v2
-    [*] --> 待处理
-    待处理 --> 处理中: 开始处理
-    处理中 --> 已完成: 完成处理
-    处理中 --> 已取消: 取消
-    已完成 --> [*]
-    已取消 --> [*]`
+    [*] --> Pending
+    Pending --> Processing: Start Processing
+    Processing --> Completed: Complete Processing
+    Processing --> Cancelled: Cancel
+    Completed --> [*]
+    Cancelled --> [*]`
 		},
 		{
-			name: '实体关系图',
+			name: 'Entity Relationship',
 			code: `erDiagram
     CUSTOMER ||--o{ ORDER : places
     ORDER ||--|{ LINE-ITEM : contains
     CUSTOMER }|..|{ DELIVERY-ADDRESS : uses`
 		},
 		{
-			name: '甘特图',
+			name: 'Gantt Chart',
 			code: `gantt
-    title 项目开发计划
+    title Project Development Plan
     dateFormat  YYYY-MM-DD
-    section 设计阶段
-    需求分析     :done, des1, 2023-01-01, 2023-01-05
-    原型设计     :active, des2, 2023-01-06, 3d
-    section 开发阶段
-    编码        :dev1, after des2, 20d
-    测试        :dev2, after dev1, 10d`
+    section Design Phase
+    Requirements Analysis     :done, des1, 2023-01-01, 2023-01-05
+    Prototype Design     :active, des2, 2023-01-06, 3d
+    section Development Phase
+    Coding        :dev1, after des2, 20d
+    Testing        :dev2, after dev1, 10d`
 		},
 		{
-			name: '饼图',
-			code: `pie title 访问来源
-    "搜索引擎" : 42.7
-    "直接访问" : 25.5
-    "社交媒体" : 18.3
-    "其他渠道" : 13.5`
+			name: 'Pie Chart',
+			code: `pie title Traffic Sources
+    "Search Engines" : 42.7
+    "Direct Access" : 25.5
+    "Social Media" : 18.3
+    "Other Channels" : 13.5`
 		}
 	]
 

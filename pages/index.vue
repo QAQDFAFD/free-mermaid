@@ -4,14 +4,14 @@
 		<EditorToolbar @update:code="updateCode" :model-value="code" />
 
 		<!-- 主内容区域 -->
-		<div class="flex flex-col md:flex-row flex-1 overflow-hidden relative">
+		<main class="flex flex-col md:flex-row flex-1 overflow-hidden relative">
 			<!-- 左侧编辑器 -->
-			<div
+			<section
 				:style="{ width: `${leftPanelWidth}%` }"
 				class="h-1/2 md:h-full border-r border-gray-200 flex flex-col">
 				<div
 					class="h-10 flex items-center justify-between bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 border-b border-gray-200">
-					<span>编辑器</span>
+					<span>Mermaid Code Editor</span>
 					<a
 						href="https://mermaid.js.org/intro/"
 						target="_blank"
@@ -28,13 +28,13 @@
 								stroke-width="2"
 								d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
 						</svg>
-						Mermaid 教程文档
+						Mermaid Documentation
 					</a>
 				</div>
 				<div class="flex-1 overflow-hidden">
 					<MermaidEditor v-model="code" @change="updateCode" />
 				</div>
-			</div>
+			</section>
 
 			<!-- 分隔条 -->
 			<div
@@ -50,19 +50,22 @@
 			</div>
 
 			<!-- 右侧预览 -->
-			<div :style="{ width: `${100 - leftPanelWidth}%` }" class="h-1/2 md:h-full flex flex-col">
+			<section :style="{ width: `${100 - leftPanelWidth}%` }" class="h-1/2 md:h-full flex flex-col">
 				<div
 					class="h-10 bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 border-b border-gray-200 flex justify-between items-center">
 					<div class="flex items-center">
-						<span>预览 {{ currentZoom > 0 ? `(${Math.round(currentZoom * 100)}%)` : '' }}</span>
-						<span class="ml-2 text-xs text-gray-500">按住 Ctrl+滚轮可缩放</span>
+						<span
+							>Mermaid Drawing Preview
+							{{ currentZoom > 0 ? `(${Math.round(currentZoom * 100)}%)` : '' }}</span
+						>
+						<span class="ml-2 text-xs text-gray-500">Hold Ctrl+Scroll to zoom</span>
 					</div>
 					<div class="flex space-x-2">
 						<!-- 缩放控制按钮 -->
 						<button
 							@click="zoomOut"
 							class="px-2 py-1 text-xs bg-white border border-gray-300 rounded hover:bg-gray-50 flex items-center"
-							title="缩小">
+							title="Zoom Out">
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								class="h-3 w-3"
@@ -75,7 +78,7 @@
 						<button
 							@click="resetView"
 							class="px-2 py-1 text-xs bg-white border border-gray-300 rounded hover:bg-gray-50 flex items-center"
-							title="重置视图">
+							title="Reset View">
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								class="h-3 w-3"
@@ -92,7 +95,7 @@
 						<button
 							@click="zoomIn"
 							class="px-2 py-1 text-xs bg-white border border-gray-300 rounded hover:bg-gray-50 flex items-center"
-							title="放大">
+							title="Zoom In">
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								class="h-3 w-3"
@@ -111,12 +114,16 @@
 				<div class="flex-1 overflow-hidden">
 					<MermaidPreview ref="previewRef" :code="code" @zoom-change="handleZoomChange" />
 				</div>
-			</div>
-		</div>
+			</section>
+		</main>
 
 		<!-- 底部信息 -->
-		<footer class="bg-white border-t border-gray-200 py-2 px-4 text-center text-sm text-gray-500">
-			<p>Free Mermaid - 免费的在线 Mermaid 图表编辑器</p>
+		<footer class="bg-white border-t border-gray-200 py-3 px-4 text-center">
+			<h1 class="text-lg font-bold text-gray-800">Mermaid Drawing</h1>
+			<p class="text-xs text-gray-600">
+				Create beautiful diagrams with simple text-based syntax at
+				<a href="https://mermaid-drawing.com" class="text-blue-600 hover:underline">mermaid-drawing.com</a>
+			</p>
 		</footer>
 	</div>
 </template>
@@ -134,10 +141,10 @@
 
 	// 默认示例代码
 	const defaultCode = `graph TD
-  A[开始] --> B{是否已登录?}
-  B -->|是| C[显示主页]
-  B -->|否| D[显示登录页]
-  C --> E[结束]
+  A[Start] --> B{Logged in?}
+  B -->|Yes| C[Show Homepage]
+  B -->|No| D[Show Login Page]
+  C --> E[End]
   D --> E`
 
 	// 编辑器代码
@@ -229,8 +236,19 @@
 
 	// 页面元数据
 	useHead({
-		title: 'Free Mermaid - 在线 Mermaid 图表工具',
-		meta: [{ name: 'description', content: '免费的在线 Mermaid 图表编辑器，支持实时预览和导出' }]
+		title: 'Mermaid Drawing - Free Online Mermaid Chart & Diagram Tool',
+		meta: [
+			{
+				name: 'description',
+				content:
+					'Create beautiful mermaid drawings and diagrams with our free online mermaid chart editor. Real-time preview, easy export, and powerful diagramming tools.'
+			},
+			{
+				name: 'keywords',
+				content:
+					'mermaid drawing, mermaid diagram, mermaid chart, flowchart, sequence diagram, class diagram, online diagram tool'
+			}
+		]
 	})
 
 	// 组件卸载时清理事件监听器

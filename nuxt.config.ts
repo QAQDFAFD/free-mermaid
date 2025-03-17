@@ -4,16 +4,47 @@ export default defineNuxtConfig({
 	modules: ['@nuxtjs/tailwindcss'],
 	app: {
 		head: {
-			title: 'Free Mermaid - 在线 Mermaid 图表工具',
+			title: 'Mermaid Drawing - Free Online Mermaid Chart & Diagram Tool',
 			meta: [
 				{ charset: 'utf-8' },
 				{ name: 'viewport', content: 'width=device-width, initial-scale=1' },
 				{
 					name: 'description',
-					content: '免费的在线 Mermaid 图表编辑器，支持实时预览和导出'
+					content:
+						'Create beautiful mermaid drawings and diagrams with our free online mermaid chart editor. Real-time preview, easy export, and powerful diagramming tools.'
+				},
+				{
+					name: 'keywords',
+					content:
+						'mermaid drawing, mermaid diagram, mermaid chart, flowchart, sequence diagram, class diagram, online diagram tool'
+				},
+				{
+					property: 'og:title',
+					content: 'Mermaid Drawing - Free Online Mermaid Chart & Diagram Tool'
+				},
+				{
+					property: 'og:description',
+					content:
+						'Create beautiful mermaid drawings and diagrams with our free online mermaid chart editor. Real-time preview, easy export, and powerful diagramming tools.'
+				},
+				{
+					property: 'og:type',
+					content: 'website'
+				},
+				{
+					property: 'og:url',
+					content: 'https://mermaid-drawing.com'
+				},
+				{
+					name: 'robots',
+					content: 'index, follow'
 				}
 			],
-			link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+			link: [
+				{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+				{ rel: 'canonical', href: 'https://mermaid-drawing.com' },
+				{ rel: 'sitemap', type: 'application/xml', href: '/sitemap.xml' }
+			]
 		}
 	},
 	// 客户端插件配置
@@ -21,7 +52,7 @@ export default defineNuxtConfig({
 	// 运行时配置
 	runtimeConfig: {
 		public: {
-			appName: 'Free Mermaid'
+			appName: 'Mermaid Drawing'
 		}
 	}
 })

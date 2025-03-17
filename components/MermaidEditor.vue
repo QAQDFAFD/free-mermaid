@@ -3,7 +3,7 @@
 		<ClientOnly>
 			<Codemirror
 				v-model="code"
-				placeholder="在此输入 Mermaid 代码..."
+				placeholder="Enter your Mermaid drawing code here..."
 				:style="{ height: '100%', width: '100%' }"
 				:autofocus="true"
 				:indent-with-tab="true"
@@ -31,7 +31,7 @@
 
 	const code = ref(props.modelValue)
 
-	// 简单的 Mermaid 语法高亮
+	// Mermaid drawing 语法高亮
 	const mermaidSyntax = StreamLanguage.define({
 		token(stream) {
 			// 处理关键字
