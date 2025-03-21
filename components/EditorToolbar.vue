@@ -1,5 +1,6 @@
 <template>
-	<div class="bg-white border-b border-gray-200 px-4 py-2 flex items-center justify-between">
+	<div
+		class="bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 p-2 flex items-center justify-between">
 		<div class="flex items-center space-x-4">
 			<div class="flex items-center">
 				<svg
@@ -70,6 +71,8 @@
 				Clear
 			</button>
 
+			<ThemeToggle />
+
 			<div class="relative">
 				<button
 					@click="isExportMenuOpen = !isExportMenuOpen"
@@ -135,6 +138,7 @@
 <script setup lang="ts">
 	import { ref, onMounted, onUnmounted, computed, watch } from 'vue'
 	import { exportAsPng, exportAsSvg } from '~/utils/exportUtils'
+	import ThemeToggle from '~/components/ThemeToggle.vue'
 
 	const props = defineProps({
 		modelValue: {
@@ -147,6 +151,7 @@
 
 	const isExportMenuOpen = ref(false)
 	const currentCode = ref(props.modelValue || '')
+	const error = ref(null)
 
 	// 示例图表
 	const examples = [
@@ -245,8 +250,19 @@
 
 	// 清空编辑器
 	const clearEditor = () => {
-		currentCode.value = ''
+		// 先将错误状态重置为null
+		error.value = null
+
+		// 先将代码更新为空
 		emit('update:code', '')
+
+		// 使用setTimeout确保代码清空被处理后再发送重置事件
+		setTimeout(() => {
+			// 发送重置事件以便预览组件重置视图
+			const resetEvent = new CustomEvent('resetMermaidView')
+			document.dispatchEvent(resetEvent)
+		}, 50)
+
 		isExportMenuOpen.value = false
 	}
 
