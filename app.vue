@@ -1,8 +1,13 @@
 <template>
 	<div>
+		<MobileWarning />
 		<NuxtPage />
 	</div>
 </template>
+
+<script setup>
+	import MobileWarning from '~/components/MobileWarning.vue'
+</script>
 
 <style>
 	html,

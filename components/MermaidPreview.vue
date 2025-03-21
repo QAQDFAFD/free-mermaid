@@ -87,7 +87,7 @@
 	const showHelp = ref(false)
 
 	// 缩放和平移状态
-	const scale = ref(1)
+	const scale = ref(0.5)
 	const translateX = ref(0)
 	const translateY = ref(0)
 	const isPanning = ref(false)
@@ -130,13 +130,28 @@
 				// 先尝试解析代码，检查语法
 				await $mermaid.parse(props.code)
 
+				// 配置mermaid以确保可导出完整图表
+				$mermaid.initialize({
+					securityLevel: 'loose',
+					startOnLoad: false
+				})
+
 				// 使用 Mermaid 渲染图表
 				const { svg } = await $mermaid.render(id, props.code)
 
 				// 替换容器内容为渲染后的 SVG
 				diagramRef.value.innerHTML = svg
 
-				// 重置缩放和平移
+				// 确保SVG有正确的宽高
+				const svgElement = diagramRef.value.querySelector('svg')
+				if (svgElement) {
+					svgElement.style.maxWidth = '100%'
+					svgElement.style.height = 'auto'
+					svgElement.setAttribute('width', '100%')
+					svgElement.removeAttribute('height')
+				}
+
+				// 重置缩放和平移为默认的50%
 				resetView(false)
 			} catch (parseErr: any) {
 				// 解析或渲染错误
@@ -196,10 +211,10 @@
 	// 重置视图
 	const resetView = (withTransition = true) => {
 		isTransitioning.value = withTransition
-		scale.value = 1
+		scale.value = 0.5
 		translateX.value = 0
 		translateY.value = 0
-		emit('zoom-change', 1)
+		emit('zoom-change', 0.5)
 
 		// 如果有过渡动画，等待动画结束后重置过渡标志
 		if (withTransition) {

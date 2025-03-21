@@ -118,9 +118,9 @@
 		</main>
 
 		<!-- 底部信息 -->
-		<footer class="bg-white border-t border-gray-200 py-3 px-4 text-center">
-			<h1 class="text-lg font-bold text-gray-800">Mermaid Drawing</h1>
-			<p class="text-xs text-gray-600">
+		<footer class="bg-white border-t border-gray-200 py-1.5 px-4 text-center">
+			<h1 class="text-sm font-bold text-gray-800">Mermaid Drawing</h1>
+			<p class="text-xs text-gray-600 leading-tight">
 				Create beautiful diagrams with simple text-based syntax at
 				<a href="https://mermaid-drawing.com" class="text-blue-600 hover:underline">mermaid-drawing.com</a>
 			</p>
@@ -157,7 +157,7 @@
 	const currentZoom = ref(1)
 
 	// 左侧面板宽度百分比
-	const leftPanelWidth = ref(50)
+	const leftPanelWidth = ref(30)
 	const isResizing = ref(false)
 
 	// 更新代码
