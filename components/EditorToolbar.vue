@@ -47,7 +47,7 @@
 							? 'bg-blue-100 text-blue-700 font-medium'
 							: 'text-gray-700 hover:bg-gray-100'
 					]">
-					{{ example.name }}
+					{{ t(`tools.${example.key}`) }}
 				</button>
 			</div>
 		</div>
@@ -68,12 +68,12 @@
 						stroke-width="2"
 						d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
 				</svg>
-				Clear
+				{{ t('editor.clear') }}
 			</button>
 
 			<ThemeToggle />
 
-			<div class="relative">
+			<div class="relative export-menu-container">
 				<button
 					@click="isExportMenuOpen = !isExportMenuOpen"
 					class="px-3 py-1.5 text-sm bg-blue-600 text-white hover:bg-blue-700 rounded flex items-center">
@@ -89,18 +89,18 @@
 							stroke-width="2"
 							d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
 					</svg>
-					Export Drawing
+					{{ t('editor.export') }}
 				</button>
 
 				<div
 					v-if="isExportMenuOpen"
-					class="absolute right-0 mt-1 w-48 bg-white rounded-md shadow-lg z-10 overflow-hidden">
-					<div class="py-1 border border-gray-200 rounded-md">
+					class="absolute right-0 mt-1 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg z-10 overflow-hidden">
+					<div class="py-1 border border-gray-200 dark:border-gray-700 rounded-md">
 						<button
 							@click="exportDiagram('png')"
-							class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center">
+							class="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center">
 							<svg
-								class="h-4 w-4 mr-2 text-gray-500"
+								class="h-5 w-5 mr-3 text-gray-500 dark:text-gray-400"
 								fill="none"
 								viewBox="0 0 24 24"
 								stroke="currentColor">
@@ -110,13 +110,13 @@
 									stroke-width="2"
 									d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
 							</svg>
-							Export Mermaid Drawing as PNG
+							{{ t('editor.exportPNG') }}
 						</button>
 						<button
 							@click="exportDiagram('svg')"
-							class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center">
+							class="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center">
 							<svg
-								class="h-4 w-4 mr-2 text-gray-500"
+								class="h-5 w-5 mr-3 text-gray-500 dark:text-gray-400"
 								fill="none"
 								viewBox="0 0 24 24"
 								stroke="currentColor">
@@ -126,11 +126,14 @@
 									stroke-width="2"
 									d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
 							</svg>
-							Export Mermaid Drawing as SVG
+							{{ t('editor.exportSVG') }}
 						</button>
 					</div>
 				</div>
 			</div>
+
+			<!-- 语言切换按钮 -->
+			<LanguageSwitch />
 		</div>
 	</div>
 </template>
@@ -139,6 +142,8 @@
 	import { ref, onMounted, onUnmounted, computed, watch } from 'vue'
 	import { exportAsPng, exportAsSvg } from '~/utils/exportUtils'
 	import ThemeToggle from '~/components/ThemeToggle.vue'
+	import LanguageSwitch from '~/components/LanguageSwitch.vue'
+	import { useI18n } from 'vue-i18n'
 
 	const props = defineProps({
 		modelValue: {
@@ -148,6 +153,7 @@
 	})
 
 	const emit = defineEmits(['update:code'])
+	const { t } = useI18n()
 
 	const isExportMenuOpen = ref(false)
 	const currentCode = ref(props.modelValue || '')
@@ -157,6 +163,7 @@
 	const examples = [
 		{
 			name: 'Flowchart',
+			key: 'flowchart',
 			code: `graph TD
     A[Start] --> B{Logged in?}
     B -->|Yes| C[Show Homepage]
@@ -166,6 +173,7 @@
 		},
 		{
 			name: 'Sequence Diagram',
+			key: 'sequence',
 			code: `sequenceDiagram
     participant User
     participant System
@@ -178,6 +186,7 @@
 		},
 		{
 			name: 'Class Diagram',
+			key: 'class',
 			code: `classDiagram
     class Animal {
       +String name
@@ -194,6 +203,7 @@
 		},
 		{
 			name: 'State Diagram',
+			key: 'state',
 			code: `stateDiagram-v2
     [*] --> Pending
     Pending --> Processing: Start Processing
@@ -204,6 +214,7 @@
 		},
 		{
 			name: 'Entity Relationship',
+			key: 'entity',
 			code: `erDiagram
     CUSTOMER ||--o{ ORDER : places
     ORDER ||--|{ LINE-ITEM : contains
@@ -211,6 +222,7 @@
 		},
 		{
 			name: 'Gantt Chart',
+			key: 'gantt',
 			code: `gantt
     title Project Development Plan
     dateFormat  YYYY-MM-DD
@@ -223,6 +235,7 @@
 		},
 		{
 			name: 'Pie Chart',
+			key: 'pie',
 			code: `pie title Traffic Sources
     "Search Engines" : 42.7
     "Direct Access" : 25.5
@@ -279,7 +292,8 @@
 	// 点击外部关闭导出菜单
 	const closeExportMenu = (e: Event) => {
 		const target = e.target as HTMLElement
-		if (!target.closest('.relative') && isExportMenuOpen.value) {
+		// 只要点击的不是导出按钮或导出菜单本身，就关闭菜单
+		if (isExportMenuOpen.value && !target.closest('.export-menu-container')) {
 			isExportMenuOpen.value = false
 		}
 	}

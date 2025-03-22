@@ -1,0 +1,45 @@
+{
+	"editor": {
+		"title": "Mermaid 代码编辑器",
+		"documentation": "Mermaid 文档",
+		"clear": "清空",
+		"export": "导出图表",
+		"exportPNG": "导出图表为 PNG",
+		"exportSVG": "导出图表为 SVG"
+	},
+	"preview": {
+		"title": "Mermaid 图表预览",
+		"zoom": "按住 Ctrl+滚轮 缩放",
+		"zoomOut": "缩小",
+		"resetView": "重置视图",
+		"zoomIn": "放大",
+		"placeholder": "在编辑器中输入您的 mermaid 代码来查看预览"
+	},
+	"tools": {
+		"flowchart": "流程图",
+		"sequence": "序列图",
+		"class": "类图",
+		"state": "状态图",
+		"entity": "实体关系图",
+		"gantt": "甘特图",
+		"pie": "饼图"
+	},
+	"footer": {
+		"title": "Mermaid Drawing",
+		"desc": "使用简单的基于文本的语法创建漂亮的图表，访问"
+	},
+	"docs": {
+		"title": "Mermaid 图表文档",
+		"subtitle": "快速学习如何使用 Mermaid 语法创建各种图表",
+		"backToEditor": "返回编辑器",
+		"basicSyntax": "基本语法",
+		"additionalResources": "更多资源",
+		"resourcesDesc": "本页面提供了基本的 Mermaid 语法指南。若需了解更多高级功能和详细语法，请参考：",
+		"officialDocs": "Mermaid 官方文档",
+		"liveEditor": "Mermaid Live Editor"
+	},
+	"language": {
+		"en": "English",
+		"zh": "中文"
+	}
+}

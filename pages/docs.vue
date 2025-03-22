@@ -2,9 +2,9 @@
 	<div class="flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900">
 		<div class="container mx-auto px-4 py-8 flex-grow">
 			<div class="mb-8">
-				<h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Mermaid Chart Documentation</h1>
+				<h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">{{ $t('docs.title') }}</h1>
 				<p class="text-gray-600 dark:text-gray-300">
-					Quickly learn how to create various diagrams using Mermaid syntax
+					{{ $t('docs.subtitle') }}
 				</p>
 				<div class="mt-4">
 					<NuxtLink to="/" class="text-blue-600 dark:text-blue-400 hover:underline flex items-center">
@@ -20,7 +20,7 @@
 								stroke-width="2"
 								d="M10 19l-7-7m0 0l7-7m-7 7h18" />
 						</svg>
-						Back to Editor
+						{{ $t('docs.backToEditor') }}
 					</NuxtLink>
 				</div>
 			</div>
@@ -29,7 +29,9 @@
 				<!-- Flowchart -->
 				<div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
 					<div class="p-6">
-						<h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Flowchart</h2>
+						<h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
+							{{ $t('tools.flowchart') }}
+						</h2>
 						<div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md mb-4">
 							<pre class="text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap">
 graph TD
@@ -41,7 +43,9 @@ graph TD
 							>
 						</div>
 						<div class="text-sm text-gray-700 dark:text-gray-300">
-							<p class="mb-2"><strong>Basic Syntax:</strong></p>
+							<p class="mb-2">
+								<strong>{{ $t('docs.basicSyntax') }}:</strong>
+							</p>
 							<ul class="list-disc pl-5 space-y-1">
 								<li><code>graph TD</code> defines a top-down graph (TD = Top Down)</li>
 								<li><code>A[Text]</code> creates a rectangular node</li>
@@ -230,11 +234,12 @@ pie title Traffic Sources
 			</div>
 
 			<div class="mt-10 mb-6">
-				<h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Additional Resources</h2>
+				<h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+					{{ $t('docs.additionalResources') }}
+				</h2>
 				<div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
 					<p class="text-gray-700 dark:text-gray-300 mb-4">
-						This page provides basic Mermaid syntax guidelines. For more advanced features and detailed
-						syntax, please refer to:
+						{{ $t('docs.resourcesDesc') }}
 					</p>
 					<ul class="space-y-2">
 						<li>
@@ -254,7 +259,7 @@ pie title Traffic Sources
 										stroke-width="2"
 										d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
 								</svg>
-								Mermaid Official Documentation
+								{{ $t('docs.officialDocs') }}
 							</a>
 						</li>
 						<li>
@@ -274,7 +279,7 @@ pie title Traffic Sources
 										stroke-width="2"
 										d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
 								</svg>
-								Mermaid Live Editor
+								{{ $t('docs.liveEditor') }}
 							</a>
 						</li>
 					</ul>
@@ -284,9 +289,9 @@ pie title Traffic Sources
 
 		<!-- 底部信息 -->
 		<footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-1.5 px-4 text-center">
-			<h1 class="text-sm font-bold text-gray-800 dark:text-gray-200">Mermaid Drawing</h1>
+			<h1 class="text-sm font-bold text-gray-800 dark:text-gray-200">{{ $t('footer.title') }}</h1>
 			<p class="text-xs text-gray-600 dark:text-gray-400 leading-tight">
-				Create beautiful diagrams with simple text-based syntax at
+				{{ $t('footer.desc') }}
 				<a href="https://mermaid-drawing.com" class="text-blue-600 dark:text-blue-400 hover:underline"
 					>mermaid-drawing.com</a
 				>
@@ -296,6 +301,10 @@ pie title Traffic Sources
 </template>
 
 <script setup>
+	import { useI18n } from 'vue-i18n'
+
+	const { t } = useI18n()
+
 	// Add meta for SEO
 	useHead({
 		title: 'Mermaid Chart Documentation - Quick Learning Guide',

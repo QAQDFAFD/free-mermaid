@@ -74,8 +74,10 @@
 
 <script setup lang="ts">
 	import { ref, watch, onMounted, onUnmounted } from 'vue'
+	import { useI18n } from 'vue-i18n'
 
 	const { $mermaid } = useNuxtApp()
+	const { t } = useI18n()
 
 	const props = defineProps({
 		code: {
@@ -171,7 +173,7 @@
 				diagramRef.value.innerHTML = `
 					<div class="placeholder-wrapper" style="transform: scale(2); transform-origin: center center;">
 						<div class="flex items-center justify-center h-full w-full text-gray-400 dark:text-gray-500 text-xl">
-							Enter your mermaid drawing code in the editor to see the preview
+							${t('preview.placeholder')}
 						</div>
 					</div>
 				`
@@ -199,7 +201,7 @@
 				diagramRef.value.innerHTML = `
 					<div class="placeholder-wrapper" style="transform: scale(${1 / currentScaleValue}); transform-origin: center center;">
 						<div class="flex items-center justify-center h-full w-full text-gray-400 dark:text-gray-500">
-							Enter your mermaid drawing code in the editor to see the preview
+							${t('preview.placeholder')}
 						</div>
 					</div>
 				`
@@ -413,7 +415,7 @@
 					diagramRef.value.innerHTML = `
 						<div class="placeholder-wrapper" style="transform: scale(2); transform-origin: center center;">
 							<div class="flex items-center justify-center h-full w-full text-gray-400 dark:text-gray-500 text-xl">
-								Enter your mermaid drawing code in the editor to see the preview
+								${t('preview.placeholder')}
 							</div>
 						</div>
 					`
@@ -458,7 +460,7 @@
 				diagramRef.value.innerHTML = `
 					<div class="placeholder-wrapper" style="transform: scale(2); transform-origin: center center;">
 						<div class="flex items-center justify-center h-full w-full text-gray-400 dark:text-gray-500 text-xl">
-							Enter your mermaid drawing code in the editor to see the preview
+							${t('preview.placeholder')}
 						</div>
 					</div>
 				`
@@ -522,7 +524,7 @@
 				diagramRef.value.innerHTML = `
 					<div class="placeholder-wrapper" style="transform: scale(2); transform-origin: center center;">
 						<div class="flex items-center justify-center h-full w-full text-gray-400 dark:text-gray-500 text-xl">
-							Enter your mermaid drawing code in the editor to see the preview
+							${t('preview.placeholder')}
 						</div>
 					</div>
 				`
