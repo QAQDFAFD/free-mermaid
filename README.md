@@ -1,6 +1,6 @@
 # Free Mermaid
 
-![Mermaid Drawing Tool](./public/og-image.png)
+![Mermaid Drawing Tool](https://picgo-use-images.oss-cn-shanghai.aliyuncs.com/images/PixPin_2025-03-22_19-29-31.png)
 
 A free, open-source Mermaid diagram editor and renderer with real-time preview and export capabilities.
 
@@ -38,7 +38,7 @@ Free Mermaid is a powerful web-based tool for creating and editing diagrams usin
 
 The easiest way to use Free Mermaid is through our online editor:
 
-[Open Free Mermaid Online](https://free-mermaid.com)
+[Open Free Mermaid Online](https://mermaid-drawing.com/)
 
 ### Local Development
 

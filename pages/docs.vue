@@ -47,11 +47,46 @@ graph TD
 								<strong>{{ $t('docs.basicSyntax') }}:</strong>
 							</p>
 							<ul class="list-disc pl-5 space-y-1">
-								<li><code>graph TD</code> defines a top-down graph (TD = Top Down)</li>
-								<li><code>A[Text]</code> creates a rectangular node</li>
-								<li><code>B{Text}</code> creates a diamond node (condition)</li>
-								<li><code>--></code> creates an arrow connection</li>
-								<li><code>-->|Text|</code> creates a labeled arrow</li>
+								<li>
+									<code
+										class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
+										graph TD
+									</code>
+									<span v-if="$i18n.locale === 'zh'">定义一个自上而下的流程图</span>
+									<span v-else>defines a top-down flowchart</span>
+								</li>
+								<li>
+									<code
+										class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
+										A[Text]
+									</code>
+									<span v-if="$i18n.locale === 'zh'">创建一个矩形节点</span>
+									<span v-else>creates a rectangle node</span>
+								</li>
+								<li>
+									<code
+										class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
+										B{Text}
+									</code>
+									<span v-if="$i18n.locale === 'zh'">创建一个菱形节点（通常用于条件）</span>
+									<span v-else>creates a diamond node (typically for conditions)</span>
+								</li>
+								<li>
+									<code
+										class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
+										-->
+									</code>
+									<span v-if="$i18n.locale === 'zh'">创建节点间的连接线</span>
+									<span v-else>creates a connection between nodes</span>
+								</li>
+								<li>
+									<code
+										class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
+										-->|Text|
+									</code>
+									<span v-if="$i18n.locale === 'zh'">创建带标签的箭头</span>
+									<span v-else>creates a labeled arrow</span>
+								</li>
 							</ul>
 						</div>
 					</div>
@@ -60,7 +95,7 @@ graph TD
 				<!-- Sequence Diagram -->
 				<div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
 					<div class="p-6">
-						<h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Sequence Diagram</h2>
+						<h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">{{ $t('tools.sequence') }}</h2>
 						<div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md mb-4">
 							<pre class="text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap">
 sequenceDiagram
@@ -75,13 +110,41 @@ sequenceDiagram
 							>
 						</div>
 						<div class="text-sm text-gray-700 dark:text-gray-300">
-							<p class="mb-2"><strong>Basic Syntax:</strong></p>
+							<p class="mb-2">
+								<strong>{{ $t('docs.basicSyntax') }}:</strong>
+							</p>
 							<ul class="list-disc pl-5 space-y-1">
-								<li><code>sequenceDiagram</code> defines a sequence diagram</li>
-								<li><code>participant Name</code> defines a participant</li>
-								<li><code>A->>B: Text</code> creates a solid arrow for synchronous messages</li>
 								<li>
-									<code>A-->>B: Text</code> creates a dashed arrow for return/asynchronous messages
+									<code
+										class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
+										sequenceDiagram
+									</code>
+									<span v-if="$i18n.locale === 'zh'">定义一个序列图</span>
+									<span v-else>defines a sequence diagram</span>
+								</li>
+								<li>
+									<code
+										class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
+										participant Name
+									</code>
+									<span v-if="$i18n.locale === 'zh'">定义一个参与者</span>
+									<span v-else>defines a participant</span>
+								</li>
+								<li>
+									<code
+										class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
+										A->>B: Text
+									</code>
+									<span v-if="$i18n.locale === 'zh'">创建一个实线箭头（表示同步消息）</span>
+									<span v-else>creates a solid arrow (synchronous message)</span>
+								</li>
+								<li>
+									<code
+										class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
+										A-->>B: Text
+									</code>
+									<span v-if="$i18n.locale === 'zh'">创建一个虚线箭头（表示异步消息）</span>
+									<span v-else>creates a dashed arrow (asynchronous message)</span>
 								</li>
 							</ul>
 						</div>
@@ -91,7 +154,7 @@ sequenceDiagram
 				<!-- Class Diagram -->
 				<div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
 					<div class="p-6">
-						<h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Class Diagram</h2>
+						<h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">{{ $t('tools.class') }}</h2>
 						<div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md mb-4">
 							<pre class="text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap">
 classDiagram
@@ -110,13 +173,50 @@ classDiagram
 							>
 						</div>
 						<div class="text-sm text-gray-700 dark:text-gray-300">
-							<p class="mb-2"><strong>Basic Syntax:</strong></p>
+							<p class="mb-2">
+								<strong>{{ $t('docs.basicSyntax') }}:</strong>
+							</p>
 							<ul class="list-disc pl-5 space-y-1">
-								<li><code>classDiagram</code> defines a class diagram</li>
-								<li><code>class ClassName {}</code> defines a class with properties/methods</li>
-								<li><code>+</code> indicates public properties/methods</li>
-								<li><code>-</code> indicates private properties/methods</li>
-								<li><code>A <|-- B</code> indicates B inherits from A</li>
+								<li>
+									<code
+										class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
+										classDiagram
+									</code>
+									<span v-if="$i18n.locale === 'zh'">定义一个类图</span>
+									<span v-else>defines a class diagram</span>
+								</li>
+								<li>
+									<code
+										class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
+										class ClassName {}
+									</code>
+									<span v-if="$i18n.locale === 'zh'">定义一个带属性/方法的类</span>
+									<span v-else>defines a class with properties/methods</span>
+								</li>
+								<li>
+									<code
+										class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
+										+
+									</code>
+									<span v-if="$i18n.locale === 'zh'">表示公共属性/方法</span>
+									<span v-else>indicates public properties/methods</span>
+								</li>
+								<li>
+									<code
+										class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
+										-
+									</code>
+									<span v-if="$i18n.locale === 'zh'">表示私有属性/方法</span>
+									<span v-else>indicates private properties/methods</span>
+								</li>
+								<li>
+									<code
+										class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
+										A &lt;|-- B
+									</code>
+									<span v-if="$i18n.locale === 'zh'">表示B继承自A（B是A的子类）</span>
+									<span v-else>indicates B inherits from A (B is a subclass of A)</span>
+								</li>
 							</ul>
 						</div>
 					</div>
@@ -125,7 +225,7 @@ classDiagram
 				<!-- State Diagram -->
 				<div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
 					<div class="p-6">
-						<h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">State Diagram</h2>
+						<h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">{{ $t('tools.state') }}</h2>
 						<div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md mb-4">
 							<pre class="text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap">
 stateDiagram-v2
@@ -138,12 +238,42 @@ stateDiagram-v2
 							>
 						</div>
 						<div class="text-sm text-gray-700 dark:text-gray-300">
-							<p class="mb-2"><strong>Basic Syntax:</strong></p>
+							<p class="mb-2">
+								<strong>{{ $t('docs.basicSyntax') }}:</strong>
+							</p>
 							<ul class="list-disc pl-5 space-y-1">
-								<li><code>stateDiagram-v2</code> defines a state diagram</li>
-								<li><code>[*]</code> represents the start or end state</li>
-								<li><code>A --> B</code> creates a transition from A to B</li>
-								<li><code>A --> B: Text</code> creates a labeled transition</li>
+								<li>
+									<code
+										class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
+										stateDiagram-v2
+									</code>
+									<span v-if="$i18n.locale === 'zh'">定义一个状态图</span>
+									<span v-else>defines a state diagram</span>
+								</li>
+								<li>
+									<code
+										class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
+										[*]
+									</code>
+									<span v-if="$i18n.locale === 'zh'">表示开始或结束状态</span>
+									<span v-else>represents start or end state</span>
+								</li>
+								<li>
+									<code
+										class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
+										A --> B
+									</code>
+									<span v-if="$i18n.locale === 'zh'">表示从状态A到状态B的转换</span>
+									<span v-else>represents a transition from state A to B</span>
+								</li>
+								<li>
+									<code
+										class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
+										A --> B: Text
+									</code>
+									<span v-if="$i18n.locale === 'zh'">添加转换说明文本</span>
+									<span v-else>adds transition description text</span>
+								</li>
 							</ul>
 						</div>
 					</div>
@@ -153,7 +283,7 @@ stateDiagram-v2
 				<div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
 					<div class="p-6">
 						<h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
-							Entity Relationship Diagram
+							{{ $t('tools.entity') }}
 						</h2>
 						<div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md mb-4">
 							<pre class="text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap">
@@ -164,13 +294,50 @@ erDiagram
 							>
 						</div>
 						<div class="text-sm text-gray-700 dark:text-gray-300">
-							<p class="mb-2"><strong>Basic Syntax:</strong></p>
+							<p class="mb-2">
+								<strong>{{ $t('docs.basicSyntax') }}:</strong>
+							</p>
 							<ul class="list-disc pl-5 space-y-1">
-								<li><code>erDiagram</code> defines an entity relationship diagram</li>
-								<li><code>||--o{</code> represents a one-to-many relationship</li>
-								<li><code>||--|{</code> represents a one-to-many (mandatory) relationship</li>
-								<li><code>}|..|{</code> represents a many-to-many relationship (dashed line)</li>
-								<li><code>: Text</code> defines the relationship description</li>
+								<li>
+									<code
+										class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
+										erDiagram
+									</code>
+									<span v-if="$i18n.locale === 'zh'">定义一个实体关系图</span>
+									<span v-else>defines an entity relationship diagram</span>
+								</li>
+								<li>
+									<code
+										class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
+										||--o{
+									</code>
+									<span v-if="$i18n.locale === 'zh'">表示一对多关系</span>
+									<span v-else>represents a one-to-many relationship</span>
+								</li>
+								<li>
+									<code
+										class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
+										||--|{
+									</code>
+									<span v-if="$i18n.locale === 'zh'">表示一对多（强制）关系</span>
+									<span v-else>represents a one-to-many (mandatory) relationship</span>
+								</li>
+								<li>
+									<code
+										class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
+										}|..|{
+									</code>
+									<span v-if="$i18n.locale === 'zh'">表示多对多关系（虚线）</span>
+									<span v-else>represents a many-to-many relationship (dashed line)</span>
+								</li>
+								<li>
+									<code
+										class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
+										: Text
+									</code>
+									<span v-if="$i18n.locale === 'zh'">添加关系说明</span>
+									<span v-else>adds relationship label</span>
+								</li>
 							</ul>
 						</div>
 					</div>
@@ -179,7 +346,7 @@ erDiagram
 				<!-- Gantt Chart -->
 				<div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
 					<div class="p-6">
-						<h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Gantt Chart</h2>
+						<h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">{{ $t('tools.gantt') }}</h2>
 						<div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md mb-4">
 							<pre class="text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap">
 gantt
@@ -194,15 +361,66 @@ gantt
 							>
 						</div>
 						<div class="text-sm text-gray-700 dark:text-gray-300">
-							<p class="mb-2"><strong>Basic Syntax:</strong></p>
+							<p class="mb-2">
+								<strong>{{ $t('docs.basicSyntax') }}:</strong>
+							</p>
 							<ul class="list-disc pl-5 space-y-1">
-								<li><code>gantt</code> defines a Gantt chart</li>
-								<li><code>title Title</code> sets the chart title</li>
-								<li><code>dateFormat Format</code> sets the date format</li>
-								<li><code>section Name</code> defines a project section</li>
-								<li><code>Task Name: ID, Start Date, Duration/End Date</code></li>
-								<li><code>done/active</code> indicates task status</li>
-								<li><code>after ID</code> indicates after another task</li>
+								<li>
+									<code
+										class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
+										gantt
+									</code>
+									<span v-if="$i18n.locale === 'zh'">定义甘特图</span>
+									<span v-else>defines a Gantt chart</span>
+								</li>
+								<li>
+									<code
+										class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
+										title Title
+									</code>
+									<span v-if="$i18n.locale === 'zh'">设置图表标题</span>
+									<span v-else>sets the chart title</span>
+								</li>
+								<li>
+									<code
+										class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
+										dateFormat Format
+									</code>
+									<span v-if="$i18n.locale === 'zh'">设置日期格式</span>
+									<span v-else>sets the date format</span>
+								</li>
+								<li>
+									<code
+										class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
+										section Name
+									</code>
+									<span v-if="$i18n.locale === 'zh'">创建任务分组</span>
+									<span v-else>creates a task section</span>
+								</li>
+								<li>
+									<code
+										class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
+										Task Name: ID, Start Date, Duration/End Date
+									</code>
+									<span v-if="$i18n.locale === 'zh'">定义任务及其时间段</span>
+									<span v-else>defines a task with its timespan</span>
+								</li>
+								<li>
+									<code
+										class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
+										done/active
+									</code>
+									<span v-if="$i18n.locale === 'zh'">标记任务状态（已完成/进行中）</span>
+									<span v-else>marks task status (completed/in progress)</span>
+								</li>
+								<li>
+									<code
+										class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
+										after ID
+									</code>
+									<span v-if="$i18n.locale === 'zh'">定义任务依赖关系</span>
+									<span v-else>defines task dependency</span>
+								</li>
 							</ul>
 						</div>
 					</div>
@@ -211,7 +429,7 @@ gantt
 				<!-- Pie Chart -->
 				<div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
 					<div class="p-6">
-						<h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Pie Chart</h2>
+						<h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">{{ $t('tools.pie') }}</h2>
 						<div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md mb-4">
 							<pre class="text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap">
 pie title Traffic Sources
@@ -222,11 +440,34 @@ pie title Traffic Sources
 							>
 						</div>
 						<div class="text-sm text-gray-700 dark:text-gray-300">
-							<p class="mb-2"><strong>Basic Syntax:</strong></p>
+							<p class="mb-2">
+								<strong>{{ $t('docs.basicSyntax') }}:</strong>
+							</p>
 							<ul class="list-disc pl-5 space-y-1">
-								<li><code>pie</code> defines a pie chart</li>
-								<li><code>title Title</code> sets the pie chart title</li>
-								<li><code>"Label" : Value</code> defines a slice of the pie chart</li>
+								<li>
+									<code
+										class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
+										pie
+									</code>
+									<span v-if="$i18n.locale === 'zh'">定义饼图</span>
+									<span v-else>defines a pie chart</span>
+								</li>
+								<li>
+									<code
+										class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
+										title Title
+									</code>
+									<span v-if="$i18n.locale === 'zh'">设置图表标题</span>
+									<span v-else>sets the chart title</span>
+								</li>
+								<li>
+									<code
+										class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
+										"Label" : Value
+									</code>
+									<span v-if="$i18n.locale === 'zh'">定义饼图的一个切片</span>
+									<span v-else>defines a slice in the pie chart</span>
+								</li>
 							</ul>
 						</div>
 					</div>
@@ -260,26 +501,6 @@ pie title Traffic Sources
 										d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
 								</svg>
 								{{ $t('docs.officialDocs') }}
-							</a>
-						</li>
-						<li>
-							<a
-								href="https://mermaid.live/"
-								target="_blank"
-								class="flex items-center text-blue-600 dark:text-blue-400 hover:underline">
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									class="h-4 w-4 mr-2"
-									fill="none"
-									viewBox="0 0 24 24"
-									stroke="currentColor">
-									<path
-										stroke-linecap="round"
-										stroke-linejoin="round"
-										stroke-width="2"
-										d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-								</svg>
-								{{ $t('docs.liveEditor') }}
 							</a>
 						</li>
 					</ul>

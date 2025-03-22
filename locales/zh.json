@@ -36,7 +36,54 @@
 		"additionalResources": "更多资源",
 		"resourcesDesc": "本页面提供了基本的 Mermaid 语法指南。若需了解更多高级功能和详细语法，请参考：",
 		"officialDocs": "Mermaid 官方文档",
-		"liveEditor": "Mermaid Live Editor"
+		"liveEditor": "Mermaid Live Editor",
+		"flowchart": {
+			"syntax1": "graph TD - 定义一个自上而下的图表 (TD = Top Down)",
+			"syntax2": "A[文本] - 创建一个矩形节点",
+			"syntax3": "B{文本} - 创建一个菱形节点（条件）",
+			"syntax4": "--> - 创建一个箭头连接",
+			"syntax5": "-->|文本| - 创建一个带标签的箭头"
+		},
+		"sequence": {
+			"syntax1": "sequenceDiagram - 定义一个序列图",
+			"syntax2": "participant 名称 - 定义一个参与者",
+			"syntax3": "A->>B: 文本 - 创建实线箭头表示同步消息",
+			"syntax4": "A-->>B: 文本 - 创建虚线箭头表示返回/异步消息"
+		},
+		"class": {
+			"syntax1": "classDiagram - 定义一个类图",
+			"syntax2": "class 类名 {} - 定义一个带属性/方法的类",
+			"syntax3": "+ - 表示公共属性/方法",
+			"syntax4": "- - 表示私有属性/方法",
+			"syntax5": "A <|-- B - 表示B继承自A（B是A的子类）"
+		},
+		"state": {
+			"syntax1": "stateDiagram-v2 - 定义一个状态图",
+			"syntax2": "[*] - 表示开始或结束状态",
+			"syntax3": "A --> B - 创建从A到B的转换",
+			"syntax4": "A --> B: 文本 - 创建带标签的转换"
+		},
+		"entity": {
+			"syntax1": "erDiagram - 定义一个实体关系图",
+			"syntax2": "||--o{ - 表示一对多关系",
+			"syntax3": "||--|{ - 表示一对多（必须）关系",
+			"syntax4": "}|..|{ - 表示多对多关系（虚线）",
+			"syntax5": ": 文本 - 定义关系描述"
+		},
+		"gantt": {
+			"syntax1": "gantt - 定义一个甘特图",
+			"syntax2": "title 标题 - 设置图表标题",
+			"syntax3": "dateFormat 格式 - 设置日期格式",
+			"syntax4": "section 名称 - 定义项目部分",
+			"syntax5": "任务名称: ID, 开始日期, 持续时间/结束日期",
+			"syntax6": "done/active - 表示任务状态",
+			"syntax7": "after ID - 表示在另一个任务之后"
+		},
+		"pie": {
+			"syntax1": "pie - 定义一个饼图",
+			"syntax2": "title 标题 - 设置饼图标题",
+			"syntax3": "\"标签\" : 数值 - 定义饼图的一个切片"
+		}
 	},
 	"language": {
 		"en": "English",

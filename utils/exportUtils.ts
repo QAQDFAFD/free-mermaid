@@ -3,6 +3,10 @@ import { saveAs } from 'file-saver'
 
 // 显示加载指示器
 const showLoading = () => {
+	// 获取当前语言，如果无法获取则默认使用中文
+	const currentLang = localStorage.getItem('userLocale') || 'en'
+	const loadingText = currentLang === 'zh' ? '导出图片中...' : 'Exporting image...'
+
 	const loading = document.createElement('div')
 	loading.id = 'export-loading'
 	loading.style.position = 'fixed'
@@ -14,7 +18,7 @@ const showLoading = () => {
 	loading.style.color = 'white'
 	loading.style.borderRadius = '5px'
 	loading.style.zIndex = '9999'
-	loading.textContent = '导出图片中...'
+	loading.textContent = loadingText
 	document.body.appendChild(loading)
 	return loading
 }
@@ -46,7 +50,7 @@ export const exportAsPng = async (elementId: string) => {
 
 		// 使用html-to-image的toBlob方法直接从元素导出
 		// 这个方法不会修改DOM，直接生成Blob对象
-		const blob = await toBlob(svgElement as HTMLElement, {
+		const blob = await toBlob(svgElement as unknown as HTMLElement, {
 			backgroundColor: '#ffffff',
 			pixelRatio: 2,
 			quality: 1,

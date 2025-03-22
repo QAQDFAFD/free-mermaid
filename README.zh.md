@@ -1,6 +1,6 @@
 # Free Mermaid
 
-![Mermaid绘图工具](./public/og-image.png)
+![Mermaid绘图工具](https://picgo-use-images.oss-cn-shanghai.aliyuncs.com/images/PixPin_2025-03-22_19-29-31.png)
 
 一个免费、开源的Mermaid图表编辑器和渲染器，具有实时预览和导出功能。
 
@@ -38,7 +38,7 @@ Free Mermaid是一个强大的基于Web的工具，用于使用Mermaid语法创�
 
 使用Free Mermaid最简单的方法是通过我们的在线编辑器：
 
-[打开Free Mermaid在线版](https://free-mermaid.com)
+[打开Free Mermaid在线版](https://mermaid-drawing.com)
 
 ### 本地开发
 
