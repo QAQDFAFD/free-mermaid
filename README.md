@@ -1,63 +1,95 @@
 # Free Mermaid
 
-Free Mermaid 是一个基于 Nuxt.js 构建的在线 Mermaid 图表编辑工具，提供实时预览和导出功能。
+![Mermaid Drawing Tool](./public/og-image.png)
 
-## 功能特点
+A free, open-source Mermaid diagram editor and renderer with real-time preview and export capabilities.
 
-- 左右布局设计，左侧编辑器，右侧实时预览
-- 支持 Mermaid 语法高亮和自动完成
-- 响应式设计，适配各种设备屏幕
-- 支持导出图表为 PNG 和 SVG 格式
-- 内置多种图表示例，快速上手
-- 轻量级架构，加载快速
+## 📖 Overview
 
-## 技术栈
+Free Mermaid is a powerful web-based tool for creating and editing diagrams using the Mermaid syntax. The application provides a user-friendly interface with side-by-side editing and preview, making it easy to visualize your diagrams as you create them.
 
-- [Nuxt 3](https://nuxt.com/) - Vue.js 框架
-- [Tailwind CSS](https://tailwindcss.com/) - 样式框架
-- [Mermaid](https://mermaid.js.org/) - 图表渲染库
-- [CodeMirror 6](https://codemirror.net/) - 代码编辑器
-- [html-to-image](https://github.com/bubkoo/html-to-image) - 图表导出工具
+[English Documentation](./README.md) | [中文文档](./README.zh.md)
 
-## 开发指南
+## ✨ Features
 
-### 安装依赖
+- **Real-time Preview**: See your changes instantly as you type
+- **Dark Mode**: Switch between light and dark themes for comfortable editing in any environment
+- **Interactive Canvas**:
+  - Zoom controls (50% to 300%)
+  - Pan navigation
+  - Reset view
+- **Multiple Diagram Types**: Support for all Mermaid diagram types:
+  - Flowcharts
+  - Sequence Diagrams
+  - Class Diagrams
+  - Entity Relationship Diagrams
+  - State Diagrams
+  - Gantt Charts
+  - Pie Charts
+  - And more...
+- **Example Templates**: Quick-start with built-in diagram examples
+- **Responsive Design**: Works on desktop and tablets
+- **Export Options**: Download your diagrams as PNG or SVG
+- **Syntax Error Handling**: Clear error messages with suggestions to fix common issues
 
+## 🚀 Getting Started
+
+### Online Usage
+
+The easiest way to use Free Mermaid is through our online editor:
+
+[Open Free Mermaid Online](https://free-mermaid.com)
+
+### Local Development
+
+To run the project locally:
+
+1. Clone the repository:
+```bash
+git clone https://github.com/username/free-mermaid.git
+cd free-mermaid
+```
+
+2. Install dependencies:
 ```bash
 npm install
 ```
 
-### 开发环境运行
-
+3. Start the development server:
 ```bash
 npm run dev
 ```
 
-### 构建生产版本
+4. Open your browser and navigate to `http://localhost:3000`
+
+## 🔧 Build for Production
 
 ```bash
 npm run build
 ```
 
-### 预览生产版本
+## 🛠️ Technology Stack
 
-```bash
-npm run preview
-```
+- [Vue.js 3](https://vuejs.org/) - Progressive JavaScript framework
+- [Nuxt.js 3](https://nuxt.com/) - Vue framework for building performant web applications
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+- [Mermaid.js](https://mermaid-js.github.io/mermaid/#/) - JavaScript-based diagramming and charting tool
+- [CodeMirror](https://codemirror.net/) - Versatile text editor implemented in JavaScript
+- [html-to-image](https://github.com/bubkoo/html-to-image) - Generates an image from DOM node
 
-## 支持的图表类型
+## 📱 Mobile Support
 
-Free Mermaid 支持所有 Mermaid 图表类型，包括但不限于：
+The application is designed primarily for desktop and tablet use. On mobile devices, a warning is displayed recommending a larger screen for optimal experience.
 
-- 流程图 (Flowchart)
-- 时序图 (Sequence Diagram)
-- 类图 (Class Diagram)
-- 状态图 (State Diagram)
-- 实体关系图 (Entity Relationship Diagram)
-- 甘特图 (Gantt)
-- 饼图 (Pie Chart)
-- Git 图 (Git Graph)
+## 🤝 Contributing
 
-## 许可证
+Contributions are welcome! Feel free to submit issues or pull requests to help improve the project.
 
-MIT
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🙏 Acknowledgements
+
+- [Mermaid.js](https://mermaid-js.github.io/mermaid/#/) for the amazing diagramming library
+- All contributors and users of this project
