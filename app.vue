@@ -8,6 +8,7 @@
 <script setup>
 	import MobileWarning from '~/components/MobileWarning.vue'
 	import { onMounted, onUnmounted } from 'vue'
+	import { useRouter } from 'vue-router'
 
 	// 初始化深色模式
 	onMounted(() => {
@@ -40,6 +41,16 @@
 		// 组件卸载时清理
 		onUnmounted(() => {
 			observer.disconnect()
+		})
+
+		// 为路由变化添加Google Analytics事件监听（备用方式，插件中已实现主要功能）
+		const router = useRouter()
+		router.afterEach(to => {
+			if (window.gtag) {
+				window.gtag('config', 'G-6SS7V4WQ96', {
+					page_path: to.fullPath
+				})
+			}
 		})
 	})
 </script>
