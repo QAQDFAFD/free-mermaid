@@ -38,12 +38,9 @@
 							<li>Try simplifying complex chart structures</li>
 						</ul>
 						<p class="mt-2">
-							<a
-								href="https://mermaid.js.org/syntax/flowchart.html"
-								target="_blank"
-								class="text-blue-600 dark:text-blue-400 hover:underline">
-								View Mermaid Drawing Syntax Documentation →
-							</a>
+							<NuxtLink to="/docs" class="text-blue-600 dark:text-blue-400 hover:underline">
+								View Mermaid Drawing Documentation →
+							</NuxtLink>
 						</p>
 					</div>
 				</div>
