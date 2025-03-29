@@ -55,10 +55,7 @@
 				<div
 					class="h-10 bg-gray-100 dark:bg-gray-800 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
 					<div class="flex items-center">
-						<span
-							>{{ $t('preview.title') }}
-							{{ currentZoom > 0 ? `(${Math.round(currentZoom * 100)}%)` : '' }}</span
-						>
+						<span>{{ $t('preview.title') }} {{ currentZoom > 0 ? `(${Math.round(currentZoom * 100)}%)` : '' }}</span>
 						<span class="ml-2 text-xs text-gray-500 dark:text-gray-400">{{ $t('preview.zoom') }}</span>
 					</div>
 					<div class="flex space-x-2">
@@ -103,13 +100,67 @@
 								fill="none"
 								viewBox="0 0 24 24"
 								stroke="currentColor">
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									stroke-width="2"
-									d="M12 4v16m8-8H4" />
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
 							</svg>
 						</button>
+						<div class="relative export-menu-container">
+							<button
+								@click="isExportMenuOpen = !isExportMenuOpen"
+								class="px-3 py-1.5 text-sm bg-blue-600 text-white hover:bg-blue-700 rounded flex items-center">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									class="h-4 w-4 mr-1"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke="currentColor">
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+								</svg>
+								{{ t('editor.export') }}
+							</button>
+
+							<div
+								v-if="isExportMenuOpen"
+								class="absolute right-0 mt-1 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg z-10 overflow-hidden">
+								<div class="py-1 border border-gray-200 dark:border-gray-700 rounded-md">
+									<button
+										@click="exportDiagram('png')"
+										class="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center">
+										<svg
+											class="h-5 w-5 mr-3 text-gray-500 dark:text-gray-400"
+											fill="none"
+											viewBox="0 0 24 24"
+											stroke="currentColor">
+											<path
+												stroke-linecap="round"
+												stroke-linejoin="round"
+												stroke-width="2"
+												d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+										</svg>
+										{{ t('editor.exportPNG') }}
+									</button>
+									<button
+										@click="exportDiagram('svg')"
+										class="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center">
+										<svg
+											class="h-5 w-5 mr-3 text-gray-500 dark:text-gray-400"
+											fill="none"
+											viewBox="0 0 24 24"
+											stroke="currentColor">
+											<path
+												stroke-linecap="round"
+												stroke-linejoin="round"
+												stroke-width="2"
+												d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+										</svg>
+										{{ t('editor.exportSVG') }}
+									</button>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 				<div class="flex-1 overflow-hidden">
@@ -135,6 +186,7 @@
 	import { ref, onMounted, onUnmounted } from 'vue'
 	import type { ComponentPublicInstance } from 'vue'
 	import { useI18n } from 'vue-i18n'
+	import { exportAsPng } from '@/utils/exportUtils'
 	// ThemeToggle导入已移至EditorToolbar组件
 
 	const { t } = useI18n()
@@ -196,6 +248,8 @@
 		}
 	}
 
+	const isExportMenuOpen = ref(false)
+
 	// 开始调整大小
 	const startResize = (e: MouseEvent) => {
 		isResizing.value = true
@@ -241,6 +295,24 @@
 		}
 	}
 
+	// 导出图表
+	const exportDiagram = async (format: 'png' | 'svg') => {
+		if (format === 'png') {
+			await exportAsPng('mermaid-diagram')
+		} else {
+			await exportAsSvg('mermaid-diagram')
+		}
+	}
+
+	// 点击外部关闭导出菜单
+	const closeExportMenu = (e: Event) => {
+		const target = e.target as HTMLElement
+		// 只要点击的不是导出按钮或导出菜单本身，就关闭菜单
+		if (isExportMenuOpen.value && !target.closest('.export-menu-container')) {
+			isExportMenuOpen.value = false
+		}
+	}
+
 	// 页面元数据
 	useHead({
 		title: 'Mermaid Drawing - Free Online Mermaid Chart & Diagram Tool',
@@ -258,10 +330,15 @@
 		]
 	})
 
+	onMounted(() => {
+		document.addEventListener('click', closeExportMenu)
+	})
+
 	// 组件卸载时清理事件监听器
 	onUnmounted(() => {
 		document.removeEventListener('mousemove', handleMouseMove)
 		document.removeEventListener('mouseup', stopResize)
+		document.removeEventListener('click', closeExportMenu)
 	})
 </script>
 

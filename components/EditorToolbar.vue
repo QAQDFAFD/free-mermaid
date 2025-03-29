@@ -3,11 +3,7 @@
 		class="bg-gray-100 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 p-2 flex items-center justify-between">
 		<div class="flex items-center space-x-4">
 			<div class="flex items-center">
-				<svg
-					class="h-6 w-6 text-blue-600 mr-2"
-					viewBox="0 0 24 24"
-					fill="none"
-					xmlns="http://www.w3.org/2000/svg">
+				<svg class="h-6 w-6 text-blue-600 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path
 						d="M14 3V7C14 7.55228 14.4477 8 15 8H19"
 						stroke="currentColor"
@@ -20,12 +16,7 @@
 						stroke-width="2"
 						stroke-linecap="round"
 						stroke-linejoin="round" />
-					<path
-						d="M7 14H14"
-						stroke="currentColor"
-						stroke-width="2"
-						stroke-linecap="round"
-						stroke-linejoin="round" />
+					<path d="M7 14H14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
 					<path
 						d="M14 11L17 14L14 17"
 						stroke="currentColor"
@@ -43,9 +34,7 @@
 					@click="loadExample(example.code)"
 					:class="[
 						'px-2 py-1 text-sm rounded transition-colors duration-200',
-						isCurrentType(example.code)
-							? 'bg-blue-100 text-blue-700 font-medium'
-							: 'text-gray-700 hover:bg-gray-100'
+						isCurrentType(example.code) ? 'bg-blue-100 text-blue-700 font-medium' : 'text-gray-700 hover:bg-gray-100'
 					]">
 					{{ t(`tools.${example.key}`) }}
 				</button>
@@ -73,65 +62,6 @@
 
 			<ThemeToggle />
 
-			<div class="relative export-menu-container">
-				<button
-					@click="isExportMenuOpen = !isExportMenuOpen"
-					class="px-3 py-1.5 text-sm bg-blue-600 text-white hover:bg-blue-700 rounded flex items-center">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						class="h-4 w-4 mr-1"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke="currentColor">
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-					</svg>
-					{{ t('editor.export') }}
-				</button>
-
-				<div
-					v-if="isExportMenuOpen"
-					class="absolute right-0 mt-1 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg z-10 overflow-hidden">
-					<div class="py-1 border border-gray-200 dark:border-gray-700 rounded-md">
-						<button
-							@click="exportDiagram('png')"
-							class="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center">
-							<svg
-								class="h-5 w-5 mr-3 text-gray-500 dark:text-gray-400"
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke="currentColor">
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									stroke-width="2"
-									d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-							</svg>
-							{{ t('editor.exportPNG') }}
-						</button>
-						<button
-							@click="exportDiagram('svg')"
-							class="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center">
-							<svg
-								class="h-5 w-5 mr-3 text-gray-500 dark:text-gray-400"
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke="currentColor">
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									stroke-width="2"
-									d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-							</svg>
-							{{ t('editor.exportSVG') }}
-						</button>
-					</div>
-				</div>
-			</div>
-
 			<!-- 语言切换按钮 -->
 			<LanguageSwitch />
 		</div>
@@ -155,7 +85,6 @@
 	const emit = defineEmits(['update:code'])
 	const { t } = useI18n()
 
-	const isExportMenuOpen = ref(false)
 	const currentCode = ref(props.modelValue || '')
 	const error = ref(null)
 
@@ -258,7 +187,6 @@
 	const loadExample = (code: string) => {
 		currentCode.value = code
 		emit('update:code', code)
-		isExportMenuOpen.value = false
 	}
 
 	// 清空编辑器
@@ -275,27 +203,6 @@
 			const resetEvent = new CustomEvent('resetMermaidView')
 			document.dispatchEvent(resetEvent)
 		}, 50)
-
-		isExportMenuOpen.value = false
-	}
-
-	// 导出图表
-	const exportDiagram = async (format: 'png' | 'svg') => {
-		if (format === 'png') {
-			await exportAsPng('mermaid-diagram')
-		} else {
-			await exportAsSvg('mermaid-diagram')
-		}
-		isExportMenuOpen.value = false
-	}
-
-	// 点击外部关闭导出菜单
-	const closeExportMenu = (e: Event) => {
-		const target = e.target as HTMLElement
-		// 只要点击的不是导出按钮或导出菜单本身，就关闭菜单
-		if (isExportMenuOpen.value && !target.closest('.export-menu-container')) {
-			isExportMenuOpen.value = false
-		}
 	}
 
 	// 监听代码变化
@@ -307,12 +214,4 @@
 			}
 		}
 	)
-
-	onMounted(() => {
-		document.addEventListener('click', closeExportMenu)
-	})
-
-	onUnmounted(() => {
-		document.removeEventListener('click', closeExportMenu)
-	})
 </script>

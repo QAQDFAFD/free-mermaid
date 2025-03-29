@@ -1,10 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-	devtools: { enabled: true },
-	modules: ['@nuxtjs/tailwindcss'],
+	devtools: { enabled: false }, // 关闭devtools
+	modules: ['@nuxtjs/tailwindcss'], // 将tailwindcss添加到modules中
 
 	app: {
+		// 添加app配置
 		head: {
+			// 添加head配置,会自动添加到所有页面，如果需要单独配置，可以在页面中添加
 			title: 'Mermaid Drawing - Free Online Mermaid Chart & Diagram Tool',
 			meta: [
 				{ charset: 'utf-8' },
@@ -68,15 +70,16 @@ export default defineNuxtConfig({
 		}
 	},
 
-	// 客户端插件配置
+	// 客户端插件配置， src 是插件文件路径，mode 是插件模式，client 是客户端模式，server 是服务端模式
 	plugins: [{ src: '~/plugins/mermaid.client.ts', mode: 'client' }],
 
-	// 运行时配置
+	// 运行时配置，public 是公共配置，server 是服务端配置
 	runtimeConfig: {
 		public: {
 			appName: 'Mermaid Drawing'
 		}
 	},
 
+	// 兼容性配置，指定兼容性日期
 	compatibilityDate: '2025-03-16'
 })
