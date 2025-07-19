@@ -516,8 +516,80 @@ pie title Traffic Sources
     </div>
 
     <!-- 融合的底部信息与SEO区域 -->
-    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-2 px-4 text-center">
-      <div class="max-w-6xl mx-auto">
+    <footer
+      class="relative bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-2 px-4 text-center overflow-hidden">
+      <!-- 美人鱼尾巴背景动画 -->
+      <div class="absolute inset-0 pointer-events-none">
+        <!-- 水波纹背景 -->
+        <div class="absolute inset-0 opacity-20 dark:opacity-15">
+          <div class="wave-animation"></div>
+          <div class="wave-animation" style="animation-delay: -2s"></div>
+          <div class="wave-animation" style="animation-delay: -4s"></div>
+        </div>
+
+        <!-- 美人鱼尾巴 -->
+        <div class="absolute bottom-0 right-0 opacity-35 dark:opacity-25">
+          <svg width="200" height="80" viewBox="0 0 200 80" class="mermaid-tail">
+            <!-- 尾巴主体 -->
+            <path
+              d="M20,60 Q40,20 80,40 Q120,60 160,30 Q180,50 200,20"
+              stroke="url(#tailGradient)"
+              stroke-width="10"
+              fill="none"
+              stroke-linecap="round" />
+            <!-- 尾鳍 -->
+            <path d="M180,20 Q200,10 190,30 Q200,40 185,35 Q175,25 180,20" fill="url(#finGradient)" opacity="1" />
+            <!-- 小鳞片装饰 -->
+            <circle cx="50" cy="45" r="4" fill="url(#scaleGradient)" opacity="0.9" />
+            <circle cx="90" cy="35" r="3.5" fill="url(#scaleGradient)" opacity="0.9" />
+            <circle cx="130" cy="50" r="4" fill="url(#scaleGradient)" opacity="0.9" />
+
+            <!-- 渐变定义 -->
+            <defs>
+              <linearGradient id="tailGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color: #1e40af; stop-opacity: 0.9" />
+                <stop offset="50%" style="stop-color: #0891b2; stop-opacity: 1" />
+                <stop offset="100%" style="stop-color: #059669; stop-opacity: 0.9" />
+              </linearGradient>
+              <linearGradient id="finGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color: #0891b2; stop-opacity: 0.9" />
+                <stop offset="100%" style="stop-color: #1e40af; stop-opacity: 1" />
+              </linearGradient>
+              <radialGradient id="scaleGradient">
+                <stop offset="0%" style="stop-color: #ffffff; stop-opacity: 1" />
+                <stop offset="100%" style="stop-color: #0891b2; stop-opacity: 0.7" />
+              </radialGradient>
+            </defs>
+          </svg>
+        </div>
+
+        <!-- 左侧美人鱼尾巴 -->
+        <div class="absolute bottom-0 left-0 opacity-25 dark:opacity-15">
+          <svg width="150" height="60" viewBox="0 0 150 60" class="mermaid-tail-left">
+            <path
+              d="M0,40 Q30,20 60,35 Q90,45 120,25 Q140,35 150,20"
+              stroke="url(#tailGradient2)"
+              stroke-width="8"
+              fill="none"
+              stroke-linecap="round" />
+            <defs>
+              <linearGradient id="tailGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color: #059669; stop-opacity: 0.8" />
+                <stop offset="50%" style="stop-color: #0891b2; stop-opacity: 1" />
+                <stop offset="100%" style="stop-color: #7c3aed; stop-opacity: 0.8" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+
+        <!-- 漂浮泡泡 -->
+        <div class="bubble bubble-1"></div>
+        <div class="bubble bubble-2"></div>
+        <div class="bubble bubble-3"></div>
+        <div class="bubble bubble-4"></div>
+      </div>
+
+      <div class="max-w-6xl mx-auto relative z-10">
         <!-- 主标题 -->
         <h1 class="text-base font-bold text-gray-900 dark:text-white mb-1.5">
           {{ $t('footer.title') }} - {{ $t('footer.editorTitle') }}
@@ -585,3 +657,219 @@ pie title Traffic Sources
     ]
   })
 </script>
+
+<style scoped>
+  /* 美人鱼尾巴动画样式 */
+  @keyframes mermaidSwim {
+    0%,
+    100% {
+      transform: translateX(0) rotate(0deg);
+    }
+    25% {
+      transform: translateX(-5px) rotate(-2deg);
+    }
+    50% {
+      transform: translateX(0) rotate(0deg);
+    }
+    75% {
+      transform: translateX(5px) rotate(2deg);
+    }
+  }
+
+  @keyframes mermaidSwimLeft {
+    0%,
+    100% {
+      transform: translateX(0) rotate(0deg) scaleX(-1);
+    }
+    25% {
+      transform: translateX(5px) rotate(2deg) scaleX(-1);
+    }
+    50% {
+      transform: translateX(0) rotate(0deg) scaleX(-1);
+    }
+    75% {
+      transform: translateX(-5px) rotate(-2deg) scaleX(-1);
+    }
+  }
+
+  @keyframes mermaidTailSwim {
+    0% {
+      left: -80px;
+      bottom: -35px;
+    }
+    25% {
+      left: 25%;
+      bottom: -25px;
+    }
+    50% {
+      left: 50%;
+      bottom: -30px;
+    }
+    75% {
+      left: 75%;
+      bottom: -20px;
+    }
+    100% {
+      left: 100%;
+      bottom: -35px;
+    }
+  }
+
+  @keyframes mermaidTailWiggle {
+    0%,
+    100% {
+      transform: scaleY(1) skewX(0deg) rotate(0deg);
+    }
+    25% {
+      transform: scaleY(0.9) skewX(-8deg) rotate(-3deg);
+    }
+    50% {
+      transform: scaleY(1.1) skewX(0deg) rotate(0deg);
+    }
+    75% {
+      transform: scaleY(0.9) skewX(8deg) rotate(3deg);
+    }
+  }
+
+  @keyframes bubbleFloat {
+    0% {
+      transform: translateY(20px) scale(0.8);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-80px) scale(1.2);
+      opacity: 0;
+    }
+  }
+
+  .mermaid-tail {
+    animation: mermaidSwim 6s ease-in-out infinite;
+    transform-origin: center bottom;
+  }
+
+  .mermaid-tail-left {
+    animation: mermaidSwimLeft 8s ease-in-out infinite;
+    transform-origin: center bottom;
+  }
+
+  .wave-animation {
+    position: absolute;
+    bottom: -30px;
+    left: 0px;
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 50%, #10b981 100%);
+    opacity: 0.8;
+    clip-path: polygon(
+      40% 100%,
+      42% 90%,
+      44% 80%,
+      46% 70%,
+      47% 60%,
+      48% 50%,
+      47% 40%,
+      45% 30%,
+      40% 25%,
+      30% 20%,
+      18% 15%,
+      8% 10%,
+      2% 5%,
+      0% 0%,
+      2% 2%,
+      8% 5%,
+      18% 8%,
+      30% 12%,
+      40% 15%,
+      45% 18%,
+      48% 22%,
+      50% 25%,
+      52% 22%,
+      55% 18%,
+      60% 15%,
+      70% 12%,
+      82% 8%,
+      92% 5%,
+      98% 2%,
+      100% 0%,
+      98% 5%,
+      92% 10%,
+      82% 15%,
+      70% 20%,
+      60% 25%,
+      55% 30%,
+      53% 40%,
+      52% 50%,
+      53% 60%,
+      54% 70%,
+      56% 80%,
+      58% 90%,
+      60% 100%
+    );
+    animation: mermaidTailSwim 10s linear infinite, mermaidTailWiggle 2.5s ease-in-out infinite;
+  }
+
+  .bubble {
+    position: absolute;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.9), rgba(8, 145, 178, 0.6));
+    border-radius: 50%;
+    animation: bubbleFloat 4s ease-in-out infinite;
+  }
+
+  .bubble-1 {
+    width: 8px;
+    height: 8px;
+    left: 20%;
+    bottom: 0;
+    animation-delay: 0s;
+    animation-duration: 5s;
+  }
+
+  .bubble-2 {
+    width: 6px;
+    height: 6px;
+    left: 40%;
+    bottom: 0;
+    animation-delay: -1.5s;
+    animation-duration: 4s;
+  }
+
+  .bubble-3 {
+    width: 10px;
+    height: 10px;
+    left: 60%;
+    bottom: 0;
+    animation-delay: -3s;
+    animation-duration: 6s;
+  }
+
+  .bubble-4 {
+    width: 5px;
+    height: 5px;
+    left: 80%;
+    bottom: 0;
+    animation-delay: -4.5s;
+    animation-duration: 3.5s;
+  }
+
+  /* 响应式调整 */
+  @media (max-width: 768px) {
+    .mermaid-tail {
+      width: 150px;
+      height: 60px;
+    }
+
+    .mermaid-tail-left {
+      width: 100px;
+      height: 40px;
+    }
+
+    .wave-animation {
+      width: 60px;
+      height: 60px;
+      bottom: -25px;
+    }
+  }
+</style>
