@@ -234,17 +234,26 @@
 
   // 默认示例代码
   const defaultCode = `graph TD
-  A[Start] --> B{Logged in?}
-  B -->|Yes| C[Show Homepage]  
-  B -->|No| D[Show Login Page]
-  C --> E[User Dashboard]
-  D --> F[Authentication]
-  E --> G[End]
-  F --> G
+  A[😊 Meet Someone Special] --> B{💭 Do You Like Her?}
+  B -->|❤️ Yes| C[💬 Start Conversation]
+  B -->|😕 No| D[👥 Stay Friends]
+  C --> E[🎯 Find Common Interests]
+  E --> F{🤔 Is She Interested?}
+  F -->|😍 Yes| G[💐 Ask Her Out]
+  F -->|😅 Not Sure| H[⏰ Give It Time]
+  F -->|😔 No| I[🤝 Respect & Stay Friends]
+  G --> J{🌟 First Date Success?}
+  J -->|🥰 Amazing| K[❤️ Keep Dating]
+  J -->|😊 Good| L[📅 Plan Another Date]
+  J -->|😐 Okay| H
+  H --> E
+  K --> M[💍 Happily Ever After]
+  L --> K
+  D --> N[😌 Friendship is Also Great]
+  I --> N
   
-  %% Mermaid Online Free - Diagram Editor
-  %% Mermaid Chart Online Free Tool
-  %% Best Mermaid Free Editor`
+  %% Mermaid Online Free - Create Love Flowcharts! 💕
+  %% Best Free Diagram Tool for Everything`
 
   // 编辑器代码
   const code = ref(defaultCode)
@@ -253,7 +262,7 @@
   const previewRef = ref<(ComponentPublicInstance & MermaidPreviewMethods) | null>(null)
 
   // 当前缩放比例
-  const currentZoom = ref(0.5)
+  const currentZoom = ref(0.9)
 
   // 左侧面板宽度百分比
   const leftPanelWidth = ref(30)

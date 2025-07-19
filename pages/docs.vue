@@ -31,11 +31,13 @@
             <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md mb-4">
               <pre class="text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap">
 graph TD
-    A[Start] --> B{Logged in?}
-    B -->|Yes| C[Show Homepage]
-    B -->|No| D[Show Login Page]
-    C --> E[End]
-    D --> E</pre
+    A[😊 Wake Up] --> B{☕ Coffee Ready?}
+    B -->|✅ Yes| C[🌟 Great Day Ahead]
+    B -->|❌ No| D[😴 Back to Bed]
+    C --> E[💪 Conquer the World]
+    D --> F[😪 Zombie Mode]
+    F --> G[🏃 Rush to Coffee Shop]
+    G --> C</pre
               >
             </div>
             <div class="text-sm text-gray-700 dark:text-gray-300">
@@ -95,14 +97,17 @@ graph TD
             <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md mb-4">
               <pre class="text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap">
 sequenceDiagram
-    participant User
-    participant System
-    participant Database
+    participant Me as 😎 Me
+    participant Fridge as 🧊 Fridge
+    participant Brain as 🧠 Brain
+    participant Stomach as 🤤 Stomach
     
-    User->>System: Login Request
-    System->>Database: Verify Credentials
-    Database-->>System: Verification Result
-    System-->>User: Login Response</pre
+    Me->>Fridge: 👀 What's for dinner?
+    Fridge-->>Me: 🥬 Only vegetables...
+    Me->>Brain: 🤔 Should I cook?
+    Brain-->>Me: 🍕 Order pizza instead!
+    Me->>Stomach: 🤷 Pizza again?
+    Stomach-->>Me: 😋 Always yes to pizza!</pre
               >
             </div>
             <div class="text-sm text-gray-700 dark:text-gray-300">
@@ -154,18 +159,24 @@ sequenceDiagram
             <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md mb-4">
               <pre class="text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap">
 classDiagram
-    class Animal {
-      +String name
-      +makeSound()
+    class DatingAppUser {
+      +String bio
+      +Array photos
+      +Integer age
+      +swipeRight()
+      +sendMessage()
     }
-    class Dog {
-      +fetch()
+    class HopelessRomantic {
+      +String dreamDate
+      +writePoetry()
+      +fallInLoveEasily()
     }
-    class Cat {
-      +scratch()
+    class SerialDater {
+      +scheduleMultipleDates()
+      +masterSmallTalk()
     }
-    Animal <|-- Dog
-    Animal <|-- Cat</pre
+    DatingAppUser <|-- HopelessRomantic
+    DatingAppUser <|-- SerialDater</pre
               >
             </div>
             <div class="text-sm text-gray-700 dark:text-gray-300">
