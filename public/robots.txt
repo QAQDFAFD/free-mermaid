@@ -1,3 +1,40 @@
+# Robots.txt for Mermaid Online Free - Graph TD Diagram Editor
+# https://mermaid-drawing.com
+
 User-agent: *
 Allow: /
+Allow: /docs
+
+# Disallow development and build directories
+Disallow: /api/
+Disallow: /_nuxt/
+Disallow: /.nuxt/
+Disallow: /node_modules/
+
+# Disallow common non-content paths
+Disallow: /404
+Disallow: /500
+Disallow: /*.json$
+
+# Enhanced sitemap location
 Sitemap: https://mermaid-drawing.com/sitemap.xml
+
+# Crawl-delay for better server performance
+Crawl-delay: 1
+
+# Special rules for specific bots
+User-agent: Googlebot
+Crawl-delay: 0
+
+User-agent: Bingbot
+Crawl-delay: 1
+
+# Allow all social media crawlers
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /

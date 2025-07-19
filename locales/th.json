@@ -1,0 +1,114 @@
+{
+  "editor": {
+    "title": "เครื่องมือแก้ไขโค้ด Mermaid",
+    "documentation": "เอกสาร Mermaid",
+    "clear": "ล้าง",
+    "export": "ส่งออกไดอะแกรม",
+    "exportPNG": "ส่งออกไดอะแกรมเป็น PNG",
+    "exportSVG": "ส่งออกไดอะแกรมเป็น SVG"
+  },
+  "preview": {
+    "title": "แสดงตัวอย่างไดอะแกรม Mermaid",
+    "zoom": "กด Ctrl+เลื่อนเมาส์ เพื่อซูม",
+    "zoomOut": "ซูมออก",
+    "resetView": "รีเซ็ตมุมมอง",
+    "zoomIn": "ซูมเข้า",
+    "placeholder": "ป้อนโค้ดไดอะแกรม mermaid ในเครื่องมือแก้ไขเพื่อดูตัวอย่าง"
+  },
+  "tools": {
+    "flowchart": "แผนผังขั้นตอน",
+    "sequence": "แผนภาพลำดับ",
+    "class": "แผนภาพคลาส",
+    "state": "แผนภาพสถานะ",
+    "entity": "แผนภาพความสัมพันธ์เอนทิตี",
+    "gantt": "แผนภาพแกนต์",
+    "pie": "แผนภาพวงกลม"
+  },
+  "footer": {
+    "title": "Mermaid Drawing",
+    "desc": "สร้างไดอะแกรมที่สวยงามด้วยไวยากรณ์ข้อความง่ายๆ ที่",
+    "editorTitle": "เครื่องมือแก้ไขไดอะแกรม Mermaid ออนไลน์ฟรี",
+    "features": {
+      "description": "สร้าง {graphTD}, {sequenceDiagram}, {classDiagram} และอื่นๆ อีกมากมาย",
+      "graphTD": "แผนผัง Graph TD",
+      "sequenceDiagram": "แผนภาพลำดับ",
+      "classDiagram": "แผนภาพคลาส"
+    },
+    "capabilities": {
+      "graphTdOnline": "Graph TD ออนไลน์",
+      "mermaidEditorFree": "เครื่องมือแก้ไข Mermaid ฟรี",
+      "mermaidChartOnlineFree": "แผนภาพออนไลน์ฟรี",
+      "mermaidFreeEditor": "เครื่องมือแก้ไข Mermaid ฟรี"
+    },
+    "seoText": "เครื่องมือ {mermaidDiagramOnlineFree} ระดับมืออาชีพพร้อมความสามารถ {mermaidChartOnlineFree} {mermaidFreeEditor} ที่ดีที่สุดสำหรับสร้างไดอะแกรมทันที",
+    "seoKeywords": {
+      "mermaidDiagramOnlineFree": "mermaid ไดอะแกรมออนไลน์ฟรี",
+      "mermaidChartOnlineFree": "mermaid แผนภาพออนไลน์ฟรี",
+      "mermaidFreeEditor": "เครื่องมือแก้ไข mermaid ฟรี"
+    }
+  },
+  "docs": {
+    "title": "เอกสารไดอะแกรม Mermaid",
+    "subtitle": "เรียนรู้วิธีสร้างไดอะแกรมต่างๆ ด้วยไวยากรณ์ Mermaid อย่างรวดเร็ว",
+    "backToEditor": "กลับไปยังเครื่องมือแก้ไข",
+    "basicSyntax": "ไวยากรณ์พื้นฐาน",
+    "additionalResources": "แหล่งข้อมูลเพิ่มเติม",
+    "resourcesDesc": "หน้านี้ให้แนวทางไวยากรณ์ Mermaid พื้นฐาน สำหรับคุณสมบัติขั้นสูงและไวยากรณ์โดยละเอียด โปรดดูที่:",
+    "officialDocs": "เอกสารอย่างเป็นทางการของ Mermaid",
+    "liveEditor": "Mermaid Live Editor",
+    "flowchart": {
+      "syntax1": "graph TD - กำหนดกราฟจากบนลงล่าง (TD = Top Down)",
+      "syntax2": "A[Text] - สร้างโหนดสี่เหลี่ยม",
+      "syntax3": "B{Text} - สร้างโหนดเพชร (เงื่อนไข)",
+      "syntax4": "---> - สร้างการเชื่อมต่อลูกศร",
+      "syntax5": "-->|Text| - สร้างลูกศรที่มีป้ายกำกับ"
+    },
+    "sequence": {
+      "syntax1": "sequenceDiagram - กำหนดแผนภาพลำดับ",
+      "syntax2": "participant Name - กำหนดผู้เข้าร่วม",
+      "syntax3": "A->>B: Text - สร้างลูกศรทึบสำหรับข้อความแบบซิงโครนัส",
+      "syntax4": "A-->>B: Text - สร้างลูกศรประสำหรับข้อความตอบกลับ/อะซิงโครนัส"
+    },
+    "class": {
+      "syntax1": "classDiagram - กำหนดแผนภาพคลาส",
+      "syntax2": "class ClassName {} - กำหนดคลาสพร้อมคุณสมบัติ/เมธอด",
+      "syntax3": "+ - ระบุคุณสมบัติ/เมธอดสาธารณะ",
+      "syntax4": "- - ระบุคุณสมบัติ/เมธอดส่วนตัว",
+      "syntax5": "A <|-- B - ระบุว่า B สืบทอดจาก A (B เป็นคลาสย่อยของ A)"
+    },
+    "state": {
+      "syntax1": "stateDiagram-v2 - กำหนดแผนภาพสถานะ",
+      "syntax2": "[*] - แทนสถานะเริ่มต้นหรือสิ้นสุด",
+      "syntax3": "A --> B - สร้างการเปลี่ยนแปลงจาก A ไป B",
+      "syntax4": "A --> B: Text - สร้างการเปลี่ยนแปลงที่มีป้ายกำกับ"
+    },
+    "entity": {
+      "syntax1": "erDiagram - กำหนดแผนภาพความสัมพันธ์เอนทิตี",
+      "syntax2": "||--o{ - แทนความสัมพันธ์หนึ่งต่อหลาย",
+      "syntax3": "||--|{ - แทนความสัมพันธ์หนึ่งต่อหลาย (บังคับ)",
+      "syntax4": "}|..|{ - แทนความสัมพันธ์หลายต่อหลาย (เส้นประ)",
+      "syntax5": ": Text - กำหนดคำอธิบายความสัมพันธ์"
+    },
+    "gantt": {
+      "syntax1": "gantt - กำหนดแผนภาพแกนต์",
+      "syntax2": "title Title - ตั้งชื่อแผนภาพ",
+      "syntax3": "dateFormat Format - ตั้งรูปแบบวันที่",
+      "syntax4": "section Name - กำหนดส่วนโครงการ",
+      "syntax5": "Task Name: ID, Start Date, Duration/End Date",
+      "syntax6": "done/active - ระบุสถานะงาน",
+      "syntax7": "after ID - ระบุหลังจากงานอื่น"
+    },
+    "pie": {
+      "syntax1": "pie - กำหนดแผนภาพวงกลม",
+      "syntax2": "title Title - ตั้งชื่อแผนภาพวงกลม",
+      "syntax3": "\"Label\" : Value - กำหนดส่วนของแผนภาพวงกลม"
+    }
+  },
+  "language": {
+    "en": "English",
+    "zh": "中文",
+    "ru": "Русский",
+    "fr": "Français",
+    "th": "ไทย"
+  }
+}

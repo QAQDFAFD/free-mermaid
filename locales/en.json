@@ -1,92 +1,114 @@
 {
-	"editor": {
-		"title": "Mermaid Code Editor",
-		"documentation": "Mermaid Documentation",
-		"clear": "Clear",
-		"export": "Export Drawing",
-		"exportPNG": "Export Drawing as PNG",
-		"exportSVG": "Export Drawing as SVG"
-	},
-	"preview": {
-		"title": "Mermaid Drawing Preview",
-		"zoom": "Hold Ctrl+Scroll to zoom",
-		"zoomOut": "Zoom Out",
-		"resetView": "Reset View",
-		"zoomIn": "Zoom In",
-		"placeholder": "Enter your mermaid drawing code in the editor to see the preview"
-	},
-	"tools": {
-		"flowchart": "Flowchart",
-		"sequence": "Sequence Diagram",
-		"class": "Class Diagram",
-		"state": "State Diagram",
-		"entity": "Entity Relationship",
-		"gantt": "Gantt Chart",
-		"pie": "Pie Chart"
-	},
-	"footer": {
-		"title": "Mermaid Drawing",
-		"desc": "Create beautiful diagrams with simple text-based syntax at"
-	},
-	"docs": {
-		"title": "Mermaid Chart Documentation",
-		"subtitle": "Quickly learn how to create various diagrams using Mermaid syntax",
-		"backToEditor": "Back to Editor",
-		"basicSyntax": "Basic Syntax",
-		"additionalResources": "Additional Resources",
-		"resourcesDesc": "This page provides basic Mermaid syntax guidelines. For more advanced features and detailed syntax, please refer to:",
-		"officialDocs": "Mermaid Official Documentation",
-		"liveEditor": "Mermaid Live Editor",
-		"flowchart": {
-			"syntax1": "graph TD - defines a top-down graph (TD = Top Down)",
-			"syntax2": "A[Text] - creates a rectangular node",
-			"syntax3": "B{Text} - creates a diamond node (condition)",
-			"syntax4": "---> - creates an arrow connection",
-			"syntax5": "-->|Text| - creates a labeled arrow"
-		},
-		"sequence": {
-			"syntax1": "sequenceDiagram - defines a sequence diagram",
-			"syntax2": "participant Name - defines a participant",
-			"syntax3": "A->>B: Text - creates a solid arrow for synchronous messages",
-			"syntax4": "A-->>B: Text - creates a dashed arrow for return/asynchronous messages"
-		},
-		"class": {
-			"syntax1": "classDiagram - defines a class diagram",
-			"syntax2": "class ClassName {} - defines a class with properties/methods",
-			"syntax3": "+ - indicates public properties/methods",
-			"syntax4": "- - indicates private properties/methods",
-			"syntax5": "A <|-- B - indicates B inherits from A (B is a subclass of A)"
-		},
-		"state": {
-			"syntax1": "stateDiagram-v2 - defines a state diagram",
-			"syntax2": "[*] - represents the start or end state",
-			"syntax3": "A --> B - creates a transition from A to B",
-			"syntax4": "A --> B: Text - creates a labeled transition"
-		},
-		"entity": {
-			"syntax1": "erDiagram - defines an entity relationship diagram",
-			"syntax2": "||--o{ - represents a one-to-many relationship",
-			"syntax3": "||--|{ - represents a one-to-many (mandatory) relationship",
-			"syntax4": "}|..|{ - represents a many-to-many relationship (dashed line)",
-			"syntax5": ": Text - defines the relationship description"
-		},
-		"gantt": {
-			"syntax1": "gantt - defines a Gantt chart",
-			"syntax2": "title Title - sets the chart title",
-			"syntax3": "dateFormat Format - sets the date format",
-			"syntax4": "section Name - defines a project section",
-			"syntax5": "Task Name: ID, Start Date, Duration/End Date",
-			"syntax6": "done/active - indicates task status",
-			"syntax7": "after ID - indicates after another task"
-		},
-		"pie": {
-			"syntax1": "pie - defines a pie chart",
-			"syntax2": "title Title - sets the pie chart title",
-			"syntax3": "\"Label\" : Value - defines a slice of the pie chart"
-		}
-	},
-	"language": {
-		"en": "English",
-		"zh": "中文"
-	}
+  "editor": {
+    "title": "Mermaid Code Editor",
+    "documentation": "Mermaid Documentation",
+    "clear": "Clear",
+    "export": "Export Drawing",
+    "exportPNG": "Export Drawing as PNG",
+    "exportSVG": "Export Drawing as SVG"
+  },
+  "preview": {
+    "title": "Mermaid Drawing Preview",
+    "zoom": "Hold Ctrl+Scroll to zoom",
+    "zoomOut": "Zoom Out",
+    "resetView": "Reset View",
+    "zoomIn": "Zoom In",
+    "placeholder": "Enter your mermaid drawing code in the editor to see the preview"
+  },
+  "tools": {
+    "flowchart": "Flowchart",
+    "sequence": "Sequence Diagram",
+    "class": "Class Diagram",
+    "state": "State Diagram",
+    "entity": "Entity Relationship",
+    "gantt": "Gantt Chart",
+    "pie": "Pie Chart"
+  },
+  "footer": {
+    "title": "Mermaid Drawing",
+    "desc": "Create beautiful diagrams with simple text-based syntax at",
+    "editorTitle": "Mermaid Online Free - Diagram Editor & Chart Maker",
+    "features": {
+      "description": "Create {graphTD}, {sequenceDiagram}, {classDiagram} online free.",
+      "graphTD": "Graph TD Flowcharts",
+      "sequenceDiagram": "Sequence Diagrams",
+      "classDiagram": "Class Diagrams"
+    },
+    "capabilities": {
+      "graphTdOnline": "Graph TD Online",
+      "mermaidEditorFree": "Mermaid Editor Free",
+      "mermaidChartOnlineFree": "Chart Online Free",
+      "mermaidFreeEditor": "Mermaid Free Editor"
+    },
+    "seoText": "Professional {mermaidDiagramOnlineFree} tool with {mermaidChartOnlineFree} capabilities. The best {mermaidFreeEditor} for creating diagrams instantly.",
+    "seoKeywords": {
+      "mermaidDiagramOnlineFree": "mermaid diagram online free",
+      "mermaidChartOnlineFree": "mermaid chart online free",
+      "mermaidFreeEditor": "mermaid free editor"
+    }
+  },
+  "docs": {
+    "title": "Mermaid Chart Documentation",
+    "subtitle": "Quickly learn how to create various diagrams using Mermaid syntax",
+    "backToEditor": "Back to Editor",
+    "basicSyntax": "Basic Syntax",
+    "additionalResources": "Additional Resources",
+    "resourcesDesc": "This page provides basic Mermaid syntax guidelines. For more advanced features and detailed syntax, please refer to:",
+    "officialDocs": "Mermaid Official Documentation",
+    "liveEditor": "Mermaid Live Editor",
+    "flowchart": {
+      "syntax1": "graph TD - defines a top-down graph (TD = Top Down)",
+      "syntax2": "A[Text] - creates a rectangular node",
+      "syntax3": "B{Text} - creates a diamond node (condition)",
+      "syntax4": "---> - creates an arrow connection",
+      "syntax5": "-->|Text| - creates a labeled arrow"
+    },
+    "sequence": {
+      "syntax1": "sequenceDiagram - defines a sequence diagram",
+      "syntax2": "participant Name - defines a participant",
+      "syntax3": "A->>B: Text - creates a solid arrow for synchronous messages",
+      "syntax4": "A-->>B: Text - creates a dashed arrow for return/asynchronous messages"
+    },
+    "class": {
+      "syntax1": "classDiagram - defines a class diagram",
+      "syntax2": "class ClassName {} - defines a class with properties/methods",
+      "syntax3": "+ - indicates public properties/methods",
+      "syntax4": "- - indicates private properties/methods",
+      "syntax5": "A <|-- B - indicates B inherits from A (B is a subclass of A)"
+    },
+    "state": {
+      "syntax1": "stateDiagram-v2 - defines a state diagram",
+      "syntax2": "[*] - represents the start or end state",
+      "syntax3": "A --> B - creates a transition from A to B",
+      "syntax4": "A --> B: Text - creates a labeled transition"
+    },
+    "entity": {
+      "syntax1": "erDiagram - defines an entity relationship diagram",
+      "syntax2": "||--o{ - represents a one-to-many relationship",
+      "syntax3": "||--|{ - represents a one-to-many (mandatory) relationship",
+      "syntax4": "}|..|{ - represents a many-to-many relationship (dashed line)",
+      "syntax5": ": Text - defines the relationship description"
+    },
+    "gantt": {
+      "syntax1": "gantt - defines a Gantt chart",
+      "syntax2": "title Title - sets the chart title",
+      "syntax3": "dateFormat Format - sets the date format",
+      "syntax4": "section Name - defines a project section",
+      "syntax5": "Task Name: ID, Start Date, Duration/End Date",
+      "syntax6": "done/active - indicates task status",
+      "syntax7": "after ID - indicates after another task"
+    },
+    "pie": {
+      "syntax1": "pie - defines a pie chart",
+      "syntax2": "title Title - sets the pie chart title",
+      "syntax3": "\"Label\" : Value - defines a slice of the pie chart"
+    }
+  },
+  "language": {
+    "en": "English",
+    "zh": "中文",
+    "ru": "Русский",
+    "fr": "Français",
+    "th": "ไทย"
+  }
 }

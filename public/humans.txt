@@ -1,0 +1,31 @@
+# Mermaid Online Free - Free Diagram Editor & Chart Maker
+# https://mermaid-drawing.com
+
+/* TEAM */
+
+Developer: Developer Team
+Site: https://mermaid-drawing.com
+Location: Global
+
+/* THANKS */
+
+Mermaid.js: https://mermaid.js.org/
+Vue.js: https://vuejs.org/
+Nuxt.js: https://nuxt.com/
+Tailwind CSS: https://tailwindcss.com/
+
+/* SITE */
+
+Last update: 2025/01/20
+Language: HTML5, CSS3, JavaScript, TypeScript, Vue.js
+Doctype: HTML5
+IDE: Visual Studio Code
+Components: Nuxt.js, Vue 3, Tailwind CSS, Mermaid.js
+Standards: W3C, SEO Optimized, Accessibility
+Software: Git, Node.js, npm
+
+/* KEYWORDS */
+
+mermaid online free, mermaid diagram online free, graph td online
+mermaid chart online free, mermaid free editor, flowchart online
+sequence diagram online, class diagram online, free diagram tool 

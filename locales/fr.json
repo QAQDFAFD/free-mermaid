@@ -1,0 +1,114 @@
+{
+  "editor": {
+    "title": "Éditeur de code Mermaid",
+    "documentation": "Documentation Mermaid",
+    "clear": "Effacer",
+    "export": "Exporter le diagramme",
+    "exportPNG": "Exporter le diagramme en PNG",
+    "exportSVG": "Exporter le diagramme en SVG"
+  },
+  "preview": {
+    "title": "Aperçu du diagramme Mermaid",
+    "zoom": "Maintenez Ctrl+Défilement pour zoomer",
+    "zoomOut": "Dézoomer",
+    "resetView": "Réinitialiser la vue",
+    "zoomIn": "Zoomer",
+    "placeholder": "Saisissez votre code de diagramme mermaid dans l'éditeur pour voir l'aperçu"
+  },
+  "tools": {
+    "flowchart": "Organigramme",
+    "sequence": "Diagramme de séquence",
+    "class": "Diagramme de classes",
+    "state": "Diagramme d'état",
+    "entity": "Diagramme entité-relation",
+    "gantt": "Diagramme de Gantt",
+    "pie": "Graphique en secteurs"
+  },
+  "footer": {
+    "title": "Mermaid Drawing",
+    "desc": "Créez de beaux diagrammes avec une syntaxe textuelle simple sur",
+    "editorTitle": "Éditeur de diagrammes Mermaid gratuit en ligne",
+    "features": {
+      "description": "Créez des {graphTD}, {sequenceDiagram}, {classDiagram} et plus encore.",
+      "graphTD": "Organigrammes Graph TD",
+      "sequenceDiagram": "Diagrammes de séquence",
+      "classDiagram": "Diagrammes de classes"
+    },
+    "capabilities": {
+      "graphTdOnline": "Graph TD en ligne",
+      "mermaidEditorFree": "Éditeur Mermaid gratuit",
+      "mermaidChartOnlineFree": "Graphiques en ligne gratuits",
+      "mermaidFreeEditor": "Éditeur Mermaid gratuit"
+    },
+    "seoText": "Outil professionnel {mermaidDiagramOnlineFree} avec des capacités {mermaidChartOnlineFree}. Le meilleur {mermaidFreeEditor} pour créer des diagrammes instantanément.",
+    "seoKeywords": {
+      "mermaidDiagramOnlineFree": "diagramme mermaid en ligne gratuit",
+      "mermaidChartOnlineFree": "graphique mermaid en ligne gratuit",
+      "mermaidFreeEditor": "éditeur mermaid gratuit"
+    }
+  },
+  "docs": {
+    "title": "Documentation des diagrammes Mermaid",
+    "subtitle": "Apprenez rapidement à créer divers diagrammes avec la syntaxe Mermaid",
+    "backToEditor": "Retour à l'éditeur",
+    "basicSyntax": "Syntaxe de base",
+    "additionalResources": "Ressources supplémentaires",
+    "resourcesDesc": "Cette page fournit des directives de base sur la syntaxe Mermaid. Pour des fonctionnalités plus avancées et une syntaxe détaillée, veuillez vous référer à :",
+    "officialDocs": "Documentation officielle Mermaid",
+    "liveEditor": "Éditeur en direct Mermaid",
+    "flowchart": {
+      "syntax1": "graph TD - définit un graphique de haut en bas (TD = Top Down)",
+      "syntax2": "A[Texte] - crée un nœud rectangulaire",
+      "syntax3": "B{Texte} - crée un nœud en losange (condition)",
+      "syntax4": "---> - crée une connexion par flèche",
+      "syntax5": "-->|Texte| - crée une flèche étiquetée"
+    },
+    "sequence": {
+      "syntax1": "sequenceDiagram - définit un diagramme de séquence",
+      "syntax2": "participant Nom - définit un participant",
+      "syntax3": "A->>B: Texte - crée une flèche pleine pour les messages synchrones",
+      "syntax4": "A-->>B: Texte - crée une flèche en pointillés pour les messages de retour/asynchrones"
+    },
+    "class": {
+      "syntax1": "classDiagram - définit un diagramme de classes",
+      "syntax2": "class NomClasse {} - définit une classe avec propriétés/méthodes",
+      "syntax3": "+ - indique les propriétés/méthodes publiques",
+      "syntax4": "- - indique les propriétés/méthodes privées",
+      "syntax5": "A <|-- B - indique que B hérite de A (B est une sous-classe de A)"
+    },
+    "state": {
+      "syntax1": "stateDiagram-v2 - définit un diagramme d'état",
+      "syntax2": "[*] - représente l'état de début ou de fin",
+      "syntax3": "A --> B - crée une transition de A vers B",
+      "syntax4": "A --> B: Texte - crée une transition étiquetée"
+    },
+    "entity": {
+      "syntax1": "erDiagram - définit un diagramme entité-relation",
+      "syntax2": "||--o{ - représente une relation un-à-plusieurs",
+      "syntax3": "||--|{ - représente une relation un-à-plusieurs (obligatoire)",
+      "syntax4": "}|..|{ - représente une relation plusieurs-à-plusieurs (ligne pointillée)",
+      "syntax5": ": Texte - définit la description de la relation"
+    },
+    "gantt": {
+      "syntax1": "gantt - définit un diagramme de Gantt",
+      "syntax2": "title Titre - définit le titre du graphique",
+      "syntax3": "dateFormat Format - définit le format de date",
+      "syntax4": "section Nom - définit une section de projet",
+      "syntax5": "Nom de tâche : ID, Date de début, Durée/Date de fin",
+      "syntax6": "done/active - indique le statut de la tâche",
+      "syntax7": "after ID - indique après une autre tâche"
+    },
+    "pie": {
+      "syntax1": "pie - définit un graphique en secteurs",
+      "syntax2": "title Titre - définit le titre du graphique en secteurs",
+      "syntax3": "\"Étiquette\" : Valeur - définit une portion du graphique en secteurs"
+    }
+  },
+  "language": {
+    "en": "English",
+    "zh": "中文",
+    "ru": "Русский",
+    "fr": "Français",
+    "th": "ไทย"
+  }
+}
