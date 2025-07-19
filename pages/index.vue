@@ -56,7 +56,21 @@
           class="h-10 bg-gray-100 dark:bg-gray-800 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
           <div class="flex items-center">
             <span>{{ $t('preview.title') }} {{ currentZoom > 0 ? `(${Math.round(currentZoom * 100)}%)` : '' }}</span>
-            <span class="ml-2 text-xs text-gray-500 dark:text-gray-400">{{ $t('preview.zoom') }}</span>
+            <span
+              class="ml-2 text-xs text-black border border-gray-300 dark:border-gray-600 rounded px-1 py-0.5"
+              style="
+                background: linear-gradient(
+                  135deg,
+                  #ff0080 0%,
+                  #ff8000 20%,
+                  #ffff00 40%,
+                  #00ff80 60%,
+                  #0080ff 80%,
+                  #8000ff 100%
+                );
+              "
+              >{{ $t('preview.zoom') }}</span
+            >
           </div>
           <div class="flex space-x-2">
             <!-- 缩放控制按钮 -->
