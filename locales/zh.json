@@ -40,11 +40,35 @@
       "mermaidChartOnlineFree": "在线免费图表",
       "mermaidFreeEditor": "Mermaid 免费编辑器"
     },
+    "startTour": "开始教程",
     "seoText": "专业的{mermaidDiagramOnlineFree}工具，具有{mermaidChartOnlineFree}功能。最好的{mermaidFreeEditor}，可即时创建图表。",
     "seoKeywords": {
       "mermaidDiagramOnlineFree": "mermaid 在线免费图表",
       "mermaidChartOnlineFree": "mermaid 在线免费制图",
       "mermaidFreeEditor": "mermaid 免费编辑器"
+    }
+  },
+  "tour": {
+    "buttons": {
+      "next": "下一步",
+      "previous": "上一步",
+      "done": "完成引导",
+      "close": "关闭",
+      "progress": "{{current}} / {{total}}"
+    },
+    "steps": {
+      "editor": {
+        "title": "🎨 Mermaid 编辑器",
+        "description": "在这里输入您的 Mermaid 图表代码，支持 Graph TD 流程图、时序图、类图等多种图表类型。完全免费的在线 Mermaid 编辑器。"
+      },
+      "preview": {
+        "title": "👀 实时预览",
+        "description": "您的图表会在这里实时渲染显示，支持缩放和导出功能。最佳的 Mermaid 图表在线预览体验。"
+      },
+      "toolbar": {
+        "title": "🛠️ 工具栏",
+        "description": "快速插入常用图表模板，包括流程图、时序图、类图等。提高您的 Mermaid 图表创作效率。"
+      }
     }
   },
   "docs": {

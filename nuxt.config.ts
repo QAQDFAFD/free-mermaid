@@ -19,7 +19,7 @@ export default defineNuxtConfig({
         {
           name: 'keywords',
           content:
-            'mermaid online free, mermaid diagram online free, mermaid chart online free, mermaid free editor, graph td online, mermaid editor free, mermaid free, flowchart online, sequence diagram online, class diagram online, mermaid graph online'
+            'mermaid online free, mermaid diagram online free, mermaid chart online free, mermaid free editor, graph td online, mermaid editor free, mermaid free, flowchart online, sequence diagram online, class diagram online, mermaid graph online, mermaid tutorial, user guide, step by step guide'
         },
         {
           property: 'og:title',

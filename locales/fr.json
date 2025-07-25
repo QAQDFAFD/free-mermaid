@@ -40,11 +40,35 @@
       "mermaidChartOnlineFree": "Graphiques en ligne gratuits",
       "mermaidFreeEditor": "Éditeur Mermaid gratuit"
     },
+    "startTour": "Commencer le tutoriel",
     "seoText": "Outil professionnel {mermaidDiagramOnlineFree} avec des capacités {mermaidChartOnlineFree}. Le meilleur {mermaidFreeEditor} pour créer des diagrammes instantanément.",
     "seoKeywords": {
       "mermaidDiagramOnlineFree": "diagramme mermaid en ligne gratuit",
       "mermaidChartOnlineFree": "graphique mermaid en ligne gratuit",
       "mermaidFreeEditor": "éditeur mermaid gratuit"
+    }
+  },
+  "tour": {
+    "buttons": {
+      "next": "Suivant",
+      "previous": "Précédent",
+      "done": "Terminer le tutoriel",
+      "close": "Fermer",
+      "progress": "{{current}} / {{total}}"
+    },
+    "steps": {
+      "editor": {
+        "title": "🎨 Éditeur Mermaid",
+        "description": "Saisissez ici votre code de diagramme Mermaid. Prend en charge les organigrammes Graph TD, les diagrammes de séquence, les diagrammes de classe et bien plus encore. Éditeur Mermaid en ligne entièrement gratuit."
+      },
+      "preview": {
+        "title": "👀 Aperçu en temps réel",
+        "description": "Vos diagrammes sont rendus ici en temps réel avec des fonctionnalités de zoom et d'exportation. La meilleure expérience d'aperçu de diagrammes Mermaid en ligne."
+      },
+      "toolbar": {
+        "title": "🛠️ Barre d'outils",
+        "description": "Insérez rapidement des modèles de diagrammes courants, y compris des organigrammes, des diagrammes de séquence, des diagrammes de classe et plus encore. Augmentez votre efficacité de création de diagrammes Mermaid."
+      }
     }
   },
   "docs": {

@@ -40,11 +40,35 @@
       "mermaidChartOnlineFree": "Chart Online Free",
       "mermaidFreeEditor": "Mermaid Free Editor"
     },
+    "startTour": "Start Tutorial",
     "seoText": "Professional {mermaidDiagramOnlineFree} tool with {mermaidChartOnlineFree} capabilities. The best {mermaidFreeEditor} for creating diagrams instantly.",
     "seoKeywords": {
       "mermaidDiagramOnlineFree": "mermaid diagram online free",
       "mermaidChartOnlineFree": "mermaid chart online free",
       "mermaidFreeEditor": "mermaid free editor"
+    }
+  },
+  "tour": {
+    "buttons": {
+      "next": "Next",
+      "previous": "Previous",
+      "done": "Finish Tour",
+      "close": "Close",
+      "progress": "{{current}} / {{total}}"
+    },
+    "steps": {
+      "editor": {
+        "title": "🎨 Mermaid Editor",
+        "description": "Enter your Mermaid diagram code here. Supports Graph TD flowcharts, sequence diagrams, class diagrams and more. Completely free online Mermaid editor."
+      },
+      "preview": {
+        "title": "👀 Live Preview",
+        "description": "Your diagrams are rendered here in real-time with zoom and export features. The best Mermaid diagram online preview experience."
+      },
+      "toolbar": {
+        "title": "🛠️ Toolbar",
+        "description": "Quickly insert common diagram templates including flowcharts, sequence diagrams, class diagrams and more. Boost your Mermaid diagram creation efficiency."
+      }
     }
   },
   "docs": {

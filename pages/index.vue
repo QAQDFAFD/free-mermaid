@@ -1,12 +1,13 @@
 <template>
   <div class="flex flex-col h-screen bg-gray-50">
     <!-- 工具栏 -->
-    <EditorToolbar @update:code="updateCode" :model-value="code" />
+    <EditorToolbar class="editor-toolbar" @update:code="updateCode" :model-value="code" />
 
     <!-- 主内容区域 -->
     <main class="flex flex-col md:flex-row flex-1 overflow-hidden relative dark:bg-gray-900" role="main">
       <!-- 左侧编辑器 -->
       <section
+        id="mermaid-editor"
         :style="{ width: `${leftPanelWidth}%` }"
         class="h-1/2 md:h-full border-r border-gray-200 dark:border-gray-700 flex flex-col">
         <div
@@ -51,7 +52,10 @@
       </div>
 
       <!-- 右侧预览 -->
-      <section :style="{ width: `${100 - leftPanelWidth}%` }" class="h-1/2 md:h-full flex flex-col">
+      <section
+        id="mermaid-preview"
+        :style="{ width: `${100 - leftPanelWidth}%` }"
+        class="h-1/2 md:h-full flex flex-col">
         <div
           class="h-10 bg-gray-100 dark:bg-gray-800 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
           <div class="flex items-center">
@@ -268,11 +272,21 @@
         <p class="text-xs text-gray-600 dark:text-gray-400 mb-1.5 leading-tight" v-html="seoText"></p>
 
         <!-- SEO关键词标签 -->
-        <div class="text-xs text-gray-600 dark:text-gray-400 leading-tight">
+        <div class="text-xs text-gray-600 dark:text-gray-400 leading-tight mb-2">
           <span class="inline-block mr-2">✓ {{ $t('footer.capabilities.graphTdOnline') }}</span>
           <span class="inline-block mr-2">✓ {{ $t('footer.capabilities.mermaidEditorFree') }}</span>
           <span class="inline-block mr-2">✓ {{ $t('footer.capabilities.mermaidChartOnlineFree') }}</span>
           <span class="inline-block">✓ {{ $t('footer.capabilities.mermaidFreeEditor') }}</span>
+        </div>
+
+        <!-- 用户引导按钮 -->
+        <div class="text-center">
+          <button
+            @click="() => $startTour(locale)"
+            class="text-xs text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 underline transition-colors"
+            title="重新开始新手引导">
+            🚀 {{ $t('footer.startTour') }}
+          </button>
         </div>
       </div>
     </footer>
@@ -353,6 +367,20 @@
   // 左侧面板宽度百分比
   const leftPanelWidth = ref(30)
   const isResizing = ref(false)
+
+  // 引导功能
+  const { $startTour } = useNuxtApp()
+  const hasSeenTour = useCookie('mermaid-tour-seen', { default: () => false })
+  const { locale } = useI18n()
+
+  onMounted(() => {
+    // 首次访问自动启动引导（延迟执行，确保用户有时间看到界面）
+    if (!hasSeenTour.value) {
+      setTimeout(() => {
+        $startTour(locale.value)
+      }, 500)
+    }
+  })
 
   // 更新代码
   const updateCode = (newCode: string) => {

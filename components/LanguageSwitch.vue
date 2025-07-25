@@ -49,7 +49,9 @@
   const changeLocale = newLocale => {
     locale.value = newLocale
     isOpen.value = false
+    // 更新缓存，覆盖自动检测的语言
     localStorage.setItem('userLocale', newLocale)
+    console.log('User manually selected language:', newLocale)
   }
 
   // 点击外部关闭语言菜单

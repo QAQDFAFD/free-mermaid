@@ -600,11 +600,21 @@ pie title Traffic Sources
         <p class="text-xs text-gray-600 dark:text-gray-400 mb-1.5 leading-tight" v-html="seoText"></p>
 
         <!-- SEO关键词标签 -->
-        <div class="text-xs text-gray-600 dark:text-gray-400 leading-tight">
+        <div class="text-xs text-gray-600 dark:text-gray-400 leading-tight mb-2">
           <span class="inline-block mr-2">✓ {{ $t('footer.capabilities.graphTdOnline') }}</span>
           <span class="inline-block mr-2">✓ {{ $t('footer.capabilities.mermaidEditorFree') }}</span>
           <span class="inline-block mr-2">✓ {{ $t('footer.capabilities.mermaidChartOnlineFree') }}</span>
           <span class="inline-block">✓ {{ $t('footer.capabilities.mermaidFreeEditor') }}</span>
+        </div>
+
+        <!-- 返回编辑器按钮 -->
+        <div class="text-center">
+          <NuxtLink
+            to="/"
+            class="text-xs text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 underline transition-colors"
+            title="返回编辑器并开始教程">
+            🚀 {{ $t('footer.startTour') }}
+          </NuxtLink>
         </div>
       </div>
     </footer>
