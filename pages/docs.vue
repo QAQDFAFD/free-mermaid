@@ -663,6 +663,59 @@ pie title Traffic Sources
         name: 'keywords',
         content:
           'mermaid tutorial, graph td tutorial, flowchart tutorial online, sequence diagram tutorial, mermaid documentation free, learn mermaid online, mermaid syntax guide, diagram tutorial'
+      },
+      // Open Graph for docs page
+      {
+        property: 'og:title',
+        content: 'Mermaid Free Editor Tutorial - Graph TD Online Diagram Guide'
+      },
+      {
+        property: 'og:description',
+        content: 'Mermaid free editor tutorial with complete examples. Learn mermaid diagram online free with step-by-step guide.'
+      },
+      {
+        property: 'og:url',
+        content: 'https://mermaid-drawing.com/docs'
+      },
+      {
+        property: 'og:type',
+        content: 'article'
+      }
+    ],
+    link: [
+      { rel: 'canonical', href: 'https://mermaid-drawing.com/docs' }
+    ],
+    script: [
+      // 结构化数据 - HowTo (教程页面)
+      {
+        type: 'application/ld+json',
+        innerHTML: JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'HowTo',
+          name: 'How to Create Mermaid Diagrams Online Free',
+          description: 'Learn how to create flowcharts, sequence diagrams, class diagrams and more using Mermaid syntax.',
+          step: [
+            {
+              '@type': 'HowToStep',
+              name: 'Choose diagram type',
+              text: 'Select the type of diagram you want to create: flowchart, sequence, class, state, ER, Gantt, or pie chart.'
+            },
+            {
+              '@type': 'HowToStep',
+              name: 'Write Mermaid code',
+              text: 'Enter your Mermaid syntax code in the editor. Use the examples provided as templates.'
+            },
+            {
+              '@type': 'HowToStep',
+              name: 'Preview and export',
+              text: 'View your diagram in real-time preview and export as PNG or SVG when ready.'
+            }
+          ],
+          tool: {
+            '@type': 'HowToTool',
+            name: 'Mermaid Online Free Editor'
+          }
+        })
       }
     ]
   })

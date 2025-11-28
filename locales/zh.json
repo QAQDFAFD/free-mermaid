@@ -9,11 +9,15 @@
   },
   "preview": {
     "title": "Mermaid 图表预览",
-    "zoom": "按住 Ctrl+滚轮 缩放",
+    "zoom": "⌘/Ctrl + 滚轮缩放",
     "zoomOut": "缩小",
     "resetView": "重置视图",
     "zoomIn": "放大",
-    "placeholder": "在编辑器中输入您的 mermaid 代码来查看预览"
+    "placeholder": "在编辑器中输入您的 mermaid 代码来查看预览",
+    "loading": "正在加载图表...",
+    "fullscreen": "全屏",
+    "exitFullscreen": "退出全屏",
+    "pressEscToExit": "按 ESC 或点击退出全屏"
   },
   "tools": {
     "flowchart": "流程图",
@@ -41,6 +45,8 @@
       "mermaidFreeEditor": "Mermaid 免费编辑器"
     },
     "startTour": "开始教程",
+    "collapse": "收起底栏",
+    "expand": "展开底栏",
     "seoText": "专业的{mermaidDiagramOnlineFree}工具，具有{mermaidChartOnlineFree}功能。最好的{mermaidFreeEditor}，可即时创建图表。",
     "seoKeywords": {
       "mermaidDiagramOnlineFree": "mermaid 在线免费图表",

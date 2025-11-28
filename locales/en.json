@@ -9,11 +9,15 @@
   },
   "preview": {
     "title": "Mermaid Drawing Preview",
-    "zoom": "Hold Ctrl+Scroll to zoom",
+    "zoom": "⌘/Ctrl + Scroll to zoom",
     "zoomOut": "Zoom Out",
     "resetView": "Reset View",
     "zoomIn": "Zoom In",
-    "placeholder": "Enter your mermaid drawing code in the editor to see the preview"
+    "placeholder": "Enter your mermaid drawing code in the editor to see the preview",
+    "loading": "Loading diagram...",
+    "fullscreen": "Fullscreen",
+    "exitFullscreen": "Exit Fullscreen",
+    "pressEscToExit": "Press ESC or click to exit fullscreen"
   },
   "tools": {
     "flowchart": "Flowchart",
@@ -41,6 +45,8 @@
       "mermaidFreeEditor": "Mermaid Free Editor"
     },
     "startTour": "Start Tutorial",
+    "collapse": "Collapse footer",
+    "expand": "Expand footer",
     "seoText": "Professional {mermaidDiagramOnlineFree} tool with {mermaidChartOnlineFree} capabilities. The best {mermaidFreeEditor} for creating diagrams instantly.",
     "seoKeywords": {
       "mermaidDiagramOnlineFree": "mermaid diagram online free",

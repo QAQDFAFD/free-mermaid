@@ -1,4 +1,4 @@
-export default defineNuxtPlugin(async () => {
+export default defineNuxtPlugin(() => {
   // 支持的语言映射：国家/地区代码 -> 语言代码
   const countryToLanguage = {
     CN: 'zh', // 中国 -> 中文
@@ -26,7 +26,7 @@ export default defineNuxtPlugin(async () => {
   const defaultLanguage = 'en'
 
   // 获取或检测用户语言
-  const detectUserLanguage = async (): Promise<string> => {
+  const detectUserLanguageSync = (): string => {
     // 1. 优先检查缓存的用户选择
     const cachedLanguage = localStorage.getItem('userLocale')
     if (cachedLanguage && availableLanguages.includes(cachedLanguage)) {
@@ -50,58 +50,15 @@ export default defineNuxtPlugin(async () => {
       detectedLang = 'th'
     }
 
-    // 3. 尝试通过IP检测地理位置
-    try {
-      let countryCode: string | null = null
-
-      // 尝试第一个API
-      try {
-        const controller = new AbortController()
-        const timeoutId = setTimeout(() => controller.abort(), 3000)
-
-        const response = await fetch('https://ipapi.co/json/', {
-          signal: controller.signal
-        })
-
-        clearTimeout(timeoutId)
-
-        if (response.ok) {
-          const data = await response.json()
-          countryCode = data.country_code
-        }
-      } catch (error) {
-        console.warn('Primary IP API failed, trying backup...', error)
-
-        // 备用API：ipinfo.io
-        try {
-          const controller2 = new AbortController()
-          const timeoutId2 = setTimeout(() => controller2.abort(), 3000)
-
-          const response2 = await fetch('https://ipinfo.io/json', {
-            signal: controller2.signal
-          })
-
-          clearTimeout(timeoutId2)
-
-          if (response2.ok) {
-            const data2 = await response2.json()
-            countryCode = data2.country
-          }
-        } catch (error2) {
-          console.warn('Backup IP API also failed:', error2)
-        }
-      }
-
-      if (countryCode) {
-        console.log('Detected country:', countryCode)
-
-        if (countryToLanguage[countryCode as keyof typeof countryToLanguage]) {
-          detectedLang = countryToLanguage[countryCode as keyof typeof countryToLanguage]
-          console.log('Language based on country:', detectedLang)
-        }
-      }
-    } catch (error) {
-      console.warn('Failed to detect location, using browser language fallback:', error)
+    // 3. IP 地理位置检测改为非阻塞：在空闲时执行，不阻塞首屏
+    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+      (window as any).requestIdleCallback(async () => {
+        await tryGeoEnhanceLanguage(detectedLang)
+      })
+    } else {
+      setTimeout(async () => {
+        await tryGeoEnhanceLanguage(detectedLang)
+      }, 0)
     }
 
     // 4. 确保检测到的语言在支持列表中
@@ -113,10 +70,51 @@ export default defineNuxtPlugin(async () => {
     return detectedLang
   }
 
+  // 非阻塞地理位置增强：更新 localStorage，但尽量避免强制重排
+  const tryGeoEnhanceLanguage = async (fallbackLang: string) => {
+    try {
+      let countryCode: string | null = null
+
+      const controller = new AbortController()
+      const timeoutId = setTimeout(() => controller.abort(), 3000)
+      const response = await fetch('https://ipapi.co/json/', { signal: controller.signal })
+      clearTimeout(timeoutId)
+
+      if (response.ok) {
+        const data = await response.json()
+        countryCode = data.country_code
+      } else {
+        // 备用API
+        const controller2 = new AbortController()
+        const timeoutId2 = setTimeout(() => controller2.abort(), 3000)
+        const response2 = await fetch('https://ipinfo.io/json', { signal: controller2.signal })
+        clearTimeout(timeoutId2)
+        if (response2.ok) {
+          const data2 = await response2.json()
+          countryCode = data2.country
+        }
+      }
+
+      if (countryCode && countryToLanguage[countryCode as keyof typeof countryToLanguage]) {
+        const lang = countryToLanguage[countryCode as keyof typeof countryToLanguage]
+        if (availableLanguages.includes(lang)) {
+          const current = localStorage.getItem('userLocale') || fallbackLang
+          if (current !== lang) {
+            // 仅更新缓存，避免强制触发整页重渲染
+            localStorage.setItem('userLocale', lang)
+            console.log('Geo-enhanced language cached:', lang)
+          }
+        }
+      }
+    } catch (e) {
+      console.warn('Geo language enhancement failed:', e)
+    }
+  }
+
   // 只在客户端执行
   if (process.client) {
     try {
-      const detectedLanguage = await detectUserLanguage()
+      const detectedLanguage = detectUserLanguageSync()
 
       // 直接从Nuxt应用实例获取i18n
       const nuxtApp = useNuxtApp()
@@ -134,7 +132,7 @@ export default defineNuxtPlugin(async () => {
       // 缓存用户语言选择
       localStorage.setItem('userLocale', detectedLanguage)
 
-      console.log('Auto-detected and set language to:', detectedLanguage)
+      console.log('Auto-detected and set language to (non-blocking):', detectedLanguage)
     } catch (error) {
       console.warn('Failed to auto-detect language, using default:', error)
 

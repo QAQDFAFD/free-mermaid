@@ -9,11 +9,15 @@
   },
   "preview": {
     "title": "แสดงตัวอย่างไดอะแกรม Mermaid",
-    "zoom": "กด Ctrl+เลื่อนเมาส์ เพื่อซูม",
+    "zoom": "⌘/Ctrl + เลื่อนเมาส์ เพื่อซูม",
     "zoomOut": "ซูมออก",
     "resetView": "รีเซ็ตมุมมอง",
     "zoomIn": "ซูมเข้า",
-    "placeholder": "ป้อนโค้ดไดอะแกรม mermaid ในเครื่องมือแก้ไขเพื่อดูตัวอย่าง"
+    "placeholder": "ป้อนโค้ดไดอะแกรม mermaid ในเครื่องมือแก้ไขเพื่อดูตัวอย่าง",
+    "loading": "กำลังโหลดไดอะแกรม...",
+    "fullscreen": "เต็มหน้าจอ",
+    "exitFullscreen": "ออกจากเต็มหน้าจอ",
+    "pressEscToExit": "กด ESC หรือคลิกเพื่อออก"
   },
   "tools": {
     "flowchart": "แผนผังขั้นตอน",
@@ -41,6 +45,8 @@
       "mermaidFreeEditor": "เครื่องมือแก้ไข Mermaid ฟรี"
     },
     "startTour": "เริ่มบทแนะนำ",
+    "collapse": "ย่อ",
+    "expand": "ขยาย",
     "seoText": "เครื่องมือ {mermaidDiagramOnlineFree} ระดับมืออาชีพพร้อมความสามารถ {mermaidChartOnlineFree} {mermaidFreeEditor} ที่ดีที่สุดสำหรับสร้างไดอะแกรมทันที",
     "seoKeywords": {
       "mermaidDiagramOnlineFree": "mermaid ไดอะแกรมออนไลน์ฟรี",

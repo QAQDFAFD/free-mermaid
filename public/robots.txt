@@ -1,9 +1,18 @@
 # Robots.txt for Mermaid Online Free - Graph TD Diagram Editor
 # https://mermaid-drawing.com
+# Last updated: 2025-11-28
 
+# Default rules for all bots
 User-agent: *
 Allow: /
 Allow: /docs
+Allow: /#flowchart
+Allow: /#sequence
+Allow: /#class
+Allow: /#state
+Allow: /#entity
+Allow: /#gantt
+Allow: /#pie
 
 # Disallow development and build directories
 Disallow: /api/
@@ -14,22 +23,40 @@ Disallow: /node_modules/
 # Disallow common non-content paths
 Disallow: /404
 Disallow: /500
-Disallow: /*.json$
 
-# Enhanced sitemap location
+# Sitemap location
 Sitemap: https://mermaid-drawing.com/sitemap.xml
 
-# Crawl-delay for better server performance
-Crawl-delay: 1
-
-# Special rules for specific bots
+# Google - Priority crawler, no delay
 User-agent: Googlebot
+Allow: /
 Crawl-delay: 0
 
+User-agent: Googlebot-Image
+Allow: /social-card.svg
+Allow: /favicon.ico
+
+# Bing
 User-agent: Bingbot
+Allow: /
 Crawl-delay: 1
 
-# Allow all social media crawlers
+# Yandex (Russian search engine)
+User-agent: Yandex
+Allow: /
+Crawl-delay: 2
+
+# Baidu (Chinese search engine)
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 2
+
+# DuckDuckGo
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 1
+
+# Social media crawlers - full access
 User-agent: facebookexternalhit
 Allow: /
 
@@ -37,4 +64,32 @@ User-agent: Twitterbot
 Allow: /
 
 User-agent: LinkedInBot
+Allow: /
+
+User-agent: Slackbot
+Allow: /
+
+User-agent: TelegramBot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+User-agent: Discordbot
+Allow: /
+
+# AI crawlers - allow for visibility
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
 Allow: /

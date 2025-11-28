@@ -1,16 +1,19 @@
 {
   "name": "Mermaid Online Free - Diagram Editor & Chart Maker",
   "short_name": "Mermaid Free",
-  "description": "Free online mermaid diagram editor and chart maker. Create graph TD flowcharts, sequence diagrams, class diagrams online free.",
+  "description": "Free online mermaid diagram editor and chart maker. Create graph TD flowcharts, sequence diagrams, class diagrams online free. Export to PNG and SVG.",
   "start_url": "/",
+  "id": "/",
   "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone"],
   "background_color": "#ffffff",
   "theme_color": "#3b82f6",
-  "orientation": "portrait-primary",
+  "orientation": "any",
   "scope": "/",
   "lang": "en-US",
-  "categories": ["productivity", "developer", "business"],
-  "keywords": ["mermaid", "diagram", "flowchart", "graph", "online", "free", "editor", "chart"],
+  "dir": "ltr",
+  "categories": ["productivity", "developer", "business", "utilities", "design"],
+  "keywords": ["mermaid", "diagram", "flowchart", "graph", "online", "free", "editor", "chart", "graph td", "sequence diagram", "class diagram"],
   "icons": [
     {
       "src": "/favicon.ico",
@@ -20,10 +23,34 @@
   ],
   "screenshots": [
     {
-      "src": "/favicon.ico",
-      "sizes": "32x32",
-      "type": "image/x-icon",
-      "platform": "wide"
+      "src": "/social-card.svg",
+      "sizes": "1200x630",
+      "type": "image/svg+xml",
+      "form_factor": "wide",
+      "label": "Mermaid Online Free Editor"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "New Flowchart",
+      "short_name": "Flowchart",
+      "description": "Create a new Graph TD flowchart",
+      "url": "/#flowchart",
+      "icons": [{ "src": "/favicon.ico", "sizes": "32x32" }]
+    },
+    {
+      "name": "New Sequence Diagram",
+      "short_name": "Sequence",
+      "description": "Create a new sequence diagram",
+      "url": "/#sequence",
+      "icons": [{ "src": "/favicon.ico", "sizes": "32x32" }]
+    },
+    {
+      "name": "Documentation",
+      "short_name": "Docs",
+      "description": "View Mermaid documentation",
+      "url": "/docs",
+      "icons": [{ "src": "/favicon.ico", "sizes": "32x32" }]
     }
   ],
   "related_applications": [],
@@ -33,5 +60,15 @@
       "protocol": "web+mermaid",
       "url": "/?diagram=%s"
     }
-  ]
+  ],
+  "share_target": {
+    "action": "/",
+    "method": "GET",
+    "params": {
+      "text": "diagram"
+    }
+  },
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  }
 }

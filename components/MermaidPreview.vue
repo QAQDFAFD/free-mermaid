@@ -1,5 +1,13 @@
 <template>
   <div class="h-full w-full flex flex-col">
+    <!-- 加载状态 -->
+    <div v-if="isLoading" class="absolute inset-0 flex items-center justify-center bg-white/80 dark:bg-gray-800/80 z-10">
+      <div class="flex flex-col items-center">
+        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+        <span class="mt-2 text-sm text-gray-600 dark:text-gray-400">{{ t('preview.loading') || 'Loading...' }}</span>
+      </div>
+    </div>
+
     <div v-if="error" class="bg-red-50 dark:bg-red-900/30 p-3 rounded-md mb-2 overflow-auto max-h-[30%]">
       <div class="flex">
         <div class="flex-shrink-0">
@@ -76,7 +84,53 @@
   import { ref, watch, onMounted, onUnmounted } from 'vue'
   import { useI18n } from 'vue-i18n'
 
-  const { $mermaid } = useNuxtApp()
+  // 动态导入 mermaid，避免首页打包体积膨胀
+  let mermaidInstance: any = null
+  let mermaidLoadPromise: Promise<any> | null = null
+
+  const ensureMermaid = async () => {
+    if (!process.client) return null
+    if (mermaidInstance) return mermaidInstance
+    
+    // 避免重复加载
+    if (mermaidLoadPromise) return mermaidLoadPromise
+    
+    mermaidLoadPromise = (async () => {
+      try {
+        const mod = await import('mermaid')
+        mermaidInstance = mod.default || mod
+        // 初始基础配置（保持与原插件一致的默认体验）
+        mermaidInstance.initialize({
+          startOnLoad: false,
+          securityLevel: 'loose',
+          fontFamily: 'monospace',
+          fontSize: 16,
+          flowchart: {
+            htmlLabels: true,
+            curve: 'linear'
+          },
+          sequence: {
+            diagramMarginX: 50,
+            diagramMarginY: 10,
+            actorMargin: 50,
+            width: 150,
+            height: 65,
+            boxMargin: 10,
+            boxTextMargin: 5,
+            noteMargin: 10,
+            messageMargin: 35
+          }
+        })
+        return mermaidInstance
+      } catch (err) {
+        mermaidLoadPromise = null
+        throw err
+      }
+    })()
+    
+    return mermaidLoadPromise
+  }
+
   const { t } = useI18n()
 
   const props = defineProps({
@@ -92,6 +146,7 @@
   const previewContainer = ref<HTMLElement | null>(null)
   const error = ref<string | null>(null)
   const showHelp = ref(false)
+  const isLoading = ref(false)
 
   // 缩放和平移状态
   const scale = ref(0.9)
@@ -161,12 +216,14 @@
   // 渲染 Mermaid 图表
   const renderDiagram = async () => {
     if (!diagramRef.value) return
+    if (!process.client) return
 
     // 首先检查内容是否为空，为空则显示占位符
     if (!props.code || !props.code.trim()) {
       hasContent.value = false
       error.value = null
       showHelp.value = false
+      isLoading.value = false
 
       // 显示占位符，但使用更大的字体，补偿50%缩放带来的缩小效果
       if (diagramRef.value) {
@@ -184,6 +241,7 @@
     try {
       error.value = null
       showHelp.value = false
+      isLoading.value = true
 
       // 保存当前的变换状态，以便渲染后恢复
       const currentScaleValue = scale.value
@@ -197,6 +255,7 @@
       diagramRef.value.innerHTML = ''
 
       if (!hasContent.value) {
+        isLoading.value = false
         // 添加占位文字容器，不受缩放影响
         diagramRef.value.innerHTML = `
 					<div class="placeholder-wrapper" style="transform: scale(${1 / currentScaleValue}); transform-origin: center center;">
@@ -219,6 +278,11 @@
         // 只有在有内容时才尝试解析和渲染
         if (props.code && props.code.trim()) {
           // 先尝试解析代码，检查语法
+          const $mermaid = (await ensureMermaid())
+          if (!$mermaid) {
+            isLoading.value = false
+            return
+          }
           await $mermaid.parse(props.code)
 
           // 实时检测当前是否为深色模式
@@ -229,7 +293,24 @@
           $mermaid.initialize({
             securityLevel: 'loose',
             startOnLoad: false,
-            theme: currentDarkMode ? 'dark' : 'default'
+            theme: currentDarkMode ? 'dark' : 'default',
+            fontFamily: 'monospace',
+            fontSize: 16,
+            flowchart: {
+              htmlLabels: true,
+              curve: 'linear'
+            },
+            sequence: {
+              diagramMarginX: 50,
+              diagramMarginY: 10,
+              actorMargin: 50,
+              width: 150,
+              height: 65,
+              boxMargin: 10,
+              boxTextMargin: 5,
+              noteMargin: 10,
+              messageMargin: 35
+            }
           })
 
           // 使用 Mermaid 渲染图表
@@ -277,7 +358,9 @@
         scale.value = currentScaleValue
         translateX.value = currentTranslateXValue
         translateY.value = currentTranslateYValue
+        isLoading.value = false
       } catch (parseErr: any) {
+        isLoading.value = false
         // 解析或渲染错误
         error.value = parseErr.message || 'Mermaid drawing syntax error'
 
@@ -298,6 +381,7 @@
         console.error('Mermaid drawing parsing error:', parseErr)
       }
     } catch (err: any) {
+      isLoading.value = false
       error.value = err.message || 'Mermaid drawing rendering failed'
       console.error('Mermaid drawing rendering error:', err)
     }
@@ -305,8 +389,8 @@
 
   // 处理滚轮事件（同时支持缩放和滚动）
   const handleWheel = (e: WheelEvent) => {
-    // 如果按住 Ctrl 键，则进行缩放
-    if (e.ctrlKey) {
+    // 如果按住 Ctrl 键 (Windows/Linux) 或 Command 键 (Mac)，则进行缩放
+    if (e.ctrlKey || e.metaKey) {
       const delta = e.deltaY > 0 ? -0.1 : 0.1
       const newScale = Math.max(0.5, Math.min(3, scale.value + delta))
       scale.value = newScale

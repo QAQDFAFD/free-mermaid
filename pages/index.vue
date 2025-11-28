@@ -1,7 +1,12 @@
 <template>
-  <div class="flex flex-col h-screen bg-gray-50">
+  <div class="flex flex-col h-screen bg-gray-50" :class="{ 'fullscreen-mode': isFullscreen }">
     <!-- 工具栏 -->
-    <EditorToolbar class="editor-toolbar" @update:code="updateCode" :model-value="code" />
+    <EditorToolbar 
+      v-show="!isFullscreen" 
+      class="editor-toolbar" 
+      @update:code="updateCode" 
+      :model-value="code" 
+    />
 
     <!-- 主内容区域 -->
     <main class="flex flex-col md:flex-row flex-1 overflow-hidden relative dark:bg-gray-900" role="main">
@@ -121,6 +126,30 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
               </svg>
             </button>
+            <!-- 全屏按钮 -->
+            <button
+              @click="toggleFullscreen"
+              class="px-2 py-1 text-xs bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-600 flex items-center"
+              :title="isFullscreen ? $t('preview.exitFullscreen') : $t('preview.fullscreen')">
+              <svg
+                v-if="!isFullscreen"
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-3 w-3 text-gray-700 dark:text-gray-300"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+              </svg>
+              <svg
+                v-else
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-3 w-3 text-gray-700 dark:text-gray-300"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
             <div class="relative export-menu-container">
               <button
                 @click="isExportMenuOpen = !isExportMenuOpen"
@@ -189,9 +218,27 @@
 
     <!-- 融合的底部信息与SEO区域 -->
     <footer
-      class="relative bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-2 px-4 text-center overflow-hidden">
-      <!-- 美人鱼尾巴背景动画 -->
-      <div class="absolute inset-0 pointer-events-none">
+      v-show="!isFullscreen"
+      class="relative bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 text-center overflow-hidden transition-all duration-300"
+      :class="isFooterCollapsed ? 'py-1 px-4' : 'py-2 px-4'">
+      <!-- 折叠/展开按钮 -->
+      <button
+        @click="toggleFooter"
+        class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-full p-1 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors shadow-sm"
+        :title="isFooterCollapsed ? $t('footer.expand') : $t('footer.collapse')">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-3 w-3 text-gray-600 dark:text-gray-300 transition-transform duration-300"
+          :class="{ 'rotate-180': isFooterCollapsed }"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+
+      <!-- 美人鱼尾巴背景动画 - 只在展开时显示 -->
+      <div v-show="!isFooterCollapsed" class="absolute inset-0 pointer-events-none">
         <!-- 水波纹背景 -->
         <div class="absolute inset-0 opacity-20 dark:opacity-15">
           <div class="wave-animation"></div>
@@ -262,34 +309,55 @@
       </div>
 
       <div class="max-w-6xl mx-auto relative z-10">
-        <!-- 主标题 -->
-        <h1 class="text-base font-bold text-gray-900 dark:text-white mb-1.5">
-          {{ $t('footer.title') }} - {{ $t('footer.editorTitle') }}
-        </h1>
-
-        <!-- 功能特点 -->
-        <p class="text-sm text-gray-700 dark:text-gray-300 mb-1 leading-tight" v-html="featuresText"></p>
-        <p class="text-xs text-gray-600 dark:text-gray-400 mb-1.5 leading-tight" v-html="seoText"></p>
-
-        <!-- SEO关键词标签 -->
-        <div class="text-xs text-gray-600 dark:text-gray-400 leading-tight mb-2">
-          <span class="inline-block mr-2">✓ {{ $t('footer.capabilities.graphTdOnline') }}</span>
-          <span class="inline-block mr-2">✓ {{ $t('footer.capabilities.mermaidEditorFree') }}</span>
-          <span class="inline-block mr-2">✓ {{ $t('footer.capabilities.mermaidChartOnlineFree') }}</span>
-          <span class="inline-block">✓ {{ $t('footer.capabilities.mermaidFreeEditor') }}</span>
+        <!-- 折叠状态：只显示一行简要信息（视觉层） -->
+        <div v-show="isFooterCollapsed" class="flex items-center justify-center space-x-4 text-xs text-gray-600 dark:text-gray-400">
+          <span class="font-medium text-gray-900 dark:text-white">{{ $t('footer.title') }}</span>
+          <span>|</span>
+          <span>{{ $t('footer.capabilities.graphTdOnline') }}</span>
+          <span>•</span>
+          <span>{{ $t('footer.capabilities.mermaidEditorFree') }}</span>
+          <a href="https://mermaid-drawing.com" class="text-blue-600 dark:text-blue-400 hover:underline ml-2">mermaid-drawing.com</a>
         </div>
 
-        <!-- 用户引导按钮 -->
-        <div class="text-center">
-          <button
-            @click="() => $startTour(locale)"
-            class="text-xs text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 underline transition-colors"
-            title="重新开始新手引导">
-            🚀 {{ $t('footer.startTour') }}
-          </button>
+        <!-- 展开状态：显示完整内容（SEO 内容始终在 DOM 中，只是视觉隐藏） -->
+        <div :class="isFooterCollapsed ? 'hidden' : ''">
+          <!-- 主标题 -->
+          <h1 class="text-base font-bold text-gray-900 dark:text-white mb-1.5">
+            {{ $t('footer.title') }} - {{ $t('footer.editorTitle') }}
+          </h1>
+
+          <!-- 功能特点 -->
+          <p class="text-sm text-gray-700 dark:text-gray-300 mb-1 leading-tight" v-html="featuresText"></p>
+          <p class="text-xs text-gray-600 dark:text-gray-400 mb-1.5 leading-tight" v-html="seoText"></p>
+
+          <!-- SEO关键词标签 -->
+          <div class="text-xs text-gray-600 dark:text-gray-400 leading-tight mb-2">
+            <span class="inline-block mr-2">✓ {{ $t('footer.capabilities.graphTdOnline') }}</span>
+            <span class="inline-block mr-2">✓ {{ $t('footer.capabilities.mermaidEditorFree') }}</span>
+            <span class="inline-block mr-2">✓ {{ $t('footer.capabilities.mermaidChartOnlineFree') }}</span>
+            <span class="inline-block">✓ {{ $t('footer.capabilities.mermaidFreeEditor') }}</span>
+          </div>
+
+          <!-- 用户引导按钮 -->
+          <div class="text-center">
+            <button
+              @click="() => $startTour(locale)"
+              class="text-xs text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 underline transition-colors"
+              title="重新开始新手引导">
+              🚀 {{ $t('footer.startTour') }}
+            </button>
+          </div>
         </div>
       </div>
     </footer>
+
+    <!-- 全屏模式下的退出提示 -->
+    <div 
+      v-if="isFullscreen" 
+      class="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 bg-black/70 text-white text-xs px-3 py-1.5 rounded-full opacity-60 hover:opacity-100 transition-opacity cursor-pointer"
+      @click="toggleFullscreen">
+      {{ $t('preview.pressEscToExit') || 'Press ESC or click to exit fullscreen' }}
+    </div>
   </div>
 </template>
 
@@ -368,6 +436,26 @@
   const leftPanelWidth = ref(30)
   const isResizing = ref(false)
 
+  // 全屏模式
+  const isFullscreen = ref(false)
+  
+  // Footer 折叠状态
+  const isFooterCollapsed = ref(false)
+
+  // 切换全屏模式
+  const toggleFullscreen = () => {
+    isFullscreen.value = !isFullscreen.value
+  }
+
+  // 切换 Footer 折叠状态
+  const toggleFooter = () => {
+    isFooterCollapsed.value = !isFooterCollapsed.value
+    // 保存用户偏好到 localStorage
+    if (process.client) {
+      localStorage.setItem('footerCollapsed', String(isFooterCollapsed.value))
+    }
+  }
+
   // 引导功能
   const { $startTour } = useNuxtApp()
   const hasSeenTour = useCookie('mermaid-tour-seen', { default: () => false })
@@ -380,6 +468,27 @@
         $startTour(locale.value)
       }, 500)
     }
+
+    // 恢复 Footer 折叠状态
+    if (process.client) {
+      const savedState = localStorage.getItem('footerCollapsed')
+      if (savedState === 'true') {
+        isFooterCollapsed.value = true
+      }
+    }
+
+    // 监听 ESC 键退出全屏
+    const handleKeydown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isFullscreen.value) {
+        isFullscreen.value = false
+      }
+    }
+    document.addEventListener('keydown', handleKeydown)
+
+    // 清理函数
+    onUnmounted(() => {
+      document.removeEventListener('keydown', handleKeydown)
+    })
   })
 
   // 更新代码
@@ -511,6 +620,20 @@
     height: 100%;
     margin: 0;
     padding: 0;
+  }
+
+  /* 全屏模式样式 */
+  .fullscreen-mode {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+  }
+
+  .fullscreen-mode main {
+    height: 100vh !important;
   }
 
   @media (max-width: 768px) {

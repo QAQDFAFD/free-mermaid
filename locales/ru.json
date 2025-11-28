@@ -9,11 +9,15 @@
   },
   "preview": {
     "title": "Предварительный просмотр Mermaid диаграммы",
-    "zoom": "Удерживайте Ctrl+прокрутка для масштабирования",
+    "zoom": "⌘/Ctrl + прокрутка для масштабирования",
     "zoomOut": "Уменьшить",
     "resetView": "Сброс вида",
     "zoomIn": "Увеличить",
-    "placeholder": "Введите код mermaid диаграммы в редакторе для просмотра"
+    "placeholder": "Введите код mermaid диаграммы в редакторе для просмотра",
+    "loading": "Загрузка диаграммы...",
+    "fullscreen": "Полноэкранный режим",
+    "exitFullscreen": "Выйти из полноэкранного режима",
+    "pressEscToExit": "Нажмите ESC или щелкните для выхода"
   },
   "tools": {
     "flowchart": "Блок-схема",
@@ -41,6 +45,8 @@
       "mermaidFreeEditor": "Mermaid бесплатный редактор"
     },
     "startTour": "Начать обучение",
+    "collapse": "Свернуть",
+    "expand": "Развернуть",
     "seoText": "Профессиональный инструмент {mermaidDiagramOnlineFree} с возможностями {mermaidChartOnlineFree}. Лучший {mermaidFreeEditor} для мгновенного создания диаграмм.",
     "seoKeywords": {
       "mermaidDiagramOnlineFree": "mermaid диаграмма онлайн бесплатно",

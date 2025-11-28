@@ -1,5 +1,4 @@
-import { driver } from 'driver.js'
-import 'driver.js/dist/driver.css'
+// 按需加载 driver.js，仅在用户启动教程时加载
 
 export default defineNuxtPlugin(() => {
   // 检查是否是首次访问
@@ -7,7 +6,7 @@ export default defineNuxtPlugin(() => {
 
   let driverObj: any = null
 
-  const startTour = (currentLocale?: string) => {
+  const startTour = async (currentLocale?: string) => {
     // 如果已经有活跃的引导，先销毁它
     if (driverObj && driverObj.isActive()) {
       driverObj.destroy()
@@ -155,6 +154,11 @@ export default defineNuxtPlugin(() => {
     }
 
     const t = translations[locale] || translations.zh
+
+    // 动态导入 driver.js 及其样式，避免影响首屏性能
+    const driverModule = await import('driver.js')
+    await import('driver.js/dist/driver.css')
+    const driver = (driverModule as any).driver || (driverModule as any).default || driverModule
 
     driverObj = driver({
       showProgress: true,

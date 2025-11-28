@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0ea5e9"/>
+      <stop offset="100%" stop-color="#1f2937"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#bg)"/>
+  <g fill="#ffffff">
+    <text x="60" y="140" font-size="64" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, 'Helvetica Neue', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei'" font-weight="700">
+      Mermaid Online Free
+    </text>
+    <text x="60" y="210" font-size="30" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, 'Helvetica Neue'">
+      Graph TD Diagram Editor & Chart Maker
+    </text>
+    <text x="60" y="270" font-size="24" opacity="0.95" font-family="Inter, system-ui, -apple-system">
+      Create flowcharts, sequence, class, ER, gantt and pie charts.
+    </text>
+  </g>
+  <g transform="translate(60,330)">
+    <rect x="0" y="0" width="540" height="240" rx="16" fill="#111827" opacity="0.35"/>
+    <text x="24" y="48" fill="#e5e7eb" font-family="monospace" font-size="22">graph TD</text>
+    <text x="24" y="82" fill="#93c5fd" font-family="monospace" font-size="20">A[User] --&gt; B(Editor)</text>
+    <text x="24" y="114" fill="#93c5fd" font-family="monospace" font-size="20">B --&gt; C{Preview}</text>
+    <text x="24" y="146" fill="#93c5fd" font-family="monospace" font-size="20">C --&gt;|SVG/PNG| D[Export]</text>
+    <text x="24" y="178" fill="#93c5fd" font-family="monospace" font-size="20">D --&gt; E(Share)</text>
+  </g>
+  <g transform="translate(640,330)">
+    <rect x="0" y="0" width="500" height="240" rx="16" fill="#111827" opacity="0.35"/>
+    <text x="24" y="48" fill="#e5e7eb" font-family="monospace" font-size="22">sequenceDiagram</text>
+    <text x="24" y="82" fill="#93c5fd" font-family="monospace" font-size="20">participant U as User</text>
+    <text x="24" y="114" fill="#93c5fd" font-family="monospace" font-size="20">participant M as Mermaid</text>
+    <text x="24" y="146" fill="#93c5fd" font-family="monospace" font-size="20">U-&gt;&gt;M: type code</text>
+    <text x="24" y="178" fill="#93c5fd" font-family="monospace" font-size="20">M--&gt;&gt;U: live preview</text>
+  </g>
+  <text x="60" y="600" font-size="22" fill="#e5e7eb" font-family="Inter, system-ui, -apple-system">https://mermaid-drawing.com</text>
+</svg>

@@ -9,11 +9,15 @@
   },
   "preview": {
     "title": "Aperçu du diagramme Mermaid",
-    "zoom": "Maintenez Ctrl+Défilement pour zoomer",
+    "zoom": "⌘/Ctrl + Défilement pour zoomer",
     "zoomOut": "Dézoomer",
     "resetView": "Réinitialiser la vue",
     "zoomIn": "Zoomer",
-    "placeholder": "Saisissez votre code de diagramme mermaid dans l'éditeur pour voir l'aperçu"
+    "placeholder": "Saisissez votre code de diagramme mermaid dans l'éditeur pour voir l'aperçu",
+    "loading": "Chargement du diagramme...",
+    "fullscreen": "Plein écran",
+    "exitFullscreen": "Quitter le plein écran",
+    "pressEscToExit": "Appuyez sur ESC ou cliquez pour quitter"
   },
   "tools": {
     "flowchart": "Organigramme",
@@ -41,6 +45,8 @@
       "mermaidFreeEditor": "Éditeur Mermaid gratuit"
     },
     "startTour": "Commencer le tutoriel",
+    "collapse": "Réduire",
+    "expand": "Développer",
     "seoText": "Outil professionnel {mermaidDiagramOnlineFree} avec des capacités {mermaidChartOnlineFree}. Le meilleur {mermaidFreeEditor} pour créer des diagrammes instantanément.",
     "seoKeywords": {
       "mermaidDiagramOnlineFree": "diagramme mermaid en ligne gratuit",
