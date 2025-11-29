@@ -28,17 +28,32 @@
             <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
               {{ $t('tools.flowchart') }}
             </h2>
-            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md mb-4">
-              <pre class="text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap">
-graph TD
-    A[😊 Wake Up] --> B{☕ Coffee Ready?}
-    B -->|✅ Yes| C[🌟 Great Day Ahead]
-    B -->|❌ No| D[😴 Back to Bed]
-    C --> E[💪 Conquer the World]
-    D --> F[😪 Zombie Mode]
-    F --> G[🏃 Rush to Coffee Shop]
-    G --> C</pre
-              >
+            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md mb-4 relative group">
+              <pre class="text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap">{{ examples.flowchart }}</pre>
+              <div class="absolute top-2 right-2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                <button
+                  @click="copyCode('flowchart')"
+                  class="px-2 py-1 text-xs bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500 rounded text-gray-700 dark:text-gray-200 transition-colors flex items-center gap-1"
+                  :title="$t('docs.copyCode')">
+                  <svg v-if="!copiedStates.flowchart" xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                  <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  {{ copiedStates.flowchart ? $t('docs.copied') : $t('docs.copyCode') }}
+                </button>
+                <button
+                  @click="tryInEditor('flowchart')"
+                  class="px-2 py-1 text-xs bg-blue-500 hover:bg-blue-600 rounded text-white transition-colors flex items-center gap-1"
+                  :title="$t('docs.tryInEditor')">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  {{ $t('docs.tryInEditor') }}
+                </button>
+              </div>
             </div>
             <div class="text-sm text-gray-700 dark:text-gray-300">
               <p class="mb-2">
@@ -94,21 +109,32 @@ graph TD
         <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
           <div class="p-6">
             <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">{{ $t('tools.sequence') }}</h2>
-            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md mb-4">
-              <pre class="text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap">
-sequenceDiagram
-    participant Me as 😎 Me
-    participant Fridge as 🧊 Fridge
-    participant Brain as 🧠 Brain
-    participant Stomach as 🤤 Stomach
-    
-    Me->>Fridge: 👀 What's for dinner?
-    Fridge-->>Me: 🥬 Only vegetables...
-    Me->>Brain: 🤔 Should I cook?
-    Brain-->>Me: 🍕 Order pizza instead!
-    Me->>Stomach: 🤷 Pizza again?
-    Stomach-->>Me: 😋 Always yes to pizza!</pre
-              >
+            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md mb-4 relative group">
+              <pre class="text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap">{{ examples.sequence }}</pre>
+              <div class="absolute top-2 right-2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                <button
+                  @click="copyCode('sequence')"
+                  class="px-2 py-1 text-xs bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500 rounded text-gray-700 dark:text-gray-200 transition-colors flex items-center gap-1"
+                  :title="$t('docs.copyCode')">
+                  <svg v-if="!copiedStates.sequence" xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                  <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  {{ copiedStates.sequence ? $t('docs.copied') : $t('docs.copyCode') }}
+                </button>
+                <button
+                  @click="tryInEditor('sequence')"
+                  class="px-2 py-1 text-xs bg-blue-500 hover:bg-blue-600 rounded text-white transition-colors flex items-center gap-1"
+                  :title="$t('docs.tryInEditor')">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  {{ $t('docs.tryInEditor') }}
+                </button>
+              </div>
             </div>
             <div class="text-sm text-gray-700 dark:text-gray-300">
               <p class="mb-2">
@@ -156,28 +182,32 @@ sequenceDiagram
         <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
           <div class="p-6">
             <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">{{ $t('tools.class') }}</h2>
-            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md mb-4">
-              <pre class="text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap">
-classDiagram
-    class DatingAppUser {
-      +String bio
-      +Array photos
-      +Integer age
-      +swipeRight()
-      +sendMessage()
-    }
-    class HopelessRomantic {
-      +String dreamDate
-      +writePoetry()
-      +fallInLoveEasily()
-    }
-    class SerialDater {
-      +scheduleMultipleDates()
-      +masterSmallTalk()
-    }
-    DatingAppUser <|-- HopelessRomantic
-    DatingAppUser <|-- SerialDater</pre
-              >
+            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md mb-4 relative group">
+              <pre class="text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap">{{ examples.class }}</pre>
+              <div class="absolute top-2 right-2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                <button
+                  @click="copyCode('class')"
+                  class="px-2 py-1 text-xs bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500 rounded text-gray-700 dark:text-gray-200 transition-colors flex items-center gap-1"
+                  :title="$t('docs.copyCode')">
+                  <svg v-if="!copiedStates.class" xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                  <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  {{ copiedStates.class ? $t('docs.copied') : $t('docs.copyCode') }}
+                </button>
+                <button
+                  @click="tryInEditor('class')"
+                  class="px-2 py-1 text-xs bg-blue-500 hover:bg-blue-600 rounded text-white transition-colors flex items-center gap-1"
+                  :title="$t('docs.tryInEditor')">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  {{ $t('docs.tryInEditor') }}
+                </button>
+              </div>
             </div>
             <div class="text-sm text-gray-700 dark:text-gray-300">
               <p class="mb-2">
@@ -233,16 +263,32 @@ classDiagram
         <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
           <div class="p-6">
             <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">{{ $t('tools.state') }}</h2>
-            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md mb-4">
-              <pre class="text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap">
-stateDiagram-v2
-    [*] --> Pending
-    Pending --> Processing: Start Processing
-    Processing --> Completed: Complete Processing
-    Processing --> Cancelled: Cancel
-    Completed --> [*]
-    Cancelled --> [*]</pre
-              >
+            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md mb-4 relative group">
+              <pre class="text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap">{{ examples.state }}</pre>
+              <div class="absolute top-2 right-2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                <button
+                  @click="copyCode('state')"
+                  class="px-2 py-1 text-xs bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500 rounded text-gray-700 dark:text-gray-200 transition-colors flex items-center gap-1"
+                  :title="$t('docs.copyCode')">
+                  <svg v-if="!copiedStates.state" xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                  <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  {{ copiedStates.state ? $t('docs.copied') : $t('docs.copyCode') }}
+                </button>
+                <button
+                  @click="tryInEditor('state')"
+                  class="px-2 py-1 text-xs bg-blue-500 hover:bg-blue-600 rounded text-white transition-colors flex items-center gap-1"
+                  :title="$t('docs.tryInEditor')">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  {{ $t('docs.tryInEditor') }}
+                </button>
+              </div>
             </div>
             <div class="text-sm text-gray-700 dark:text-gray-300">
               <p class="mb-2">
@@ -292,13 +338,32 @@ stateDiagram-v2
             <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
               {{ $t('tools.entity') }}
             </h2>
-            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md mb-4">
-              <pre class="text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap">
-erDiagram
-    CUSTOMER ||--o{ ORDER : places
-    ORDER ||--|{ LINE-ITEM : contains
-    CUSTOMER }|..|{ DELIVERY-ADDRESS : uses</pre
-              >
+            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md mb-4 relative group">
+              <pre class="text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap">{{ examples.entity }}</pre>
+              <div class="absolute top-2 right-2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                <button
+                  @click="copyCode('entity')"
+                  class="px-2 py-1 text-xs bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500 rounded text-gray-700 dark:text-gray-200 transition-colors flex items-center gap-1"
+                  :title="$t('docs.copyCode')">
+                  <svg v-if="!copiedStates.entity" xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                  <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  {{ copiedStates.entity ? $t('docs.copied') : $t('docs.copyCode') }}
+                </button>
+                <button
+                  @click="tryInEditor('entity')"
+                  class="px-2 py-1 text-xs bg-blue-500 hover:bg-blue-600 rounded text-white transition-colors flex items-center gap-1"
+                  :title="$t('docs.tryInEditor')">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  {{ $t('docs.tryInEditor') }}
+                </button>
+              </div>
             </div>
             <div class="text-sm text-gray-700 dark:text-gray-300">
               <p class="mb-2">
@@ -354,18 +419,32 @@ erDiagram
         <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
           <div class="p-6">
             <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">{{ $t('tools.gantt') }}</h2>
-            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md mb-4">
-              <pre class="text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap">
-gantt
-    title Project Development Plan
-    dateFormat YYYY-MM-DD
-    section Design Phase
-    Requirements Analysis     :done, des1, 2023-01-01, 2023-01-05
-    Prototype Design     :active, des2, 2023-01-06, 3d
-    section Development Phase
-    Coding        :dev1, after des2, 20d
-    Testing        :dev2, after dev1, 10d</pre
-              >
+            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md mb-4 relative group">
+              <pre class="text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap">{{ examples.gantt }}</pre>
+              <div class="absolute top-2 right-2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                <button
+                  @click="copyCode('gantt')"
+                  class="px-2 py-1 text-xs bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500 rounded text-gray-700 dark:text-gray-200 transition-colors flex items-center gap-1"
+                  :title="$t('docs.copyCode')">
+                  <svg v-if="!copiedStates.gantt" xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                  <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  {{ copiedStates.gantt ? $t('docs.copied') : $t('docs.copyCode') }}
+                </button>
+                <button
+                  @click="tryInEditor('gantt')"
+                  class="px-2 py-1 text-xs bg-blue-500 hover:bg-blue-600 rounded text-white transition-colors flex items-center gap-1"
+                  :title="$t('docs.tryInEditor')">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  {{ $t('docs.tryInEditor') }}
+                </button>
+              </div>
             </div>
             <div class="text-sm text-gray-700 dark:text-gray-300">
               <p class="mb-2">
@@ -437,14 +516,32 @@ gantt
         <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
           <div class="p-6">
             <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">{{ $t('tools.pie') }}</h2>
-            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md mb-4">
-              <pre class="text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap">
-pie title Traffic Sources
-    "Search Engines" : 42.7
-    "Direct Access" : 25.5
-    "Social Media" : 18.3
-    "Other Channels" : 13.5</pre
-              >
+            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md mb-4 relative group">
+              <pre class="text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap">{{ examples.pie }}</pre>
+              <div class="absolute top-2 right-2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                <button
+                  @click="copyCode('pie')"
+                  class="px-2 py-1 text-xs bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500 rounded text-gray-700 dark:text-gray-200 transition-colors flex items-center gap-1"
+                  :title="$t('docs.copyCode')">
+                  <svg v-if="!copiedStates.pie" xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                  <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  {{ copiedStates.pie ? $t('docs.copied') : $t('docs.copyCode') }}
+                </button>
+                <button
+                  @click="tryInEditor('pie')"
+                  class="px-2 py-1 text-xs bg-blue-500 hover:bg-blue-600 rounded text-white transition-colors flex items-center gap-1"
+                  :title="$t('docs.tryInEditor')">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  {{ $t('docs.tryInEditor') }}
+                </button>
+              </div>
             </div>
             <div class="text-sm text-gray-700 dark:text-gray-300">
               <p class="mb-2">
@@ -622,10 +719,44 @@ pie title Traffic Sources
 </template>
 
 <script setup>
-  import { computed } from 'vue'
+  import { computed, ref } from 'vue'
   import { useI18n } from 'vue-i18n'
+  import { useRouter } from 'vue-router'
+  import { examples as allExamples } from '~/composables/useExamples'
 
-  const { t } = useI18n()
+  const { t, locale } = useI18n()
+  const router = useRouter()
+  
+  // 复制状态管理
+  const copiedStates = ref({})
+  
+  // 根据当前语言获取示例代码
+  const examples = computed(() => {
+    const lang = locale.value
+    return allExamples[lang] || allExamples['en']
+  })
+  
+  // 复制代码到剪贴板
+  const copyCode = async (type) => {
+    const code = examples.value[type]
+    try {
+      await navigator.clipboard.writeText(code)
+      copiedStates.value[type] = true
+      setTimeout(() => {
+        copiedStates.value[type] = false
+      }, 2000)
+    } catch (err) {
+      console.error('Failed to copy:', err)
+    }
+  }
+  
+  // 在编辑器中尝试
+  const tryInEditor = (type) => {
+    const code = examples.value[type]
+    // 将代码存储到 sessionStorage，然后跳转到编辑器
+    sessionStorage.setItem('mermaid-try-code', code)
+    router.push('/')
+  }
 
   // 计算属性：生成带HTML标签的功能描述文本
   const featuresText = computed(() => {

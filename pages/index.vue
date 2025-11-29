@@ -491,8 +491,21 @@
   const hasSeenTour = useCookie('mermaid-tour-seen', { default: () => false })
 
   onMounted(() => {
-    // 初始化默认代码（确保翻译已加载）
-    initializeCode()
+    // 检查是否有从文档页面传来的代码
+    if (process.client) {
+      const tryCode = sessionStorage.getItem('mermaid-try-code')
+      if (tryCode) {
+        code.value = tryCode
+        previewCode.value = tryCode
+        currentExampleType.value = null // 用户自定义代码
+        sessionStorage.removeItem('mermaid-try-code')
+      } else {
+        // 初始化默认代码（确保翻译已加载）
+        initializeCode()
+      }
+    } else {
+      initializeCode()
+    }
     
     // 首次访问自动启动引导（延迟执行，确保用户有时间看到界面）
     if (!hasSeenTour.value) {
