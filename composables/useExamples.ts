@@ -415,5 +415,13 @@ export function getExample(locale: string, type: keyof ExampleSet): string {
 }
 
 // 所有示例类型
-export const exampleKeys: (keyof ExampleSet)[] = ['default', 'flowchart', 'sequence', 'class', 'state', 'entity', 'gantt', 'pie']
-
+export const exampleKeys: (keyof ExampleSet)[] = [
+  'default',
+  'flowchart',
+  'sequence',
+  'class',
+  'state',
+  'entity',
+  'gantt',
+  'pie'
+]
