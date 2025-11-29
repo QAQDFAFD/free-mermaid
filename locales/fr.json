@@ -15,6 +15,7 @@
     "zoomIn": "Zoomer",
     "placeholder": "Saisissez votre code de diagramme mermaid dans l'éditeur pour voir l'aperçu",
     "loading": "Chargement du diagramme...",
+    "typing": "Saisie en cours...",
     "fullscreen": "Plein écran",
     "exitFullscreen": "Quitter le plein écran",
     "pressEscToExit": "Appuyez sur ESC ou cliquez pour quitter"

@@ -21,6 +21,12 @@
 	import { LanguageSupport, StreamLanguage } from '@codemirror/language'
 	import { ref, watch, computed, onMounted, onUnmounted } from 'vue'
 
+	// 标准代码字体栈，确保跨平台一致性
+	const CODE_FONT_FAMILY = 'ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace'
+
+	// 防抖延迟时间（毫秒）
+	const DEBOUNCE_DELAY = 500
+
 	const props = defineProps({
 		modelValue: {
 			type: String,
@@ -31,6 +37,9 @@
 	const emit = defineEmits(['update:modelValue', 'change'])
 
 	const code = ref(props.modelValue)
+	
+	// 防抖定时器
+	let debounceTimer: ReturnType<typeof setTimeout> | null = null
 
 	// 检测是否为深色模式
 	const isDarkMode = ref(false)
@@ -40,11 +49,21 @@
 		isDarkMode.value = document.documentElement.classList.contains('dark')
 	}
 
+	// 存储 observer 引用以便清理
+	let observer: MutationObserver | null = null
+	
+	// storage 事件处理函数
+	const handleStorageChange = (e: StorageEvent) => {
+		if (e.key === 'theme') {
+			updateDarkMode()
+		}
+	}
+
 	onMounted(() => {
 		updateDarkMode()
 
 		// 使用MutationObserver监听documentElement的class变化
-		const observer = new MutationObserver(mutations => {
+		observer = new MutationObserver(mutations => {
 			mutations.forEach(mutation => {
 				if (mutation.attributeName === 'class') {
 					updateDarkMode()
@@ -58,18 +77,22 @@
 		document.addEventListener('themeChange', updateDarkMode)
 
 		// 监听localStorage变化
-		window.addEventListener('storage', e => {
-			if (e.key === 'theme') {
-				updateDarkMode()
-			}
-		})
+		window.addEventListener('storage', handleStorageChange)
+	})
 
-		// 组件卸载时清理事件监听器
-		onUnmounted(() => {
+	// 组件卸载时清理
+	onUnmounted(() => {
+		// 清理防抖定时器
+		if (debounceTimer) {
+			clearTimeout(debounceTimer)
+		}
+		// 清理 MutationObserver
+		if (observer) {
 			observer.disconnect()
-			document.removeEventListener('themeChange', updateDarkMode)
-			window.removeEventListener('storage', updateDarkMode)
-		})
+		}
+		// 清理事件监听器
+		document.removeEventListener('themeChange', updateDarkMode)
+		window.removeEventListener('storage', handleStorageChange)
 	})
 
 	// Mermaid drawing 语法高亮
@@ -117,13 +140,14 @@
 			backgroundColor: '#1f2937' // gray-800
 		},
 		'.cm-content': {
-			fontFamily: 'monospace',
+			fontFamily: CODE_FONT_FAMILY,
 			color: '#e5e7eb' // gray-200
 		},
 		'.cm-gutters': {
 			backgroundColor: '#374151', // gray-700
 			color: '#9ca3af', // gray-400
-			border: 'none'
+			border: 'none',
+			fontFamily: CODE_FONT_FAMILY
 		},
 		'.cm-line': {
 			color: '#e5e7eb' // gray-200
@@ -164,12 +188,13 @@
 			height: '100%'
 		},
 		'.cm-content': {
-			fontFamily: 'monospace'
+			fontFamily: CODE_FONT_FAMILY
 		},
 		'.cm-gutters': {
 			backgroundColor: '#f5f5f5',
 			color: '#6e6e6e',
-			border: 'none'
+			border: 'none',
+			fontFamily: CODE_FONT_FAMILY
 		}
 	})
 
@@ -196,10 +221,20 @@
 		}
 	)
 
-	// 当编辑器内容变化时触发
+	// 当编辑器内容变化时触发（带防抖）
 	const onChange = (value: string) => {
+		// 立即更新 v-model（保持编辑器状态同步）
 		emit('update:modelValue', value)
-		emit('change', value)
+		
+		// 清除之前的定时器
+		if (debounceTimer) {
+			clearTimeout(debounceTimer)
+		}
+		
+		// 防抖：延迟触发 change 事件（用于渲染预览）
+		debounceTimer = setTimeout(() => {
+			emit('change', value)
+		}, DEBOUNCE_DELAY)
 	}
 
 	// 监听深色模式变化

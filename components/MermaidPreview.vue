@@ -1,7 +1,7 @@
 <template>
   <div class="h-full w-full flex flex-col">
-    <!-- 加载状态 -->
-    <div v-if="isLoading" class="absolute inset-0 flex items-center justify-center bg-white/80 dark:bg-gray-800/80 z-10">
+    <!-- 加载状态 - 完全不透明遮罩，隐藏背后的内容 -->
+    <div v-if="isLoading" class="absolute inset-0 flex items-center justify-center bg-white dark:bg-gray-800 z-20">
       <div class="flex flex-col items-center">
         <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
         <span class="mt-2 text-sm text-gray-600 dark:text-gray-400">{{ t('preview.loading') || 'Loading...' }}</span>
@@ -271,7 +271,9 @@
       const id = `mermaid-${Date.now()}`
       const container = document.createElement('div')
       container.id = id
-      container.textContent = props.code
+      // 不设置 textContent，避免加载时显示原始代码
+      // mermaid.render 会直接使用传入的代码参数
+      container.style.visibility = 'hidden' // 隐藏容器直到渲染完成
       diagramRef.value.appendChild(container)
 
       try {

@@ -210,8 +210,20 @@
             </div>
           </div>
         </div>
-        <div class="flex-1 overflow-hidden">
-          <MermaidPreview ref="previewRef" :code="code" @zoom-change="handleZoomChange" />
+        <div class="flex-1 overflow-hidden relative">
+          <MermaidPreview ref="previewRef" :code="previewCode" @zoom-change="handleZoomChange" />
+          <!-- 正在输入提示 -->
+          <Transition name="fade">
+            <div 
+              v-if="isTyping" 
+              class="absolute top-2 right-2 bg-blue-500/90 text-white text-xs px-2.5 py-1 rounded-full flex items-center gap-1.5 shadow-lg backdrop-blur-sm z-10">
+              <svg class="animate-spin h-3 w-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              <span>{{ $t('preview.typing') }}</span>
+            </div>
+          </Transition>
         </div>
       </section>
     </main>
@@ -362,13 +374,14 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, computed, onMounted, onUnmounted } from 'vue'
+  import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
   import type { ComponentPublicInstance } from 'vue'
   import { useI18n } from 'vue-i18n'
   import { exportAsPng } from '@/utils/exportUtils'
+  import { getExample, getExamples, exampleKeys, type ExampleSet } from '@/composables/useExamples'
   // ThemeToggle导入已移至EditorToolbar组件
 
-  const { t } = useI18n()
+  const { t, locale } = useI18n()
 
   // 计算属性：生成带HTML标签的功能描述文本
   const featuresText = computed(() => {
@@ -399,32 +412,49 @@
     zoomOut: () => void
     resetView: () => void
   }
-
-  // 默认示例代码
-  const defaultCode = `graph TD
-  A[😊 Meet Someone Special] --> B{💭 Do You Like Her?}
-  B -->|❤️ Yes| C[💬 Start Conversation]
-  B -->|😕 No| D[👥 Stay Friends]
-  C --> E[🎯 Find Common Interests]
-  E --> F{🤔 Is She Interested?}
-  F -->|😍 Yes| G[💐 Ask Her Out]
-  F -->|😅 Not Sure| H[⏰ Give It Time]
-  F -->|😔 No| I[🤝 Respect & Stay Friends]
-  G --> J{🌟 First Date Success?}
-  J -->|🥰 Amazing| K[❤️ Keep Dating]
-  J -->|😊 Good| L[📅 Plan Another Date]
-  J -->|😐 Okay| H
-  H --> E
-  K --> M[💍 Happily Ever After]
-  L --> K
-  D --> N[😌 Friendship is Also Great]
-  I --> N
   
-  %% Mermaid Online Free - Create Love Flowcharts! 💕
-  %% Best Free Diagram Tool for Everything`
+  // 当前使用的示例类型（用于语言切换时保持同类型）
+  const currentExampleType = ref<keyof ExampleSet | null>('default')
 
   // 编辑器代码
-  const code = ref(defaultCode)
+  const code = ref('')
+  
+  // 预览代码（防抖后更新，避免输入时频繁报错）
+  const previewCode = ref('')
+  
+  // 检查代码是否匹配某个示例（用于判断用户是否修改过）
+  const findMatchingExampleType = (codeToCheck: string): keyof ExampleSet | null => {
+    const currentExamples = getExamples(locale.value)
+    for (const key of exampleKeys) {
+      if (codeToCheck === currentExamples[key]) {
+        return key
+      }
+    }
+    return null
+  }
+  
+  // 初始化代码（在 onMounted 中设置，确保翻译已加载）
+  const initializeCode = () => {
+    if (!code.value) {
+      const defaultExample = getExample(locale.value, 'default')
+      code.value = defaultExample
+      previewCode.value = defaultExample
+      currentExampleType.value = 'default'
+    }
+  }
+  
+  // 监听语言变化，自动切换示例（仅当用户没有修改代码时）
+  watch(locale, (newLocale, oldLocale) => {
+    if (newLocale !== oldLocale && currentExampleType.value) {
+      // 用户正在使用某个示例，切换到新语言的同类型示例
+      const newExample = getExample(newLocale, currentExampleType.value)
+      code.value = newExample
+      previewCode.value = newExample
+    }
+  })
+  
+  // 是否正在输入（用于显示输入提示）
+  const isTyping = ref(false)
 
   // 预览引用
   const previewRef = ref<(ComponentPublicInstance & MermaidPreviewMethods) | null>(null)
@@ -459,9 +489,11 @@
   // 引导功能
   const { $startTour } = useNuxtApp()
   const hasSeenTour = useCookie('mermaid-tour-seen', { default: () => false })
-  const { locale } = useI18n()
 
   onMounted(() => {
+    // 初始化默认代码（确保翻译已加载）
+    initializeCode()
+    
     // 首次访问自动启动引导（延迟执行，确保用户有时间看到界面）
     if (!hasSeenTour.value) {
       setTimeout(() => {
@@ -491,10 +523,26 @@
     })
   })
 
-  // 更新代码
+  // 更新预览代码（由编辑器防抖后触发）
+  // 更新代码（由工具栏或编辑器触发）
+  // 更新代码（由工具栏或编辑器触发）
   const updateCode = (newCode: string) => {
     code.value = newCode
+    previewCode.value = newCode
+    isTyping.value = false
+    
+    // 检查是否是某个示例，更新当前示例类型
+    currentExampleType.value = findMatchingExampleType(newCode)
   }
+  
+  // 监听编辑器代码变化，设置正在输入状态
+  watch(code, (newCode, oldCode) => {
+    if (newCode !== oldCode && newCode !== previewCode.value) {
+      isTyping.value = true
+      // 用户正在编辑，检查是否还是示例代码
+      currentExampleType.value = findMatchingExampleType(newCode)
+    }
+  })
 
   // 处理缩放变化
   const handleZoomChange = (zoom: number) => {
@@ -899,5 +947,16 @@
       height: 60px;
       bottom: -25px;
     }
+  }
+
+  /* Fade 过渡动画 */
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 0.2s ease;
+  }
+
+  .fade-enter-from,
+  .fade-leave-to {
+    opacity: 0;
   }
 </style>

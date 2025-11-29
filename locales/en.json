@@ -15,6 +15,7 @@
     "zoomIn": "Zoom In",
     "placeholder": "Enter your mermaid drawing code in the editor to see the preview",
     "loading": "Loading diagram...",
+    "typing": "Typing...",
     "fullscreen": "Fullscreen",
     "exitFullscreen": "Exit Fullscreen",
     "pressEscToExit": "Press ESC or click to exit fullscreen"

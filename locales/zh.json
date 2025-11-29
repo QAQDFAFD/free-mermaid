@@ -15,6 +15,7 @@
     "zoomIn": "放大",
     "placeholder": "在编辑器中输入您的 mermaid 代码来查看预览",
     "loading": "正在加载图表...",
+    "typing": "正在输入...",
     "fullscreen": "全屏",
     "exitFullscreen": "退出全屏",
     "pressEscToExit": "按 ESC 或点击退出全屏"

@@ -74,6 +74,7 @@
   import ThemeToggle from '~/components/ThemeToggle.vue'
   import LanguageSwitch from '~/components/LanguageSwitch.vue'
   import { useI18n } from 'vue-i18n'
+  import { getExamples, type ExampleSet } from '~/composables/useExamples'
 
   const props = defineProps({
     modelValue: {
@@ -83,154 +84,23 @@
   })
 
   const emit = defineEmits(['update:code'])
-  const { t } = useI18n()
+  const { t, locale } = useI18n()
 
   const currentCode = ref(props.modelValue || '')
   const error = ref(null)
 
-  // 示例图表
-  const examples = [
-    {
-      name: 'Love Flowchart',
-      key: 'flowchart',
-      code: `graph TD
-    A[😊 Meet Someone Special] --> B{💭 Do You Like Her?}
-    B -->|❤️ Yes| C[💬 Start Conversation]
-    B -->|😕 No| D[👥 Stay Friends]
-    C --> E[🎯 Find Common Interests]
-    E --> F{🤔 Is She Interested?}
-    F -->|😍 Yes| G[💐 Ask Her Out]
-    F -->|😅 Not Sure| H[⏰ Give It Time]
-    F -->|😔 No| I[🤝 Respect & Stay Friends]
-    G --> J{🌟 First Date Success?}
-    J -->|🥰 Amazing| K[❤️ Keep Dating]
-    J -->|😊 Good| L[📅 Plan Another Date]
-    J -->|😐 Okay| H
-    H --> E
-    K --> M[💍 Happily Ever After]
-    L --> K
-    D --> N[😌 Friendship is Also Great]
-    I --> N`
-    },
-    {
-      name: 'Dating Sequence',
-      key: 'sequence',
-      code: `sequenceDiagram
-    participant You as 😊 You
-    participant Her as 💕 Her
-    participant Heart as ❤️ Heart
-    participant Cupid as 🏹 Cupid
-    
-    You->>Her: 👋 Hello, nice to meet you!
-    Her-->>You: 😊 Hi there!
-    You->>Heart: 💭 Check if interested
-    Heart-->>You: 💓 Yes, definitely!
-    You->>Her: ☕ Would you like to grab coffee?
-    Her->>Heart: 🤔 Should I say yes?
-    Heart-->>Her: 💖 Absolutely!
-    Her-->>You: 😍 I'd love to!
-    Cupid->>You: 🎯 Mission accomplished!
-    Cupid->>Her: ✨ Love is in the air!`
-    },
-    {
-      name: 'Dating App Classes',
-      key: 'class',
-      code: `classDiagram
-    class DatingAppUser {
-      +String bio
-      +Array photos
-      +Integer age
-      +Boolean verified
-      +swipeRight()
-      +swipeLeft()
-      +sendMessage()
-    }
-    class HopelessRomantic {
-      +String dreamDate
-      +writePoetry()
-      +fallInLoveEasily()
-      +getHeartbroken()
-    }
-    class SerialDater {
-      +Integer matchCount
-      +scheduleMultipleDates()
-      +masterSmallTalk()
-      +neverSettle()
-    }
-    class CatfishHunter {
-      +Array suspiciousProfiles
-      +reverseImageSearch()
-      +detectFakeProfiles()
-      +saveInnocentHearts()
-    }
-    DatingAppUser <|-- HopelessRomantic
-    DatingAppUser <|-- SerialDater  
-    DatingAppUser <|-- CatfishHunter`
-    },
-    {
-      name: 'Fitness Journey',
-      key: 'state',
-      code: `stateDiagram-v2
-    [*] --> 😴 CouchPotato
-    😴 CouchPotato --> 💪 Motivated: New Year Resolution!
-    💪 Motivated --> 🏃 Working_Out: Hit the Gym
-    🏃 Working_Out --> 😅 Exhausted: Too Much Too Soon
-    🏃 Working_Out --> 🎯 Seeing_Results: Consistent Work
-    😅 Exhausted --> 😴 CouchPotato: Give Up
-    😅 Exhausted --> 💪 Motivated: Try Again
-    🎯 Seeing_Results --> 🏆 Fit_And_Healthy: Achieved Goals!
-    🎯 Seeing_Results --> 🏃 Working_Out: Keep Going
-    🏆 Fit_And_Healthy --> 🏃 Working_Out: Maintain Fitness
-    🏆 Fit_And_Healthy --> [*]: Living Best Life`
-    },
-    {
-      name: 'Netflix & Chill Empire',
-      key: 'entity',
-      code: `erDiagram
-    USER ||--o{ WATCHLIST : creates
-    USER ||--o{ SUBSCRIPTION : pays_for
-    SUBSCRIPTION ||--|{ STREAMING_SERVICE : includes
-    USER }|..|{ SHOW : binges
-    SHOW ||--o{ EPISODE : contains
-    SHOW ||--o{ SEASON : has
-    USER ||--o{ REVIEW : writes
-    SHOW ||--|{ REVIEW : receives
-    USER ||--o{ RECOMMENDATION : gets
-    SHOW ||--o{ RECOMMENDATION : generates
-    USER ||--o{ MIDNIGHT_SNACK : consumes
-    BINGE_SESSION ||--|{ MIDNIGHT_SNACK : requires`
-    },
-    {
-      name: 'Become Internet Famous',
-      key: 'gantt',
-      code: `gantt
-    title 🚀 Road to Internet Fame
-    dateFormat  YYYY-MM-DD
-    section 📱 Content Creation
-    Learn TikTok Trends     :done, trend1, 2024-01-01, 2024-01-07
-    Master Video Editing     :active, edit1, 2024-01-08, 10d
-    Develop Personal Brand     :brand1, after edit1, 14d
-    section 🎬 Going Viral
-    Post Daily Content     :daily1, 2024-01-15, 30d
-    Collaborate with Influencers     :collab1, after brand1, 15d
-    Launch Viral Challenge     :viral1, after collab1, 7d
-    section 💰 Monetization
-    Reach 100K Followers     :milestone1, after viral1, 21d
-    Brand Partnerships     :money1, after milestone1, 14d
-    Launch Merchandise     :merch1, after money1, 10d`
-    },
-    {
-      name: 'Student Budget Reality',
-      key: 'pie',
-      code: `pie title 💸 Where Student Money Really Goes
-    "🍕 Food Delivery" : 35.2
-    "☕ Coffee & Bubble Tea" : 28.7
-    "🛍️ Online Shopping" : 18.5
-    "🎮 Gaming & Entertainment" : 12.3
-    "📚 Actual School Supplies" : 3.8
-    "💰 Savings (LOL)" : 1.5`
-    }
-  ]
+  // 示例图表类型列表（不包含 default）
+  const toolbarExampleKeys: (keyof ExampleSet)[] = ['flowchart', 'sequence', 'class', 'state', 'entity', 'gantt', 'pie']
+  
+  // 使用计算属性获取当前语言的示例
+  const examples = computed(() => {
+    const currentExamples = getExamples(locale.value)
+    return toolbarExampleKeys.map(key => ({
+      name: key,
+      key: key,
+      code: currentExamples[key]
+    }))
+  })
 
   // 检查当前代码是否匹配某个示例类型
   const isCurrentType = (exampleCode: string) => {
