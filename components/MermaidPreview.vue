@@ -8,7 +8,7 @@
       </div>
     </div>
 
-    <div v-if="error" class="bg-red-50 dark:bg-red-900/30 p-3 rounded-md mb-2 overflow-auto max-h-[30%]">
+    <div v-if="error && !props.typing" class="bg-red-50 dark:bg-red-900/30 p-3 rounded-md mb-2 overflow-auto max-h-[30%]">
       <div class="flex">
         <div class="flex-shrink-0">
           <svg
@@ -137,6 +137,10 @@
     code: {
       type: String,
       default: ''
+    },
+    typing: {
+      type: Boolean,
+      default: false
     }
   })
 
@@ -147,6 +151,7 @@
   const error = ref<string | null>(null)
   const showHelp = ref(false)
   const isLoading = ref(false)
+  const lastValidSvg = ref<string | null>(null) // 保存上一次有效的SVG
 
   // 缩放和平移状态
   const scale = ref(0.9)
@@ -320,6 +325,12 @@
 
           // 替换容器内容为渲染后的 SVG
           diagramRef.value.innerHTML = svg
+          
+          // 保存有效的SVG，用于错误时回退显示
+          lastValidSvg.value = svg
+          
+          // 清除错误状态
+          error.value = null
 
           // 确保SVG有正确的宽高
           const svgElement = diagramRef.value.querySelector('svg')
@@ -363,7 +374,18 @@
         isLoading.value = false
       } catch (parseErr: any) {
         isLoading.value = false
-        // 解析或渲染错误
+        
+        // 如果用户正在输入，不显示错误，保留上一次有效的渲染结果
+        if (props.typing) {
+          // 静默处理，保留上一次有效的SVG或显示友好提示
+          if (lastValidSvg.value && diagramRef.value) {
+            diagramRef.value.innerHTML = lastValidSvg.value
+          }
+          // 不在控制台输出错误，减少干扰
+          return
+        }
+        
+        // 只有在用户停止输入后才显示错误
         error.value = parseErr.message || 'Mermaid drawing syntax error'
 
         // 显示错误提示，但保留编辑器内容
@@ -380,12 +402,28 @@
 					`
         }
 
-        console.error('Mermaid drawing parsing error:', parseErr)
+        // 使用 warn 而不是 error，减少控制台干扰
+        if (process.env.NODE_ENV === 'development') {
+          console.warn('Mermaid syntax issue:', parseErr.message?.substring(0, 100))
+        }
       }
     } catch (err: any) {
       isLoading.value = false
+      
+      // 如果用户正在输入，静默处理
+      if (props.typing) {
+        if (lastValidSvg.value && diagramRef.value) {
+          diagramRef.value.innerHTML = lastValidSvg.value
+        }
+        return
+      }
+      
       error.value = err.message || 'Mermaid drawing rendering failed'
-      console.error('Mermaid drawing rendering error:', err)
+      
+      // 使用 warn 而不是 error
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('Mermaid rendering issue:', err.message?.substring(0, 100))
+      }
     }
   }
 

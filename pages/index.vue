@@ -211,7 +211,7 @@
           </div>
         </div>
         <div class="flex-1 overflow-hidden relative">
-          <MermaidPreview ref="previewRef" :code="previewCode" @zoom-change="handleZoomChange" />
+          <MermaidPreview ref="previewRef" :code="previewCode" :typing="isTyping" @zoom-change="handleZoomChange" />
           <!-- 正在输入提示 -->
           <Transition name="fade">
             <div 
