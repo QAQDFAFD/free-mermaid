@@ -351,13 +351,28 @@
           </div>
 
           <!-- 用户引导按钮 -->
-          <div class="text-center">
+          <div class="text-center space-x-4">
             <button
               @click="() => $startTour(locale)"
               class="text-xs text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 underline transition-colors"
               title="重新开始新手引导">
               🚀 {{ $t('footer.startTour') }}
             </button>
+            <NuxtLink
+              to="/about"
+              class="text-xs text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+              {{ locale === 'zh' ? '关于我们' : 'About' }}
+            </NuxtLink>
+            <NuxtLink
+              to="/privacy"
+              class="text-xs text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+              {{ locale === 'zh' ? '隐私政策' : 'Privacy' }}
+            </NuxtLink>
+            <NuxtLink
+              to="/terms"
+              class="text-xs text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+              {{ locale === 'zh' ? '服务条款' : 'Terms' }}
+            </NuxtLink>
           </div>
         </div>
       </div>

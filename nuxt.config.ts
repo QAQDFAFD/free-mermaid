@@ -19,7 +19,7 @@ export default defineNuxtConfig({
     minify: true, // 压缩服务端代码
     prerender: {
       crawlLinks: false, // 禁用自动爬取，只预渲染指定路由
-      routes: ['/', '/docs'],
+      routes: ['/', '/docs', '/about', '/privacy', '/terms'],
       ignore: ['/manifest.json', '/robots.txt', '/sitemap.xml', '/favicon.ico'] // 忽略静态文件
     }
   },
@@ -44,6 +44,12 @@ export default defineNuxtConfig({
     '/': { prerender: true },
     // 文档页预渲染
     '/docs': { prerender: true },
+    // 关于页面预渲染
+    '/about': { prerender: true },
+    // 隐私政策页面预渲染
+    '/privacy': { prerender: true },
+    // 服务条款页面预渲染
+    '/terms': { prerender: true },
     // 静态资源长期缓存
     '/_nuxt/**': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
     // 公共资源缓存
