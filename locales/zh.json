@@ -20,6 +20,9 @@
     "exitFullscreen": "退出全屏",
     "pressEscToExit": "按 ESC 或点击退出全屏"
   },
+  "diagramTheme": {
+    "title": "主题"
+  },
   "tools": {
     "flowchart": "流程图",
     "sequence": "序列图",

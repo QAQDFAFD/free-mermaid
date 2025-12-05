@@ -24,9 +24,10 @@
             stroke-linecap="round"
             stroke-linejoin="round" />
         </svg>
-        <h1 class="text-xl font-bold text-gray-900">Mermaid Drawing</h1>
+        <h1 class="text-xl font-bold text-gray-900 dark:text-white">Mermaid Drawing</h1>
       </div>
 
+      <!-- 图表类型按钮 -->
       <div class="hidden md:flex space-x-2">
         <button
           v-for="example in examples"
@@ -34,7 +35,9 @@
           @click="loadExample(example.code)"
           :class="[
             'px-2 py-1 text-sm rounded transition-colors duration-200',
-            isCurrentType(example.code) ? 'bg-blue-100 text-blue-700 font-medium' : 'text-gray-700 hover:bg-gray-100'
+            isCurrentType(example.code)
+              ? 'bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 font-medium'
+              : 'text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
           ]">
           {{ t(`tools.${example.key}`) }}
         </button>
@@ -44,7 +47,7 @@
     <div class="flex items-center space-x-2">
       <button
         @click="clearEditor"
-        class="px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-100 rounded flex items-center">
+        class="px-3 py-1.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 rounded flex items-center transition-colors">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="h-4 w-4 mr-1"
@@ -69,8 +72,7 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, onMounted, onUnmounted, computed, watch } from 'vue'
-  import { exportAsPng, exportAsSvg } from '~/utils/exportUtils'
+  import { ref, computed, watch } from 'vue'
   import ThemeToggle from '~/components/ThemeToggle.vue'
   import LanguageSwitch from '~/components/LanguageSwitch.vue'
   import { useI18n } from 'vue-i18n'
@@ -91,7 +93,7 @@
 
   // 示例图表类型列表（不包含 default）
   const toolbarExampleKeys: (keyof ExampleSet)[] = ['flowchart', 'sequence', 'class', 'state', 'entity', 'gantt', 'pie']
-  
+
   // 使用计算属性获取当前语言的示例
   const examples = computed(() => {
     const currentExamples = getExamples(locale.value)

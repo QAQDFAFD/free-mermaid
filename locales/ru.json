@@ -20,6 +20,9 @@
     "exitFullscreen": "Выйти из полноэкранного режима",
     "pressEscToExit": "Нажмите ESC или щелкните для выхода"
   },
+  "diagramTheme": {
+    "title": "Тема"
+  },
   "tools": {
     "flowchart": "Блок-схема",
     "sequence": "Диаграмма последовательности",

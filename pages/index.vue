@@ -1,12 +1,7 @@
 <template>
   <div class="flex flex-col h-screen bg-gray-50" :class="{ 'fullscreen-mode': isFullscreen }">
     <!-- 工具栏 -->
-    <EditorToolbar 
-      v-show="!isFullscreen" 
-      class="editor-toolbar" 
-      @update:code="updateCode" 
-      :model-value="code" 
-    />
+    <EditorToolbar v-show="!isFullscreen" class="editor-toolbar" @update:code="updateCode" :model-value="code" />
 
     <!-- 主内容区域 -->
     <main class="flex flex-col md:flex-row flex-1 overflow-hidden relative dark:bg-gray-900" role="main">
@@ -138,7 +133,11 @@
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
               </svg>
               <svg
                 v-else
@@ -211,15 +210,27 @@
           </div>
         </div>
         <div class="flex-1 overflow-hidden relative">
-          <MermaidPreview ref="previewRef" :code="previewCode" :typing="isTyping" @zoom-change="handleZoomChange" />
+          <MermaidPreview
+            ref="previewRef"
+            :code="previewCode"
+            :typing="isTyping"
+            :diagram-theme="diagramTheme"
+            @zoom-change="handleZoomChange" />
+
+          <!-- 悬浮主题选择器 - 左下角 -->
+          <DiagramThemeSelector v-model="diagramTheme" />
+
           <!-- 正在输入提示 -->
           <Transition name="fade">
-            <div 
-              v-if="isTyping" 
+            <div
+              v-if="isTyping"
               class="absolute top-2 right-2 bg-blue-500/90 text-white text-xs px-2.5 py-1 rounded-full flex items-center gap-1.5 shadow-lg backdrop-blur-sm z-10">
               <svg class="animate-spin h-3 w-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                <path
+                  class="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
               </svg>
               <span>{{ $t('preview.typing') }}</span>
             </div>
@@ -322,13 +333,17 @@
 
       <div class="max-w-6xl mx-auto relative z-10">
         <!-- 折叠状态：只显示一行简要信息（视觉层） -->
-        <div v-show="isFooterCollapsed" class="flex items-center justify-center space-x-4 text-xs text-gray-600 dark:text-gray-400">
+        <div
+          v-show="isFooterCollapsed"
+          class="flex items-center justify-center space-x-4 text-xs text-gray-600 dark:text-gray-400">
           <span class="font-medium text-gray-900 dark:text-white">{{ $t('footer.title') }}</span>
           <span>|</span>
           <span>{{ $t('footer.capabilities.graphTdOnline') }}</span>
           <span>•</span>
           <span>{{ $t('footer.capabilities.mermaidEditorFree') }}</span>
-          <a href="https://mermaid-drawing.com" class="text-blue-600 dark:text-blue-400 hover:underline ml-2">mermaid-drawing.com</a>
+          <a href="https://mermaid-drawing.com" class="text-blue-600 dark:text-blue-400 hover:underline ml-2"
+            >mermaid-drawing.com</a
+          >
         </div>
 
         <!-- 展开状态：显示完整内容（SEO 内容始终在 DOM 中，只是视觉隐藏） -->
@@ -379,8 +394,8 @@
     </footer>
 
     <!-- 全屏模式下的退出提示 -->
-    <div 
-      v-if="isFullscreen" 
+    <div
+      v-if="isFullscreen"
       class="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 bg-black/70 text-white text-xs px-3 py-1.5 rounded-full opacity-60 hover:opacity-100 transition-opacity cursor-pointer"
       @click="toggleFullscreen">
       {{ $t('preview.pressEscToExit') || 'Press ESC or click to exit fullscreen' }}
@@ -393,7 +408,7 @@
   import type { ComponentPublicInstance } from 'vue'
   import { useI18n } from 'vue-i18n'
   import { getExample, getExamples, exampleKeys, type ExampleSet } from '@/composables/useExamples'
-  
+
   // 延迟导入 exportUtils，只在需要时加载
   let exportAsPng: any = null
   const loadExportUtils = async () => {
@@ -435,16 +450,16 @@
     zoomOut: () => void
     resetView: () => void
   }
-  
+
   // 当前使用的示例类型（用于语言切换时保持同类型）
   const currentExampleType = ref<keyof ExampleSet | null>('default')
 
   // 编辑器代码
   const code = ref('')
-  
+
   // 预览代码（防抖后更新，避免输入时频繁报错）
   const previewCode = ref('')
-  
+
   // 检查代码是否匹配某个示例（用于判断用户是否修改过）
   const findMatchingExampleType = (codeToCheck: string): keyof ExampleSet | null => {
     const currentExamples = getExamples(locale.value)
@@ -455,17 +470,20 @@
     }
     return null
   }
-  
+
   // 初始化代码（在 onMounted 中设置，确保翻译已加载）
   const initializeCode = () => {
-    if (!code.value) {
-      const defaultExample = getExample(locale.value, 'default')
+    const defaultExample = getExample(locale.value, 'default')
+    if (!code.value || code.value === '') {
       code.value = defaultExample
-      previewCode.value = defaultExample
       currentExampleType.value = 'default'
     }
+    // 始终同步 previewCode，确保预览区有内容
+    if (!previewCode.value || previewCode.value === '') {
+      previewCode.value = code.value || defaultExample
+    }
   }
-  
+
   // 监听语言变化，自动切换示例（仅当用户没有修改代码时）
   watch(locale, (newLocale, oldLocale) => {
     if (newLocale !== oldLocale && currentExampleType.value) {
@@ -475,9 +493,12 @@
       previewCode.value = newExample
     }
   })
-  
+
   // 是否正在输入（用于显示输入提示）
   const isTyping = ref(false)
+
+  // 图表主题
+  const diagramTheme = ref('default')
 
   // 预览引用
   const previewRef = ref<(ComponentPublicInstance & MermaidPreviewMethods) | null>(null)
@@ -491,7 +512,7 @@
 
   // 全屏模式
   const isFullscreen = ref(false)
-  
+
   // Footer 折叠状态
   const isFooterCollapsed = ref(false)
 
@@ -529,7 +550,7 @@
     } else {
       initializeCode()
     }
-    
+
     // 首次访问自动启动引导（延迟执行，确保用户有时间看到界面）
     if (!hasSeenTour.value) {
       setTimeout(() => {
@@ -542,6 +563,12 @@
       const savedState = localStorage.getItem('footerCollapsed')
       if (savedState === 'true') {
         isFooterCollapsed.value = true
+      }
+
+      // 恢复图表主题偏好
+      const savedTheme = localStorage.getItem('mermaid-diagram-theme')
+      if (savedTheme) {
+        diagramTheme.value = savedTheme
       }
     }
 
@@ -566,11 +593,11 @@
     code.value = newCode
     previewCode.value = newCode
     isTyping.value = false
-    
+
     // 检查是否是某个示例，更新当前示例类型
     currentExampleType.value = findMatchingExampleType(newCode)
   }
-  
+
   // 监听编辑器代码变化，设置正在输入状态
   watch(code, (newCode, oldCode) => {
     if (newCode !== oldCode && newCode !== previewCode.value) {

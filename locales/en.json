@@ -20,6 +20,9 @@
     "exitFullscreen": "Exit Fullscreen",
     "pressEscToExit": "Press ESC or click to exit fullscreen"
   },
+  "diagramTheme": {
+    "title": "Theme"
+  },
   "tools": {
     "flowchart": "Flowchart",
     "sequence": "Sequence Diagram",

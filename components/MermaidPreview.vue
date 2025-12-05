@@ -141,6 +141,10 @@
     typing: {
       type: Boolean,
       default: false
+    },
+    diagramTheme: {
+      type: String,
+      default: 'default'
     }
   })
 
@@ -296,16 +300,31 @@
           const currentDarkMode = document.documentElement.classList.contains('dark')
           isDarkMode.value = currentDarkMode
 
-          // 配置mermaid以确保可导出完整图表和深色模式支持
-          $mermaid.initialize({
+          // 确定要使用的主题
+          // 如果用户选择了手绘主题，使用特殊配置
+          // 否则根据深色模式和用户选择的主题来决定
+          let themeToUse = props.diagramTheme
+          if (props.diagramTheme === 'default' && currentDarkMode) {
+            themeToUse = 'dark'
+          }
+          
+          // 手绘主题的特殊配置
+          const isHandDrawn = props.diagramTheme === 'hand'
+          
+          // 配置mermaid以确保可导出完整图表和主题支持
+          const mermaidConfig: any = {
             securityLevel: 'loose',
             startOnLoad: false,
-            theme: currentDarkMode ? 'dark' : 'default',
-            fontFamily: 'monospace',
+            theme: isHandDrawn ? 'default' : themeToUse,
+            fontFamily: isHandDrawn ? '"Comic Sans MS", "Comic Sans", cursive, sans-serif' : 'monospace',
             fontSize: 16,
             flowchart: {
               htmlLabels: true,
-              curve: 'linear'
+              curve: 'basis', // 使用柔和的曲线连接
+              padding: isHandDrawn ? 15 : 10,
+              diagramPadding: 8,
+              nodeSpacing: 50,
+              rankSpacing: 50
             },
             sequence: {
               diagramMarginX: 50,
@@ -318,13 +337,68 @@
               noteMargin: 10,
               messageMargin: 35
             }
-          })
+          }
+          
+          // 手绘主题的额外样式配置
+          if (isHandDrawn) {
+            mermaidConfig.themeVariables = {
+              fontFamily: '"Comic Sans MS", "Comic Sans", cursive, sans-serif',
+              primaryColor: '#ffeaa7',
+              primaryTextColor: '#2d3436',
+              primaryBorderColor: '#636e72',
+              lineColor: '#636e72',
+              secondaryColor: '#dfe6e9',
+              tertiaryColor: '#b2bec3',
+              noteBkgColor: '#fff3cd',
+              noteTextColor: '#2d3436',
+              noteBorderColor: '#636e72'
+            }
+          }
+          
+          $mermaid.initialize(mermaidConfig)
 
           // 使用 Mermaid 渲染图表
           const { svg } = await $mermaid.render(id, props.code)
 
           // 替换容器内容为渲染后的 SVG
           diagramRef.value.innerHTML = svg
+          
+          // 如果是手绘主题，添加手绘效果滤镜
+          if (isHandDrawn) {
+            const svgEl = diagramRef.value.querySelector('svg')
+            if (svgEl) {
+              // 添加手绘效果的 SVG 滤镜
+              const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs')
+              defs.innerHTML = `
+                <filter id="hand-drawn-filter" x="-5%" y="-5%" width="110%" height="110%">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="3" result="noise"/>
+                  <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" xChannelSelector="R" yChannelSelector="G"/>
+                </filter>
+                <style>
+                  .node rect, .node polygon, .node circle, .node ellipse,
+                  .cluster rect, .cluster polygon,
+                  .actor, .actor-line,
+                  .messageLine0, .messageLine1,
+                  .note, .noteText,
+                  .label-container, .label {
+                    filter: url(#hand-drawn-filter);
+                  }
+                  path:not(.arrowMarkerPath) {
+                    stroke-dasharray: 5, 3;
+                    stroke-linecap: round;
+                    stroke-linejoin: round;
+                  }
+                  text {
+                    font-family: "Comic Sans MS", "Comic Sans", cursive, sans-serif !important;
+                  }
+                  .edgePath path {
+                    stroke-width: 2px;
+                  }
+                </style>
+              `
+              svgEl.insertBefore(defs, svgEl.firstChild)
+            }
+          }
           
           // 保存有效的SVG，用于错误时回退显示
           lastValidSvg.value = svg
@@ -512,6 +586,17 @@
       previewContainer.value.style.cursor = 'default'
     }
   }
+
+  // 监听主题变化
+  watch(
+    () => props.diagramTheme,
+    async () => {
+      // 主题变化时重新渲染图表
+      if (props.code && props.code.trim()) {
+        await renderDiagram()
+      }
+    }
+  )
 
   // 监听代码变化
   watch(

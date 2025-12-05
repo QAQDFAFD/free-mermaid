@@ -20,6 +20,9 @@
     "exitFullscreen": "ออกจากเต็มหน้าจอ",
     "pressEscToExit": "กด ESC หรือคลิกเพื่อออก"
   },
+  "diagramTheme": {
+    "title": "ธีม"
+  },
   "tools": {
     "flowchart": "แผนผังขั้นตอน",
     "sequence": "แผนภาพลำดับ",
