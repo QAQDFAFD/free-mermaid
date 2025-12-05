@@ -389,12 +389,20 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
+  import { ref, computed, onMounted, onUnmounted, watch, defineAsyncComponent } from 'vue'
   import type { ComponentPublicInstance } from 'vue'
   import { useI18n } from 'vue-i18n'
-  import { exportAsPng } from '@/utils/exportUtils'
   import { getExample, getExamples, exampleKeys, type ExampleSet } from '@/composables/useExamples'
-  // ThemeToggle导入已移至EditorToolbar组件
+  
+  // 延迟导入 exportUtils，只在需要时加载
+  let exportAsPng: any = null
+  const loadExportUtils = async () => {
+    if (!exportAsPng) {
+      const mod = await import('@/utils/exportUtils')
+      exportAsPng = mod.exportAsPng
+    }
+    return exportAsPng
+  }
 
   const { t, locale } = useI18n()
 
@@ -646,7 +654,8 @@
   // 导出图表
   const exportDiagram = async (format: 'png' | 'svg') => {
     if (format === 'png') {
-      await exportAsPng('mermaid-diagram')
+      const fn = await loadExportUtils()
+      await fn('mermaid-diagram')
     } else {
       await exportAsSvg('mermaid-diagram')
     }

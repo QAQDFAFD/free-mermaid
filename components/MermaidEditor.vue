@@ -1,7 +1,20 @@
 <template>
 	<div class="h-full w-full">
 		<ClientOnly>
-			<Codemirror
+			<!-- 编辑器加载前的骨架屏 -->
+			<template #fallback>
+				<div class="h-full w-full bg-white dark:bg-gray-900 p-4 animate-pulse">
+					<div class="space-y-2">
+						<div class="h-4 w-3/4 bg-gray-200 dark:bg-gray-700 rounded"></div>
+						<div class="h-4 w-1/2 bg-gray-200 dark:bg-gray-700 rounded"></div>
+						<div class="h-4 w-2/3 bg-gray-200 dark:bg-gray-700 rounded"></div>
+						<div class="h-4 w-1/3 bg-gray-200 dark:bg-gray-700 rounded"></div>
+					</div>
+				</div>
+			</template>
+			<component
+				:is="CodemirrorComponent"
+				v-if="isEditorReady"
 				v-model="code"
 				placeholder="Enter your Mermaid drawing code here..."
 				:style="{ height: '100%', width: '100%' }"
@@ -15,11 +28,17 @@
 </template>
 
 <script setup lang="ts">
-	import { Codemirror } from 'vue-codemirror'
-	import { javascript } from '@codemirror/lang-javascript'
-	import { EditorView } from '@codemirror/view'
-	import { LanguageSupport, StreamLanguage } from '@codemirror/language'
-	import { ref, watch, computed, onMounted, onUnmounted } from 'vue'
+	import { ref, watch, computed, onMounted, onUnmounted, shallowRef, markRaw } from 'vue'
+
+	// 动态导入 CodeMirror 相关模块，减少首屏加载
+	let CodemirrorModule: any = null
+	let javascriptModule: any = null
+	let EditorViewModule: any = null
+	let LanguageSupportModule: any = null
+	let StreamLanguageModule: any = null
+
+	const CodemirrorComponent = shallowRef<any>(null)
+	const isEditorReady = ref(false)
 
 	// 标准代码字体栈，确保跨平台一致性
 	const CODE_FONT_FAMILY = 'ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace'
@@ -59,8 +78,44 @@
 		}
 	}
 
+	// 异步加载 CodeMirror 模块
+	const loadCodeMirror = async () => {
+		try {
+			// 并行加载所有模块
+			const [codemirror, javascript, view, language] = await Promise.all([
+				import('vue-codemirror'),
+				import('@codemirror/lang-javascript'),
+				import('@codemirror/view'),
+				import('@codemirror/language')
+			])
+
+			CodemirrorModule = codemirror
+			javascriptModule = javascript
+			EditorViewModule = view
+			LanguageSupportModule = language.LanguageSupport
+			StreamLanguageModule = language.StreamLanguage
+
+			// 设置组件
+			CodemirrorComponent.value = markRaw(codemirror.Codemirror)
+			isEditorReady.value = true
+		} catch (error) {
+			console.error('Failed to load CodeMirror:', error)
+		}
+	}
+
 	onMounted(() => {
 		updateDarkMode()
+
+		// 延迟加载 CodeMirror，优先渲染骨架屏
+		if (process.client) {
+			// 使用 requestIdleCallback 在空闲时加载，或者立即加载
+			if ('requestIdleCallback' in window) {
+				(window as any).requestIdleCallback(() => loadCodeMirror(), { timeout: 100 })
+			} else {
+				// 立即加载，但不阻塞渲染
+				setTimeout(loadCodeMirror, 0)
+			}
+		}
 
 		// 使用MutationObserver监听documentElement的class变化
 		observer = new MutationObserver(mutations => {
@@ -95,121 +150,143 @@
 		window.removeEventListener('storage', handleStorageChange)
 	})
 
-	// Mermaid drawing 语法高亮
-	const mermaidSyntax = StreamLanguage.define({
-		token(stream) {
-			// 处理关键字
-			if (
-				stream.match(/graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|erDiagram|gantt|pie|gitGraph/)
-			) {
-				return 'keyword'
-			}
+	// Mermaid drawing 语法高亮定义
+	const getMermaidSyntax = () => {
+		if (!StreamLanguageModule) return null
+		return StreamLanguageModule.define({
+			token(stream: any) {
+				// 处理关键字
+				if (
+					stream.match(/graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|erDiagram|gantt|pie|gitGraph/)
+				) {
+					return 'keyword'
+				}
 
-			// 处理方向
-			if (stream.match(/TB|TD|BT|RL|LR/)) {
-				return 'atom'
-			}
+				// 处理方向
+				if (stream.match(/TB|TD|BT|RL|LR/)) {
+					return 'atom'
+				}
 
-			// 处理节点和连接
-			if (stream.match(/-->|---|==>|-.->|===/)) {
-				return 'operator'
-			}
+				// 处理节点和连接
+				if (stream.match(/-->|---|==>|-.->|===/)) {
+					return 'operator'
+				}
 
-			// 处理节点定义
-			if (stream.match(/\[.*?\]|\(.*?\)|{.*?}|>.*?]|\/.*?\//)) {
-				return 'string'
-			}
+				// 处理节点定义
+				if (stream.match(/\[.*?\]|\(.*?\)|{.*?}|>.*?]|\/.*?\//)) {
+					return 'string'
+				}
 
-			// 处理注释
-			if (stream.match(/%%/)) {
-				stream.skipToEnd()
-				return 'comment'
-			}
+				// 处理注释
+				if (stream.match(/%%/)) {
+					stream.skipToEnd()
+					return 'comment'
+				}
 
-			// 处理其他字符
-			stream.next()
-			return null
+				// 处理其他字符
+				stream.next()
+				return null
+			}
+		})
+	}
+
+	// 获取深色模式主题
+	const getDarkTheme = () => {
+		if (!EditorViewModule) return null
+		return EditorViewModule.EditorView.theme({
+			'&': {
+				fontSize: '14px',
+				height: '100%',
+				backgroundColor: '#1f2937' // gray-800
+			},
+			'.cm-content': {
+				fontFamily: CODE_FONT_FAMILY,
+				color: '#e5e7eb' // gray-200
+			},
+			'.cm-gutters': {
+				backgroundColor: '#374151', // gray-700
+				color: '#9ca3af', // gray-400
+				border: 'none',
+				fontFamily: CODE_FONT_FAMILY
+			},
+			'.cm-line': {
+				color: '#e5e7eb' // gray-200
+			},
+			'.cm-activeLine': {
+				backgroundColor: '#374151' // gray-700
+			},
+			'.cm-activeLineGutter': {
+				backgroundColor: '#4b5563' // gray-600
+			},
+			'.cm-selectionMatch': {
+				backgroundColor: '#4b5563' // gray-600
+			},
+			'.cm-cursor': {
+				borderLeftColor: '#e5e7eb' // gray-200
+			},
+			'.cm-keyword': {
+				color: '#93c5fd' // blue-300
+			},
+			'.cm-atom': {
+				color: '#c4b5fd' // purple-300
+			},
+			'.cm-operator': {
+				color: '#fdba74' // orange-300
+			},
+			'.cm-string': {
+				color: '#86efac' // green-300
+			},
+			'.cm-comment': {
+				color: '#9ca3af' // gray-400
+			}
+		})
+	}
+
+	// 获取默认主题
+	const getLightTheme = () => {
+		if (!EditorViewModule) return null
+		return EditorViewModule.EditorView.theme({
+			'&': {
+				fontSize: '14px',
+				height: '100%'
+			},
+			'.cm-content': {
+				fontFamily: CODE_FONT_FAMILY
+			},
+			'.cm-gutters': {
+				backgroundColor: '#f5f5f5',
+				color: '#6e6e6e',
+				border: 'none',
+				fontFamily: CODE_FONT_FAMILY
+			}
+		})
+	}
+
+	// 编辑器扩展 - 动态计算
+	const extensions = computed(() => {
+		if (!isEditorReady.value || !EditorViewModule || !LanguageSupportModule || !javascriptModule) {
+			return []
 		}
-	})
 
-	// 深色模式主题
-	const darkTheme = EditorView.theme({
-		'&': {
-			fontSize: '14px',
-			height: '100%',
-			backgroundColor: '#1f2937' // gray-800
-		},
-		'.cm-content': {
-			fontFamily: CODE_FONT_FAMILY,
-			color: '#e5e7eb' // gray-200
-		},
-		'.cm-gutters': {
-			backgroundColor: '#374151', // gray-700
-			color: '#9ca3af', // gray-400
-			border: 'none',
-			fontFamily: CODE_FONT_FAMILY
-		},
-		'.cm-line': {
-			color: '#e5e7eb' // gray-200
-		},
-		'.cm-activeLine': {
-			backgroundColor: '#374151' // gray-700
-		},
-		'.cm-activeLineGutter': {
-			backgroundColor: '#4b5563' // gray-600
-		},
-		'.cm-selectionMatch': {
-			backgroundColor: '#4b5563' // gray-600
-		},
-		'.cm-cursor': {
-			borderLeftColor: '#e5e7eb' // gray-200
-		},
-		'.cm-keyword': {
-			color: '#93c5fd' // blue-300
-		},
-		'.cm-atom': {
-			color: '#c4b5fd' // purple-300
-		},
-		'.cm-operator': {
-			color: '#fdba74' // orange-300
-		},
-		'.cm-string': {
-			color: '#86efac' // green-300
-		},
-		'.cm-comment': {
-			color: '#9ca3af' // gray-400
+		const mermaidSyntax = getMermaidSyntax()
+		const currentTheme = isDarkMode.value ? getDarkTheme() : getLightTheme()
+		
+		const exts = []
+		if (mermaidSyntax) {
+			exts.push(new LanguageSupportModule(mermaidSyntax))
 		}
-	})
-
-	// 默认主题
-	const lightTheme = EditorView.theme({
-		'&': {
-			fontSize: '14px',
-			height: '100%'
-		},
-		'.cm-content': {
-			fontFamily: CODE_FONT_FAMILY
-		},
-		'.cm-gutters': {
-			backgroundColor: '#f5f5f5',
-			color: '#6e6e6e',
-			border: 'none',
-			fontFamily: CODE_FONT_FAMILY
+		if (javascriptModule.javascript) {
+			exts.push(javascriptModule.javascript())
 		}
+		if (currentTheme) {
+			exts.push(currentTheme)
+		}
+		if (EditorViewModule.EditorView) {
+			exts.push(EditorViewModule.EditorView.lineWrapping)
+		}
+		
+		return exts
 	})
-
-	// 根据当前模式计算使用的主题
-	const currentTheme = computed(() => {
-		return isDarkMode.value ? darkTheme : lightTheme
-	})
-
-	// 编辑器扩展
-	const extensions = computed(() => [
-		new LanguageSupport(mermaidSyntax),
-		javascript(),
-		currentTheme.value,
-		EditorView.lineWrapping
-	])
 
 	// 监听代码变化
 	watch(
@@ -237,13 +314,6 @@
 		}, DEBOUNCE_DELAY)
 	}
 
-	// 监听深色模式变化
-	watch(
-		() => isDarkMode.value,
-		() => {
-			// 这里无需特殊处理，computed 值会自动更新
-		}
-	)
 </script>
 
 <style scoped>

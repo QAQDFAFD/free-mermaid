@@ -10,7 +10,9 @@ export default defineNuxtConfig({
   experimental: {
     payloadExtraction: true, // 提取页面 payload 以减少 JS 体积
     renderJsonPayloads: true, // 优化 JSON payload 渲染
-    componentIslands: true // 组件岛屿架构
+    componentIslands: true, // 组件岛屿架构
+    inlineSSRStyles: true, // 内联关键 CSS 到 HTML，减少首屏渲染阻塞
+    viewTransition: true // 视图过渡优化
   },
 
   // Nitro 服务器优化
@@ -31,10 +33,11 @@ export default defineNuxtConfig({
       cssCodeSplit: true,
       // 提高 chunk 大小警告阈值（mermaid 库本身很大）
       chunkSizeWarningLimit: 1000
+      // 注意：不使用 manualChunks，让 Vite 自动处理，避免 dayjs 等库的导出问题
     },
     // 优化依赖预构建
     optimizeDeps: {
-      include: ['vue', 'vue-router', 'mermaid']
+      include: ['vue', 'vue-router', 'mermaid', 'dayjs']
     }
   },
 
@@ -60,8 +63,9 @@ export default defineNuxtConfig({
   },
 
   app: {
-    // 页面过渡动画
-    pageTransition: { name: 'page', mode: 'out-in' },
+    // 禁用页面过渡动画以提升首屏性能
+    pageTransition: false,
+    layoutTransition: false,
     head: {
       htmlAttrs: {
         lang: 'en' // 默认语言
@@ -120,10 +124,8 @@ export default defineNuxtConfig({
         { rel: 'canonical', href: 'https://mermaid-drawing.com' },
         { rel: 'sitemap', type: 'application/xml', href: '/sitemap.xml' },
         { rel: 'manifest', href: '/manifest.json' },
-        // 预连接优化 - 只保留必要的
-        { rel: 'preconnect', href: 'https://www.googletagmanager.com' },
+        // 预连接优化 - 只保留必要的（延迟加载的资源不需要预连接）
         { rel: 'dns-prefetch', href: 'https://www.googletagmanager.com' },
-        { rel: 'dns-prefetch', href: 'https://www.google-analytics.com' },
         { rel: 'dns-prefetch', href: 'https://pagead2.googlesyndication.com' },
         // 多语言支持
         { rel: 'alternate', hreflang: 'en', href: 'https://mermaid-drawing.com' },
