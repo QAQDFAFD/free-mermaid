@@ -8,10 +8,10 @@ export default defineNuxtPlugin(nuxtApp => {
 	let gaLoaded = false
 
 	// 初始化 dataLayer
-	window.dataLayer = window.dataLayer || []
-	function gtag() {
-		window.dataLayer.push(arguments)
-	}
+		window.dataLayer = window.dataLayer || []
+		function gtag() {
+			window.dataLayer.push(arguments)
+		}
 	// 暴露到全局
 	window.gtag = gtag
 
@@ -64,12 +64,12 @@ export default defineNuxtPlugin(nuxtApp => {
 	scheduleLoad()
 
 	// 页面路由变化时发送 pageview 事件
-	nuxtApp.hook('page:finish', () => {
+		nuxtApp.hook('page:finish', () => {
 		if (gaLoaded && window.gtag) {
 			gtag('event', 'page_view', {
 				page_location: window.location.href,
 				page_title: document.title
-			})
-		}
+		})
+	}
 	})
 })

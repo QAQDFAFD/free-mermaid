@@ -8,7 +8,9 @@
       </div>
     </div>
 
-    <div v-if="error && !props.typing" class="bg-red-50 dark:bg-red-900/30 p-3 rounded-md mb-2 overflow-auto max-h-[30%]">
+    <div
+      v-if="error && !props.typing"
+      class="bg-red-50 dark:bg-red-900/30 p-3 rounded-md mb-2 overflow-auto max-h-[30%]">
       <div class="flex">
         <div class="flex-shrink-0">
           <svg
@@ -91,10 +93,10 @@
   const ensureMermaid = async () => {
     if (!process.client) return null
     if (mermaidInstance) return mermaidInstance
-    
+
     // 避免重复加载
     if (mermaidLoadPromise) return mermaidLoadPromise
-    
+
     mermaidLoadPromise = (async () => {
       try {
         const mod = await import('mermaid')
@@ -127,7 +129,7 @@
         throw err
       }
     })()
-    
+
     return mermaidLoadPromise
   }
 
@@ -289,7 +291,7 @@
         // 只有在有内容时才尝试解析和渲染
         if (props.code && props.code.trim()) {
           // 先尝试解析代码，检查语法
-          const $mermaid = (await ensureMermaid())
+          const $mermaid = await ensureMermaid()
           if (!$mermaid) {
             isLoading.value = false
             return
@@ -307,10 +309,10 @@
           if (props.diagramTheme === 'default' && currentDarkMode) {
             themeToUse = 'dark'
           }
-          
+
           // 手绘主题的特殊配置
           const isHandDrawn = props.diagramTheme === 'hand'
-          
+
           // 配置mermaid以确保可导出完整图表和主题支持
           const mermaidConfig: any = {
             securityLevel: 'loose',
@@ -338,7 +340,7 @@
               messageMargin: 35
             }
           }
-          
+
           // 手绘主题的额外样式配置
           if (isHandDrawn) {
             mermaidConfig.themeVariables = {
@@ -354,7 +356,7 @@
               noteBorderColor: '#636e72'
             }
           }
-          
+
           $mermaid.initialize(mermaidConfig)
 
           // 使用 Mermaid 渲染图表
@@ -362,7 +364,7 @@
 
           // 替换容器内容为渲染后的 SVG
           diagramRef.value.innerHTML = svg
-          
+
           // 如果是手绘主题，添加手绘效果滤镜
           if (isHandDrawn) {
             const svgEl = diagramRef.value.querySelector('svg')
@@ -399,10 +401,10 @@
               svgEl.insertBefore(defs, svgEl.firstChild)
             }
           }
-          
+
           // 保存有效的SVG，用于错误时回退显示
           lastValidSvg.value = svg
-          
+
           // 清除错误状态
           error.value = null
 
@@ -448,7 +450,7 @@
         isLoading.value = false
       } catch (parseErr: any) {
         isLoading.value = false
-        
+
         // 如果用户正在输入，不显示错误，保留上一次有效的渲染结果
         if (props.typing) {
           // 静默处理，保留上一次有效的SVG或显示友好提示
@@ -458,7 +460,7 @@
           // 不在控制台输出错误，减少干扰
           return
         }
-        
+
         // 只有在用户停止输入后才显示错误
         error.value = parseErr.message || 'Mermaid drawing syntax error'
 
@@ -483,7 +485,7 @@
       }
     } catch (err: any) {
       isLoading.value = false
-      
+
       // 如果用户正在输入，静默处理
       if (props.typing) {
         if (lastValidSvg.value && diagramRef.value) {
@@ -491,9 +493,9 @@
         }
         return
       }
-      
+
       error.value = err.message || 'Mermaid drawing rendering failed'
-      
+
       // 使用 warn 而不是 error
       if (process.env.NODE_ENV === 'development') {
         console.warn('Mermaid rendering issue:', err.message?.substring(0, 100))

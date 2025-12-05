@@ -454,11 +454,14 @@
   // 当前使用的示例类型（用于语言切换时保持同类型）
   const currentExampleType = ref<keyof ExampleSet | null>('default')
 
+  // 获取初始默认示例（使用英文作为默认值，后续会根据 locale 更新）
+  const initialExample = getExample('en', 'default')
+
   // 编辑器代码
-  const code = ref('')
+  const code = ref(initialExample)
 
   // 预览代码（防抖后更新，避免输入时频繁报错）
-  const previewCode = ref('')
+  const previewCode = ref(initialExample)
 
   // 检查代码是否匹配某个示例（用于判断用户是否修改过）
   const findMatchingExampleType = (codeToCheck: string): keyof ExampleSet | null => {
@@ -474,13 +477,12 @@
   // 初始化代码（在 onMounted 中设置，确保翻译已加载）
   const initializeCode = () => {
     const defaultExample = getExample(locale.value, 'default')
-    if (!code.value || code.value === '') {
+    // 如果当前代码是英文默认示例，则更新为当前语言的默认示例
+    const enDefault = getExample('en', 'default')
+    if (!code.value || code.value === '' || code.value === enDefault) {
       code.value = defaultExample
+      previewCode.value = defaultExample
       currentExampleType.value = 'default'
-    }
-    // 始终同步 previewCode，确保预览区有内容
-    if (!previewCode.value || previewCode.value === '') {
-      previewCode.value = code.value || defaultExample
     }
   }
 
