@@ -1,5 +1,8 @@
 <template>
   <div class="flex flex-col h-screen bg-gray-50" :class="{ 'fullscreen-mode': isFullscreen }">
+    <!-- SEO 主标题 - 视觉隐藏但对搜索引擎和屏幕阅读器可见 -->
+    <h1 class="sr-only">{{ $t('footer.title') }} - {{ $t('footer.editorTitle') }}</h1>
+
     <!-- 工具栏 -->
     <EditorToolbar v-show="!isFullscreen" class="editor-toolbar" @update:code="updateCode" :model-value="code" />
 
@@ -9,10 +12,12 @@
       <section
         id="mermaid-editor"
         :style="{ width: `${leftPanelWidth}%` }"
-        class="h-1/2 md:h-full border-r border-gray-200 dark:border-gray-700 flex flex-col">
+        class="h-1/2 md:h-full border-r border-gray-200 dark:border-gray-700 flex flex-col"
+        aria-labelledby="editor-heading">
+        <h2 id="editor-heading" class="sr-only">{{ $t('editor.title') }}</h2>
         <div
           class="h-10 flex items-center justify-between bg-gray-100 dark:bg-gray-800 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 border-b border-gray-200 dark:border-gray-700">
-          <span>{{ $t('editor.title') }}</span>
+          <span aria-hidden="true">{{ $t('editor.title') }}</span>
           <div class="flex items-center space-x-2">
             <NuxtLink
               to="/docs"
@@ -55,11 +60,15 @@
       <section
         id="mermaid-preview"
         :style="{ width: `${100 - leftPanelWidth}%` }"
-        class="h-1/2 md:h-full flex flex-col">
+        class="h-1/2 md:h-full flex flex-col"
+        aria-labelledby="preview-heading">
+        <h2 id="preview-heading" class="sr-only">{{ $t('preview.title') }}</h2>
         <div
           class="h-10 bg-gray-100 dark:bg-gray-800 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
           <div class="flex items-center">
-            <span>{{ $t('preview.title') }} {{ currentZoom > 0 ? `(${Math.round(currentZoom * 100)}%)` : '' }}</span>
+            <span aria-hidden="true"
+              >{{ $t('preview.title') }} {{ currentZoom > 0 ? `(${Math.round(currentZoom * 100)}%)` : '' }}</span
+            >
             <span
               class="ml-2 text-xs text-black border border-gray-300 dark:border-gray-600 rounded px-1 py-0.5"
               style="
@@ -348,47 +357,54 @@
 
         <!-- 展开状态：显示完整内容（SEO 内容始终在 DOM 中，只是视觉隐藏） -->
         <div :class="isFooterCollapsed ? 'hidden' : ''">
-          <!-- 主标题 -->
-          <h1 class="text-base font-bold text-gray-900 dark:text-white mb-1.5">
-            {{ $t('footer.title') }} - {{ $t('footer.editorTitle') }}
-          </h1>
+          <!-- 关于编辑器 -->
+          <section aria-labelledby="about-heading">
+            <h2 id="about-heading" class="text-base font-bold text-gray-900 dark:text-white mb-1.5">
+              {{ $t('footer.title') }} - {{ $t('footer.editorTitle') }}
+            </h2>
 
-          <!-- 功能特点 -->
-          <p class="text-sm text-gray-700 dark:text-gray-300 mb-1 leading-tight" v-html="featuresText"></p>
-          <p class="text-xs text-gray-600 dark:text-gray-400 mb-1.5 leading-tight" v-html="seoText"></p>
+            <!-- 功能特点 -->
+            <p class="text-sm text-gray-700 dark:text-gray-300 mb-1 leading-tight" v-html="featuresText"></p>
+            <p class="text-xs text-gray-600 dark:text-gray-400 mb-1.5 leading-tight" v-html="seoText"></p>
+          </section>
 
-          <!-- SEO关键词标签 -->
-          <div class="text-xs text-gray-600 dark:text-gray-400 leading-tight mb-2">
-            <span class="inline-block mr-2">✓ {{ $t('footer.capabilities.graphTdOnline') }}</span>
-            <span class="inline-block mr-2">✓ {{ $t('footer.capabilities.mermaidEditorFree') }}</span>
-            <span class="inline-block mr-2">✓ {{ $t('footer.capabilities.mermaidChartOnlineFree') }}</span>
-            <span class="inline-block">✓ {{ $t('footer.capabilities.mermaidFreeEditor') }}</span>
-          </div>
+          <!-- 支持的图表类型 -->
+          <section aria-labelledby="features-heading">
+            <h3 id="features-heading" class="sr-only">{{ $t('footer.capabilities.title') || 'Supported Features' }}</h3>
+            <div class="text-xs text-gray-600 dark:text-gray-400 leading-tight mb-2">
+              <span class="inline-block mr-2">✓ {{ $t('footer.capabilities.graphTdOnline') }}</span>
+              <span class="inline-block mr-2">✓ {{ $t('footer.capabilities.mermaidEditorFree') }}</span>
+              <span class="inline-block mr-2">✓ {{ $t('footer.capabilities.mermaidChartOnlineFree') }}</span>
+              <span class="inline-block">✓ {{ $t('footer.capabilities.mermaidFreeEditor') }}</span>
+            </div>
+          </section>
 
-          <!-- 用户引导按钮 -->
-          <div class="text-center space-x-4">
-            <button
-              @click="() => $startTour(locale)"
-              class="text-xs text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 underline transition-colors"
-              title="重新开始新手引导">
-              🚀 {{ $t('footer.startTour') }}
-            </button>
-            <NuxtLink
-              to="/about"
-              class="text-xs text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-              {{ locale === 'zh' ? '关于我们' : 'About' }}
-            </NuxtLink>
-            <NuxtLink
-              to="/privacy"
-              class="text-xs text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-              {{ locale === 'zh' ? '隐私政策' : 'Privacy' }}
-            </NuxtLink>
-            <NuxtLink
-              to="/terms"
-              class="text-xs text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-              {{ locale === 'zh' ? '服务条款' : 'Terms' }}
-            </NuxtLink>
-          </div>
+          <!-- 导航链接 -->
+          <nav aria-label="Footer navigation">
+            <div class="text-center space-x-4">
+              <button
+                @click="() => $startTour(locale)"
+                class="text-xs text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 underline transition-colors"
+                title="重新开始新手引导">
+                🚀 {{ $t('footer.startTour') }}
+              </button>
+              <NuxtLink
+                to="/about"
+                class="text-xs text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                {{ locale === 'zh' ? '关于我们' : 'About' }}
+              </NuxtLink>
+              <NuxtLink
+                to="/privacy"
+                class="text-xs text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                {{ locale === 'zh' ? '隐私政策' : 'Privacy' }}
+              </NuxtLink>
+              <NuxtLink
+                to="/terms"
+                class="text-xs text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                {{ locale === 'zh' ? '服务条款' : 'Terms' }}
+              </NuxtLink>
+            </div>
+          </nav>
         </div>
       </div>
     </footer>
@@ -734,6 +750,19 @@
     height: 100%;
     margin: 0;
     padding: 0;
+  }
+
+  /* 屏幕阅读器专用类 - 视觉隐藏但对 SEO 和无障碍可见 */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
   }
 
   /* 全屏模式样式 */
