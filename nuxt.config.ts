@@ -44,22 +44,89 @@ export default defineNuxtConfig({
   // 路由规则配置
   routeRules: {
     // 首页预渲染并缓存
-    '/': { prerender: true },
+    '/': { 
+      prerender: true,
+      headers: {
+        'X-Robots-Tag': 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
+        'cache-control': 'public, max-age=3600, s-maxage=3600'
+      }
+    },
     // 文档页预渲染
-    '/docs': { prerender: true },
+    '/docs': { 
+      prerender: true,
+      headers: {
+        'X-Robots-Tag': 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
+        'cache-control': 'public, max-age=3600, s-maxage=3600'
+      }
+    },
     // 关于页面预渲染
-    '/about': { prerender: true },
+    '/about': { 
+      prerender: true,
+      headers: {
+        'X-Robots-Tag': 'index, follow',
+        'cache-control': 'public, max-age=3600, s-maxage=3600'
+      }
+    },
     // 隐私政策页面预渲染
-    '/privacy': { prerender: true },
+    '/privacy': { 
+      prerender: true,
+      headers: {
+        'X-Robots-Tag': 'index, follow',
+        'cache-control': 'public, max-age=3600, s-maxage=3600'
+      }
+    },
     // 服务条款页面预渲染
-    '/terms': { prerender: true },
+    '/terms': { 
+      prerender: true,
+      headers: {
+        'X-Robots-Tag': 'index, follow',
+        'cache-control': 'public, max-age=3600, s-maxage=3600'
+      }
+    },
     // 静态资源长期缓存
-    '/_nuxt/**': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
+    '/_nuxt/**': { 
+      headers: { 
+        'cache-control': 'public, max-age=31536000, immutable',
+        'X-Robots-Tag': 'noindex' // 静态资源不需要索引
+      } 
+    },
     // 公共资源缓存
-    '/favicon.ico': { headers: { 'cache-control': 'public, max-age=86400' } },
-    '/manifest.json': { headers: { 'cache-control': 'public, max-age=86400' } },
-    '/robots.txt': { headers: { 'cache-control': 'public, max-age=86400' } },
-    '/sitemap.xml': { headers: { 'cache-control': 'public, max-age=3600' } }
+    '/favicon.ico': { 
+      headers: { 
+        'cache-control': 'public, max-age=86400',
+        'X-Robots-Tag': 'noindex'
+      } 
+    },
+    '/manifest.json': { 
+      headers: { 
+        'cache-control': 'public, max-age=86400',
+        'X-Robots-Tag': 'noindex'
+      } 
+    },
+    '/robots.txt': { 
+      headers: { 
+        'cache-control': 'public, max-age=86400',
+        'X-Robots-Tag': 'noindex'
+      } 
+    },
+    '/sitemap.xml': { 
+      headers: { 
+        'cache-control': 'public, max-age=3600',
+        'X-Robots-Tag': 'noindex'
+      } 
+    },
+    '/ads.txt': {
+      headers: {
+        'cache-control': 'public, max-age=86400',
+        'X-Robots-Tag': 'noindex'
+      }
+    },
+    '/social-card.svg': {
+      headers: {
+        'cache-control': 'public, max-age=86400',
+        'X-Robots-Tag': 'index, follow' // 社交卡片图片允许索引
+      }
+    }
   },
 
   app: {
