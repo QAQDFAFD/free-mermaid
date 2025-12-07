@@ -124,6 +124,13 @@
                   : 'You can control or delete cookies through your browser settings. However, please note that disabling cookies may affect some website functionality.'
               }}
             </p>
+            <p class="text-gray-700 dark:text-gray-300 mb-4">
+              {{
+                locale === 'zh'
+                  ? 'Google 及其合作伙伴可能使用 Cookie 根据您之前访问过的网站向您展示广告。您可以在 adssettings.google.com 控制广告个性化，或在 policies.google.com/technologies/ads 了解详情。'
+                  : 'Google and its partners may use cookies to serve ads based on your prior visits to this or other websites. You can control ad personalization at adssettings.google.com or learn more at policies.google.com/technologies/ads.'
+              }}
+            </p>
           </section>
 
           <section class="mb-8">
@@ -154,6 +161,31 @@
                   : 'These third-party services have their own privacy policies, and we recommend reviewing their privacy policies for more information.'
               }}
             </p>
+            <p class="text-gray-700 dark:text-gray-300 mb-4">
+              {{
+                locale === 'zh'
+                  ? '我们遵守欧盟用户同意政策。除非您同意使用 Cookie，否则我们不会加载广告服务或分析脚本。'
+                  : 'We comply with the EU User Consent Policy. We do not load ad services or analytics scripts unless you consent to the use of cookies.'
+              }}
+            </p>
+            <ul class="list-disc pl-6 text-gray-700 dark:text-gray-300 mb-4 space-y-2">
+              <li>
+                <a
+                  href="https://policies.google.com/technologies/ads"
+                  target="_blank"
+                  class="text-blue-600 dark:text-blue-400 hover:underline">
+                  {{ locale === 'zh' ? 'Google 广告与 Cookie 政策' : 'Google Ads & Cookies Policy' }}
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://adssettings.google.com/"
+                  target="_blank"
+                  class="text-blue-600 dark:text-blue-400 hover:underline">
+                  {{ locale === 'zh' ? 'Google 广告设置（个性化）' : 'Google Ads Settings (Personalization)' }}
+                </a>
+              </li>
+            </ul>
           </section>
 
           <section class="mb-8">
@@ -236,6 +268,20 @@
     <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-6 mt-12">
       <div class="container mx-auto px-4 text-center text-gray-600 dark:text-gray-400 text-sm">
         <p>© {{ new Date().getFullYear() }} Mermaid Drawing. All rights reserved.</p>
+        <div class="mt-2 space-x-4">
+          <NuxtLink to="/privacy" class="hover:text-blue-600 dark:hover:text-blue-400">
+            {{ locale === 'zh' ? '隐私政策' : 'Privacy Policy' }}
+          </NuxtLink>
+          <NuxtLink to="/terms" class="hover:text-blue-600 dark:hover:text-blue-400">
+            {{ locale === 'zh' ? '服务条款' : 'Terms of Service' }}
+          </NuxtLink>
+          <NuxtLink to="/contact" class="hover:text-blue-600 dark:hover:text-blue-400">
+            {{ locale === 'zh' ? '联系我们' : 'Contact' }}
+          </NuxtLink>
+          <NuxtLink to="/faq" class="hover:text-blue-600 dark:hover:text-blue-400">
+            {{ locale === 'zh' ? '常见问题' : 'FAQ' }}
+          </NuxtLink>
+        </div>
       </div>
     </footer>
   </div>
@@ -253,6 +299,7 @@
         name: 'description',
         content: 'Privacy Policy for Mermaid Drawing - Learn how we collect, use, and protect your information.'
       }
-    ]
+    ],
+    link: [{ rel: 'canonical', href: 'https://mermaid-drawing.com/privacy' }]
   })
 </script>

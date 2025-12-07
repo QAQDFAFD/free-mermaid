@@ -21,7 +21,7 @@ export default defineNuxtConfig({
     minify: true, // 压缩服务端代码
     prerender: {
       crawlLinks: false, // 禁用自动爬取，只预渲染指定路由
-      routes: ['/', '/docs', '/about', '/privacy', '/terms'],
+      routes: ['/', '/docs', '/about', '/privacy', '/terms', '/contact', '/faq'],
       ignore: ['/manifest.json', '/robots.txt', '/sitemap.xml', '/favicon.ico'] // 忽略静态文件
     }
   },
@@ -44,7 +44,7 @@ export default defineNuxtConfig({
   // 路由规则配置
   routeRules: {
     // 首页预渲染并缓存
-    '/': { 
+    '/': {
       prerender: true,
       headers: {
         'X-Robots-Tag': 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
@@ -52,7 +52,7 @@ export default defineNuxtConfig({
       }
     },
     // 文档页预渲染
-    '/docs': { 
+    '/docs': {
       prerender: true,
       headers: {
         'X-Robots-Tag': 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
@@ -60,7 +60,7 @@ export default defineNuxtConfig({
       }
     },
     // 关于页面预渲染
-    '/about': { 
+    '/about': {
       prerender: true,
       headers: {
         'X-Robots-Tag': 'index, follow',
@@ -68,7 +68,7 @@ export default defineNuxtConfig({
       }
     },
     // 隐私政策页面预渲染
-    '/privacy': { 
+    '/privacy': {
       prerender: true,
       headers: {
         'X-Robots-Tag': 'index, follow',
@@ -76,7 +76,21 @@ export default defineNuxtConfig({
       }
     },
     // 服务条款页面预渲染
-    '/terms': { 
+    '/terms': {
+      prerender: true,
+      headers: {
+        'X-Robots-Tag': 'index, follow',
+        'cache-control': 'public, max-age=3600, s-maxage=3600'
+      }
+    },
+    '/contact': {
+      prerender: true,
+      headers: {
+        'X-Robots-Tag': 'index, follow',
+        'cache-control': 'public, max-age=3600, s-maxage=3600'
+      }
+    },
+    '/faq': {
       prerender: true,
       headers: {
         'X-Robots-Tag': 'index, follow',
@@ -84,36 +98,36 @@ export default defineNuxtConfig({
       }
     },
     // 静态资源长期缓存
-    '/_nuxt/**': { 
-      headers: { 
+    '/_nuxt/**': {
+      headers: {
         'cache-control': 'public, max-age=31536000, immutable',
         'X-Robots-Tag': 'noindex' // 静态资源不需要索引
-      } 
+      }
     },
     // 公共资源缓存
-    '/favicon.ico': { 
-      headers: { 
+    '/favicon.ico': {
+      headers: {
         'cache-control': 'public, max-age=86400',
         'X-Robots-Tag': 'noindex'
-      } 
+      }
     },
-    '/manifest.json': { 
-      headers: { 
+    '/manifest.json': {
+      headers: {
         'cache-control': 'public, max-age=86400',
         'X-Robots-Tag': 'noindex'
-      } 
+      }
     },
-    '/robots.txt': { 
-      headers: { 
+    '/robots.txt': {
+      headers: {
         'cache-control': 'public, max-age=86400',
         'X-Robots-Tag': 'noindex'
-      } 
+      }
     },
-    '/sitemap.xml': { 
-      headers: { 
+    '/sitemap.xml': {
+      headers: {
         'cache-control': 'public, max-age=3600',
         'X-Robots-Tag': 'noindex'
-      } 
+      }
     },
     '/ads.txt': {
       headers: {
@@ -141,6 +155,7 @@ export default defineNuxtConfig({
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=5' },
+        { name: 'google-adsense-account', content: 'ca-pub-6451531797615157' },
         {
           name: 'description',
           content:
@@ -169,10 +184,16 @@ export default defineNuxtConfig({
         { property: 'og:site_name', content: 'Mermaid Drawing' },
         { property: 'og:locale', content: 'en_US' },
         { property: 'og:locale:alternate', content: 'zh_CN' },
+        { property: 'og:locale:alternate', content: 'ru_RU' },
+        { property: 'og:locale:alternate', content: 'fr_FR' },
+        { property: 'og:locale:alternate', content: 'th_TH' },
         // Twitter Card 优化
         { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'twitter:title', content: 'Mermaid Online Free - Graph TD Diagram Editor' },
-        { name: 'twitter:description', content: 'Create beautiful diagrams online for free. Flowcharts, sequence diagrams, class diagrams and more.' },
+        {
+          name: 'twitter:description',
+          content: 'Create beautiful diagrams online for free. Flowcharts, sequence diagrams, class diagrams and more.'
+        },
         { name: 'twitter:image', content: 'https://mermaid-drawing.com/social-card.svg' },
         // SEO 优化
         { name: 'robots', content: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' },
@@ -212,7 +233,8 @@ export default defineNuxtConfig({
             '@context': 'https://schema.org',
             '@type': 'WebApplication',
             name: 'Mermaid Online Free - Graph TD Diagram Editor & Chart Maker',
-            description: 'Mermaid online free diagram editor and chart maker. Create graph TD flowcharts, sequence diagrams, class diagrams online free.',
+            description:
+              'Mermaid online free diagram editor and chart maker. Create graph TD flowcharts, sequence diagrams, class diagrams online free.',
             url: 'https://mermaid-drawing.com',
             applicationCategory: 'DesignApplication',
             operatingSystem: 'Web',

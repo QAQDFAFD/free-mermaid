@@ -3,9 +3,12 @@
  * 优化首屏性能：在用户交互后或页面空闲时才加载 GA 脚本
  */
 export default defineNuxtPlugin(nuxtApp => {
-	if (!process.client) return
+  if (!process.client) return
 
-	let gaLoaded = false
+  let gaLoaded = false
+  const hasConsent = () => {
+    try { return localStorage.getItem('cookieConsent') === 'accepted' } catch (_) { return false }
+  }
 
 	// 初始化 dataLayer
 		window.dataLayer = window.dataLayer || []
@@ -16,9 +19,10 @@ export default defineNuxtPlugin(nuxtApp => {
 	window.gtag = gtag
 
 	// 加载 GA 脚本的函数
-	const loadGA = () => {
-		if (gaLoaded) return
-		gaLoaded = true
+  const loadGA = () => {
+    if (gaLoaded) return
+    if (!hasConsent()) return
+    gaLoaded = true
 
 		// 创建并加载 GA 脚本
 		const script = document.createElement('script')
@@ -32,18 +36,19 @@ export default defineNuxtPlugin(nuxtApp => {
 			send_page_view: true,
 			cookie_flags: 'SameSite=None;Secure'
 		})
-	}
+  }
 
-	// 延迟加载策略：使用 requestIdleCallback 或 setTimeout 作为降级
-	const scheduleLoad = () => {
-		if ('requestIdleCallback' in window) {
-			// 在浏览器空闲时加载
-			requestIdleCallback(() => loadGA(), { timeout: 3000 })
-		} else {
-			// 降级：3秒后加载
-			setTimeout(loadGA, 3000)
-		}
-	}
+  // 延迟加载策略：使用 requestIdleCallback 或 setTimeout 作为降级
+  const scheduleLoad = () => {
+    if (!hasConsent()) return
+    if ('requestIdleCallback' in window) {
+      // 在浏览器空闲时加载
+      requestIdleCallback(() => loadGA(), { timeout: 3000 })
+    } else {
+      // 降级：3秒后加载
+      setTimeout(loadGA, 3000)
+    }
+  }
 
 	// 用户交互时立即加载
 	const interactionEvents = ['scroll', 'click', 'touchstart', 'keydown']
@@ -56,20 +61,25 @@ export default defineNuxtPlugin(nuxtApp => {
 	}
 
 	// 添加用户交互监听
-	interactionEvents.forEach(event => {
-		document.addEventListener(event, loadOnInteraction, { passive: true, once: true })
-	})
+  interactionEvents.forEach(event => {
+    document.addEventListener(event, loadOnInteraction, { passive: true, once: true })
+  })
 
-	// 同时设置空闲加载作为备选
-	scheduleLoad()
+  // 同时设置空闲加载作为备选
+  scheduleLoad()
+
+  // 监听 Cookie 同意事件以即时加载
+  window.addEventListener('cookie-consent-accepted', () => {
+    loadGA()
+  }, { once: true })
 
 	// 页面路由变化时发送 pageview 事件
-		nuxtApp.hook('page:finish', () => {
-		if (gaLoaded && window.gtag) {
-			gtag('event', 'page_view', {
-				page_location: window.location.href,
-				page_title: document.title
-		})
-	}
-	})
+  nuxtApp.hook('page:finish', () => {
+    if (gaLoaded && window.gtag) {
+      gtag('event', 'page_view', {
+        page_location: window.location.href,
+        page_title: document.title
+      })
+    }
+  })
 })

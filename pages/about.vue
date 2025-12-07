@@ -267,7 +267,7 @@
         <ul class="space-y-2 text-gray-600 dark:text-gray-400">
           <li class="flex items-center">
             <span class="mr-2">📧</span>
-            <span>Email: support@mermaid-drawing.com</span>
+            <span>Email: qaqdfafd@gmail.com</span>
           </li>
           <li class="flex items-center">
             <span class="mr-2">🌐</span>
@@ -293,6 +293,12 @@
           <NuxtLink to="/terms" class="hover:text-blue-600 dark:hover:text-blue-400">
             {{ locale === 'zh' ? '服务条款' : 'Terms of Service' }}
           </NuxtLink>
+          <NuxtLink to="/contact" class="hover:text-blue-600 dark:hover:text-blue-400">
+            {{ locale === 'zh' ? '联系我们' : 'Contact' }}
+          </NuxtLink>
+          <NuxtLink to="/faq" class="hover:text-blue-600 dark:hover:text-blue-400">
+            {{ locale === 'zh' ? '常见问题' : 'FAQ' }}
+          </NuxtLink>
         </div>
       </div>
     </footer>
@@ -312,6 +318,7 @@
         content:
           'Learn about Mermaid Drawing, a free online diagram editor for creating flowcharts, sequence diagrams, class diagrams and more using simple text syntax.'
       }
-    ]
+    ],
+    link: [{ rel: 'canonical', href: 'https://mermaid-drawing.com/about' }]
   })
 </script>

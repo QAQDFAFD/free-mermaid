@@ -6,11 +6,20 @@ export default defineNuxtPlugin(() => {
   if (!process.client) return
 
   let adsLoaded = false
+  const hasConsent = () => {
+    try { return localStorage.getItem('cookieConsent') === 'accepted' } catch (_) { return false }
+  }
 
   const loadAdsense = () => {
     if (adsLoaded) return
+    if (!hasConsent()) return
+    // 避免重复加载
+    const exists = document.querySelector('script[src*="pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"]')
+    if (exists) {
+      adsLoaded = true
+      return
+    }
     adsLoaded = true
-
     const script = document.createElement('script')
     script.async = true
     script.crossOrigin = 'anonymous'
@@ -27,5 +36,9 @@ export default defineNuxtPlugin(() => {
       setTimeout(loadAdsense, 5000)
     }, { once: true })
   }
-})
 
+  // 用户同意后立即加载
+  window.addEventListener('cookie-consent-accepted', () => {
+    loadAdsense()
+  }, { once: true })
+})

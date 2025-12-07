@@ -201,7 +201,7 @@
                   : 'If you have any questions about these Terms of Service, please contact us at:'
               }}
             </p>
-            <p class="text-gray-700 dark:text-gray-300">📧 Email: legal@mermaid-drawing.com</p>
+            <p class="text-gray-700 dark:text-gray-300">📧 Email: qaqdfafd@gmail.com</p>
           </section>
         </div>
       </article>
@@ -211,6 +211,20 @@
     <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-6 mt-12">
       <div class="container mx-auto px-4 text-center text-gray-600 dark:text-gray-400 text-sm">
         <p>© {{ new Date().getFullYear() }} Mermaid Drawing. All rights reserved.</p>
+        <div class="mt-2 space-x-4">
+          <NuxtLink to="/privacy" class="hover:text-blue-600 dark:hover:text-blue-400">
+            {{ locale === 'zh' ? '隐私政策' : 'Privacy Policy' }}
+          </NuxtLink>
+          <NuxtLink to="/terms" class="hover:text-blue-600 dark:hover:text-blue-400">
+            {{ locale === 'zh' ? '服务条款' : 'Terms of Service' }}
+          </NuxtLink>
+          <NuxtLink to="/contact" class="hover:text-blue-600 dark:hover:text-blue-400">
+            {{ locale === 'zh' ? '联系我们' : 'Contact' }}
+          </NuxtLink>
+          <NuxtLink to="/faq" class="hover:text-blue-600 dark:hover:text-blue-400">
+            {{ locale === 'zh' ? '常见问题' : 'FAQ' }}
+          </NuxtLink>
+        </div>
       </div>
     </footer>
   </div>
@@ -229,6 +243,9 @@
         content:
           'Terms of Service for Mermaid Drawing - Read our terms and conditions for using the free online diagram editor.'
       }
+    ],
+    link: [
+      { rel: 'canonical', href: 'https://mermaid-drawing.com/terms' }
     ]
   })
 </script>

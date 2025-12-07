@@ -1,12 +1,14 @@
 <template>
-	<div>
-		<MobileWarning />
-		<NuxtPage />
-	</div>
+    <div>
+        <MobileWarning />
+        <CookieConsent />
+        <NuxtPage />
+    </div>
 </template>
 
 <script setup>
-	import MobileWarning from '~/components/MobileWarning.vue'
+    import MobileWarning from '~/components/MobileWarning.vue'
+    import CookieConsent from '~/components/CookieConsent.vue'
 	import { onMounted, onUnmounted } from 'vue'
 	import { useRouter } from 'vue-router'
 

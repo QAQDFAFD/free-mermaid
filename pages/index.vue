@@ -403,6 +403,16 @@
                 class="text-xs text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                 {{ locale === 'zh' ? '服务条款' : 'Terms' }}
               </NuxtLink>
+              <NuxtLink
+                to="/contact"
+                class="text-xs text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                {{ locale === 'zh' ? '联系我们' : 'Contact' }}
+              </NuxtLink>
+              <NuxtLink
+                to="/faq"
+                class="text-xs text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                {{ locale === 'zh' ? '常见问题' : 'FAQ' }}
+              </NuxtLink>
             </div>
           </nav>
         </div>
