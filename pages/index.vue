@@ -370,7 +370,7 @@
 
           <!-- 支持的图表类型 -->
           <section aria-labelledby="features-heading">
-            <h3 id="features-heading" class="sr-only">{{ $t('footer.capabilities.title') || 'Supported Features' }}</h3>
+            <h2 id="features-heading" class="sr-only">{{ $t('footer.capabilities.title') || 'Supported Features' }}</h2>
             <div class="text-xs text-gray-600 dark:text-gray-400 leading-tight mb-2">
               <span class="inline-block mr-2">✓ {{ $t('footer.capabilities.graphTdOnline') }}</span>
               <span class="inline-block mr-2">✓ {{ $t('footer.capabilities.mermaidEditorFree') }}</span>

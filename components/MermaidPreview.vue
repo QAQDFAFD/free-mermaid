@@ -25,7 +25,7 @@
           </svg>
         </div>
         <div class="ml-3 flex-1">
-          <h3 class="text-sm font-medium text-red-800 dark:text-red-400">Mermaid Drawing Syntax Error</h3>
+          <p class="text-sm font-medium text-red-800 dark:text-red-400" role="alert" aria-live="polite">Mermaid Drawing Syntax Error</p>
           <div class="mt-1 text-sm text-red-700 dark:text-red-300">
             <p>{{ formatErrorMessage(error) }}</p>
           </div>

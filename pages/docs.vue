@@ -891,9 +891,9 @@
 
       <div class="max-w-6xl mx-auto relative z-10">
         <!-- 主标题 -->
-        <h1 class="text-base font-bold text-gray-900 dark:text-white mb-1.5">
+        <h2 class="text-base font-bold text-gray-900 dark:text-white mb-1.5">
           {{ $t('footer.title') }} - {{ $t('footer.editorTitle') }}
-        </h1>
+        </h2>
 
         <!-- 功能特点 -->
         <p class="text-sm text-gray-700 dark:text-gray-300 mb-1 leading-tight" v-html="featuresText"></p>

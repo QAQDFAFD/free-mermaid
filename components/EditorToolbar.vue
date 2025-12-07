@@ -24,7 +24,7 @@
             stroke-linecap="round"
             stroke-linejoin="round" />
         </svg>
-        <h1 class="text-xl font-bold text-gray-900 dark:text-white">Mermaid Drawing</h1>
+        <h2 class="text-xl font-bold text-gray-900 dark:text-white">Mermaid Drawing</h2>
       </div>
 
       <!-- 图表类型按钮 -->
