@@ -278,40 +278,6 @@ export default defineNuxtConfig({
             logo: 'https://mermaid-drawing.com/favicon.ico',
             sameAs: []
           })
-        },
-        // 结构化数据 - FAQ (常见问题，有助于 SEO)
-        {
-          type: 'application/ld+json',
-          innerHTML: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'FAQPage',
-            mainEntity: [
-              {
-                '@type': 'Question',
-                name: 'What is Mermaid diagram?',
-                acceptedAnswer: {
-                  '@type': 'Answer',
-                  text: 'Mermaid is a JavaScript-based diagramming and charting tool that renders Markdown-inspired text definitions to create diagrams dynamically. It supports flowcharts, sequence diagrams, class diagrams, state diagrams, ER diagrams, Gantt charts, and pie charts.'
-                }
-              },
-              {
-                '@type': 'Question',
-                name: 'Is Mermaid Drawing free to use?',
-                acceptedAnswer: {
-                  '@type': 'Answer',
-                  text: 'Yes, Mermaid Drawing is completely free to use. You can create, edit, and export diagrams without any cost or registration.'
-                }
-              },
-              {
-                '@type': 'Question',
-                name: 'What diagram types are supported?',
-                acceptedAnswer: {
-                  '@type': 'Answer',
-                  text: 'Mermaid Drawing supports Graph TD flowcharts, sequence diagrams, class diagrams, state diagrams, ER diagrams, Gantt charts, and pie charts.'
-                }
-              }
-            ]
-          })
         }
       ]
     }
