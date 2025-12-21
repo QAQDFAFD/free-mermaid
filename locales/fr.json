@@ -80,15 +80,19 @@
     "steps": {
       "editor": {
         "title": "🎨 Éditeur Mermaid",
-        "description": "Saisissez ici votre code de diagramme Mermaid. Prend en charge les organigrammes Graph TD, les diagrammes de séquence et plus encore. Utilisez l'IA pour générer ou optimiser votre code."
+        "description": "Saisissez ici votre code de diagramme Mermaid. Prend en charge les organigrammes Graph TD, les diagrammes de séquence et plus encore."
       },
       "preview": {
         "title": "👀 Aperçu en temps réel",
         "description": "Vos diagrammes sont rendus ici en temps réel avec des fonctionnalités de zoom et d'exportation. La meilleure expérience d'aperçu de diagrammes Mermaid en ligne."
       },
+      "ai": {
+        "title": "🤖 Assistant IA",
+        "description": "Utilisez l'IA pour générer ou optimiser le code Mermaid ! Décrivez simplement le diagramme souhaité, et l'IA générera le code pour vous."
+      },
       "toolbar": {
         "title": "🛠️ Barre d'outils",
-        "description": "Insérez rapidement des modèles de diagrammes courants ou utilisez l'assistant IA pour générer des diagrammes à partir de descriptions. Augmentez votre efficacité de création de diagrammes Mermaid."
+        "description": "Insérez rapidement des modèles de diagrammes courants, y compris des organigrammes, des diagrammes de séquence et plus encore."
       }
     }
   },

@@ -80,15 +80,19 @@
     "steps": {
       "editor": {
         "title": "🎨 Mermaid 编辑器",
-        "description": "在这里输入您的 Mermaid 图表代码，支持 Graph TD 流程图、时序图、类图等多种图表类型。使用 AI 助手可自动生成或优化代码。"
+        "description": "在这里输入您的 Mermaid 图表代码，支持 Graph TD 流程图、时序图、类图等多种图表类型。"
       },
       "preview": {
         "title": "👀 实时预览",
         "description": "您的图表会在这里实时渲染显示，支持缩放和导出功能。最佳的 Mermaid 图表在线预览体验。"
       },
+      "ai": {
+        "title": "🤖 AI 助手",
+        "description": "使用 AI 智能生成或优化 Mermaid 代码！只需描述您想要的图表，AI 就能为您生成代码。"
+      },
       "toolbar": {
         "title": "🛠️ 工具栏",
-        "description": "快速插入常用图表模板，或使用 AI 助手从描述生成图表。提高您的 Mermaid 图表创作效率。"
+        "description": "快速插入常用图表模板，包括流程图、时序图、类图等。提高您的 Mermaid 图表创作效率。"
       }
     }
   },

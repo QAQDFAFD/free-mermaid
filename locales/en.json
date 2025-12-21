@@ -80,15 +80,19 @@
     "steps": {
       "editor": {
         "title": "🎨 Mermaid Editor",
-        "description": "Enter your Mermaid diagram code here. Supports Graph TD flowcharts, sequence diagrams, class diagrams and more. Use AI to generate or optimize your code."
+        "description": "Enter your Mermaid diagram code here. Supports Graph TD flowcharts, sequence diagrams, class diagrams and more."
       },
       "preview": {
         "title": "👀 Live Preview",
         "description": "Your diagrams are rendered here in real-time with zoom and export features. The best Mermaid diagram online preview experience."
       },
+      "ai": {
+        "title": "🤖 AI Assistant",
+        "description": "Use AI to generate or optimize Mermaid code! Simply describe the diagram you want, and AI will generate the code for you."
+      },
       "toolbar": {
         "title": "🛠️ Toolbar",
-        "description": "Quickly insert common diagram templates or use AI assistant to generate diagrams from descriptions. Boost your Mermaid diagram creation efficiency."
+        "description": "Quickly insert common diagram templates including flowcharts, sequence diagrams, class diagrams and more."
       }
     }
   },

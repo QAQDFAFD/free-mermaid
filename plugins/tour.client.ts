@@ -45,6 +45,10 @@ export default defineNuxtPlugin(() => {
             title: '👀 实时预览',
             description: '您的图表会在这里实时渲染显示，支持缩放和导出功能。最佳的 Mermaid 图表在线预览体验。'
           },
+          ai: {
+            title: '🤖 AI 助手',
+            description: '使用 AI 智能生成或优化 Mermaid 代码！只需描述您想要的图表，AI 就能为您生成代码；或者让 AI 帮您优化现有代码，提升图表质量。'
+          },
           toolbar: {
             title: '🛠️ 工具栏',
             description: '快速插入常用图表模板，包括流程图、时序图、类图等。提高您的 Mermaid 图表创作效率。'
@@ -68,6 +72,10 @@ export default defineNuxtPlugin(() => {
             title: '👀 Live Preview',
             description:
               'Your diagrams are rendered here in real-time with zoom and export features. The best Mermaid diagram online preview experience.'
+          },
+          ai: {
+            title: '🤖 AI Assistant',
+            description: 'Use AI to generate or optimize Mermaid code! Simply describe the diagram you want, and AI will generate the code for you. Or let AI optimize your existing code to improve diagram quality.'
           },
           toolbar: {
             title: '🛠️ Toolbar',
@@ -94,6 +102,10 @@ export default defineNuxtPlugin(() => {
             description:
               'Ваши диаграммы отображаются здесь в реальном времени с функциями масштабирования и экспорта. Лучший опыт онлайн просмотра диаграмм Mermaid.'
           },
+          ai: {
+            title: '🤖 ИИ-ассистент',
+            description: 'Используйте ИИ для генерации или оптимизации кода Mermaid! Просто опишите нужную диаграмму, и ИИ сгенерирует код. Или позвольте ИИ оптимизировать ваш существующий код.'
+          },
           toolbar: {
             title: '🛠️ Панель инструментов',
             description:
@@ -119,6 +131,10 @@ export default defineNuxtPlugin(() => {
             description:
               "Vos diagrammes sont rendus ici en temps réel avec des fonctionnalités de zoom et d'exportation. La meilleure expérience d'aperçu de diagrammes Mermaid en ligne."
           },
+          ai: {
+            title: '🤖 Assistant IA',
+            description: "Utilisez l'IA pour générer ou optimiser le code Mermaid ! Décrivez simplement le diagramme souhaité, et l'IA générera le code pour vous. Ou laissez l'IA optimiser votre code existant."
+          },
           toolbar: {
             title: "🛠️ Barre d'outils",
             description:
@@ -143,6 +159,10 @@ export default defineNuxtPlugin(() => {
             title: '👀 ตัวอย่างแบบเรียลไทม์',
             description:
               'ไดอะแกรมของคุณจะแสดงที่นี่แบบเรียลไทม์พร้อมฟีเจอร์ซูมและเอ็กซ์พอร์ต ประสบการณ์การดูตัวอย่างไดอะแกรม Mermaid ออนไลน์ที่ดีที่สุด'
+          },
+          ai: {
+            title: '🤖 ผู้ช่วย AI',
+            description: 'ใช้ AI เพื่อสร้างหรือปรับปรุงโค้ด Mermaid! เพียงอธิบายไดอะแกรมที่คุณต้องการ แล้ว AI จะสร้างโค้ดให้คุณ หรือให้ AI ปรับปรุงโค้ดที่มีอยู่ของคุณ'
           },
           toolbar: {
             title: '🛠️ แถบเครื่องมือ',
@@ -179,6 +199,15 @@ export default defineNuxtPlugin(() => {
             description: t.steps.preview.description,
             side: 'left',
             align: 'start'
+          }
+        },
+        {
+          element: '.ai-trigger-btn',
+          popover: {
+            title: t.steps.ai.title,
+            description: t.steps.ai.description,
+            side: 'bottom',
+            align: 'end'
           }
         },
         {
