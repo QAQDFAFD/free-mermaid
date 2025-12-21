@@ -34,28 +34,39 @@
   },
   "footer": {
     "title": "Mermaid Drawing",
-    "desc": "Créez de beaux diagrammes avec une syntaxe textuelle simple sur",
-    "editorTitle": "Éditeur de diagrammes Mermaid gratuit en ligne",
+    "desc": "Meilleur éditeur Graph TD en ligne - Créez des diagrammes mermaid gratuitement sur",
+    "editorTitle": "Graph TD en Ligne - Éditeur Mermaid Gratuit avec IA",
     "features": {
-      "description": "Créez des {graphTD}, {sequenceDiagram}, {classDiagram} et plus encore.",
+      "description": "Créez des {graphTD}, {sequenceDiagram}, {classDiagram} avec {aiAssistant}. Meilleur outil {mermaidOnline}.",
       "graphTD": "Organigrammes Graph TD",
       "sequenceDiagram": "Diagrammes de séquence",
-      "classDiagram": "Diagrammes de classes"
+      "classDiagram": "Diagrammes de classes",
+      "aiAssistant": "Assistant IA",
+      "mermaidOnline": "mermaid en ligne"
     },
     "capabilities": {
+      "graphTd": "Graph TD",
       "graphTdOnline": "Graph TD en ligne",
+      "mermaidOnline": "Mermaid en ligne",
+      "mermaidOnlineFree": "Mermaid en ligne gratuit",
+      "mermaidDiagramOnline": "Diagramme Mermaid en ligne",
+      "onlineMermaidEditor": "Éditeur Mermaid en ligne",
+      "freeMermaidEditor": "Éditeur Mermaid gratuit",
       "mermaidEditorFree": "Éditeur Mermaid gratuit",
-      "mermaidChartOnlineFree": "Graphiques en ligne gratuits",
-      "mermaidFreeEditor": "Éditeur Mermaid gratuit"
+      "graphtd": "GraphTD"
     },
     "startTour": "Commencer le tutoriel",
     "collapse": "Réduire",
     "expand": "Développer",
-    "seoText": "Outil professionnel {mermaidDiagramOnlineFree} avec des capacités {mermaidChartOnlineFree}. Le meilleur {mermaidFreeEditor} pour créer des diagrammes instantanément.",
+    "seoText": "Meilleur éditeur {graphTd} en ligne. Outil professionnel {mermaidOnline} gratuit avec des capacités {mermaidDiagramOnline}. Le meilleur {freeMermaidEditor} pour créer des diagrammes instantanément.",
     "seoKeywords": {
-      "mermaidDiagramOnlineFree": "diagramme mermaid en ligne gratuit",
-      "mermaidChartOnlineFree": "graphique mermaid en ligne gratuit",
-      "mermaidFreeEditor": "éditeur mermaid gratuit"
+      "graphTd": "graph td",
+      "mermaidOnline": "mermaid en ligne",
+      "graphTdOnline": "graph td en ligne",
+      "mermaidDiagramOnline": "diagramme mermaid en ligne",
+      "mermaidOnlineFree": "mermaid en ligne gratuit",
+      "freeMermaidEditor": "éditeur mermaid gratuit",
+      "onlineMermaidEditor": "éditeur mermaid en ligne"
     }
   },
   "tour": {
@@ -69,7 +80,7 @@
     "steps": {
       "editor": {
         "title": "🎨 Éditeur Mermaid",
-        "description": "Saisissez ici votre code de diagramme Mermaid. Prend en charge les organigrammes Graph TD, les diagrammes de séquence, les diagrammes de classe et bien plus encore. Éditeur Mermaid en ligne entièrement gratuit."
+        "description": "Saisissez ici votre code de diagramme Mermaid. Prend en charge les organigrammes Graph TD, les diagrammes de séquence et plus encore. Utilisez l'IA pour générer ou optimiser votre code."
       },
       "preview": {
         "title": "👀 Aperçu en temps réel",
@@ -77,7 +88,7 @@
       },
       "toolbar": {
         "title": "🛠️ Barre d'outils",
-        "description": "Insérez rapidement des modèles de diagrammes courants, y compris des organigrammes, des diagrammes de séquence, des diagrammes de classe et plus encore. Augmentez votre efficacité de création de diagrammes Mermaid."
+        "description": "Insérez rapidement des modèles de diagrammes courants ou utilisez l'assistant IA pour générer des diagrammes à partir de descriptions. Augmentez votre efficacité de création de diagrammes Mermaid."
       }
     }
   },
@@ -147,5 +158,41 @@
     "ru": "Русский",
     "fr": "Français",
     "th": "ไทย"
+  },
+  "mobile": {
+    "title": "Bureau recommandé",
+    "description": "Pour la meilleure expérience de dessin Mermaid, nous recommandons d'utiliser un appareil de bureau. L'éditeur fonctionne mieux sur les grands écrans.",
+    "tip": "Vous pouvez toujours utiliser l'éditeur sur mobile, mais certaines fonctionnalités peuvent être limitées.",
+    "continue": "Continuer quand même"
+  },
+  "ai": {
+    "title": "Assistant IA",
+    "settings": "Paramètres",
+    "selectModel": "Sélectionner le modèle",
+    "keySource": "Source de la clé API",
+    "freeKey": "Gratuit",
+    "freeKeyDesc": "Utiliser le quota du site",
+    "freeKeyUnavailable": "Non disponible",
+    "customKey": "Clé personnalisée",
+    "customKeyDesc": "Utiliser votre propre clé",
+    "freeKeyNotice": "Vous utilisez un quota gratuit avec des limites quotidiennes. Pour plus d'utilisation, veuillez utiliser votre propre clé API.",
+    "enterApiKey": "Entrez la clé API",
+    "saveSettings": "Enregistrer",
+    "optimizeMode": "Optimiser",
+    "generateMode": "Générer",
+    "optimizeDesc": "L'IA analysera et optimisera votre code Mermaid actuel, améliorant la structure, la lisibilité et la mise en page.",
+    "noCode": "Pas de code dans l'éditeur",
+    "topicLabel": "Décrivez le diagramme souhaité",
+    "topicPlaceholder": "Ex: Flux de connexion utilisateur, Architecture du système de commande...",
+    "diagramType": "Type de diagramme (Optionnel)",
+    "autoDetect": "Détection automatique",
+    "output": "Résultat",
+    "applyToEditor": "Appliquer à l'éditeur",
+    "generating": "Génération...",
+    "optimize": "Optimiser",
+    "generate": "Générer",
+    "regenerate": "Régénérer",
+    "noApiKey": "Veuillez configurer la clé API pour utiliser les fonctionnalités IA.",
+    "configureNow": "Configurer maintenant"
   }
 }

@@ -151,7 +151,7 @@ export default defineNuxtConfig({
       htmlAttrs: {
         lang: 'en' // 默认语言
       },
-      title: 'Mermaid Online Free - Graph TD Diagram Editor & Chart Maker',
+      title: 'Graph TD Online - Free Mermaid Editor with AI | Mermaid Online Free',
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=5' },
@@ -159,22 +159,22 @@ export default defineNuxtConfig({
         {
           name: 'description',
           content:
-            'Mermaid online free diagram editor and chart maker. Create graph TD flowcharts, sequence diagrams, class diagrams online free. Free mermaid editor with real-time preview and export.'
+            'Graph TD online free editor - Create mermaid diagrams with AI. Best mermaid online free tool for flowcharts, sequence diagrams. Free mermaid editor with graphtd support, real-time preview and export.'
         },
         {
           name: 'keywords',
           content:
-            'mermaid online free, mermaid diagram online free, mermaid chart online free, mermaid free editor, graph td online, mermaid editor free, mermaid free, flowchart online, sequence diagram online, class diagram online, mermaid graph online, mermaid tutorial, user guide, step by step guide'
+            'graph td, mermaid online, graph td online, mermaid diagram online, mermaid online free, mermaid free, online mermaid editor, graphtd, free mermaid editor, mermaid editor free, mermaid ai, ai diagram generator, mermaid chart online free, mermaid graph online, flowchart online, sequence diagram online'
         },
         // Open Graph 优化
         {
           property: 'og:title',
-          content: 'Mermaid Online Free - Graph TD Diagram Editor & Chart Maker'
+          content: 'Graph TD Online - Free Mermaid Editor with AI | Mermaid Online Free'
         },
         {
           property: 'og:description',
           content:
-            'Mermaid online free diagram editor and chart maker. Create graph TD flowcharts, sequence diagrams, class diagrams online free. Free mermaid editor with real-time preview and export.'
+            'Graph TD online free editor - Create mermaid diagrams with AI. Best mermaid online free tool for flowcharts, sequence diagrams, class diagrams.'
         },
         { property: 'og:type', content: 'website' },
         { property: 'og:url', content: 'https://mermaid-drawing.com' },
@@ -189,10 +189,11 @@ export default defineNuxtConfig({
         { property: 'og:locale:alternate', content: 'th_TH' },
         // Twitter Card 优化
         { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:title', content: 'Mermaid Online Free - Graph TD Diagram Editor' },
+        { name: 'twitter:title', content: 'Graph TD Online - Free Mermaid Editor with AI' },
         {
           name: 'twitter:description',
-          content: 'Create beautiful diagrams online for free. Flowcharts, sequence diagrams, class diagrams and more.'
+          content:
+            'Graph TD online free - Best mermaid online editor with AI. Create flowcharts, sequence diagrams instantly. Free mermaid editor.'
         },
         { name: 'twitter:image', content: 'https://mermaid-drawing.com/social-card.svg' },
         // SEO 优化
@@ -232,20 +233,25 @@ export default defineNuxtConfig({
           innerHTML: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'WebApplication',
-            name: 'Mermaid Online Free - Graph TD Diagram Editor & Chart Maker',
+            name: 'Graph TD Online - Free Mermaid Editor with AI',
+            alternateName: ['Mermaid Online Free', 'GraphTD Editor', 'Online Mermaid Editor', 'Free Mermaid Editor'],
             description:
-              'Mermaid online free diagram editor and chart maker. Create graph TD flowcharts, sequence diagrams, class diagrams online free.',
+              'Graph TD online free editor - Create mermaid diagrams with AI. Best mermaid online free tool for flowcharts, sequence diagrams, class diagrams.',
             url: 'https://mermaid-drawing.com',
             applicationCategory: 'DesignApplication',
             operatingSystem: 'Web',
             browserRequirements: 'Requires JavaScript',
-            softwareVersion: '1.0',
+            softwareVersion: '2.0',
             offers: {
               '@type': 'Offer',
               price: '0',
               priceCurrency: 'USD'
             },
             featureList: [
+              'Graph TD Online Editor',
+              'Mermaid Online Free',
+              'AI Diagram Generation',
+              'AI Code Optimization',
               'Graph TD Flowcharts',
               'Sequence Diagrams',
               'Class Diagrams',
@@ -290,7 +296,9 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       appName: 'Mermaid Drawing',
-      siteUrl: 'https://mermaid-drawing.com'
+      siteUrl: 'https://mermaid-drawing.com',
+      // AI 默认 API Key（通过环境变量配置）
+      deepseekApiKey: process.env.NUXT_PUBLIC_DEEPSEEK_API_KEY || ''
     }
   },
 

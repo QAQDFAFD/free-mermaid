@@ -1,7 +1,7 @@
 {
-  "name": "Mermaid Online Free - Diagram Editor & Chart Maker",
-  "short_name": "Mermaid Free",
-  "description": "Free online mermaid diagram editor and chart maker. Create graph TD flowcharts, sequence diagrams, class diagrams online free. Export to PNG and SVG.",
+  "name": "Graph TD Online - Free Mermaid Editor with AI",
+  "short_name": "Graph TD",
+  "description": "Graph TD online free editor - Best mermaid online tool. Create mermaid diagram online, flowcharts, sequence diagrams. Free mermaid editor with graphtd support and AI.",
   "start_url": "/",
   "id": "/",
   "display": "standalone",
@@ -12,8 +12,8 @@
   "scope": "/",
   "lang": "en-US",
   "dir": "ltr",
-  "categories": ["productivity", "developer", "business", "utilities", "design"],
-  "keywords": ["mermaid", "diagram", "flowchart", "graph", "online", "free", "editor", "chart", "graph td", "sequence diagram", "class diagram"],
+  "categories": ["productivity", "developer", "business", "utilities", "design", "ai"],
+  "keywords": ["graph td", "mermaid online", "graph td online", "mermaid diagram online", "mermaid online free", "mermaid free", "online mermaid editor", "graphtd", "free mermaid editor", "mermaid editor free", "flowchart", "sequence diagram"],
   "icons": [
     {
       "src": "/favicon.ico",
@@ -27,10 +27,17 @@
       "sizes": "1200x630",
       "type": "image/svg+xml",
       "form_factor": "wide",
-      "label": "Mermaid Online Free Editor"
+      "label": "Graph TD Online - Free Mermaid Editor"
     }
   ],
   "shortcuts": [
+    {
+      "name": "AI Assistant",
+      "short_name": "AI",
+      "description": "Generate diagrams with AI assistant",
+      "url": "/#ai",
+      "icons": [{ "src": "/favicon.ico", "sizes": "32x32" }]
+    },
     {
       "name": "New Flowchart",
       "short_name": "Flowchart",

@@ -1,11 +1,12 @@
-# Robots.txt for Mermaid Online Free - Graph TD Diagram Editor
+# Robots.txt for Mermaid AI Diagram Generator - Free Online Editor
 # https://mermaid-drawing.com
-# Last updated: 2025-11-28
+# Last updated: 2025-12-21
 
 # Default rules for all bots
 User-agent: *
 Allow: /
 Allow: /docs
+Allow: /#ai
 Allow: /#flowchart
 Allow: /#sequence
 Allow: /#class

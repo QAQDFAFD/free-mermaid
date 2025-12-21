@@ -11,20 +11,20 @@
       <!-- 左侧编辑器 -->
       <section
         id="mermaid-editor"
-        :style="{ width: `${leftPanelWidth}%` }"
-        class="h-1/2 md:h-full border-r border-gray-200 dark:border-gray-700 flex flex-col"
+        :style="isMobile ? {} : { width: `${leftPanelWidth}%` }"
+        class="h-[45%] md:h-full border-b md:border-b-0 md:border-r border-gray-200 dark:border-gray-700 flex flex-col"
         aria-labelledby="editor-heading">
         <h2 id="editor-heading" class="sr-only">{{ $t('editor.title') }}</h2>
         <div
-          class="h-10 flex items-center justify-between bg-gray-100 dark:bg-gray-800 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 border-b border-gray-200 dark:border-gray-700">
-          <span aria-hidden="true">{{ $t('editor.title') }}</span>
-          <div class="flex items-center space-x-2">
+          class="h-10 flex items-center justify-between bg-gray-100 dark:bg-gray-800 px-2 md:px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 border-b border-gray-200 dark:border-gray-700">
+          <span aria-hidden="true" class="text-xs md:text-sm truncate">{{ $t('editor.title') }}</span>
+          <div class="flex items-center space-x-1 md:space-x-2">
             <NuxtLink
               to="/docs"
               class="text-xs text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 flex items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-3.5 w-3.5 mr-1"
+                class="h-3.5 w-3.5 md:mr-1"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor">
@@ -34,7 +34,7 @@
                   stroke-width="2"
                   d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
               </svg>
-              {{ $t('editor.documentation') }}
+              <span class="hidden md:inline">{{ $t('editor.documentation') }}</span>
             </NuxtLink>
           </div>
         </div>
@@ -43,7 +43,7 @@
         </div>
       </section>
 
-      <!-- 分隔条 -->
+      <!-- 分隔条 - 仅桌面端显示 -->
       <div
         class="hidden md:block absolute top-0 bottom-0 w-2 bg-gray-200 dark:bg-gray-700 hover:bg-blue-100 dark:hover:bg-blue-900 cursor-col-resize z-10 transition-colors duration-200 flex items-center justify-center"
         :style="{ left: `calc(${leftPanelWidth}% - 1px)` }"
@@ -59,18 +59,21 @@
       <!-- 右侧预览 -->
       <section
         id="mermaid-preview"
-        :style="{ width: `${100 - leftPanelWidth}%` }"
-        class="h-1/2 md:h-full flex flex-col"
+        :style="isMobile ? {} : { width: `${100 - leftPanelWidth}%` }"
+        class="h-[55%] md:h-full flex flex-col"
         aria-labelledby="preview-heading">
         <h2 id="preview-heading" class="sr-only">{{ $t('preview.title') }}</h2>
+        <!-- 预览区标题栏 - 移动端优化 -->
         <div
-          class="h-10 bg-gray-100 dark:bg-gray-800 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
-          <div class="flex items-center">
-            <span aria-hidden="true"
-              >{{ $t('preview.title') }} {{ currentZoom > 0 ? `(${Math.round(currentZoom * 100)}%)` : '' }}</span
-            >
+          class="h-10 bg-gray-100 dark:bg-gray-800 px-2 md:px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
+          <div class="flex items-center min-w-0">
+            <span aria-hidden="true" class="text-xs md:text-sm truncate">
+              {{ $t('preview.title') }}
+              <span class="hidden sm:inline">{{ currentZoom > 0 ? `(${Math.round(currentZoom * 100)}%)` : '' }}</span>
+            </span>
+            <!-- 缩放提示 - 仅桌面端显示 -->
             <span
-              class="ml-2 text-xs text-black border border-gray-300 dark:border-gray-600 rounded px-1 py-0.5"
+              class="hidden lg:inline-block ml-2 text-xs text-black border border-gray-300 dark:border-gray-600 rounded px-1 py-0.5"
               style="
                 background: linear-gradient(
                   135deg,
@@ -85,15 +88,15 @@
               >{{ $t('preview.zoom') }}</span
             >
           </div>
-          <div class="flex space-x-2">
+          <div class="flex items-center space-x-1 md:space-x-2">
             <!-- 缩放控制按钮 -->
             <button
               @click="zoomOut"
-              class="px-2 py-1 text-xs bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-600 flex items-center"
+              class="p-1.5 md:px-2 md:py-1 text-xs bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-600 flex items-center"
               :title="$t('preview.zoomOut')">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-3 w-3 text-gray-700 dark:text-gray-300"
+                class="h-3.5 w-3.5 md:h-3 md:w-3 text-gray-700 dark:text-gray-300"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor">
@@ -102,11 +105,11 @@
             </button>
             <button
               @click="resetView"
-              class="px-2 py-1 text-xs bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-600 flex items-center"
+              class="p-1.5 md:px-2 md:py-1 text-xs bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-600 flex items-center"
               :title="$t('preview.resetView')">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-3 w-3 text-gray-700 dark:text-gray-300"
+                class="h-3.5 w-3.5 md:h-3 md:w-3 text-gray-700 dark:text-gray-300"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor">
@@ -119,11 +122,11 @@
             </button>
             <button
               @click="zoomIn"
-              class="px-2 py-1 text-xs bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-600 flex items-center"
+              class="p-1.5 md:px-2 md:py-1 text-xs bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-600 flex items-center"
               :title="$t('preview.zoomIn')">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-3 w-3 text-gray-700 dark:text-gray-300"
+                class="h-3.5 w-3.5 md:h-3 md:w-3 text-gray-700 dark:text-gray-300"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor">
@@ -133,12 +136,12 @@
             <!-- 全屏按钮 -->
             <button
               @click="toggleFullscreen"
-              class="px-2 py-1 text-xs bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-600 flex items-center"
+              class="p-1.5 md:px-2 md:py-1 text-xs bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-600 flex items-center"
               :title="isFullscreen ? $t('preview.exitFullscreen') : $t('preview.fullscreen')">
               <svg
                 v-if="!isFullscreen"
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-3 w-3 text-gray-700 dark:text-gray-300"
+                class="h-3.5 w-3.5 md:h-3 md:w-3 text-gray-700 dark:text-gray-300"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor">
@@ -151,20 +154,21 @@
               <svg
                 v-else
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-3 w-3 text-gray-700 dark:text-gray-300"
+                class="h-3.5 w-3.5 md:h-3 md:w-3 text-gray-700 dark:text-gray-300"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
+            <!-- 导出按钮 -->
             <div class="relative export-menu-container">
               <button
                 @click="isExportMenuOpen = !isExportMenuOpen"
-                class="px-3 py-1.5 text-sm bg-blue-600 text-white hover:bg-blue-700 rounded flex items-center">
+                class="px-2 py-1.5 md:px-3 text-xs md:text-sm bg-blue-600 text-white hover:bg-blue-700 rounded flex items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="h-4 w-4 mr-1"
+                  class="h-3.5 w-3.5 md:h-4 md:w-4 md:mr-1"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor">
@@ -174,7 +178,7 @@
                     stroke-width="2"
                     d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                 </svg>
-                {{ t('editor.export') }}
+                <span class="hidden sm:inline">{{ t('editor.export') }}</span>
               </button>
 
               <div
@@ -248,10 +252,10 @@
       </section>
     </main>
 
-    <!-- 融合的底部信息与SEO区域 -->
+    <!-- 融合的底部信息与SEO区域 - 移动端隐藏 -->
     <footer
-      v-show="!isFullscreen"
-      class="relative bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 text-center overflow-hidden transition-all duration-300"
+      v-show="!isFullscreen && !isMobile"
+      class="relative bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 text-center overflow-hidden transition-all duration-300 hidden md:block"
       :class="isFooterCollapsed ? 'py-1 px-4' : 'py-2 px-4'">
       <!-- 折叠/展开按钮 -->
       <button
@@ -538,6 +542,14 @@
   const leftPanelWidth = ref(30)
   const isResizing = ref(false)
 
+  // 移动端检测
+  const isMobile = ref(false)
+  const checkMobile = () => {
+    if (process.client) {
+      isMobile.value = window.innerWidth < 768
+    }
+  }
+
   // 全屏模式
   const isFullscreen = ref(false)
 
@@ -598,6 +610,10 @@
       if (savedTheme) {
         diagramTheme.value = savedTheme
       }
+
+      // 初始化移动端检测
+      checkMobile()
+      window.addEventListener('resize', checkMobile)
     }
 
     // 监听 ESC 键退出全屏
@@ -611,6 +627,9 @@
     // 清理函数
     onUnmounted(() => {
       document.removeEventListener('keydown', handleKeydown)
+      if (process.client) {
+        window.removeEventListener('resize', checkMobile)
+      }
     })
   })
 
@@ -727,17 +746,17 @@
 
   // 页面元数据
   useHead({
-    title: 'Mermaid Online Free - Graph TD Diagram Editor & Chart Maker',
+    title: 'Graph TD Online - Free Mermaid Editor with AI | Mermaid Online Free',
     meta: [
       {
         name: 'description',
         content:
-          'Mermaid online free diagram editor and chart maker. Create graph TD flowcharts, sequence diagrams, class diagrams online free. Free mermaid editor with real-time preview and export.'
+          'Graph TD online free editor - Create mermaid diagrams with AI. Best mermaid online free tool for flowcharts, sequence diagrams. Free mermaid editor with graphtd support, real-time preview and export.'
       },
       {
         name: 'keywords',
         content:
-          'mermaid online free, mermaid diagram online free, mermaid chart online free, mermaid free editor, graph td online, mermaid editor free, mermaid free, flowchart online, sequence diagram online, class diagram online, mermaid graph online'
+          'graph td, mermaid online, graph td online, mermaid diagram online, mermaid online free, mermaid free, online mermaid editor, graphtd, free mermaid editor, mermaid editor free, mermaid ai, ai diagram generator'
       }
     ]
   })
@@ -789,6 +808,7 @@
     height: 100vh !important;
   }
 
+  /* 移动端布局优化 */
   @media (max-width: 768px) {
     .md\:flex-row {
       flex-direction: column;
@@ -799,7 +819,40 @@
     }
 
     .md\:h-full {
-      height: 50%;
+      height: auto;
+    }
+
+    /* 移动端编辑器和预览区高度 */
+    #mermaid-editor {
+      width: 100% !important;
+      min-height: 40vh;
+    }
+
+    #mermaid-preview {
+      width: 100% !important;
+      min-height: 45vh;
+    }
+
+    /* 移动端滚动条更细 */
+    ::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+
+    /* 移动端禁用水平滚动 */
+    body {
+      overflow-x: hidden;
+    }
+  }
+
+  /* 小屏幕手机优化 */
+  @media (max-width: 480px) {
+    #mermaid-editor {
+      min-height: 35vh;
+    }
+
+    #mermaid-preview {
+      min-height: 50vh;
     }
   }
 

@@ -4,10 +4,10 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
         xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
   
-  <!-- Main Homepage - Mermaid Online Free Editor -->
+  <!-- Main Homepage - Graph TD Online Free Mermaid Editor -->
   <url>
     <loc>https://mermaid-drawing.com/</loc>
-    <lastmod>2025-11-28</lastmod>
+    <lastmod>2025-12-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <!-- Multi-language support -->
@@ -20,9 +20,17 @@
     <!-- Social card image -->
     <image:image>
       <image:loc>https://mermaid-drawing.com/social-card.svg</image:loc>
-      <image:title>Mermaid Online Free - Graph TD Diagram Editor</image:title>
-      <image:caption>Free online mermaid diagram editor with real-time preview. Create flowcharts, sequence diagrams, class diagrams and more.</image:caption>
+      <image:title>Graph TD Online - Free Mermaid Editor with AI</image:title>
+      <image:caption>Graph TD online free editor - Best mermaid online tool. Create mermaid diagram online, flowcharts, sequence diagrams. Free mermaid editor with graphtd support.</image:caption>
     </image:image>
+  </url>
+  
+  <!-- AI Feature Page -->
+  <url>
+    <loc>https://mermaid-drawing.com/#ai</loc>
+    <lastmod>2025-12-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
   
   <!-- Documentation Page - Mermaid Tutorial & User Guide -->
