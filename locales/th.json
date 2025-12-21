@@ -45,6 +45,7 @@
       "mermaidOnline": "mermaid ออนไลน์"
     },
     "capabilities": {
+      "title": "ฟีเจอร์ที่รองรับ",
       "graphTd": "Graph TD",
       "graphTdOnline": "Graph TD ออนไลน์",
       "mermaidOnline": "Mermaid ออนไลน์",
@@ -53,6 +54,8 @@
       "onlineMermaidEditor": "เครื่องมือแก้ไข Mermaid ออนไลน์",
       "freeMermaidEditor": "เครื่องมือแก้ไข Mermaid ฟรี",
       "mermaidEditorFree": "เครื่องมือแก้ไข Mermaid ฟรี",
+      "mermaidChartOnlineFree": "แผนภูมิ Mermaid ออนไลน์ฟรี",
+      "mermaidFreeEditor": "เครื่องมือแก้ไข Mermaid ฟรี",
       "graphtd": "GraphTD"
     },
     "startTour": "เริ่มบทแนะนำ",
@@ -66,7 +69,10 @@
       "mermaidDiagramOnline": "mermaid ไดอะแกรมออนไลน์",
       "mermaidOnlineFree": "mermaid ออนไลน์ฟรี",
       "freeMermaidEditor": "เครื่องมือแก้ไข mermaid ฟรี",
-      "onlineMermaidEditor": "เครื่องมือแก้ไข mermaid ออนไลน์"
+      "onlineMermaidEditor": "เครื่องมือแก้ไข mermaid ออนไลน์",
+      "mermaidDiagramOnlineFree": "mermaid ไดอะแกรมออนไลน์ฟรี",
+      "mermaidChartOnlineFree": "mermaid แผนภูมิออนไลน์ฟรี",
+      "mermaidFreeEditor": "mermaid เครื่องมือแก้ไขฟรี"
     }
   },
   "tour": {

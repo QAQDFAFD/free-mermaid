@@ -45,6 +45,7 @@
       "mermaidOnline": "mermaid en ligne"
     },
     "capabilities": {
+      "title": "Fonctionnalités prises en charge",
       "graphTd": "Graph TD",
       "graphTdOnline": "Graph TD en ligne",
       "mermaidOnline": "Mermaid en ligne",
@@ -53,6 +54,8 @@
       "onlineMermaidEditor": "Éditeur Mermaid en ligne",
       "freeMermaidEditor": "Éditeur Mermaid gratuit",
       "mermaidEditorFree": "Éditeur Mermaid gratuit",
+      "mermaidChartOnlineFree": "Graphique Mermaid en ligne gratuit",
+      "mermaidFreeEditor": "Éditeur Mermaid gratuit",
       "graphtd": "GraphTD"
     },
     "startTour": "Commencer le tutoriel",
@@ -66,7 +69,10 @@
       "mermaidDiagramOnline": "diagramme mermaid en ligne",
       "mermaidOnlineFree": "mermaid en ligne gratuit",
       "freeMermaidEditor": "éditeur mermaid gratuit",
-      "onlineMermaidEditor": "éditeur mermaid en ligne"
+      "onlineMermaidEditor": "éditeur mermaid en ligne",
+      "mermaidDiagramOnlineFree": "diagramme mermaid en ligne gratuit",
+      "mermaidChartOnlineFree": "graphique mermaid en ligne gratuit",
+      "mermaidFreeEditor": "éditeur mermaid gratuit"
     }
   },
   "tour": {

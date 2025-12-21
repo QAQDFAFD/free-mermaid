@@ -45,6 +45,7 @@
       "mermaidOnline": "mermaid онлайн"
     },
     "capabilities": {
+      "title": "Поддерживаемые функции",
       "graphTd": "Graph TD",
       "graphTdOnline": "Graph TD онлайн",
       "mermaidOnline": "Mermaid онлайн",
@@ -53,6 +54,8 @@
       "onlineMermaidEditor": "Онлайн Mermaid редактор",
       "freeMermaidEditor": "Бесплатный Mermaid редактор",
       "mermaidEditorFree": "Mermaid редактор бесплатно",
+      "mermaidChartOnlineFree": "Mermaid график онлайн бесплатно",
+      "mermaidFreeEditor": "Mermaid бесплатный редактор",
       "graphtd": "GraphTD"
     },
     "startTour": "Начать обучение",
@@ -66,7 +69,10 @@
       "mermaidDiagramOnline": "mermaid диаграмма онлайн",
       "mermaidOnlineFree": "mermaid онлайн бесплатно",
       "freeMermaidEditor": "бесплатный mermaid редактор",
-      "onlineMermaidEditor": "онлайн mermaid редактор"
+      "onlineMermaidEditor": "онлайн mermaid редактор",
+      "mermaidDiagramOnlineFree": "mermaid диаграмма онлайн бесплатно",
+      "mermaidChartOnlineFree": "mermaid график онлайн бесплатно",
+      "mermaidFreeEditor": "mermaid бесплатный редактор"
     }
   },
   "tour": {

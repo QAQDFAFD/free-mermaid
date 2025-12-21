@@ -45,6 +45,7 @@
       "mermaidOnline": "mermaid online"
     },
     "capabilities": {
+      "title": "Supported Features",
       "graphTd": "Graph TD",
       "graphTdOnline": "Graph TD Online",
       "mermaidOnline": "Mermaid Online",
@@ -53,6 +54,8 @@
       "onlineMermaidEditor": "Online Mermaid Editor",
       "freeMermaidEditor": "Free Mermaid Editor",
       "mermaidEditorFree": "Mermaid Editor Free",
+      "mermaidChartOnlineFree": "Mermaid Chart Online Free",
+      "mermaidFreeEditor": "Mermaid Free Editor",
       "graphtd": "GraphTD"
     },
     "startTour": "Start Tutorial",
@@ -66,7 +69,10 @@
       "mermaidDiagramOnline": "mermaid diagram online",
       "mermaidOnlineFree": "mermaid online free",
       "freeMermaidEditor": "free mermaid editor",
-      "onlineMermaidEditor": "online mermaid editor"
+      "onlineMermaidEditor": "online mermaid editor",
+      "mermaidDiagramOnlineFree": "mermaid diagram online free",
+      "mermaidChartOnlineFree": "mermaid chart online free",
+      "mermaidFreeEditor": "mermaid free editor"
     }
   },
   "tour": {

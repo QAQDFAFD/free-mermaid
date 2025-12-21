@@ -45,6 +45,7 @@
       "mermaidOnline": "mermaid 在线"
     },
     "capabilities": {
+      "title": "支持的功能",
       "graphTd": "Graph TD",
       "graphTdOnline": "Graph TD 在线",
       "mermaidOnline": "Mermaid 在线",
@@ -53,6 +54,8 @@
       "onlineMermaidEditor": "在线 Mermaid 编辑器",
       "freeMermaidEditor": "免费 Mermaid 编辑器",
       "mermaidEditorFree": "Mermaid 编辑器免费",
+      "mermaidChartOnlineFree": "Mermaid 图表在线免费",
+      "mermaidFreeEditor": "Mermaid 免费编辑器",
       "graphtd": "GraphTD"
     },
     "startTour": "开始教程",
@@ -66,7 +69,10 @@
       "mermaidDiagramOnline": "mermaid 图表在线",
       "mermaidOnlineFree": "mermaid 在线免费",
       "freeMermaidEditor": "免费 mermaid 编辑器",
-      "onlineMermaidEditor": "在线 mermaid 编辑器"
+      "onlineMermaidEditor": "在线 mermaid 编辑器",
+      "mermaidDiagramOnlineFree": "mermaid 图表在线免费",
+      "mermaidChartOnlineFree": "mermaid 图表在线免费",
+      "mermaidFreeEditor": "mermaid 免费编辑器"
     }
   },
   "tour": {
