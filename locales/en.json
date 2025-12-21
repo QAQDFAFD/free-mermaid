@@ -184,6 +184,7 @@
     "configureKey": "configure your own Key →",
     "dismissTip": "Don't show again",
     "enterApiKey": "Enter API Key",
+    "customKeyHint": "Please enter your API Key, or switch to \"Free to Use\" option",
     "saveSettings": "Save Settings",
     "optimizeMode": "Optimize",
     "generateMode": "Generate",

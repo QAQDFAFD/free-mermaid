@@ -184,6 +184,7 @@
       "configureKey": "настроить свой ключ →",
       "dismissTip": "Больше не показывать",
       "enterApiKey": "Введите API ключ",
+      "customKeyHint": "Введите ваш API ключ или выберите опцию «Бесплатно»",
     "saveSettings": "Сохранить",
     "optimizeMode": "Оптимизация",
     "generateMode": "Генерация",

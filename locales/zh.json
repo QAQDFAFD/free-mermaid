@@ -184,6 +184,7 @@
     "configureKey": "去配置自己的 Key →",
     "dismissTip": "不再提示",
     "enterApiKey": "请输入 API Key",
+    "customKeyHint": "请输入您的 API Key，或切换到「免费使用」选项",
     "saveSettings": "保存设置",
     "optimizeMode": "优化代码",
     "generateMode": "生成图表",

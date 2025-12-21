@@ -154,7 +154,19 @@
                 v-model="config.deepseekKey"
                 type="password"
                 :placeholder="t('ai.enterApiKey')"
-                class="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+                class="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                :class="config.keySource === 'custom' && !config.deepseekKey.trim() 
+                  ? 'border-amber-300 dark:border-amber-600' 
+                  : 'border-gray-300 dark:border-gray-600'" />
+            </div>
+            <!-- 未输入 Key 时的提示 -->
+            <div
+              v-if="!config.deepseekKey.trim()"
+              class="p-2.5 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800/50 rounded-lg">
+              <p class="text-xs text-amber-600 dark:text-amber-400 flex items-center gap-1.5">
+                <span>⚠️</span>
+                <span>{{ t('ai.customKeyHint') }}</span>
+              </p>
             </div>
           </div>
 
@@ -170,7 +182,11 @@
 
           <button
             @click="handleSaveConfig"
-            class="w-full mt-4 px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors">
+            :disabled="config.keySource === 'custom' && !config.deepseekKey.trim()"
+            class="w-full mt-4 px-4 py-2 text-sm font-medium text-white rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            :class="config.keySource === 'custom' && !config.deepseekKey.trim()
+              ? 'bg-gray-400'
+              : 'bg-blue-600 hover:bg-blue-700'">
             {{ t('ai.saveSettings') }}
           </button>
         </div>

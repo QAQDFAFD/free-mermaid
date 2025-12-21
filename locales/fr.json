@@ -184,6 +184,7 @@
       "configureKey": "configurer votre clé →",
       "dismissTip": "Ne plus afficher",
       "enterApiKey": "Entrez la clé API",
+      "customKeyHint": "Veuillez entrer votre clé API, ou passez à l'option « Gratuit »",
     "saveSettings": "Enregistrer",
     "optimizeMode": "Optimiser",
     "generateMode": "Générer",
