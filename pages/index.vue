@@ -434,10 +434,11 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, computed, onMounted, onUnmounted, watch, defineAsyncComponent } from 'vue'
+  import { ref, computed, onMounted, onUnmounted, watch, defineAsyncComponent, shallowRef } from 'vue'
   import type { ComponentPublicInstance } from 'vue'
   import { useI18n } from 'vue-i18n'
   import { getExample, getExamples, exampleKeys, type ExampleSet } from '@/composables/useExamples'
+  import { preloadCriticalResources } from '@/composables/useAppReady'
 
   // 延迟导入 exportUtils，只在需要时加载
   let exportAsPng: any = null
@@ -448,6 +449,7 @@
     }
     return exportAsPng
   }
+
 
   const { t, locale } = useI18n()
 
@@ -575,6 +577,8 @@
   const hasSeenTour = useCookie('mermaid-tour-seen', { default: () => false })
 
   onMounted(() => {
+    // 在空闲时预加载可能需要的资源（AI助手、导出工具等）
+    preloadCriticalResources()
     // 检查是否有从文档页面传来的代码
     if (process.client) {
       const tryCode = sessionStorage.getItem('mermaid-try-code')

@@ -32,12 +32,19 @@ export default defineNuxtConfig({
       // 启用 CSS 代码分割
       cssCodeSplit: true,
       // 提高 chunk 大小警告阈值（mermaid 库本身很大）
-      chunkSizeWarningLimit: 1000
-      // 注意：不使用 manualChunks，让 Vite 自动处理，避免 dayjs 等库的导出问题
+      chunkSizeWarningLimit: 1500,
+      // 启用 terser 压缩
+      minify: 'terser',
+      terserOptions: {
+        compress: {
+          drop_console: true, // 生产环境移除 console
+          drop_debugger: true
+        }
+      }
     },
     // 优化依赖预构建
     optimizeDeps: {
-      include: ['vue', 'vue-router', 'mermaid', 'dayjs']
+      include: ['vue', 'vue-router', 'vue-i18n']
     }
   },
 
@@ -216,6 +223,9 @@ export default defineNuxtConfig({
         // 预连接优化 - 只保留必要的（延迟加载的资源不需要预连接）
         { rel: 'dns-prefetch', href: 'https://www.googletagmanager.com' },
         { rel: 'dns-prefetch', href: 'https://pagead2.googlesyndication.com' },
+        // 预加载关键字体 - 提升首屏文字渲染速度
+        { rel: 'preconnect', href: 'https://fonts.googleapis.com', crossorigin: '' },
+        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
         // 多语言支持
         { rel: 'alternate', hreflang: 'en', href: 'https://mermaid-drawing.com' },
         { rel: 'alternate', hreflang: 'zh', href: 'https://mermaid-drawing.com' },

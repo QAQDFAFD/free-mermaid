@@ -106,14 +106,17 @@
 	onMounted(() => {
 		updateDarkMode()
 
-		// 延迟加载 CodeMirror，优先渲染骨架屏
+		// 延迟加载 CodeMirror，优先渲染首屏内容
 		if (process.client) {
-			// 使用 requestIdleCallback 在空闲时加载，或者立即加载
+			// 使用 requestIdleCallback 在浏览器空闲时加载
+			// 设置较短的 timeout 确保编辑器尽快可用
 			if ('requestIdleCallback' in window) {
-				(window as any).requestIdleCallback(() => loadCodeMirror(), { timeout: 100 })
+				(window as any).requestIdleCallback(() => loadCodeMirror(), { timeout: 50 })
 			} else {
-				// 立即加载，但不阻塞渲染
-				setTimeout(loadCodeMirror, 0)
+				// 使用 requestAnimationFrame 确保在下一帧开始时加载
+				requestAnimationFrame(() => {
+					setTimeout(loadCodeMirror, 0)
+				})
 			}
 		}
 

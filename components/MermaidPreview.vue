@@ -89,6 +89,24 @@
   // 动态导入 mermaid，避免首页打包体积膨胀
   let mermaidInstance: any = null
   let mermaidLoadPromise: Promise<any> | null = null
+  let mermaidPreloadStarted = false
+
+  // 预加载 Mermaid（在空闲时开始加载，但不等待完成）
+  const preloadMermaid = () => {
+    if (mermaidPreloadStarted || !process.client) return
+    mermaidPreloadStarted = true
+    
+    // 在浏览器空闲时预加载
+    if ('requestIdleCallback' in window) {
+      (window as any).requestIdleCallback(() => {
+        ensureMermaid().catch(() => {})
+      }, { timeout: 2000 })
+    } else {
+      setTimeout(() => {
+        ensureMermaid().catch(() => {})
+      }, 100)
+    }
+  }
 
   const ensureMermaid = async () => {
     if (!process.client) return null
@@ -650,6 +668,9 @@
 
   // 监听自定义主题变化事件
   onMounted(async () => {
+    // 预加载 Mermaid 库（在空闲时）
+    preloadMermaid()
+    
     // 更新currentZoom，确保与初始scale值一致
     emit('zoom-change', scale.value)
 
