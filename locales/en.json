@@ -56,12 +56,15 @@
       "mermaidEditorFree": "Mermaid Editor Free",
       "mermaidChartOnlineFree": "Mermaid Chart Online Free",
       "mermaidFreeEditor": "Mermaid Free Editor",
-      "graphtd": "GraphTD"
+      "graphtd": "GraphTD",
+      "mermaidFree": "Mermaid Free",
+      "freeMermaidDiagram": "Free Mermaid Diagram",
+      "mermaidEditor": "Mermaid Editor"
     },
     "startTour": "Start Tutorial",
     "collapse": "Collapse footer",
     "expand": "Expand footer",
-    "seoText": "Best {graphTd} online editor. Professional {mermaidOnline} free tool with {mermaidDiagramOnline} capabilities. The best {freeMermaidEditor} for creating diagrams instantly.",
+    "seoText": "Best {graphTd} online editor. Professional {mermaidOnline} free tool to generate a {freeMermaidDiagram} easily. The ultimate {freeMermaidEditor} and {mermaidEditor} for creating diagrams instantly. Explore our {mermaidFree} features.",
     "seoKeywords": {
       "graphTd": "graph td",
       "mermaidOnline": "mermaid online",
@@ -72,7 +75,10 @@
       "onlineMermaidEditor": "online mermaid editor",
       "mermaidDiagramOnlineFree": "mermaid diagram online free",
       "mermaidChartOnlineFree": "mermaid chart online free",
-      "mermaidFreeEditor": "mermaid free editor"
+      "mermaidFreeEditor": "mermaid free editor",
+      "freeMermaidDiagram": "free mermaid diagram",
+      "mermaidEditor": "mermaid editor",
+      "mermaidFree": "mermaid free"
     }
   },
   "tour": {

@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col h-screen bg-gray-50" :class="{ 'fullscreen-mode': isFullscreen }">
     <!-- SEO 主标题 - 视觉隐藏但对搜索引擎和屏幕阅读器可见 -->
-    <h1 class="sr-only">{{ $t('footer.title') }} - {{ $t('footer.editorTitle') }}</h1>
+    <h1 class="sr-only">{{ $t('footer.title') }} - {{ $t('footer.editorTitle') }} | Free Mermaid Diagram Editor</h1>
 
     <!-- 工具栏 -->
     <EditorToolbar v-show="!isFullscreen" class="editor-toolbar" @update:code="updateCode" :model-value="code" />
@@ -364,7 +364,7 @@
           <!-- 关于编辑器 -->
           <section aria-labelledby="about-heading">
             <h2 id="about-heading" class="text-base font-bold text-gray-900 dark:text-white mb-1.5">
-              {{ $t('footer.title') }} - {{ $t('footer.editorTitle') }}
+              {{ $t('footer.title') }} - {{ $t('footer.editorTitle') }} | Free Mermaid Diagram
             </h2>
 
             <!-- 功能特点 -->
@@ -379,7 +379,10 @@
               <span class="inline-block mr-2">✓ {{ $t('footer.capabilities.graphTdOnline') }}</span>
               <span class="inline-block mr-2">✓ {{ $t('footer.capabilities.mermaidEditorFree') }}</span>
               <span class="inline-block mr-2">✓ {{ $t('footer.capabilities.mermaidChartOnlineFree') }}</span>
-              <span class="inline-block">✓ {{ $t('footer.capabilities.mermaidFreeEditor') }}</span>
+              <span class="inline-block mr-2">✓ {{ $t('footer.capabilities.mermaidFreeEditor') }}</span>
+              <span class="inline-block mr-2">✓ {{ $t('footer.capabilities.mermaidFree') }}</span>
+              <span class="inline-block mr-2">✓ {{ $t('footer.capabilities.freeMermaidDiagram') }}</span>
+              <span class="inline-block">✓ {{ $t('footer.capabilities.mermaidEditor') }}</span>
             </div>
           </section>
 
@@ -464,15 +467,18 @@
     const link =
       '<a href="https://mermaid-drawing.com" class="text-blue-600 dark:text-blue-400 hover:underline font-medium">mermaid-drawing.com</a>'
 
-    return `${description} ${desc} ${link}`
+    return `${description} ${desc} ${link}. Try our <strong>free mermaid diagram</strong> features today!`
   })
 
   // 计算属性：生成SEO文本
   const seoText = computed(() => {
     return t('footer.seoText', {
-      mermaidDiagramOnlineFree: `<strong>${t('footer.seoKeywords.mermaidDiagramOnlineFree')}</strong>`,
-      mermaidChartOnlineFree: `<strong>${t('footer.seoKeywords.mermaidChartOnlineFree')}</strong>`,
-      mermaidFreeEditor: `<strong>${t('footer.seoKeywords.mermaidFreeEditor')}</strong>`
+      graphTd: `<strong>${t('footer.seoKeywords.graphTd')}</strong>`,
+      mermaidOnline: `<strong>${t('footer.seoKeywords.mermaidOnline')}</strong>`,
+      freeMermaidDiagram: `<strong>${t('footer.seoKeywords.freeMermaidDiagram')}</strong>`,
+      freeMermaidEditor: `<strong>${t('footer.seoKeywords.freeMermaidEditor')}</strong>`,
+      mermaidEditor: `<strong>${t('footer.seoKeywords.mermaidEditor')}</strong>`,
+      mermaidFree: `<strong>${t('footer.seoKeywords.mermaidFree')}</strong>`
     })
   })
 
@@ -760,7 +766,7 @@
       {
         name: 'keywords',
         content:
-          'graph td, mermaid online, graph td online, mermaid diagram online, mermaid online free, mermaid free, online mermaid editor, graphtd, free mermaid editor, mermaid editor free, mermaid ai, ai diagram generator'
+          'graph td, mermaid online, graph td online, mermaid diagram online, mermaid online free, mermaid free, online mermaid editor, graphtd, free mermaid editor, mermaid editor free, mermaid ai, ai diagram generator, free mermaid diagram, mermaid editor, free mermaid'
       }
     ]
   })

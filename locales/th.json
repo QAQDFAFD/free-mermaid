@@ -56,12 +56,15 @@
       "mermaidEditorFree": "เครื่องมือแก้ไข Mermaid ฟรี",
       "mermaidChartOnlineFree": "แผนภูมิ Mermaid ออนไลน์ฟรี",
       "mermaidFreeEditor": "เครื่องมือแก้ไข Mermaid ฟรี",
-      "graphtd": "GraphTD"
+      "graphtd": "GraphTD",
+      "mermaidFree": "Mermaid ฟรี",
+      "freeMermaidDiagram": "ไดอะแกรม Mermaid ฟรี",
+      "mermaidEditor": "เครื่องมือแก้ไข Mermaid"
     },
     "startTour": "เริ่มบทแนะนำ",
     "collapse": "ย่อ",
     "expand": "ขยาย",
-    "seoText": "เครื่องมือแก้ไข {graphTd} ออนไลน์ที่ดีที่สุด เครื่องมือ {mermaidOnline} ฟรีระดับมืออาชีพพร้อมความสามารถ {mermaidDiagramOnline} {freeMermaidEditor} ที่ดีที่สุดสำหรับสร้างไดอะแกรมทันที",
+    "seoText": "เครื่องมือแก้ไข {graphTd} ออนไลน์ที่ดีที่สุด เครื่องมือ {mermaidOnline} ฟรีระดับมืออาชีพเพื่อสร้าง {freeMermaidDiagram} อย่างง่ายดาย {freeMermaidEditor} และ {mermaidEditor} ที่ดีที่สุดสำหรับสร้างไดอะแกรมทันที เพลิดเพลินกับฟีเจอร์ {mermaidFree} ของเรา",
     "seoKeywords": {
       "graphTd": "graph td",
       "mermaidOnline": "mermaid ออนไลน์",
@@ -72,7 +75,10 @@
       "onlineMermaidEditor": "เครื่องมือแก้ไข mermaid ออนไลน์",
       "mermaidDiagramOnlineFree": "mermaid ไดอะแกรมออนไลน์ฟรี",
       "mermaidChartOnlineFree": "mermaid แผนภูมิออนไลน์ฟรี",
-      "mermaidFreeEditor": "mermaid เครื่องมือแก้ไขฟรี"
+      "mermaidFreeEditor": "mermaid เครื่องมือแก้ไขฟรี",
+      "freeMermaidDiagram": "ไดอะแกรม mermaid ฟรี",
+      "mermaidEditor": "เครื่องมือแก้ไข mermaid",
+      "mermaidFree": "mermaid ฟรี"
     }
   },
   "tour": {

@@ -56,12 +56,15 @@
       "mermaidEditorFree": "Mermaid редактор бесплатно",
       "mermaidChartOnlineFree": "Mermaid график онлайн бесплатно",
       "mermaidFreeEditor": "Mermaid бесплатный редактор",
-      "graphtd": "GraphTD"
+      "graphtd": "GraphTD",
+      "mermaidFree": "Mermaid бесплатно",
+      "freeMermaidDiagram": "Бесплатная Mermaid диаграмма",
+      "mermaidEditor": "Mermaid редактор"
     },
     "startTour": "Начать обучение",
     "collapse": "Свернуть",
     "expand": "Развернуть",
-    "seoText": "Лучший редактор {graphTd} онлайн. Профессиональный инструмент {mermaidOnline} бесплатно с возможностями {mermaidDiagramOnline}. Лучший {freeMermaidEditor} для мгновенного создания диаграмм.",
+    "seoText": "Лучший редактор {graphTd} онлайн. Профессиональный инструмент {mermaidOnline} для легкого создания {freeMermaidDiagram}. Лучший {freeMermaidEditor} и {mermaidEditor} для мгновенного создания диаграмм. Изучите наши функции {mermaidFree}.",
     "seoKeywords": {
       "graphTd": "graph td",
       "mermaidOnline": "mermaid онлайн",
@@ -72,7 +75,10 @@
       "onlineMermaidEditor": "онлайн mermaid редактор",
       "mermaidDiagramOnlineFree": "mermaid диаграмма онлайн бесплатно",
       "mermaidChartOnlineFree": "mermaid график онлайн бесплатно",
-      "mermaidFreeEditor": "mermaid бесплатный редактор"
+      "mermaidFreeEditor": "mermaid бесплатный редактор",
+      "freeMermaidDiagram": "бесплатная mermaid диаграмма",
+      "mermaidEditor": "mermaid редактор",
+      "mermaidFree": "mermaid бесплатно"
     }
   },
   "tour": {

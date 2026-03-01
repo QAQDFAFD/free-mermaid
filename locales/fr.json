@@ -56,12 +56,15 @@
       "mermaidEditorFree": "Éditeur Mermaid gratuit",
       "mermaidChartOnlineFree": "Graphique Mermaid en ligne gratuit",
       "mermaidFreeEditor": "Éditeur Mermaid gratuit",
-      "graphtd": "GraphTD"
+      "graphtd": "GraphTD",
+      "mermaidFree": "Mermaid gratuit",
+      "freeMermaidDiagram": "Diagramme Mermaid gratuit",
+      "mermaidEditor": "Éditeur Mermaid"
     },
     "startTour": "Commencer le tutoriel",
     "collapse": "Réduire",
     "expand": "Développer",
-    "seoText": "Meilleur éditeur {graphTd} en ligne. Outil professionnel {mermaidOnline} gratuit avec des capacités {mermaidDiagramOnline}. Le meilleur {freeMermaidEditor} pour créer des diagrammes instantanément.",
+    "seoText": "Meilleur éditeur {graphTd} en ligne. Outil professionnel {mermaidOnline} gratuit pour générer facilement un {freeMermaidDiagram}. Le meilleur {freeMermaidEditor} et {mermaidEditor} pour créer des diagrammes instantanément. Découvrez nos fonctionnalités {mermaidFree}.",
     "seoKeywords": {
       "graphTd": "graph td",
       "mermaidOnline": "mermaid en ligne",
@@ -72,7 +75,10 @@
       "onlineMermaidEditor": "éditeur mermaid en ligne",
       "mermaidDiagramOnlineFree": "diagramme mermaid en ligne gratuit",
       "mermaidChartOnlineFree": "graphique mermaid en ligne gratuit",
-      "mermaidFreeEditor": "éditeur mermaid gratuit"
+      "mermaidFreeEditor": "éditeur mermaid gratuit",
+      "freeMermaidDiagram": "diagramme mermaid gratuit",
+      "mermaidEditor": "éditeur mermaid",
+      "mermaidFree": "mermaid gratuit"
     }
   },
   "tour": {

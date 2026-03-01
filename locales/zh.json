@@ -56,12 +56,15 @@
       "mermaidEditorFree": "Mermaid 编辑器免费",
       "mermaidChartOnlineFree": "Mermaid 图表在线免费",
       "mermaidFreeEditor": "Mermaid 免费编辑器",
-      "graphtd": "GraphTD"
+      "graphtd": "GraphTD",
+      "mermaidFree": "Mermaid 免费",
+      "freeMermaidDiagram": "免费 Mermaid 图表",
+      "mermaidEditor": "Mermaid 编辑器"
     },
     "startTour": "开始教程",
     "collapse": "收起底栏",
     "expand": "展开底栏",
-    "seoText": "最好的{graphTd}在线编辑器。专业的{mermaidOnline}免费工具，具有{mermaidDiagramOnline}功能。最好的{freeMermaidEditor}，可即时创建图表。",
+    "seoText": "最好的{graphTd}在线编辑器。专业的{mermaidOnline}工具，轻松生成{freeMermaidDiagram}。顶级的{freeMermaidEditor}和{mermaidEditor}，可即时创建图表。体验我们的{mermaidFree}功能。",
     "seoKeywords": {
       "graphTd": "graph td",
       "mermaidOnline": "mermaid 在线",
@@ -72,7 +75,10 @@
       "onlineMermaidEditor": "在线 mermaid 编辑器",
       "mermaidDiagramOnlineFree": "mermaid 图表在线免费",
       "mermaidChartOnlineFree": "mermaid 图表在线免费",
-      "mermaidFreeEditor": "mermaid 免费编辑器"
+      "mermaidFreeEditor": "mermaid 免费编辑器",
+      "freeMermaidDiagram": "免费 mermaid 图表",
+      "mermaidEditor": "mermaid 编辑器",
+      "mermaidFree": "mermaid 免费"
     }
   },
   "tour": {

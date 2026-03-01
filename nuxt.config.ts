@@ -166,12 +166,12 @@ export default defineNuxtConfig({
         {
           name: 'description',
           content:
-            'Graph TD online free editor - Create mermaid diagrams with AI. Best mermaid online free tool for flowcharts, sequence diagrams. Free mermaid editor with graphtd support, real-time preview and export.'
+            'Graph TD online free editor - Create mermaid diagrams with AI. Best mermaid online free tool for flowcharts, sequence diagrams. Free mermaid editor with graphtd support, real-time preview and export. A free mermaid diagram tool.'
         },
         {
           name: 'keywords',
           content:
-            'graph td, mermaid online, graph td online, mermaid diagram online, mermaid online free, mermaid free, online mermaid editor, graphtd, free mermaid editor, mermaid editor free, mermaid ai, ai diagram generator, mermaid chart online free, mermaid graph online, flowchart online, sequence diagram online'
+            'graph td, mermaid online, graph td online, mermaid diagram online, mermaid online free, mermaid free, online mermaid editor, graphtd, free mermaid editor, mermaid editor free, mermaid ai, ai diagram generator, mermaid chart online free, mermaid graph online, flowchart online, sequence diagram online, free mermaid diagram, mermaid editor, free mermaid'
         },
         // Open Graph 优化
         {
@@ -181,7 +181,7 @@ export default defineNuxtConfig({
         {
           property: 'og:description',
           content:
-            'Graph TD online free editor - Create mermaid diagrams with AI. Best mermaid online free tool for flowcharts, sequence diagrams, class diagrams.'
+            'Graph TD online free editor - Create mermaid diagrams with AI. Best mermaid online free tool for flowcharts, sequence diagrams, class diagrams. Your go-to free mermaid diagram editor.'
         },
         { property: 'og:type', content: 'website' },
         { property: 'og:url', content: 'https://mermaid-drawing.com' },
@@ -200,7 +200,7 @@ export default defineNuxtConfig({
         {
           name: 'twitter:description',
           content:
-            'Graph TD online free - Best mermaid online editor with AI. Create flowcharts, sequence diagrams instantly. Free mermaid editor.'
+            'Graph TD online free - Best mermaid online editor with AI. Create flowcharts, sequence diagrams instantly. Free mermaid editor and free mermaid diagram generator.'
         },
         { name: 'twitter:image', content: 'https://mermaid-drawing.com/social-card.svg' },
         // SEO 优化
@@ -244,9 +244,9 @@ export default defineNuxtConfig({
             '@context': 'https://schema.org',
             '@type': 'WebApplication',
             name: 'Graph TD Online - Free Mermaid Editor with AI',
-            alternateName: ['Mermaid Online Free', 'GraphTD Editor', 'Online Mermaid Editor', 'Free Mermaid Editor'],
+            alternateName: ['Mermaid Online Free', 'GraphTD Editor', 'Online Mermaid Editor', 'Free Mermaid Editor', 'Mermaid Editor', 'Free Mermaid Diagram'],
             description:
-              'Graph TD online free editor - Create mermaid diagrams with AI. Best mermaid online free tool for flowcharts, sequence diagrams, class diagrams.',
+              'Graph TD online free editor - Create mermaid diagrams with AI. Best mermaid online free tool for flowcharts, sequence diagrams, class diagrams. Get a free mermaid diagram.',
             url: 'https://mermaid-drawing.com',
             applicationCategory: 'DesignApplication',
             operatingSystem: 'Web',
@@ -260,6 +260,8 @@ export default defineNuxtConfig({
             featureList: [
               'Graph TD Online Editor',
               'Mermaid Online Free',
+              'Free Mermaid Diagram',
+              'Mermaid Editor',
               'AI Diagram Generation',
               'AI Code Optimization',
               'Graph TD Flowcharts',
@@ -315,3 +317,7 @@ export default defineNuxtConfig({
   // 兼容性配置
   compatibilityDate: '2025-03-16'
 })
+
+const add = () => {
+	return a + b;
+}
