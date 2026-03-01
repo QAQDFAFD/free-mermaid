@@ -25,7 +25,9 @@
           </svg>
         </div>
         <div class="ml-3 flex-1">
-          <p class="text-sm font-medium text-red-800 dark:text-red-400" role="alert" aria-live="polite">Mermaid Drawing Syntax Error</p>
+          <p class="text-sm font-medium text-red-800 dark:text-red-400" role="alert" aria-live="polite">
+            Mermaid Drawing Syntax Error
+          </p>
           <div class="mt-1 text-sm text-red-700 dark:text-red-300">
             <p>{{ formatErrorMessage(error) }}</p>
           </div>
@@ -95,12 +97,15 @@
   const preloadMermaid = () => {
     if (mermaidPreloadStarted || !process.client) return
     mermaidPreloadStarted = true
-    
+
     // 在浏览器空闲时预加载
     if ('requestIdleCallback' in window) {
-      (window as any).requestIdleCallback(() => {
-        ensureMermaid().catch(() => {})
-      }, { timeout: 2000 })
+      ;(window as any).requestIdleCallback(
+        () => {
+          ensureMermaid().catch(() => {})
+        },
+        { timeout: 2000 }
+      )
     } else {
       setTimeout(() => {
         ensureMermaid().catch(() => {})
@@ -670,7 +675,7 @@
   onMounted(async () => {
     // 预加载 Mermaid 库（在空闲时）
     preloadMermaid()
-    
+
     // 更新currentZoom，确保与初始scale值一致
     emit('zoom-change', scale.value)
 
