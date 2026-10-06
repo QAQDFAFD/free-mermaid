@@ -21,16 +21,35 @@
         </div>
       </div>
 
+      <section lang="en" aria-labelledby="quick-start-heading" class="mb-8 rounded-lg bg-white p-6 text-gray-700 dark:bg-gray-800 dark:text-gray-300">
+        <h2 id="quick-start-heading" class="text-xl font-bold text-gray-900 dark:text-white">Mermaid syntax quick start</h2>
+        <p class="mt-3 leading-relaxed">
+          Choose a diagram below, copy its plain-text source, and select Try in Editor to preview it.
+          For flowcharts, <code>graph TD</code> and <code>flowchart TD</code> both create a top-down layout;
+          <code>graph LR</code> runs from left to right. Use node IDs to connect steps and quotes around labels
+          containing punctuation. Paste the source without Markdown code fences.
+        </p>
+        <nav aria-label="On this page" class="mt-4 flex flex-wrap gap-x-6 gap-y-3 text-sm text-blue-700 underline dark:text-blue-400">
+          <a href="#flowchart">Flowcharts</a>
+          <a href="#sequence">Sequence diagrams</a>
+          <a href="#class">Class diagrams</a>
+          <a href="#state">State diagrams</a>
+          <a href="#entity">ER diagrams</a>
+          <a href="#gantt">Gantt charts</a>
+          <a href="#pie">Pie charts</a>
+        </nav>
+      </section>
+
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <!-- Flowchart -->
-        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+        <div id="flowchart" class="scroll-mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
           <div class="p-6">
             <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
               {{ $t('tools.flowchart') }}
             </h2>
             <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md mb-4 relative group">
               <pre class="text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap">{{ examples.flowchart }}</pre>
-              <div class="absolute top-2 right-2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+              <div class="absolute top-2 right-2 flex gap-2 md:opacity-0 md:group-hover:opacity-100 focus-within:opacity-100 transition-opacity">
                 <button
                   @click="copyCode('flowchart')"
                   class="px-2 py-1 text-xs bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500 rounded text-gray-700 dark:text-gray-200 transition-colors flex items-center gap-1"
@@ -135,12 +154,12 @@
         </div>
 
         <!-- Sequence Diagram -->
-        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+        <div id="sequence" class="scroll-mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
           <div class="p-6">
             <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">{{ $t('tools.sequence') }}</h2>
             <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md mb-4 relative group">
               <pre class="text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap">{{ examples.sequence }}</pre>
-              <div class="absolute top-2 right-2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+              <div class="absolute top-2 right-2 flex gap-2 md:opacity-0 md:group-hover:opacity-100 focus-within:opacity-100 transition-opacity">
                 <button
                   @click="copyCode('sequence')"
                   class="px-2 py-1 text-xs bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500 rounded text-gray-700 dark:text-gray-200 transition-colors flex items-center gap-1"
@@ -237,12 +256,12 @@
         </div>
 
         <!-- Class Diagram -->
-        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+        <div id="class" class="scroll-mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
           <div class="p-6">
             <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">{{ $t('tools.class') }}</h2>
             <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md mb-4 relative group">
               <pre class="text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap">{{ examples.class }}</pre>
-              <div class="absolute top-2 right-2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+              <div class="absolute top-2 right-2 flex gap-2 md:opacity-0 md:group-hover:opacity-100 focus-within:opacity-100 transition-opacity">
                 <button
                   @click="copyCode('class')"
                   class="px-2 py-1 text-xs bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500 rounded text-gray-700 dark:text-gray-200 transition-colors flex items-center gap-1"
@@ -347,12 +366,12 @@
         </div>
 
         <!-- State Diagram -->
-        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+        <div id="state" class="scroll-mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
           <div class="p-6">
             <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">{{ $t('tools.state') }}</h2>
             <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md mb-4 relative group">
               <pre class="text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap">{{ examples.state }}</pre>
-              <div class="absolute top-2 right-2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+              <div class="absolute top-2 right-2 flex gap-2 md:opacity-0 md:group-hover:opacity-100 focus-within:opacity-100 transition-opacity">
                 <button
                   @click="copyCode('state')"
                   class="px-2 py-1 text-xs bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500 rounded text-gray-700 dark:text-gray-200 transition-colors flex items-center gap-1"
@@ -449,14 +468,14 @@
         </div>
 
         <!-- Entity Relationship Diagram -->
-        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+        <div id="entity" class="scroll-mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
           <div class="p-6">
             <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
               {{ $t('tools.entity') }}
             </h2>
             <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md mb-4 relative group">
               <pre class="text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap">{{ examples.entity }}</pre>
-              <div class="absolute top-2 right-2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+              <div class="absolute top-2 right-2 flex gap-2 md:opacity-0 md:group-hover:opacity-100 focus-within:opacity-100 transition-opacity">
                 <button
                   @click="copyCode('entity')"
                   class="px-2 py-1 text-xs bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500 rounded text-gray-700 dark:text-gray-200 transition-colors flex items-center gap-1"
@@ -561,12 +580,12 @@
         </div>
 
         <!-- Gantt Chart -->
-        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+        <div id="gantt" class="scroll-mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
           <div class="p-6">
             <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">{{ $t('tools.gantt') }}</h2>
             <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md mb-4 relative group">
               <pre class="text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap">{{ examples.gantt }}</pre>
-              <div class="absolute top-2 right-2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+              <div class="absolute top-2 right-2 flex gap-2 md:opacity-0 md:group-hover:opacity-100 focus-within:opacity-100 transition-opacity">
                 <button
                   @click="copyCode('gantt')"
                   class="px-2 py-1 text-xs bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500 rounded text-gray-700 dark:text-gray-200 transition-colors flex items-center gap-1"
@@ -687,12 +706,12 @@
         </div>
 
         <!-- Pie Chart -->
-        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+        <div id="pie" class="scroll-mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
           <div class="p-6">
             <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-4">{{ $t('tools.pie') }}</h2>
             <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md mb-4 relative group">
               <pre class="text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap">{{ examples.pie }}</pre>
-              <div class="absolute top-2 right-2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+              <div class="absolute top-2 right-2 flex gap-2 md:opacity-0 md:group-hover:opacity-100 focus-within:opacity-100 transition-opacity">
                 <button
                   @click="copyCode('pie')"
                   class="px-2 py-1 text-xs bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500 rounded text-gray-700 dark:text-gray-200 transition-colors flex items-center gap-1"
@@ -890,22 +909,14 @@
       </div>
 
       <div class="max-w-6xl mx-auto relative z-10">
-        <!-- 主标题 -->
-        <h2 class="text-base font-bold text-gray-900 dark:text-white mb-1.5">
-          {{ $t('footer.title') }} - {{ $t('footer.editorTitle') }}
+        <h2 class="text-base font-bold text-gray-900 dark:text-white mb-2">
+          {{ locale === 'zh' ? '继续编辑您的 Mermaid 图表' : 'Keep editing your Mermaid diagram' }}
         </h2>
-
-        <!-- 功能特点 -->
-        <p class="text-sm text-gray-700 dark:text-gray-300 mb-1 leading-tight" v-html="featuresText"></p>
-        <p class="text-xs text-gray-600 dark:text-gray-400 mb-1.5 leading-tight" v-html="seoText"></p>
-
-        <!-- SEO关键词标签 -->
-        <div class="text-xs text-gray-600 dark:text-gray-400 leading-tight mb-2">
-          <span class="inline-block mr-2">✓ {{ $t('footer.capabilities.graphTdOnline') }}</span>
-          <span class="inline-block mr-2">✓ {{ $t('footer.capabilities.mermaidEditorFree') }}</span>
-          <span class="inline-block mr-2">✓ {{ $t('footer.capabilities.mermaidChartOnlineFree') }}</span>
-          <span class="inline-block">✓ {{ $t('footer.capabilities.mermaidFreeEditor') }}</span>
-        </div>
+        <p class="text-sm text-gray-700 dark:text-gray-300 mb-3">
+          {{ locale === 'zh'
+            ? '选择上方示例，在编辑器中修改代码并查看实时预览，再导出 PNG 或 SVG。无需注册。'
+            : 'Choose an example above, edit its code with a live preview, then export PNG or SVG. No registration required.' }}
+        </p>
 
         <!-- 返回编辑器按钮 -->
         <div class="text-center">
@@ -983,63 +994,17 @@
     router.push('/')
   }
 
-  // 计算属性：生成带HTML标签的功能描述文本
-  const featuresText = computed(() => {
-    const description = t('footer.features.description', {
-      graphTD: `<strong>${t('footer.features.graphTD')}</strong>`,
-      sequenceDiagram: `<strong>${t('footer.features.sequenceDiagram')}</strong>`,
-      classDiagram: `<strong>${t('footer.features.classDiagram')}</strong>`
-    })
-    const desc = t('footer.desc')
-    const link =
-      '<a href="https://mermaid-drawing.com" class="text-blue-600 dark:text-blue-400 hover:underline font-medium">mermaid-drawing.com</a>'
-
-    return `${description} ${desc} ${link}`
-  })
-
-  // 计算属性：生成SEO文本
-  const seoText = computed(() => {
-    return t('footer.seoText', {
-      mermaidDiagramOnlineFree: `<strong>${t('footer.seoKeywords.mermaidDiagramOnlineFree')}</strong>`,
-      mermaidChartOnlineFree: `<strong>${t('footer.seoKeywords.mermaidChartOnlineFree')}</strong>`,
-      mermaidFreeEditor: `<strong>${t('footer.seoKeywords.mermaidFreeEditor')}</strong>`
-    })
-  })
-
   // Add meta for SEO
+  const docsSeo = createSeoHead({
+    path: '/docs',
+    title: 'Mermaid Syntax Guide: Flowcharts, Sequence & ER Diagrams',
+    description:
+      'Learn Mermaid syntax with editable examples for graph TD flowcharts, sequence, class, state and ER diagrams, Gantt charts, and pie charts. Try each in the editor.',
+    type: 'article'
+  })
+
   useHead({
-    title: 'Mermaid Free Editor Tutorial - Graph TD Online Diagram Guide',
-    meta: [
-      {
-        name: 'description',
-        content:
-          'Mermaid free editor tutorial with complete examples. Learn mermaid diagram online free, graph TD flowcharts, mermaid chart online free creation with step-by-step guide.'
-      },
-      {
-        name: 'keywords',
-        content:
-          'mermaid tutorial, graph td tutorial, flowchart tutorial online, sequence diagram tutorial, mermaid documentation free, learn mermaid online, mermaid syntax guide, diagram tutorial'
-      },
-      // Open Graph for docs page
-      {
-        property: 'og:title',
-        content: 'Mermaid Free Editor Tutorial - Graph TD Online Diagram Guide'
-      },
-      {
-        property: 'og:description',
-        content:
-          'Mermaid free editor tutorial with complete examples. Learn mermaid diagram online free with step-by-step guide.'
-      },
-      {
-        property: 'og:url',
-        content: 'https://mermaid-drawing.com/docs'
-      },
-      {
-        property: 'og:type',
-        content: 'article'
-      }
-    ],
-    link: [{ rel: 'canonical', href: 'https://mermaid-drawing.com/docs' }],
+    ...docsSeo,
     script: [
       // 结构化数据 - HowTo (教程页面)
       {

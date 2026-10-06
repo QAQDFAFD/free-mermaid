@@ -310,15 +310,12 @@
 
   const { locale } = useI18n()
 
-  useHead({
-    title: 'About Mermaid Drawing - Free Online Diagram Editor',
-    meta: [
-      {
-        name: 'description',
-        content:
-          'Learn about Mermaid Drawing, a free online diagram editor for creating flowcharts, sequence diagrams, class diagrams and more using simple text syntax.'
-      }
-    ],
-    link: [{ rel: 'canonical', href: 'https://mermaid-drawing.com/about' }]
-  })
+  useHead(
+    createSeoHead({
+      path: '/about',
+      title: 'About Mermaid Drawing - Free Online Diagram Editor',
+      description:
+        'Learn about Mermaid Drawing, a free online diagram editor for creating flowcharts, sequence diagrams, class diagrams and more using simple text syntax.'
+    })
+  )
 </script>

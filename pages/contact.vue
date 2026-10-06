@@ -77,8 +77,11 @@
   const { locale } = useI18n()
 
   useHead({
-    title: 'Contact Us - Mermaid Drawing',
-    meta: [{ name: 'description', content: 'Contact the Mermaid Drawing team for support, legal and feedback.' }],
+    ...createSeoHead({
+      path: '/contact',
+      title: 'Contact Us - Mermaid Drawing',
+      description: 'Contact the Mermaid Drawing team for support, legal and feedback.'
+    }),
     script: [
       {
         type: 'application/ld+json',

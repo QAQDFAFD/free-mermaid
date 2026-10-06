@@ -122,13 +122,11 @@ import { useI18n } from 'vue-i18n'
 const { locale } = useI18n()
 
 useHead({
-  title: 'FAQ - Mermaid Drawing',
-  meta: [
-    { name: 'description', content: 'FAQ about Mermaid Drawing: free use, diagram types, export, privacy, ads and contact.' }
-  ],
-  link: [
-    { rel: 'canonical', href: 'https://mermaid-drawing.com/faq' }
-  ],
+  ...createSeoHead({
+    path: '/faq',
+    title: 'FAQ - Mermaid Drawing',
+    description: 'FAQ about Mermaid Drawing: free use, diagram types, export, privacy, ads and contact.'
+  }),
   script: [
     {
       type: 'application/ld+json',

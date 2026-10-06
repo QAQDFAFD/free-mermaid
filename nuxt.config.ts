@@ -158,66 +158,23 @@ export default defineNuxtConfig({
       htmlAttrs: {
         lang: 'en' // 默认语言
       },
-      title: 'Graph TD Online - Free Mermaid Editor with AI | Mermaid Online Free',
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=5' },
         { name: 'google-adsense-account', content: 'ca-pub-6451531797615157' },
-        {
-          name: 'description',
-          content:
-            'Graph TD online free editor - Create mermaid diagrams with AI. Best mermaid online free tool for flowcharts, sequence diagrams. Free mermaid editor with graphtd support, real-time preview and export. A free mermaid diagram tool.'
-        },
-        {
-          name: 'keywords',
-          content:
-            'graph td, mermaid online, graph td online, mermaid diagram online, mermaid online free, mermaid free, online mermaid editor, graphtd, free mermaid editor, mermaid editor free, mermaid ai, ai diagram generator, mermaid chart online free, mermaid graph online, flowchart online, sequence diagram online, free mermaid diagram, mermaid editor, free mermaid'
-        },
-        // Open Graph 优化
-        {
-          property: 'og:title',
-          content: 'Graph TD Online - Free Mermaid Editor with AI | Mermaid Online Free'
-        },
-        {
-          property: 'og:description',
-          content:
-            'Graph TD online free editor - Create mermaid diagrams with AI. Best mermaid online free tool for flowcharts, sequence diagrams, class diagrams. Your go-to free mermaid diagram editor.'
-        },
-        { property: 'og:type', content: 'website' },
-        { property: 'og:url', content: 'https://mermaid-drawing.com' },
-        { property: 'og:image', content: 'https://mermaid-drawing.com/social-card.svg' },
-        { property: 'og:image:width', content: '1200' },
-        { property: 'og:image:height', content: '630' },
         { property: 'og:site_name', content: 'Mermaid Drawing' },
         { property: 'og:locale', content: 'en_US' },
-        { property: 'og:locale:alternate', content: 'zh_CN' },
-        { property: 'og:locale:alternate', content: 'ru_RU' },
-        { property: 'og:locale:alternate', content: 'fr_FR' },
-        { property: 'og:locale:alternate', content: 'th_TH' },
-        // Twitter Card 优化
-        { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:title', content: 'Graph TD Online - Free Mermaid Editor with AI' },
-        {
-          name: 'twitter:description',
-          content:
-            'Graph TD online free - Best mermaid online editor with AI. Create flowcharts, sequence diagrams instantly. Free mermaid editor and free mermaid diagram generator.'
-        },
-        { name: 'twitter:image', content: 'https://mermaid-drawing.com/social-card.svg' },
-        // SEO 优化
         { name: 'robots', content: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' },
         { name: 'googlebot', content: 'index, follow' },
-        // 移动端优化
         { name: 'theme-color', content: '#3b82f6' },
         { name: 'apple-mobile-web-app-capable', content: 'yes' },
         { name: 'apple-mobile-web-app-status-bar-style', content: 'default' },
         { name: 'apple-mobile-web-app-title', content: 'Mermaid Drawing' },
-        // 安全相关
         { name: 'referrer', content: 'strict-origin-when-cross-origin' }
       ],
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
         { rel: 'apple-touch-icon', href: '/favicon.ico' },
-        { rel: 'canonical', href: 'https://mermaid-drawing.com' },
         { rel: 'sitemap', type: 'application/xml', href: '/sitemap.xml' },
         { rel: 'manifest', href: '/manifest.json' },
         // 预连接优化 - 只保留必要的（延迟加载的资源不需要预连接）
@@ -226,75 +183,29 @@ export default defineNuxtConfig({
         // 预加载关键字体 - 提升首屏文字渲染速度
         { rel: 'preconnect', href: 'https://fonts.googleapis.com', crossorigin: '' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
-        // 多语言支持
-        { rel: 'alternate', hreflang: 'en', href: 'https://mermaid-drawing.com' },
-        { rel: 'alternate', hreflang: 'zh', href: 'https://mermaid-drawing.com' },
-        { rel: 'alternate', hreflang: 'ru', href: 'https://mermaid-drawing.com' },
-        { rel: 'alternate', hreflang: 'fr', href: 'https://mermaid-drawing.com' },
-        { rel: 'alternate', hreflang: 'th', href: 'https://mermaid-drawing.com' },
-        { rel: 'alternate', hreflang: 'x-default', href: 'https://mermaid-drawing.com' },
         { rel: 'author', href: '/humans.txt' }
       ],
-      // 结构化数据 - 移除内联脚本，改为延迟加载
       script: [
-        // 结构化数据 - WebApplication
-        {
-          type: 'application/ld+json',
-          innerHTML: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'WebApplication',
-            name: 'Graph TD Online - Free Mermaid Editor with AI',
-            alternateName: ['Mermaid Online Free', 'GraphTD Editor', 'Online Mermaid Editor', 'Free Mermaid Editor', 'Mermaid Editor', 'Free Mermaid Diagram'],
-            description:
-              'Graph TD online free editor - Create mermaid diagrams with AI. Best mermaid online free tool for flowcharts, sequence diagrams, class diagrams. Get a free mermaid diagram.',
-            url: 'https://mermaid-drawing.com',
-            applicationCategory: 'DesignApplication',
-            operatingSystem: 'Web',
-            browserRequirements: 'Requires JavaScript',
-            softwareVersion: '2.0',
-            offers: {
-              '@type': 'Offer',
-              price: '0',
-              priceCurrency: 'USD'
-            },
-            featureList: [
-              'Graph TD Online Editor',
-              'Mermaid Online Free',
-              'Free Mermaid Diagram',
-              'Mermaid Editor',
-              'AI Diagram Generation',
-              'AI Code Optimization',
-              'Graph TD Flowcharts',
-              'Sequence Diagrams',
-              'Class Diagrams',
-              'State Diagrams',
-              'ER Diagrams',
-              'Gantt Charts',
-              'Pie Charts',
-              'Real-time Preview',
-              'PNG/SVG Export',
-              'Free Online Tool'
-            ],
-            screenshot: 'https://mermaid-drawing.com/social-card.svg',
-            aggregateRating: {
-              '@type': 'AggregateRating',
-              ratingValue: '4.8',
-              ratingCount: '1250',
-              bestRating: '5',
-              worstRating: '1'
-            }
-          })
-        },
-        // 结构化数据 - Organization
         {
           type: 'application/ld+json',
           innerHTML: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'Organization',
+            '@id': 'https://mermaid-drawing.com/#organization',
             name: 'Mermaid Drawing',
             url: 'https://mermaid-drawing.com',
-            logo: 'https://mermaid-drawing.com/favicon.ico',
-            sameAs: []
+            logo: 'https://mermaid-drawing.com/favicon.ico'
+          })
+        },
+        {
+          type: 'application/ld+json',
+          innerHTML: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'WebSite',
+            '@id': 'https://mermaid-drawing.com/#website',
+            name: 'Mermaid Drawing',
+            url: 'https://mermaid-drawing.com',
+            publisher: { '@id': 'https://mermaid-drawing.com/#organization' }
           })
         }
       ]
@@ -317,7 +228,3 @@ export default defineNuxtConfig({
   // 兼容性配置
   compatibilityDate: '2025-03-16'
 })
-
-const add = () => {
-	return a + b;
-}

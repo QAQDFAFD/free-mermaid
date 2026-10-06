@@ -1,18 +1,26 @@
 <template>
-  <div class="flex flex-col h-screen bg-gray-50" :class="{ 'fullscreen-mode': isFullscreen }">
-    <!-- SEO 主标题 - 视觉隐藏但对搜索引擎和屏幕阅读器可见 -->
-    <h1 class="sr-only">{{ $t('footer.title') }} - {{ $t('footer.editorTitle') }} | Free Mermaid Diagram Editor</h1>
+  <div class="min-h-screen bg-gray-50 dark:bg-gray-900" :class="{ 'fullscreen-mode': isFullscreen }">
+    <div class="editor-workspace flex flex-col">
+    <header v-show="!isFullscreen" lang="en" class="border-b border-blue-100 bg-white px-3 py-2 dark:border-gray-700 dark:bg-gray-900 md:px-4">
+      <div class="mx-auto flex max-w-7xl flex-col gap-0.5 sm:flex-row sm:items-baseline sm:gap-3">
+        <h1 class="text-base font-bold text-gray-900 dark:text-white md:text-lg">Graph TD Online — Free Mermaid Editor</h1>
+        <p class="text-xs text-gray-600 dark:text-gray-300 md:text-sm">
+          Write Mermaid code, preview diagrams, and export PNG or SVG. No registration required.
+          <a href="#graph-td-guide" class="whitespace-nowrap text-blue-700 underline dark:text-blue-400">How to use</a>
+        </p>
+      </div>
+    </header>
 
     <!-- 工具栏 -->
     <EditorToolbar v-show="!isFullscreen" class="editor-toolbar" @update:code="updateCode" :model-value="code" />
 
     <!-- 主内容区域 -->
-    <main class="flex flex-col md:flex-row flex-1 overflow-hidden relative dark:bg-gray-900" role="main">
+    <main class="flex flex-col md:flex-row flex-1 min-h-0 overflow-hidden relative dark:bg-gray-900" role="main">
       <!-- 左侧编辑器 -->
       <section
         id="mermaid-editor"
         :style="isMobile ? {} : { width: `${leftPanelWidth}%` }"
-        class="h-[45%] md:h-full border-b md:border-b-0 md:border-r border-gray-200 dark:border-gray-700 flex flex-col"
+        class="h-[45%] md:h-full min-h-0 min-w-0 border-b md:border-b-0 md:border-r border-gray-200 dark:border-gray-700 flex flex-col"
         aria-labelledby="editor-heading">
         <h2 id="editor-heading" class="sr-only">{{ $t('editor.title') }}</h2>
         <div
@@ -21,6 +29,7 @@
           <div class="flex items-center space-x-1 md:space-x-2">
             <NuxtLink
               to="/docs"
+              :aria-label="$t('editor.documentation')"
               class="text-xs text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 flex items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -60,7 +69,7 @@
       <section
         id="mermaid-preview"
         :style="isMobile ? {} : { width: `${100 - leftPanelWidth}%` }"
-        class="h-[55%] md:h-full flex flex-col"
+        class="h-[55%] md:h-full min-h-0 min-w-0 flex flex-col"
         aria-labelledby="preview-heading">
         <h2 id="preview-heading" class="sr-only">{{ $t('preview.title') }}</h2>
         <!-- 预览区标题栏 - 移动端优化 -->
@@ -93,6 +102,7 @@
             <button
               @click="zoomOut"
               class="p-1.5 md:px-2 md:py-1 text-xs bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-600 flex items-center"
+              :aria-label="$t('preview.zoomOut')"
               :title="$t('preview.zoomOut')">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -106,6 +116,7 @@
             <button
               @click="resetView"
               class="p-1.5 md:px-2 md:py-1 text-xs bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-600 flex items-center"
+              :aria-label="$t('preview.resetView')"
               :title="$t('preview.resetView')">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -123,6 +134,7 @@
             <button
               @click="zoomIn"
               class="p-1.5 md:px-2 md:py-1 text-xs bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-600 flex items-center"
+              :aria-label="$t('preview.zoomIn')"
               :title="$t('preview.zoomIn')">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -137,6 +149,7 @@
             <button
               @click="toggleFullscreen"
               class="p-1.5 md:px-2 md:py-1 text-xs bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-600 flex items-center"
+              :aria-label="isFullscreen ? $t('preview.exitFullscreen') : $t('preview.fullscreen')"
               :title="isFullscreen ? $t('preview.exitFullscreen') : $t('preview.fullscreen')">
               <svg
                 v-if="!isFullscreen"
@@ -165,6 +178,8 @@
             <div class="relative export-menu-container">
               <button
                 @click="isExportMenuOpen = !isExportMenuOpen"
+                :aria-label="t('editor.export')"
+                :aria-expanded="isExportMenuOpen"
                 class="px-2 py-1.5 md:px-3 text-xs md:text-sm bg-blue-600 text-white hover:bg-blue-700 rounded flex items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -252,179 +267,9 @@
       </section>
     </main>
 
-    <!-- 融合的底部信息与SEO区域 - 移动端隐藏 -->
-    <footer
-      v-show="!isFullscreen && !isMobile"
-      class="relative bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 text-center overflow-hidden transition-all duration-300 hidden md:block"
-      :class="isFooterCollapsed ? 'py-1 px-4' : 'py-2 px-4'">
-      <!-- 折叠/展开按钮 -->
-      <button
-        @click="toggleFooter"
-        class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-full p-1 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors shadow-sm"
-        :title="isFooterCollapsed ? $t('footer.expand') : $t('footer.collapse')">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-3 w-3 text-gray-600 dark:text-gray-300 transition-transform duration-300"
-          :class="{ 'rotate-180': isFooterCollapsed }"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-        </svg>
-      </button>
+    </div>
 
-      <!-- 美人鱼尾巴背景动画 - 只在展开时显示 -->
-      <div v-show="!isFooterCollapsed" class="absolute inset-0 pointer-events-none">
-        <!-- 水波纹背景 -->
-        <div class="absolute inset-0 opacity-20 dark:opacity-15">
-          <div class="wave-animation"></div>
-          <div class="wave-animation" style="animation-delay: -2s"></div>
-          <div class="wave-animation" style="animation-delay: -4s"></div>
-        </div>
-
-        <!-- 美人鱼尾巴 -->
-        <div class="absolute bottom-0 right-0 opacity-35 dark:opacity-25">
-          <svg width="200" height="80" viewBox="0 0 200 80" class="mermaid-tail">
-            <!-- 尾巴主体 -->
-            <path
-              d="M20,60 Q40,20 80,40 Q120,60 160,30 Q180,50 200,20"
-              stroke="url(#tailGradient)"
-              stroke-width="10"
-              fill="none"
-              stroke-linecap="round" />
-            <!-- 尾鳍 -->
-            <path d="M180,20 Q200,10 190,30 Q200,40 185,35 Q175,25 180,20" fill="url(#finGradient)" opacity="1" />
-            <!-- 小鳞片装饰 -->
-            <circle cx="50" cy="45" r="4" fill="url(#scaleGradient)" opacity="0.9" />
-            <circle cx="90" cy="35" r="3.5" fill="url(#scaleGradient)" opacity="0.9" />
-            <circle cx="130" cy="50" r="4" fill="url(#scaleGradient)" opacity="0.9" />
-
-            <!-- 渐变定义 -->
-            <defs>
-              <linearGradient id="tailGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" style="stop-color: #1e40af; stop-opacity: 0.9" />
-                <stop offset="50%" style="stop-color: #0891b2; stop-opacity: 1" />
-                <stop offset="100%" style="stop-color: #059669; stop-opacity: 0.9" />
-              </linearGradient>
-              <linearGradient id="finGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style="stop-color: #0891b2; stop-opacity: 0.9" />
-                <stop offset="100%" style="stop-color: #1e40af; stop-opacity: 1" />
-              </linearGradient>
-              <radialGradient id="scaleGradient">
-                <stop offset="0%" style="stop-color: #ffffff; stop-opacity: 1" />
-                <stop offset="100%" style="stop-color: #0891b2; stop-opacity: 0.7" />
-              </radialGradient>
-            </defs>
-          </svg>
-        </div>
-
-        <!-- 左侧美人鱼尾巴 -->
-        <div class="absolute bottom-0 left-0 opacity-25 dark:opacity-15">
-          <svg width="150" height="60" viewBox="0 0 150 60" class="mermaid-tail-left">
-            <path
-              d="M0,40 Q30,20 60,35 Q90,45 120,25 Q140,35 150,20"
-              stroke="url(#tailGradient2)"
-              stroke-width="8"
-              fill="none"
-              stroke-linecap="round" />
-            <defs>
-              <linearGradient id="tailGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" style="stop-color: #059669; stop-opacity: 0.8" />
-                <stop offset="50%" style="stop-color: #0891b2; stop-opacity: 1" />
-                <stop offset="100%" style="stop-color: #7c3aed; stop-opacity: 0.8" />
-              </linearGradient>
-            </defs>
-          </svg>
-        </div>
-
-        <!-- 漂浮泡泡 -->
-        <div class="bubble bubble-1"></div>
-        <div class="bubble bubble-2"></div>
-        <div class="bubble bubble-3"></div>
-        <div class="bubble bubble-4"></div>
-      </div>
-
-      <div class="max-w-6xl mx-auto relative z-10">
-        <!-- 折叠状态：只显示一行简要信息（视觉层） -->
-        <div
-          v-show="isFooterCollapsed"
-          class="flex items-center justify-center space-x-4 text-xs text-gray-600 dark:text-gray-400">
-          <span class="font-medium text-gray-900 dark:text-white">{{ $t('footer.title') }}</span>
-          <span>|</span>
-          <span>{{ $t('footer.capabilities.graphTdOnline') }}</span>
-          <span>•</span>
-          <span>{{ $t('footer.capabilities.mermaidEditorFree') }}</span>
-          <a href="https://mermaid-drawing.com" class="text-blue-600 dark:text-blue-400 hover:underline ml-2"
-            >mermaid-drawing.com</a
-          >
-        </div>
-
-        <!-- 展开状态：显示完整内容（SEO 内容始终在 DOM 中，只是视觉隐藏） -->
-        <div :class="isFooterCollapsed ? 'hidden' : ''">
-          <!-- 关于编辑器 -->
-          <section aria-labelledby="about-heading">
-            <h2 id="about-heading" class="text-base font-bold text-gray-900 dark:text-white mb-1.5">
-              {{ $t('footer.title') }} - {{ $t('footer.editorTitle') }} | Free Mermaid Diagram
-            </h2>
-
-            <!-- 功能特点 -->
-            <p class="text-sm text-gray-700 dark:text-gray-300 mb-1 leading-tight" v-html="featuresText"></p>
-            <p class="text-xs text-gray-600 dark:text-gray-400 mb-1.5 leading-tight" v-html="seoText"></p>
-          </section>
-
-          <!-- 支持的图表类型 -->
-          <section aria-labelledby="features-heading">
-            <h2 id="features-heading" class="sr-only">{{ $t('footer.capabilities.title') || 'Supported Features' }}</h2>
-            <div class="text-xs text-gray-600 dark:text-gray-400 leading-tight mb-2">
-              <span class="inline-block mr-2">✓ {{ $t('footer.capabilities.graphTdOnline') }}</span>
-              <span class="inline-block mr-2">✓ {{ $t('footer.capabilities.mermaidEditorFree') }}</span>
-              <span class="inline-block mr-2">✓ {{ $t('footer.capabilities.mermaidChartOnlineFree') }}</span>
-              <span class="inline-block mr-2">✓ {{ $t('footer.capabilities.mermaidFreeEditor') }}</span>
-              <span class="inline-block mr-2">✓ {{ $t('footer.capabilities.mermaidFree') }}</span>
-              <span class="inline-block mr-2">✓ {{ $t('footer.capabilities.freeMermaidDiagram') }}</span>
-              <span class="inline-block">✓ {{ $t('footer.capabilities.mermaidEditor') }}</span>
-            </div>
-          </section>
-
-          <!-- 导航链接 -->
-          <nav aria-label="Footer navigation">
-            <div class="text-center space-x-4">
-              <button
-                @click="() => $startTour(locale)"
-                class="text-xs text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 underline transition-colors"
-                title="重新开始新手引导">
-                🚀 {{ $t('footer.startTour') }}
-              </button>
-              <NuxtLink
-                to="/about"
-                class="text-xs text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                {{ locale === 'zh' ? '关于我们' : 'About' }}
-              </NuxtLink>
-              <NuxtLink
-                to="/privacy"
-                class="text-xs text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                {{ locale === 'zh' ? '隐私政策' : 'Privacy' }}
-              </NuxtLink>
-              <NuxtLink
-                to="/terms"
-                class="text-xs text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                {{ locale === 'zh' ? '服务条款' : 'Terms' }}
-              </NuxtLink>
-              <NuxtLink
-                to="/contact"
-                class="text-xs text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                {{ locale === 'zh' ? '联系我们' : 'Contact' }}
-              </NuxtLink>
-              <NuxtLink
-                to="/faq"
-                class="text-xs text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                {{ locale === 'zh' ? '常见问题' : 'FAQ' }}
-              </NuxtLink>
-            </div>
-          </nav>
-        </div>
-      </div>
-    </footer>
+    <HomeGuide v-show="!isFullscreen" @load-example="loadGuideExample" @start-tour="() => $startTour(locale)" />
 
     <!-- 全屏模式下的退出提示 -->
     <div
@@ -437,50 +282,13 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, computed, onMounted, onUnmounted, watch, defineAsyncComponent, shallowRef } from 'vue'
+  import { ref, onMounted, onUnmounted, watch } from 'vue'
   import type { ComponentPublicInstance } from 'vue'
   import { useI18n } from 'vue-i18n'
   import { getExample, getExamples, exampleKeys, type ExampleSet } from '@/composables/useExamples'
-  import { preloadCriticalResources } from '@/composables/useAppReady'
-
-  // 延迟导入 exportUtils，只在需要时加载
-  let exportAsPng: any = null
-  const loadExportUtils = async () => {
-    if (!exportAsPng) {
-      const mod = await import('@/utils/exportUtils')
-      exportAsPng = mod.exportAsPng
-    }
-    return exportAsPng
-  }
-
+  import { createSeoHead } from '@/utils/seo'
 
   const { t, locale } = useI18n()
-
-  // 计算属性：生成带HTML标签的功能描述文本
-  const featuresText = computed(() => {
-    const description = t('footer.features.description', {
-      graphTD: `<strong>${t('footer.features.graphTD')}</strong>`,
-      sequenceDiagram: `<strong>${t('footer.features.sequenceDiagram')}</strong>`,
-      classDiagram: `<strong>${t('footer.features.classDiagram')}</strong>`
-    })
-    const desc = t('footer.desc')
-    const link =
-      '<a href="https://mermaid-drawing.com" class="text-blue-600 dark:text-blue-400 hover:underline font-medium">mermaid-drawing.com</a>'
-
-    return `${description} ${desc} ${link}. Try our <strong>free mermaid diagram</strong> features today!`
-  })
-
-  // 计算属性：生成SEO文本
-  const seoText = computed(() => {
-    return t('footer.seoText', {
-      graphTd: `<strong>${t('footer.seoKeywords.graphTd')}</strong>`,
-      mermaidOnline: `<strong>${t('footer.seoKeywords.mermaidOnline')}</strong>`,
-      freeMermaidDiagram: `<strong>${t('footer.seoKeywords.freeMermaidDiagram')}</strong>`,
-      freeMermaidEditor: `<strong>${t('footer.seoKeywords.freeMermaidEditor')}</strong>`,
-      mermaidEditor: `<strong>${t('footer.seoKeywords.mermaidEditor')}</strong>`,
-      mermaidFree: `<strong>${t('footer.seoKeywords.mermaidFree')}</strong>`
-    })
-  })
 
   // 定义 MermaidPreview 组件的方法接口
   interface MermaidPreviewMethods {
@@ -561,30 +369,15 @@
   // 全屏模式
   const isFullscreen = ref(false)
 
-  // Footer 折叠状态
-  const isFooterCollapsed = ref(false)
-
   // 切换全屏模式
   const toggleFullscreen = () => {
     isFullscreen.value = !isFullscreen.value
   }
 
-  // 切换 Footer 折叠状态
-  const toggleFooter = () => {
-    isFooterCollapsed.value = !isFooterCollapsed.value
-    // 保存用户偏好到 localStorage
-    if (process.client) {
-      localStorage.setItem('footerCollapsed', String(isFooterCollapsed.value))
-    }
-  }
-
-  // 引导功能
+  // 引导功能仅由页脚的 Start Tutorial 按钮触发
   const { $startTour } = useNuxtApp()
-  const hasSeenTour = useCookie('mermaid-tour-seen', { default: () => false })
 
   onMounted(() => {
-    // 在空闲时预加载可能需要的资源（AI助手、导出工具等）
-    preloadCriticalResources()
     // 检查是否有从文档页面传来的代码
     if (process.client) {
       const tryCode = sessionStorage.getItem('mermaid-try-code')
@@ -601,20 +394,7 @@
       initializeCode()
     }
 
-    // 首次访问自动启动引导（延迟执行，确保用户有时间看到界面）
-    if (!hasSeenTour.value) {
-      setTimeout(() => {
-        $startTour(locale.value)
-      }, 500)
-    }
-
-    // 恢复 Footer 折叠状态
     if (process.client) {
-      const savedState = localStorage.getItem('footerCollapsed')
-      if (savedState === 'true') {
-        isFooterCollapsed.value = true
-      }
-
       // 恢复图表主题偏好
       const savedTheme = localStorage.getItem('mermaid-diagram-theme')
       if (savedTheme) {
@@ -653,6 +433,11 @@
 
     // 检查是否是某个示例，更新当前示例类型
     currentExampleType.value = findMatchingExampleType(newCode)
+  }
+
+  const loadGuideExample = (example: string) => {
+    updateCode(example)
+    document.getElementById('mermaid-editor')?.scrollIntoView({ block: 'start' })
   }
 
   // 监听编辑器代码变化，设置正在输入状态
@@ -737,12 +522,14 @@
 
   // 导出图表
   const exportDiagram = async (format: 'png' | 'svg') => {
+    // Use the module object so Nuxt does not auto-import SVG export into the initial bundle.
+    const exportUtils = await import('@/utils/exportUtils')
     if (format === 'png') {
-      const fn = await loadExportUtils()
-      await fn('mermaid-diagram')
+      await exportUtils.exportAsPng('mermaid-diagram')
     } else {
-      await exportAsSvg('mermaid-diagram')
+      await exportUtils.exportAsSvg('mermaid-diagram')
     }
+    isExportMenuOpen.value = false
   }
 
   // 点击外部关闭导出菜单
@@ -755,18 +542,32 @@
   }
 
   // 页面元数据
+  const homeTitle = 'Graph TD Online | Free Mermaid Editor & Live Preview'
+  const homeDescription =
+    'Edit graph TD and flowchart TD online with live Mermaid preview. Create flowcharts, sequence and ER diagrams, then export PNG or SVG. Free, no sign-up.'
+
+  const homeSeo = createSeoHead({ path: '/', title: homeTitle, description: homeDescription })
+
   useHead({
-    title: 'Graph TD Online - Free Mermaid Editor with AI | Mermaid Online Free',
-    meta: [
+    ...homeSeo,
+    script: [
       {
-        name: 'description',
-        content:
-          'Graph TD online free editor - Create mermaid diagrams with AI. Best mermaid online free tool for flowcharts, sequence diagrams. Free mermaid editor with graphtd support, real-time preview and export.'
-      },
-      {
-        name: 'keywords',
-        content:
-          'graph td, mermaid online, graph td online, mermaid diagram online, mermaid online free, mermaid free, online mermaid editor, graphtd, free mermaid editor, mermaid editor free, mermaid ai, ai diagram generator, free mermaid diagram, mermaid editor, free mermaid'
+        type: 'application/ld+json',
+        innerHTML: JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'WebApplication',
+          '@id': 'https://mermaid-drawing.com/#webapp',
+          name: 'Mermaid Drawing',
+          description: homeDescription,
+          url: 'https://mermaid-drawing.com/',
+          isPartOf: { '@id': 'https://mermaid-drawing.com/#website' },
+          applicationCategory: 'DesignApplication',
+          operatingSystem: 'Web',
+          browserRequirements: 'Requires JavaScript',
+          offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+          featureList: ['Live Mermaid preview', 'AI diagram generation', 'PNG export', 'SVG export'],
+          screenshot: 'https://mermaid-drawing.com/social-card.svg'
+        })
       }
     ]
   })
@@ -804,6 +605,22 @@
     border-width: 0;
   }
 
+  .editor-workspace {
+    height: 100vh;
+    height: 100svh;
+    min-height: 560px;
+  }
+
+  .editor-workspace > header,
+  .editor-workspace > .editor-toolbar {
+    flex-shrink: 0;
+  }
+
+  .fullscreen-mode .editor-workspace {
+    height: 100%;
+    min-height: 0;
+  }
+
   /* 全屏模式样式 */
   .fullscreen-mode {
     position: fixed;
@@ -828,19 +645,15 @@
       width: 100%;
     }
 
-    .md\:h-full {
-      height: auto;
-    }
-
     /* 移动端编辑器和预览区高度 */
     #mermaid-editor {
       width: 100% !important;
-      min-height: 40vh;
+      min-height: 0;
     }
 
     #mermaid-preview {
       width: 100% !important;
-      min-height: 45vh;
+      min-height: 0;
     }
 
     /* 移动端滚动条更细 */
@@ -852,17 +665,6 @@
     /* 移动端禁用水平滚动 */
     body {
       overflow-x: hidden;
-    }
-  }
-
-  /* 小屏幕手机优化 */
-  @media (max-width: 480px) {
-    #mermaid-editor {
-      min-height: 35vh;
-    }
-
-    #mermaid-preview {
-      min-height: 50vh;
     }
   }
 
@@ -901,220 +703,6 @@
 
   ::-webkit-scrollbar-thumb:hover {
     background: #9ca3af;
-  }
-
-  /* 美人鱼尾巴动画样式 */
-  @keyframes mermaidSwim {
-    0%,
-    100% {
-      transform: translateX(0) rotate(0deg);
-    }
-    25% {
-      transform: translateX(-5px) rotate(-2deg);
-    }
-    50% {
-      transform: translateX(0) rotate(0deg);
-    }
-    75% {
-      transform: translateX(5px) rotate(2deg);
-    }
-  }
-
-  @keyframes mermaidSwimLeft {
-    0%,
-    100% {
-      transform: translateX(0) rotate(0deg) scaleX(-1);
-    }
-    25% {
-      transform: translateX(5px) rotate(2deg) scaleX(-1);
-    }
-    50% {
-      transform: translateX(0) rotate(0deg) scaleX(-1);
-    }
-    75% {
-      transform: translateX(-5px) rotate(-2deg) scaleX(-1);
-    }
-  }
-
-  @keyframes mermaidTailSwim {
-    0% {
-      left: -80px;
-      bottom: -35px;
-    }
-    25% {
-      left: 25%;
-      bottom: -25px;
-    }
-    50% {
-      left: 50%;
-      bottom: -30px;
-    }
-    75% {
-      left: 75%;
-      bottom: -20px;
-    }
-    100% {
-      left: 100%;
-      bottom: -35px;
-    }
-  }
-
-  @keyframes mermaidTailWiggle {
-    0%,
-    100% {
-      transform: scaleY(1) skewX(0deg) rotate(0deg);
-    }
-    25% {
-      transform: scaleY(0.9) skewX(-8deg) rotate(-3deg);
-    }
-    50% {
-      transform: scaleY(1.1) skewX(0deg) rotate(0deg);
-    }
-    75% {
-      transform: scaleY(0.9) skewX(8deg) rotate(3deg);
-    }
-  }
-
-  @keyframes bubbleFloat {
-    0% {
-      transform: translateY(20px) scale(0.8);
-      opacity: 0;
-    }
-    50% {
-      opacity: 1;
-    }
-    100% {
-      transform: translateY(-80px) scale(1.2);
-      opacity: 0;
-    }
-  }
-
-  .mermaid-tail {
-    animation: mermaidSwim 6s ease-in-out infinite;
-    transform-origin: center bottom;
-  }
-
-  .mermaid-tail-left {
-    animation: mermaidSwimLeft 8s ease-in-out infinite;
-    transform-origin: center bottom;
-  }
-
-  .wave-animation {
-    position: absolute;
-    bottom: -30px;
-    left: 0px;
-    width: 80px;
-    height: 80px;
-    background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 50%, #10b981 100%);
-    opacity: 0.8;
-    clip-path: polygon(
-      40% 100%,
-      42% 90%,
-      44% 80%,
-      46% 70%,
-      47% 60%,
-      48% 50%,
-      47% 40%,
-      45% 30%,
-      40% 25%,
-      30% 20%,
-      18% 15%,
-      8% 10%,
-      2% 5%,
-      0% 0%,
-      2% 2%,
-      8% 5%,
-      18% 8%,
-      30% 12%,
-      40% 15%,
-      45% 18%,
-      48% 22%,
-      50% 25%,
-      52% 22%,
-      55% 18%,
-      60% 15%,
-      70% 12%,
-      82% 8%,
-      92% 5%,
-      98% 2%,
-      100% 0%,
-      98% 5%,
-      92% 10%,
-      82% 15%,
-      70% 20%,
-      60% 25%,
-      55% 30%,
-      53% 40%,
-      52% 50%,
-      53% 60%,
-      54% 70%,
-      56% 80%,
-      58% 90%,
-      60% 100%
-    );
-    animation: mermaidTailSwim 10s linear infinite, mermaidTailWiggle 2.5s ease-in-out infinite;
-  }
-
-  .bubble {
-    position: absolute;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.9), rgba(8, 145, 178, 0.6));
-    border-radius: 50%;
-    animation: bubbleFloat 4s ease-in-out infinite;
-  }
-
-  .bubble-1 {
-    width: 8px;
-    height: 8px;
-    left: 20%;
-    bottom: 0;
-    animation-delay: 0s;
-    animation-duration: 5s;
-  }
-
-  .bubble-2 {
-    width: 6px;
-    height: 6px;
-    left: 40%;
-    bottom: 0;
-    animation-delay: -1.5s;
-    animation-duration: 4s;
-  }
-
-  .bubble-3 {
-    width: 10px;
-    height: 10px;
-    left: 60%;
-    bottom: 0;
-    animation-delay: -3s;
-    animation-duration: 6s;
-  }
-
-  .bubble-4 {
-    width: 5px;
-    height: 5px;
-    left: 80%;
-    bottom: 0;
-    animation-delay: -4.5s;
-    animation-duration: 3.5s;
-  }
-
-  /* 响应式调整 */
-  @media (max-width: 768px) {
-    .mermaid-tail {
-      width: 150px;
-      height: 60px;
-    }
-
-    .mermaid-tail-left {
-      width: 100px;
-      height: 40px;
-    }
-
-    .wave-animation {
-      width: 60px;
-      height: 60px;
-      bottom: -25px;
-    }
   }
 
   /* Fade 过渡动画 */

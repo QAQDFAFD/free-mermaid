@@ -6,6 +6,8 @@
 		"build": "nuxt build",
 		"dev": "nuxt dev",
 		"generate": "nuxt generate",
+		"postgenerate": "npm run check:seo",
+		"check:seo": "node scripts/check-generated-seo.mjs",
 		"preview": "nuxt preview",
 		"postinstall": "nuxt prepare"
 	},

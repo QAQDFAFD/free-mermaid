@@ -49,6 +49,8 @@
       <div class="lg:hidden relative">
         <button
           @click="showMobileMenu = !showMobileMenu"
+          :aria-label="locale === 'zh' ? '选择图表类型' : 'Choose diagram type'"
+          :aria-expanded="showMobileMenu"
           class="px-2 py-1 text-xs md:text-sm text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded flex items-center"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 md:mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -82,6 +84,7 @@
       <!-- 清空按钮 - 移动端仅显示图标 -->
       <button
         @click="clearEditor"
+        :aria-label="t('editor.clear')"
         class="p-1.5 md:px-3 md:py-1.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 rounded flex items-center transition-colors">
         <svg
           xmlns="http://www.w3.org/2000/svg"

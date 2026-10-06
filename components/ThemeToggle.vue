@@ -2,9 +2,11 @@
 	<button
 		@click="toggleDarkMode"
 		class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+		:aria-label="isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'"
 		:title="isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'">
 		<!-- Sun icon for dark mode -->
 		<svg
+			aria-hidden="true"
 			v-if="isDarkMode"
 			xmlns="http://www.w3.org/2000/svg"
 			class="h-5 w-5 text-yellow-300"
@@ -20,6 +22,7 @@
 
 		<!-- Moon icon for light mode -->
 		<svg
+			aria-hidden="true"
 			v-else
 			xmlns="http://www.w3.org/2000/svg"
 			class="h-5 w-5 text-gray-700"

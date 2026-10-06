@@ -235,17 +235,12 @@
 
   const { locale } = useI18n()
 
-  useHead({
-    title: 'Terms of Service - Mermaid Drawing',
-    meta: [
-      {
-        name: 'description',
-        content:
-          'Terms of Service for Mermaid Drawing - Read our terms and conditions for using the free online diagram editor.'
-      }
-    ],
-    link: [
-      { rel: 'canonical', href: 'https://mermaid-drawing.com/terms' }
-    ]
-  })
+  useHead(
+    createSeoHead({
+      path: '/terms',
+      title: 'Terms of Service - Mermaid Drawing',
+      description:
+        'Terms of Service for Mermaid Drawing - Read our terms and conditions for using the free online diagram editor.'
+    })
+  )
 </script>

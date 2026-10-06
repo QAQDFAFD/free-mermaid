@@ -292,14 +292,11 @@
 
   const { locale } = useI18n()
 
-  useHead({
-    title: 'Privacy Policy - Mermaid Drawing',
-    meta: [
-      {
-        name: 'description',
-        content: 'Privacy Policy for Mermaid Drawing - Learn how we collect, use, and protect your information.'
-      }
-    ],
-    link: [{ rel: 'canonical', href: 'https://mermaid-drawing.com/privacy' }]
-  })
+  useHead(
+    createSeoHead({
+      path: '/privacy',
+      title: 'Privacy Policy - Mermaid Drawing',
+      description: 'Privacy Policy for Mermaid Drawing - Learn how we collect, use, and protect your information.'
+    })
+  )
 </script>
