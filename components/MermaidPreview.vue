@@ -127,11 +127,11 @@
         // 初始基础配置（保持与原插件一致的默认体验）
         mermaidInstance.initialize({
           startOnLoad: false,
-          securityLevel: 'loose',
+          securityLevel: 'strict',
           fontFamily: 'monospace',
           fontSize: 16,
           flowchart: {
-            htmlLabels: true,
+            htmlLabels: false,
             curve: 'linear'
           },
           sequence: {
@@ -338,13 +338,13 @@
 
           // 配置mermaid以确保可导出完整图表和主题支持
           const mermaidConfig: any = {
-            securityLevel: 'loose',
+            securityLevel: 'strict',
             startOnLoad: false,
             theme: isHandDrawn ? 'default' : themeToUse,
             fontFamily: isHandDrawn ? '"Comic Sans MS", "Comic Sans", cursive, sans-serif' : 'monospace',
             fontSize: 16,
             flowchart: {
-              htmlLabels: true,
+              htmlLabels: false,
               curve: 'basis', // 使用柔和的曲线连接
               padding: isHandDrawn ? 15 : 10,
               diagramPadding: 8,

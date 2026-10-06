@@ -565,7 +565,7 @@
           operatingSystem: 'Web',
           browserRequirements: 'Requires JavaScript',
           offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-          featureList: ['Live Mermaid preview', 'AI diagram generation', 'PNG export', 'SVG export'],
+          featureList: ['Live Mermaid preview', 'AI diagram generation with your own API key', 'PNG export', 'SVG export'],
           screenshot: 'https://mermaid-drawing.com/social-card.svg'
         })
       }

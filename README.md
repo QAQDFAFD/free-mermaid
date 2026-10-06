@@ -30,6 +30,7 @@ Free Mermaid is a powerful web-based tool for creating and editing diagrams usin
 - **Example Templates**: Quick-start with built-in diagram examples
 - **Responsive Design**: Works on desktop and tablets
 - **Export Options**: Download your diagrams as PNG or SVG
+- **Optional AI Assistant**: Generate or improve diagrams with your own OpenAI GPT, Anthropic Claude, or DeepSeek API Key. The site does not provide AI credits. Keys are stored in this site's browser session storage; your browser sends them directly to the selected provider when you use AI.
 - **Syntax Error Handling**: Clear error messages with suggestions to fix common issues
 
 ## 🚀 Getting Started

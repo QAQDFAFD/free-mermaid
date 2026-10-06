@@ -1,7 +1,7 @@
 {
-  "name": "Graph TD Online - Free Mermaid Editor with AI",
+  "name": "Graph TD Online - Free Mermaid Editor",
   "short_name": "Graph TD",
-  "description": "Graph TD online free editor - Best mermaid online tool. Create mermaid diagram online, flowcharts, sequence diagrams. Free mermaid editor with graphtd support and AI.",
+  "description": "Create Mermaid diagrams with live preview and export. Optional GPT, Claude, and DeepSeek assistance requires your own API Key.",
   "start_url": "/",
   "id": "/",
   "display": "standalone",
@@ -34,7 +34,7 @@
     {
       "name": "AI Assistant",
       "short_name": "AI",
-      "description": "Generate diagrams with AI assistant",
+      "description": "Generate diagrams with your own GPT, Claude, or DeepSeek API Key",
       "url": "/#ai",
       "icons": [{ "src": "/favicon.ico", "sizes": "32x32" }]
     },

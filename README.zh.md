@@ -30,6 +30,7 @@ Free Mermaid是一个强大的基于Web的工具，用于使用Mermaid语法创�
 - **示例模板**：通过内置图表示例快速入门
 - **响应式设计**：适用于桌面和平板设备
 - **导出选项**：将您的图表下载为PNG或SVG格式
+- **可选 AI 助手**：使用您自己的 OpenAI GPT、Anthropic Claude 或 DeepSeek API Key 生成和优化图表。本站不提供免费 AI 额度；Key 暂存在本站的浏览器会话存储中，使用 AI 时由浏览器直接发送给所选服务商。
 - **语法错误处理**：清晰的错误信息，并提供修复常见问题的建议
 
 ## 🚀 开始使用
@@ -92,4 +93,4 @@ npm run build
 ## 🙏 致谢
 
 - 感谢[Mermaid.js](https://mermaid-js.github.io/mermaid/#/)提供的出色图表库
-- 感谢本项目的所有贡献者和用户 
+- 感谢本项目的所有贡献者和用户

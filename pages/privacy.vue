@@ -21,7 +21,7 @@
           {{ locale === 'zh' ? '隐私政策' : 'Privacy Policy' }}
         </h1>
         <p class="text-gray-500 dark:text-gray-400 mb-8">
-          {{ locale === 'zh' ? '最后更新：2025年11月' : 'Last updated: November 2024' }}
+          {{ locale === 'zh' ? '最后更新：2026年10月6日' : 'Last updated: October 6, 2026' }}
         </p>
 
         <div class="prose dark:prose-invert max-w-none">
@@ -68,6 +68,23 @@
                 locale === 'zh'
                   ? '您在编辑器中创建的图表代码仅存储在您的浏览器本地存储中。我们不会将您的图表数据上传到我们的服务器。'
                   : "The diagram code you create in the editor is stored only in your browser's local storage. We do not upload your diagram data to our servers."
+              }}
+            </p>
+            <h3 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-2">
+              {{ locale === 'zh' ? '2.3 可选 AI 功能' : '2.3 Optional AI Features' }}
+            </h3>
+            <p class="text-gray-700 dark:text-gray-300 mb-4">
+              {{
+                locale === 'zh'
+                  ? 'AI 功能仅使用您自行输入的 API Key。Key 暂存在本站的浏览器会话存储中，可在 AI 设置中清除。使用 AI 时，浏览器会将 Key 和您提交的图表或描述直接发送给您选择的 OpenAI、Anthropic 或 DeepSeek；本站服务器不接收或保存这些内容。'
+                  : 'AI features use only the API Key you enter. The key is kept in browser session storage for this site and can be cleared in AI settings. When you use AI, your browser sends the key and the diagram or description you submit directly to your selected provider: OpenAI, Anthropic, or DeepSeek. Our server does not receive or store this content.'
+              }}
+            </p>
+            <p class="text-gray-700 dark:text-gray-300 mb-4">
+              {{
+                locale === 'zh'
+                  ? '在您同意 Cookie 后，本页加载的分析和广告脚本与其他页面脚本一样，技术上可以访问浏览器会话存储。建议使用可限制用量的 Key，并在用完后从 AI 设置中清除。'
+                  : 'If you consent to cookies, analytics and advertising scripts loaded on this page can technically access browser session storage, like other page scripts. We recommend a key with a usage limit and clearing it in AI settings when finished.'
               }}
             </p>
           </section>

@@ -219,9 +219,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       appName: 'Mermaid Drawing',
-      siteUrl: 'https://mermaid-drawing.com',
-      // AI 默认 API Key（通过环境变量配置）
-      deepseekApiKey: process.env.NUXT_PUBLIC_DEEPSEEK_API_KEY || ''
+      siteUrl: 'https://mermaid-drawing.com'
     }
   },
 

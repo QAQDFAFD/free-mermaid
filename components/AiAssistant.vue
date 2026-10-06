@@ -43,6 +43,7 @@
       leave-to-class="opacity-0 translate-y-2 scale-95">
       <div
         v-if="isPanelOpen"
+        @click.stop
         class="fixed md:absolute inset-4 md:inset-auto md:top-full md:right-0 md:mt-2 md:w-[420px] bg-white dark:bg-gray-800 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 z-50 overflow-hidden flex flex-col max-h-[90vh] md:max-h-[80vh]">
         <!-- 面板头部 -->
         <div class="bg-gradient-to-r from-blue-600 to-cyan-600 px-3 md:px-4 py-2.5 md:py-3 flex-shrink-0">
@@ -69,11 +70,11 @@
                   stroke-linejoin="round" />
               </svg>
               <span class="font-semibold text-sm md:text-base">{{ t('ai.title') }}</span>
-              <span class="text-xs bg-white/20 px-1.5 py-0.5 rounded">DeepSeek</span>
+              <span class="text-xs bg-white/20 px-1.5 py-0.5 rounded">{{ currentModelLabel }}</span>
             </div>
             <div class="flex items-center gap-1">
               <button
-                @click="showSettings = !showSettings"
+                @click="toggleSettings"
                 class="text-white/80 hover:text-white transition-colors p-1.5 rounded-lg hover:bg-white/10"
                 :title="t('ai.settings')">
                 <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -105,118 +106,59 @@
         <div
           v-show="showSettings"
           class="p-3 md:p-4 bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 flex-1 overflow-y-auto">
-          <!-- Key 来源选择 -->
-          <div class="mb-4">
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              {{ t('ai.keySource') }}
-            </label>
-            <div class="flex gap-2">
-              <button
-                @click="hasDefaultKey && (config.keySource = 'default')"
-                class="flex-1 px-3 py-2 text-sm rounded-lg border-2 transition-all duration-200"
-                :class="[
-                  config.keySource === 'default'
-                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300'
-                    : 'border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500 text-gray-600 dark:text-gray-400',
-                  !hasDefaultKey && 'opacity-50 cursor-not-allowed'
-                ]"
-                :disabled="!hasDefaultKey">
-                <div class="font-medium flex items-center justify-center gap-1">
-                  <span>🎁</span>
-                  {{ t('ai.freeKey') }}
-                </div>
-                <div class="text-xs opacity-70">
-                  {{ hasDefaultKey ? t('ai.freeKeyDesc') : t('ai.freeKeyUnavailable') }}
-                </div>
-              </button>
-              <button
-                @click="config.keySource = 'custom'"
-                class="flex-1 px-3 py-2 text-sm rounded-lg border-2 transition-all duration-200"
-                :class="
-                  config.keySource === 'custom'
-                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300'
-                    : 'border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500 text-gray-600 dark:text-gray-400'
-                ">
-                <div class="font-medium flex items-center justify-center gap-1">
-                  <span>🔑</span>
-                  {{ t('ai.customKey') }}
-                </div>
-                <div class="text-xs opacity-70">{{ t('ai.customKeyDesc') }}</div>
-              </button>
-            </div>
-          </div>
+          <label for="ai-provider" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{{ t('ai.provider') }}</label>
+          <select
+            id="ai-provider"
+            :value="config.provider"
+            @change="selectProvider(($event.target as HTMLSelectElement).value as AIProvider)"
+            class="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white">
+            <option value="openai">OpenAI (GPT)</option>
+            <option value="anthropic">Anthropic (Claude)</option>
+            <option value="deepseek">DeepSeek</option>
+          </select>
 
-          <!-- 自定义 API Key 输入（仅在选择自定义时显示） -->
-          <div v-show="config.keySource === 'custom'" class="space-y-3">
-            <div>
-              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"> DeepSeek API Key </label>
-              <input
-                v-model="config.deepseekKey"
-                type="password"
-                :placeholder="t('ai.enterApiKey')"
-                class="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                :class="config.keySource === 'custom' && !config.deepseekKey.trim() 
-                  ? 'border-amber-300 dark:border-amber-600' 
-                  : 'border-gray-300 dark:border-gray-600'" />
-            </div>
-            <!-- 未输入 Key 时的提示 -->
-            <div
-              v-if="!config.deepseekKey.trim()"
-              class="p-2.5 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800/50 rounded-lg">
-              <p class="text-xs text-amber-600 dark:text-amber-400 flex items-center gap-1.5">
-                <span>⚠️</span>
-                <span>{{ t('ai.customKeyHint') }}</span>
-              </p>
-            </div>
-          </div>
+          <label for="ai-model" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mt-4 mb-1">{{ t('ai.selectModel') }}</label>
+          <select
+            id="ai-model"
+            v-model="config.model"
+            class="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white">
+            <option v-for="option in modelOptions" :key="option.id" :value="option.id">{{ option.label }}</option>
+          </select>
 
-          <!-- 免费额度提示（仅在选择默认时显示） -->
-          <div
-            v-show="config.keySource === 'default'"
-            class="p-3 bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800 rounded-lg">
-            <p class="text-sm text-blue-600 dark:text-blue-400 flex items-start gap-2">
-              <span class="text-lg">✨</span>
-              <span>{{ t('ai.freeKeyNotice') }}</span>
-            </p>
-          </div>
+          <label for="ai-api-key" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mt-4 mb-1">
+            {{ t('ai.yourApiKey', { provider: providerLabel }) }}
+          </label>
+          <input
+            id="ai-api-key"
+            v-model="config.keys[config.provider]"
+            type="password"
+            autocomplete="off"
+            spellcheck="false"
+            :placeholder="t('ai.enterApiKey')"
+            class="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            :class="hasValidKey ? 'border-gray-300 dark:border-gray-600' : 'border-amber-300 dark:border-amber-600'" />
+          <p class="mt-2 text-xs text-gray-600 dark:text-gray-400">{{ t('ai.keyPrivacy') }}</p>
+          <p class="mt-1 text-xs text-gray-600 dark:text-gray-400">{{ t('ai.billingNotice') }}</p>
+
+          <button
+            v-if="config.keys[config.provider]"
+            type="button"
+            @click="clearCurrentKey"
+            class="mt-3 text-xs text-red-600 underline dark:text-red-400">
+            {{ t('ai.clearKey') }}
+          </button>
 
           <button
             @click="handleSaveConfig"
-            :disabled="config.keySource === 'custom' && !config.deepseekKey.trim()"
+            :disabled="!hasValidKey"
             class="w-full mt-4 px-4 py-2 text-sm font-medium text-white rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-            :class="config.keySource === 'custom' && !config.deepseekKey.trim()
-              ? 'bg-gray-400'
-              : 'bg-blue-600 hover:bg-blue-700'">
+            :class="!hasValidKey ? 'bg-gray-400' : 'bg-blue-600 hover:bg-blue-700'">
             {{ t('ai.saveSettings') }}
           </button>
         </div>
 
         <!-- 主内容区域 -->
         <div v-show="!showSettings" class="p-3 md:p-4 flex-1 overflow-y-auto">
-          <!-- 免费额度提示条 -->
-          <div
-            v-if="config.keySource === 'default' && hasDefaultKey && !dismissedTip"
-            class="mb-4 p-2.5 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 border border-amber-200 dark:border-amber-800/50 rounded-lg flex items-center justify-between gap-2">
-            <div class="flex items-center gap-2 text-xs text-amber-700 dark:text-amber-300">
-              <span class="text-base">💡</span>
-              <span
-                >{{ t('ai.freeTip') }}，<button
-                  @click="showSettings = true"
-                  class="underline underline-offset-2 hover:text-amber-800 dark:hover:text-amber-200 transition-colors">
-                  {{ t('ai.configureKey') }}
-                </button></span
-              >
-            </div>
-            <button
-              @click="dismissTip"
-              class="p-1 text-amber-400 hover:text-amber-600 dark:hover:text-amber-200 transition-colors shrink-0"
-              :title="t('ai.dismissTip')">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          </div>
-
           <!-- 模式切换 -->
           <div class="flex gap-2 mb-4">
             <button
@@ -299,6 +241,13 @@
 
           <!-- 操作按钮 -->
           <div class="mt-4 flex gap-2">
+            <button
+              v-if="isLoading"
+              type="button"
+              @click="stopRequest"
+              class="rounded-lg border border-gray-300 px-3 py-2.5 text-sm text-gray-700 dark:border-gray-600 dark:text-gray-200">
+              {{ t('ai.cancel') }}
+            </button>
             <!-- 生成完成后显示应用按钮 -->
             <button
               v-if="!isLoading && streamOutput"
@@ -366,6 +315,7 @@
   import { ref, computed, watch } from 'vue'
   import { useI18n } from 'vue-i18n'
   import { useAI } from '~/composables/useAI'
+  import type { AIProvider } from '~/utils/aiProviders'
 
   const props = defineProps<{
     currentCode: string
@@ -376,7 +326,7 @@
   }>()
 
   const { t } = useI18n()
-  const { config, isLoading, error, hasValidKey, hasDefaultKey, saveConfig, optimizeMermaid, generateMermaid } = useAI()
+  const { config, isLoading, error, hasValidKey, modelOptions, selectProvider, saveConfig, clearCurrentKey, cancelRequest, optimizeMermaid, generateMermaid } = useAI()
 
   const isPanelOpen = ref(false)
   const showSettings = ref(false)
@@ -384,19 +334,8 @@
   const topic = ref('')
   const selectedDiagramType = ref('')
   const streamOutput = ref('')
-  const dismissedTip = ref(false)
-
-  // 从 localStorage 读取提示是否已关闭
-  if (process.client) {
-    dismissedTip.value = localStorage.getItem('ai-tip-dismissed') === 'true'
-  }
-
-  const dismissTip = () => {
-    dismissedTip.value = true
-    if (process.client) {
-      localStorage.setItem('ai-tip-dismissed', 'true')
-    }
-  }
+  const providerLabel = computed(() => ({ openai: 'OpenAI', anthropic: 'Anthropic', deepseek: 'DeepSeek' })[config.provider])
+  const currentModelLabel = computed(() => modelOptions.value.find(option => option.id === config.model)?.label || providerLabel.value)
 
   // 模式列表
   const modes = computed(() => [
@@ -405,10 +344,20 @@
   ])
 
   const togglePanel = () => {
+    if (isPanelOpen.value) cancelRequest()
     isPanelOpen.value = !isPanelOpen.value
     if (!isPanelOpen.value) {
       showSettings.value = false
     }
+  }
+
+  const toggleSettings = () => {
+    showSettings.value = !showSettings.value
+  }
+
+  const stopRequest = () => {
+    cancelRequest()
+    streamOutput.value = ''
   }
 
   const handleSaveConfig = () => {
@@ -426,8 +375,8 @@
       onComplete: (fullText: string) => {
         streamOutput.value = cleanMermaidCode(fullText)
       },
-      onError: (err: Error) => {
-        console.error('AI Error:', err)
+      onError: () => {
+        streamOutput.value = ''
       }
     }
 
@@ -464,6 +413,7 @@
   // 监听面板关闭时重置状态
   watch(isPanelOpen, open => {
     if (!open) {
+      cancelRequest()
       streamOutput.value = ''
     }
   })

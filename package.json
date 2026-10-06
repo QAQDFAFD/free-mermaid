@@ -8,6 +8,7 @@
 		"generate": "nuxt generate",
 		"postgenerate": "npm run check:seo",
 		"check:seo": "node scripts/check-generated-seo.mjs",
+		"test:ai": "node --experimental-strip-types --test tests/aiProviders.test.mjs",
 		"preview": "nuxt preview",
 		"postinstall": "nuxt prepare"
 	},
@@ -27,7 +28,7 @@
 		"driver.js": "^1.3.6",
 		"file-saver": "^2.0.5",
 		"html-to-image": "^1.11.11",
-		"mermaid": "^10.6.1",
+		"mermaid": "10.9.8",
 		"vue-codemirror": "^6.1.1",
 		"vue-i18n": "^9.4.1"
 	}

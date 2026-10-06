@@ -1,14 +1,25 @@
 /**
  * AI Service Composable
- * 支持 DeepSeek 模型
+ * 用户自带 Key：OpenAI、Anthropic、DeepSeek
  * 纯前端流式输出
  */
 
-export type KeySource = 'default' | 'custom'
+import {
+  AI_MODELS,
+  DEFAULT_PROVIDER,
+  createAIRequest,
+  defaultModel,
+  isAIProvider,
+  isSupportedModel,
+  readAIStream,
+  type AIMessage,
+  type AIProvider
+} from '@/utils/aiProviders'
 
 export interface AIConfig {
-  deepseekKey: string
-  keySource: KeySource
+  provider: AIProvider
+  model: string
+  keys: Record<AIProvider, string>
 }
 
 export interface StreamCallbacks {
@@ -16,12 +27,6 @@ export interface StreamCallbacks {
   onToken?: (token: string) => void
   onComplete?: (fullText: string) => void
   onError?: (error: Error) => void
-}
-
-// DeepSeek 模型配置
-const MODEL_CONFIG = {
-  baseUrl: 'https://api.deepseek.com/v1/chat/completions',
-  model: 'deepseek-chat'
 }
 
 // Mermaid 优化的系统提示词
@@ -89,149 +94,123 @@ IMPORTANT:
 - Double-check the syntax before outputting`
 
 export function useAI() {
-  // 获取运行时配置（默认 Key）
-  const runtimeConfig = useRuntimeConfig()
-
+  let activeRequest: AbortController | null = null
   const config = reactive<AIConfig>({
-    deepseekKey: '',
-    keySource: 'default'
+    provider: DEFAULT_PROVIDER,
+    model: defaultModel(DEFAULT_PROVIDER),
+    keys: { openai: '', anthropic: '', deepseek: '' }
   })
 
   const isLoading = ref(false)
   const error = ref<string | null>(null)
 
-  // 检查是否有默认 Key 可用
-  const hasDefaultKey = computed(() => {
-    const defaultDeepseekKey = (runtimeConfig.public.deepseekApiKey as string) || ''
-    return defaultDeepseekKey.length > 0
-  })
+  const modelOptions = computed(() => AI_MODELS[config.provider])
+  const hasValidKey = computed(() =>
+    !!config.keys[config.provider].trim() && isSupportedModel(config.provider, config.model)
+  )
 
-  // 从 localStorage 加载配置
+  const selectProvider = (provider: AIProvider) => {
+    if (!isAIProvider(provider)) return
+    config.provider = provider
+    config.model = defaultModel(provider)
+  }
+
+  // Keep keys in browser session storage and remove old persistent settings.
   const loadConfig = () => {
-    if (process.client) {
-      const saved = localStorage.getItem('ai-config')
+    if (!import.meta.client) return
+    let hasSavedConfig = false
+    try {
+      const saved = sessionStorage.getItem('ai-config-v2')
       if (saved) {
+        const parsed = JSON.parse(saved)
+        if (!parsed || !isAIProvider(parsed.provider) || !parsed.keys || typeof parsed.keys !== 'object') {
+          throw new Error('Invalid AI settings')
+        }
+        config.provider = parsed.provider
+        config.model = isSupportedModel(parsed.provider, parsed.model)
+          ? parsed.model : defaultModel(parsed.provider)
+        for (const provider of Object.keys(config.keys) as AIProvider[]) {
+          config.keys[provider] = typeof parsed.keys?.[provider] === 'string' ? parsed.keys[provider] : ''
+        }
+        hasSavedConfig = true
+      }
+    } catch {
+      try { sessionStorage.removeItem('ai-config-v2') } catch { /* Storage may be disabled. */ }
+    }
+
+    try {
+      const legacy = localStorage.getItem('ai-config')
+      if (legacy && !hasSavedConfig) {
         try {
-          const parsed = JSON.parse(saved)
-          config.deepseekKey = parsed.deepseekKey || ''
-          config.keySource = parsed.keySource || 'default'
-        } catch (e) {
-          console.error('Failed to parse AI config:', e)
+          const parsed = JSON.parse(legacy)
+          if (parsed.keySource === 'custom' && typeof parsed.deepseekKey === 'string') {
+            config.keys.deepseek = parsed.deepseekKey
+            saveConfig()
+          }
+        } catch {
+          // Discard malformed legacy settings as well.
         }
       }
+    } catch {
+      // Browser storage may be disabled; the in-memory config remains usable.
+    } finally {
+      try { localStorage.removeItem('ai-config') } catch { /* Storage may be disabled. */ }
     }
   }
 
-  // 保存配置到 localStorage
   const saveConfig = () => {
-    if (process.client) {
-      localStorage.setItem(
-        'ai-config',
-        JSON.stringify({
-          deepseekKey: config.deepseekKey,
-          keySource: config.keySource
-        })
-      )
+    if (!import.meta.client) return
+    try {
+      sessionStorage.setItem('ai-config-v2', JSON.stringify(config))
+    } catch {
+      error.value = 'Browser storage is unavailable; settings will last until this page closes.'
     }
   }
 
-  // 检查是否有有效的 API Key
-  const hasValidKey = computed(() => {
-    // 如果使用默认 Key
-    if (config.keySource === 'default') {
-      return hasDefaultKey.value
-    }
-    // 如果使用自定义 Key
-    return config.deepseekKey.length > 0
-  })
-
-  // 获取当前 API Key
-  const getCurrentKey = () => {
-    const defaultDeepseekKey = (runtimeConfig.public.deepseekApiKey as string) || ''
-
-    if (config.keySource === 'default') {
-      return defaultDeepseekKey
-    }
-    return config.deepseekKey
+  const clearCurrentKey = () => {
+    config.keys[config.provider] = ''
+    saveConfig()
   }
 
-  // 流式调用 AI API
-  const streamChat = async (
-    messages: Array<{ role: 'system' | 'user' | 'assistant'; content: string }>,
-    callbacks: StreamCallbacks
-  ) => {
-    const apiKey = getCurrentKey()
+  const cancelRequest = () => {
+    activeRequest?.abort()
+  }
 
-    if (!apiKey) {
-      callbacks.onError?.(new Error('API Key not configured'))
+  const streamChat = async (messages: AIMessage[], callbacks: StreamCallbacks) => {
+    if (!hasValidKey.value) {
+      const missingKey = new Error('Select a model and enter your own API Key first.')
+      error.value = missingKey.message
+      callbacks.onError?.(missingKey)
       return
     }
 
     isLoading.value = true
     error.value = null
     callbacks.onStart?.()
+    const controller = new AbortController()
+    activeRequest = controller
 
     try {
-      const response = await fetch(MODEL_CONFIG.baseUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${apiKey}`
-        },
-        body: JSON.stringify({
-          model: MODEL_CONFIG.model,
-          messages,
-          stream: true,
-          temperature: 0.7,
-          max_tokens: 4096
-        })
-      })
+      const provider = config.provider
+      const request = createAIRequest(provider, config.model, config.keys[provider], messages)
+      const response = await fetch(request.url, { ...request.init, signal: controller.signal })
 
       if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}))
-        throw new Error(errorData.error?.message || `API Error: ${response.status}`)
+        const errorData = await response.json().catch(() => null)
+        throw new Error(errorData?.error?.message || errorData?.message || `API Error: ${response.status}`)
       }
 
-      const reader = response.body?.getReader()
-      const decoder = new TextDecoder()
-      let fullText = ''
-
-      if (!reader) {
-        throw new Error('No response body')
-      }
-
-      while (true) {
-        const { done, value } = await reader.read()
-        if (done) break
-
-        const chunk = decoder.decode(value, { stream: true })
-        const lines = chunk.split('\n').filter(line => line.trim() !== '')
-
-        for (const line of lines) {
-          if (line.startsWith('data: ')) {
-            const data = line.slice(6)
-            if (data === '[DONE]') continue
-
-            try {
-              const parsed = JSON.parse(data)
-              const content = parsed.choices?.[0]?.delta?.content
-              if (content) {
-                fullText += content
-                callbacks.onToken?.(content)
-              }
-            } catch (e) {
-              // 忽略解析错误
-            }
-          }
-        }
-      }
-
+      if (!response.body) throw new Error('No response body')
+      const fullText = await readAIStream(response.body, provider, token => callbacks.onToken?.(token))
+      if (controller.signal.aborted) return
       callbacks.onComplete?.(fullText)
     } catch (e) {
+      if (controller.signal.aborted) return
       const err = e instanceof Error ? e : new Error('Unknown error')
       error.value = err.message
       callbacks.onError?.(err)
     } finally {
+      if (activeRequest === controller) activeRequest = null
       isLoading.value = false
     }
   }
@@ -263,15 +242,19 @@ export function useAI() {
   onMounted(() => {
     loadConfig()
   })
+  onUnmounted(cancelRequest)
 
   return {
     config,
     isLoading,
     error,
     hasValidKey,
-    hasDefaultKey,
+    modelOptions,
+    selectProvider,
     saveConfig,
     loadConfig,
+    clearCurrentKey,
+    cancelRequest,
     optimizeMermaid,
     generateMermaid
   }
