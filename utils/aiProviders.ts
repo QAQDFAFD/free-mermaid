@@ -1,11 +1,11 @@
 export const AI_MODELS = {
   openai: [
-    { id: 'gpt-4.1-mini', label: 'GPT-4.1 mini' },
-    { id: 'gpt-4.1', label: 'GPT-4.1' }
+    { id: 'gpt-5.4-mini', label: 'GPT-5.4 mini' },
+    { id: 'gpt-5.4', label: 'GPT-5.4' }
   ],
   anthropic: [
-    { id: 'claude-haiku-4-5', label: 'Claude Haiku 4.5' },
-    { id: 'claude-sonnet-4-6', label: 'Claude Sonnet 4.6' }
+    { id: 'claude-sonnet-5-5', label: 'Claude Sonnet 5.5' },
+    { id: 'claude-opus-5-5', label: 'Claude Opus 5.5' }
   ],
   deepseek: [
     { id: 'deepseek-flash', label: 'DeepSeek V4.1 Flash' },
@@ -52,6 +52,8 @@ export function createAIRequest(
           system: messages.filter(message => message.role === 'system').map(message => message.content).join('\n\n'),
           messages: messages.filter(message => message.role !== 'system'),
           max_tokens: 4096,
+          output_config: { effort: 'low' },
+          ...(model === 'claude-sonnet-5-5' ? { thinking: { type: 'between_tools' } } : {}),
           stream: true
         })
       }
@@ -68,13 +70,9 @@ export function createAIRequest(
         'Content-Type': 'application/json',
         Authorization: `Bearer ${apiKey.trim()}`
       },
-      body: JSON.stringify({
-        model,
-        messages,
-        max_tokens: 4096,
-        stream: true,
-        ...(provider === 'deepseek' ? { thinking: { type: 'disabled' } } : {})
-      })
+      body: JSON.stringify(provider === 'openai'
+        ? { model, messages, max_completion_tokens: 4096, reasoning_effort: 'none', stream: true }
+        : { model, messages, max_tokens: 4096, thinking: { type: 'disabled' }, stream: true })
     }
   }
 }

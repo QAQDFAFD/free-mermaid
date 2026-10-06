@@ -27,15 +27,29 @@ test('each provider requires a user key and uses the right endpoint and model', 
         assert.equal(init.headers['anthropic-dangerous-direct-browser-access'], 'true')
         assert.equal(body.system, messages[0].content)
         assert.deepEqual(body.messages, [messages[1]])
+        assert.deepEqual(body.output_config, { effort: 'low' })
+        if (option.id === 'claude-sonnet-5-5') assert.deepEqual(body.thinking, { type: 'between_tools' })
+        if (option.id === 'claude-opus-5-5') assert.equal(body.thinking, undefined)
       } else {
         assert.equal(init.headers.Authorization, 'Bearer user-key')
         assert.deepEqual(body.messages, messages)
         if (provider === 'deepseek') assert.deepEqual(body.thinking, { type: 'disabled' })
+        if (provider === 'openai') {
+          assert.equal(body.max_completion_tokens, 4096)
+          assert.equal(body.max_tokens, undefined)
+          assert.equal(body.reasoning_effort, 'none')
+        }
       }
     }
     assert.throws(() => createAIRequest(provider, options[0].id, '', messages), /API Key/)
     assert.throws(() => createAIRequest(provider, 'unsupported-model', 'key', messages), /supported model/)
   }
+})
+
+test('model catalog contains current cost-first and higher-capability choices', () => {
+  assert.deepEqual(AI_MODELS.openai.map(model => model.id), ['gpt-5.4-mini', 'gpt-5.4'])
+  assert.deepEqual(AI_MODELS.anthropic.map(model => model.id), ['claude-sonnet-5-5', 'claude-opus-5-5'])
+  assert.deepEqual(AI_MODELS.deepseek.map(model => model.id), ['deepseek-flash', 'deepseek-v4-pro'])
 })
 
 test('truncated or interrupted streams cannot be applied as complete Mermaid', async () => {
