@@ -1,3 +1,5 @@
+import { trafficLocaleExamples } from './trafficLocaleExamples'
+
 // 示例代码按语言分组，避免 vue-i18n 解析花括号的问题
 export interface ExampleSet {
   default: string
@@ -11,6 +13,7 @@ export interface ExampleSet {
 }
 
 export const examples: Record<string, ExampleSet> = {
+  ...trafficLocaleExamples,
   en: {
     default: `graph TD
   A[🚀 Start Project] --> B{📋 Have Requirements?}

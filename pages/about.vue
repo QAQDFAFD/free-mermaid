@@ -132,8 +132,8 @@
               <p class="text-gray-600 dark:text-gray-400 text-sm">
                 {{
                   locale === 'zh'
-                    ? '支持中文、英语、俄语、法语、泰语等多种语言'
-                    : 'Support Chinese, English, Russian, French, Thai and more languages'
+                    ? '支持中文、英语、西班牙语、葡萄牙语、印尼语、俄语、法语和泰语'
+                    : 'Support English, Chinese, Spanish, Portuguese, Indonesian, Russian, French and Thai'
                 }}
               </p>
             </div>

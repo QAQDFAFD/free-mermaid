@@ -4,15 +4,11 @@
       class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg rounded-lg p-4 md:p-5 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
       <div class="text-sm text-gray-700 dark:text-gray-300">
         <p>
-          {{
-            locale === 'zh'
-              ? '我们使用 Cookie 分析网站使用情况并通过 Google AdSense 展示广告。您可以选择是否同意。'
-              : 'We use cookies to analyze usage and show ads via Google AdSense. You can choose whether to consent.'
-          }}
+          {{ t('cookies.message') }}
         </p>
         <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
           <NuxtLink to="/privacy" class="underline">
-            {{ locale === 'zh' ? '查看隐私政策' : 'See Privacy Policy' }}
+            {{ t('cookies.privacy') }}
           </NuxtLink>
         </p>
       </div>
@@ -20,10 +16,10 @@
         <button
           @click="decline"
           class="px-3 py-1.5 text-sm rounded border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-          {{ locale === 'zh' ? '拒绝' : 'Decline' }}
+          {{ t('cookies.decline') }}
         </button>
         <button @click="accept" class="px-3 py-1.5 text-sm rounded bg-blue-600 text-white hover:bg-blue-700">
-          {{ locale === 'zh' ? '同意' : 'Accept' }}
+          {{ t('cookies.accept') }}
         </button>
       </div>
     </div>
@@ -34,7 +30,7 @@
   import { ref, onMounted } from 'vue'
   import { useI18n } from 'vue-i18n'
 
-  const { locale } = useI18n()
+  const { t } = useI18n()
   const visible = ref(false)
 
   const accept = () => {

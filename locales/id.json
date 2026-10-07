@@ -1,0 +1,216 @@
+{
+  "homeGuide": {
+    "headerTitle": "Graph TD daring — editor Mermaid gratis",
+    "headerDescription": "Tulis kode Mermaid, lihat pratinjau diagram, dan ekspor PNG atau SVG tanpa mendaftar.",
+    "howToUse": "Cara menggunakan",
+    "title": "Buat diagram Graph TD daring",
+    "intro": "Mermaid mengubah teks menjadi diagram. Mulai dengan graph TD untuk membuat diagram alir dari atas ke bawah, lalu jelaskan langkah dan hubungannya. Pratinjau diperbarui saat Anda mengedit, tanpa perlu mendaftar.",
+    "step1": "Tempelkan kode Mermaid ke editor atau coba contoh di samping.",
+    "step2": "Ubah teks, hubungkan simpul, dan periksa pratinjau untuk menemukan kesalahan sintaks.",
+    "step3": "Pilih «Ekspor diagram» untuk mengunduh PNG atau SVG bagi dokumentasi Anda.",
+    "needAnother": "Perlu jenis diagram lain?",
+    "browseExamples": "Lihat contoh sintaks Mermaid",
+    "exampleHeading": "Contoh diagram keputusan yang dapat diedit",
+    "exampleCode": "graph TD\n    A[Mulai] --> B{'{'}Siap?{'}'}\n    B -->{'|'}Ya{'|'} C[Buat diagram]\n    B -->{'|'}Tidak{'|'} D[Tinjau kebutuhan]\n    D --> B\n    C --> E[Ekspor SVG atau PNG]",
+    "tryExample": "Coba contoh Graph TD ini",
+    "replacesCode": "Menggantikan kode yang sedang ada di editor.",
+    "syntaxHeading": "Apa perbedaan Graph TD dan flowchart TD?",
+    "syntaxOverview": "graph TD dan flowchart TD sama-sama membuat diagram alir Mermaid dari atas ke bawah. Ganti TD dengan LR untuk susunan dari kiri ke kanan. Dalam contoh, A[Mulai] adalah simpul persegi panjang, B{'{'}Siap?{'}'} adalah simpul keputusan, dan -->{'|'}Ya{'|'} adalah panah berlabel.",
+    "syntaxTips": "Tempelkan kode Mermaid langsung tanpa pembatas blok kode Markdown. Gunakan tanda kutip untuk label yang berisi tanda kurung atau tanda baca. Baca",
+    "syntaxLink": "panduan sintaks diagram alir",
+    "syntaxTipsEnd": "untuk contoh lainnya.",
+    "moreHeading": "Jenis diagram lain dan pilihan ekspor",
+    "moreDescription": "Gunakan diagram urutan untuk pesan antarlayanan, diagram kelas untuk hubungan antarobjek, dan diagram ER untuk basis data. Ekspor PNG untuk presentasi atau SVG untuk gambar yang dapat diubah ukurannya. Mengedit, melihat pratinjau, dan mengekspor tidak memerlukan pendaftaran.",
+    "exampleNav": "Contoh diagram",
+    "footerNav": "Navigasi bagian bawah",
+    "about": "Tentang",
+    "faq": "Pertanyaan umum",
+    "contact": "Kontak",
+    "privacy": "Privasi",
+    "terms": "Ketentuan"
+  },
+  "editor": {
+    "chooseDiagram": "Pilih jenis diagram",
+    "title": "Editor kode Mermaid",
+    "documentation": "Dokumentasi Mermaid",
+    "clear": "Bersihkan",
+    "export": "Ekspor diagram",
+    "exportPNG": "Ekspor diagram sebagai PNG",
+    "exportSVG": "Ekspor diagram sebagai SVG"
+  },
+  "preview": {
+    "title": "Pratinjau diagram Mermaid",
+    "zoom": "⌘/Ctrl + gulir untuk memperbesar",
+    "zoomOut": "Perkecil",
+    "resetView": "Atur ulang tampilan",
+    "zoomIn": "Perbesar",
+    "placeholder": "Masukkan kode Mermaid di editor untuk melihat pratinjau",
+    "loading": "Memuat diagram…",
+    "typing": "Sedang mengetik…",
+    "fullscreen": "Layar penuh",
+    "exitFullscreen": "Keluar dari layar penuh",
+    "pressEscToExit": "Tekan ESC atau klik untuk keluar dari layar penuh"
+  },
+  "diagramTheme": {
+    "title": "Tema"
+  },
+  "tools": {
+    "flowchart": "Diagram alir",
+    "sequence": "Diagram urutan",
+    "class": "Diagram kelas",
+    "state": "Diagram keadaan",
+    "entity": "Diagram hubungan entitas",
+    "gantt": "Bagan Gantt",
+    "pie": "Diagram lingkaran"
+  },
+  "footer": {
+    "startTour": "Mulai tutorial"
+  },
+  "mobile": {
+    "title": "Disarankan menggunakan komputer",
+    "description": "Untuk mengedit diagram Mermaid dengan lebih nyaman, gunakan komputer dengan layar yang lebih besar.",
+    "tip": "Anda tetap dapat menggunakan editor di ponsel, tetapi beberapa fitur mungkin terbatas.",
+    "continue": "Tetap lanjutkan"
+  },
+  "ai": {
+    "title": "Asisten AI",
+    "settings": "Pengaturan",
+    "selectModel": "Pilih model",
+    "provider": "Penyedia AI",
+    "yourApiKey": "Kunci API {provider} Anda",
+    "keyPrivacy": "Disimpan dalam penyimpanan sesi situs ini di peramban Anda. Saat menggunakan AI, peramban mengirimkannya langsung ke penyedia yang dipilih.",
+    "billingNotice": "Penyedia dapat menagih biaya penggunaan API. Situs ini tidak menyediakan kredit AI gratis.",
+    "clearKey": "Hapus kunci ini",
+    "cancel": "Hentikan permintaan",
+    "enterApiKey": "Masukkan kunci API",
+    "saveSettings": "Simpan pengaturan",
+    "optimizeMode": "Optimalkan",
+    "generateMode": "Buat",
+    "optimizeDesc": "AI akan menganalisis dan mengoptimalkan kode Mermaid Anda untuk memperbaiki struktur, keterbacaan, dan tata letak.",
+    "noCode": "Tidak ada kode di editor",
+    "topicLabel": "Jelaskan diagram yang Anda inginkan",
+    "topicPlaceholder": "Contoh: alur masuk pengguna, arsitektur sistem pesanan, jadwal proyek…",
+    "diagramType": "Jenis diagram (opsional)",
+    "autoDetect": "Deteksi jenis terbaik secara otomatis",
+    "output": "Hasil",
+    "applyToEditor": "Terapkan ke editor",
+    "generating": "Sedang membuat…",
+    "optimize": "Optimalkan",
+    "generate": "Buat",
+    "regenerate": "Buat ulang",
+    "noApiKey": "Atur kunci API Anda untuk menggunakan fitur AI.",
+    "configureNow": "Atur sekarang"
+  },
+  "tour": {
+    "buttons": {
+      "next": "Berikutnya",
+      "previous": "Sebelumnya",
+      "done": "Selesaikan tutorial",
+      "close": "Tutup",
+      "progress": "{{current}} / {{total}}"
+    },
+    "steps": {
+      "editor": {
+        "title": "🎨 Editor Mermaid",
+        "description": "Masukkan kode diagram Mermaid di sini. Anda dapat membuat diagram alir Graph TD, diagram urutan, diagram kelas, dan jenis lainnya."
+      },
+      "preview": {
+        "title": "👀 Pratinjau langsung",
+        "description": "Diagram ditampilkan di sini saat Anda mengedit. Perbesar tampilan atau ekspor hasilnya."
+      },
+      "ai": {
+        "title": "🤖 Asisten AI",
+        "description": "Buat atau optimalkan kode Mermaid menggunakan kunci API Anda sendiri. Jelaskan diagram yang diinginkan, lalu pilih penyedia dan model."
+      },
+      "toolbar": {
+        "title": "🛠️ Bilah alat",
+        "description": "Sisipkan templat diagram alir, diagram urutan, diagram kelas, dan jenis lainnya untuk mulai dengan cepat."
+      }
+    }
+  },
+  "docs": {
+    "title": "Dokumentasi Mermaid",
+    "subtitle": "Pelajari cara membuat berbagai diagram menggunakan sintaks Mermaid",
+    "backToEditor": "Kembali ke editor",
+    "basicSyntax": "Sintaks dasar",
+    "copyCode": "Salin kode",
+    "copied": "Tersalin!",
+    "tryInEditor": "Coba di editor",
+    "additionalResources": "Sumber lainnya",
+    "resourcesDesc": "Halaman ini menjelaskan sintaks dasar Mermaid. Untuk fitur lanjutan dan rincian sintaks, lihat:",
+    "officialDocs": "Dokumentasi resmi Mermaid",
+    "liveEditor": "Editor langsung Mermaid",
+    "flowchart": {
+      "syntax1": "mendefinisikan diagram alir dari atas ke bawah",
+      "syntax2": "membuat simpul persegi panjang",
+      "syntax3": "membuat simpul keputusan berbentuk belah ketupat",
+      "syntax4": "membuat hubungan dengan panah",
+      "syntax5": "membuat panah berlabel"
+    },
+    "sequence": {
+      "syntax1": "mendefinisikan diagram urutan",
+      "syntax2": "mendefinisikan peserta",
+      "syntax3": "membuat panah utuh untuk pesan sinkron",
+      "syntax4": "membuat panah putus-putus untuk balasan atau pesan asinkron"
+    },
+    "class": {
+      "syntax1": "mendefinisikan diagram kelas",
+      "syntax2": "mendefinisikan kelas dengan properti dan metode",
+      "syntax3": "menandai properti atau metode publik",
+      "syntax4": "menandai properti atau metode privat",
+      "syntax5": "menandakan B mewarisi A"
+    },
+    "state": {
+      "syntax1": "mendefinisikan diagram keadaan",
+      "syntax2": "menandai keadaan awal atau akhir",
+      "syntax3": "membuat transisi antarkeadaan",
+      "syntax4": "membuat transisi berlabel"
+    },
+    "entity": {
+      "syntax1": "mendefinisikan diagram hubungan entitas",
+      "syntax2": "menandakan hubungan satu ke banyak",
+      "syntax3": "menandakan hubungan wajib satu ke banyak",
+      "syntax4": "menandakan hubungan banyak ke banyak dengan garis putus-putus",
+      "syntax5": "menambahkan deskripsi hubungan"
+    },
+    "gantt": {
+      "syntax1": "mendefinisikan bagan Gantt",
+      "syntax2": "menentukan judul",
+      "syntax3": "menentukan format tanggal",
+      "syntax4": "mendefinisikan bagian proyek",
+      "syntax5": "mendefinisikan tugas, tanggal mulai, dan durasi atau tanggal akhir",
+      "syntax6": "menandai status tugas",
+      "syntax7": "menentukan ketergantungan antartugas"
+    },
+    "pie": {
+      "syntax1": "mendefinisikan diagram lingkaran",
+      "syntax2": "menentukan judul",
+      "syntax3": "mendefinisikan bagian diagram"
+    },
+    "quickStartTitle": "Panduan awal sintaks Mermaid",
+    "quickStartDescription": "Pilih diagram, salin kodenya, lalu coba di editor. graph TD dan flowchart TD menyusun langkah dari atas ke bawah; graph LR menyusun dari kiri ke kanan. Gunakan ID simpul untuk menghubungkan langkah dan tanda kutip untuk label dengan tanda baca. Tempelkan kode tanpa pembatas blok Markdown.",
+    "contents": "Isi halaman ini",
+    "continueTitle": "Lanjutkan mengedit diagram Mermaid",
+    "continueDescription": "Pilih contoh, edit kode sambil melihat pratinjau langsung, lalu ekspor PNG atau SVG tanpa mendaftar."
+  },
+  "cookies": {
+    "message": "Kami menggunakan cookie untuk menganalisis penggunaan situs dan menampilkan iklan Google AdSense. Anda dapat memilih untuk menyetujuinya atau tidak.",
+    "privacy": "Lihat kebijakan privasi",
+    "decline": "Tolak",
+    "accept": "Setuju"
+  },
+  "theme": {
+    "toLight": "Beralih ke mode terang",
+    "toDark": "Beralih ke mode gelap"
+  },
+  "language": {
+    "en": "English",
+    "zh": "中文",
+    "ru": "Русский",
+    "fr": "Français",
+    "th": "ไทย",
+    "es": "Español",
+    "pt": "Português",
+    "id": "Bahasa Indonesia"
+  }
+}

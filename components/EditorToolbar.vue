@@ -49,7 +49,7 @@
       <div class="lg:hidden relative">
         <button
           @click="showMobileMenu = !showMobileMenu"
-          :aria-label="locale === 'zh' ? '选择图表类型' : 'Choose diagram type'"
+          :aria-label="t('editor.chooseDiagram')"
           :aria-expanded="showMobileMenu"
           class="px-2 py-1 text-xs md:text-sm text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded flex items-center"
         >

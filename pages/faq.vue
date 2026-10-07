@@ -69,7 +69,7 @@
               {{ locale === 'zh' ? '是否支持多语言？' : 'Is multi-language supported?' }}
             </h2>
             <p class="text-gray-700 dark:text-gray-300">
-              {{ locale === 'zh' ? '支持中文、英语、俄语、法语、泰语等。' : 'Supports Chinese, English, Russian, French, Thai and more.' }}
+              {{ locale === 'zh' ? '支持中文、英语、西班牙语、葡萄牙语、印尼语、俄语、法语和泰语。' : 'Supports English, Chinese, Spanish, Portuguese, Indonesian, Russian, French and Thai.' }}
             </p>
           </section>
 

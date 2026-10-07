@@ -1,9 +1,10 @@
 <template>
-  <div class="relative">
+  <div ref="container" class="relative" @keydown.esc="isOpen = false">
     <button
       @click="isOpen = !isOpen"
       class="px-3 py-1.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded flex items-center"
-      :title="$t('language.' + currentLocale)">
+      :aria-expanded="isOpen"
+      :title="currentLocaleName">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="h-4 w-4 mr-1"
@@ -21,15 +22,15 @@
 
     <div
       v-if="isOpen"
-      class="absolute right-0 mt-1 w-32 bg-white dark:bg-gray-800 rounded-md shadow-lg z-10 overflow-hidden">
-      <div class="py-1 border border-gray-200 dark:border-gray-700 rounded-md">
+      class="absolute right-0 mt-1 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg z-10 overflow-hidden">
+      <div class="max-h-72 overflow-y-auto py-1 border border-gray-200 dark:border-gray-700 rounded-md">
         <button
-          v-for="locale in availableLocales"
-          :key="locale"
-          @click="changeLocale(locale)"
+          v-for="item in supportedLocales"
+          :key="item.code"
+          @click="changeLocale(item.code)"
           class="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center"
-          :class="{ 'bg-blue-50 dark:bg-blue-900/20': locale === currentLocale }">
-          {{ $t(`language.${locale}`) }}
+          :class="{ 'bg-blue-50 dark:bg-blue-900/20': item.code === currentLocale }">
+          {{ item.name }}
         </button>
       </div>
     </div>
@@ -37,37 +38,32 @@
 </template>
 
 <script setup>
-  import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
+  import { ref, computed, onMounted, onUnmounted } from 'vue'
   import { useI18n } from 'vue-i18n'
+  import { supportedLocales } from '~/utils/locales'
 
-  const { locale, t } = useI18n()
+  const { locale } = useI18n()
   const isOpen = ref(false)
+  const container = ref(null)
 
   const currentLocale = computed(() => locale.value)
-  const availableLocales = ['en', 'zh', 'ru', 'fr', 'th']
+  const currentLocaleName = computed(() => supportedLocales.find(item => item.code === locale.value)?.name || 'English')
 
   const changeLocale = newLocale => {
     locale.value = newLocale
     isOpen.value = false
     // 更新缓存，覆盖自动检测的语言
-    localStorage.setItem('userLocale', newLocale)
-    console.log('User manually selected language:', newLocale)
+    try { localStorage.setItem('userLocale', newLocale) } catch (_) {}
   }
 
   // 点击外部关闭语言菜单
   const closeMenu = e => {
-    if (isOpen.value && !e.target.closest('.relative')) {
+    if (isOpen.value && !container.value?.contains(e.target)) {
       isOpen.value = false
     }
   }
 
-  // 从本地存储恢复语言设置
   onMounted(() => {
-    const savedLocale = localStorage.getItem('userLocale')
-    if (savedLocale && availableLocales.includes(savedLocale)) {
-      locale.value = savedLocale
-    }
-
     document.addEventListener('click', closeMenu)
   })
 

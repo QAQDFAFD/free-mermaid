@@ -21,22 +21,11 @@
         </div>
       </div>
 
-      <section lang="en" aria-labelledby="quick-start-heading" class="mb-8 rounded-lg bg-white p-6 text-gray-700 dark:bg-gray-800 dark:text-gray-300">
-        <h2 id="quick-start-heading" class="text-xl font-bold text-gray-900 dark:text-white">Mermaid syntax quick start</h2>
-        <p class="mt-3 leading-relaxed">
-          Choose a diagram below, copy its plain-text source, and select Try in Editor to preview it.
-          For flowcharts, <code>graph TD</code> and <code>flowchart TD</code> both create a top-down layout;
-          <code>graph LR</code> runs from left to right. Use node IDs to connect steps and quotes around labels
-          containing punctuation. Paste the source without Markdown code fences.
-        </p>
-        <nav aria-label="On this page" class="mt-4 flex flex-wrap gap-x-6 gap-y-3 text-sm text-blue-700 underline dark:text-blue-400">
-          <a href="#flowchart">Flowcharts</a>
-          <a href="#sequence">Sequence diagrams</a>
-          <a href="#class">Class diagrams</a>
-          <a href="#state">State diagrams</a>
-          <a href="#entity">ER diagrams</a>
-          <a href="#gantt">Gantt charts</a>
-          <a href="#pie">Pie charts</a>
+      <section :lang="locale" aria-labelledby="quick-start-heading" class="mb-8 rounded-lg bg-white p-6 text-gray-700 dark:bg-gray-800 dark:text-gray-300">
+        <h2 id="quick-start-heading" class="text-xl font-bold text-gray-900 dark:text-white">{{ $t('docs.quickStartTitle') }}</h2>
+        <p class="mt-3 leading-relaxed">{{ $t('docs.quickStartDescription') }}</p>
+        <nav :aria-label="$t('docs.contents')" class="mt-4 flex flex-wrap gap-x-6 gap-y-3 text-sm text-blue-700 underline dark:text-blue-400">
+          <a v-for="type in diagramTypes" :key="type" :href="`#${type}`">{{ $t(`tools.${type}`) }}</a>
         </nav>
       </section>
 
@@ -113,40 +102,35 @@
                     class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
                     graph TD
                   </code>
-                  <span v-if="$i18n.locale === 'zh'">定义一个自上而下的流程图</span>
-                  <span v-else>defines a top-down flowchart</span>
+                  <span>{{ $t('docs.flowchart.syntax1') }}</span>
                 </li>
                 <li>
                   <code
                     class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
                     A[Text]
                   </code>
-                  <span v-if="$i18n.locale === 'zh'">创建一个矩形节点</span>
-                  <span v-else>creates a rectangle node</span>
+                  <span>{{ $t('docs.flowchart.syntax2') }}</span>
                 </li>
                 <li>
                   <code
                     class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
                     B{Text}
                   </code>
-                  <span v-if="$i18n.locale === 'zh'">创建一个菱形节点（通常用于条件）</span>
-                  <span v-else>creates a diamond node (typically for conditions)</span>
+                  <span>{{ $t('docs.flowchart.syntax3') }}</span>
                 </li>
                 <li>
                   <code
                     class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
                     -->
                   </code>
-                  <span v-if="$i18n.locale === 'zh'">创建节点间的连接线</span>
-                  <span v-else>creates a connection between nodes</span>
+                  <span>{{ $t('docs.flowchart.syntax4') }}</span>
                 </li>
                 <li>
                   <code
                     class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
                     -->|Text|
                   </code>
-                  <span v-if="$i18n.locale === 'zh'">创建带标签的箭头</span>
-                  <span v-else>creates a labeled arrow</span>
+                  <span>{{ $t('docs.flowchart.syntax5') }}</span>
                 </li>
               </ul>
             </div>
@@ -223,32 +207,28 @@
                     class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
                     sequenceDiagram
                   </code>
-                  <span v-if="$i18n.locale === 'zh'">定义一个序列图</span>
-                  <span v-else>defines a sequence diagram</span>
+                  <span>{{ $t('docs.sequence.syntax1') }}</span>
                 </li>
                 <li>
                   <code
                     class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
                     participant Name
                   </code>
-                  <span v-if="$i18n.locale === 'zh'">定义一个参与者</span>
-                  <span v-else>defines a participant</span>
+                  <span>{{ $t('docs.sequence.syntax2') }}</span>
                 </li>
                 <li>
                   <code
                     class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
                     A->>B: Text
                   </code>
-                  <span v-if="$i18n.locale === 'zh'">创建一个实线箭头（表示同步消息）</span>
-                  <span v-else>creates a solid arrow (synchronous message)</span>
+                  <span>{{ $t('docs.sequence.syntax3') }}</span>
                 </li>
                 <li>
                   <code
                     class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
                     A-->>B: Text
                   </code>
-                  <span v-if="$i18n.locale === 'zh'">创建一个虚线箭头（表示异步消息）</span>
-                  <span v-else>creates a dashed arrow (asynchronous message)</span>
+                  <span>{{ $t('docs.sequence.syntax4') }}</span>
                 </li>
               </ul>
             </div>
@@ -325,40 +305,35 @@
                     class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
                     classDiagram
                   </code>
-                  <span v-if="$i18n.locale === 'zh'">定义一个类图</span>
-                  <span v-else>defines a class diagram</span>
+                  <span>{{ $t('docs.class.syntax1') }}</span>
                 </li>
                 <li>
                   <code
                     class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
                     class ClassName {}
                   </code>
-                  <span v-if="$i18n.locale === 'zh'">定义一个带属性/方法的类</span>
-                  <span v-else>defines a class with properties/methods</span>
+                  <span>{{ $t('docs.class.syntax2') }}</span>
                 </li>
                 <li>
                   <code
                     class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
                     +
                   </code>
-                  <span v-if="$i18n.locale === 'zh'">表示公共属性/方法</span>
-                  <span v-else>indicates public properties/methods</span>
+                  <span>{{ $t('docs.class.syntax3') }}</span>
                 </li>
                 <li>
                   <code
                     class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
                     -
                   </code>
-                  <span v-if="$i18n.locale === 'zh'">表示私有属性/方法</span>
-                  <span v-else>indicates private properties/methods</span>
+                  <span>{{ $t('docs.class.syntax4') }}</span>
                 </li>
                 <li>
                   <code
                     class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
                     A &lt;|-- B
                   </code>
-                  <span v-if="$i18n.locale === 'zh'">表示B继承自A（B是A的子类）</span>
-                  <span v-else>indicates B inherits from A (B is a subclass of A)</span>
+                  <span>{{ $t('docs.class.syntax5') }}</span>
                 </li>
               </ul>
             </div>
@@ -435,32 +410,28 @@
                     class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
                     stateDiagram-v2
                   </code>
-                  <span v-if="$i18n.locale === 'zh'">定义一个状态图</span>
-                  <span v-else>defines a state diagram</span>
+                  <span>{{ $t('docs.state.syntax1') }}</span>
                 </li>
                 <li>
                   <code
                     class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
                     [*]
                   </code>
-                  <span v-if="$i18n.locale === 'zh'">表示开始或结束状态</span>
-                  <span v-else>represents start or end state</span>
+                  <span>{{ $t('docs.state.syntax2') }}</span>
                 </li>
                 <li>
                   <code
                     class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
                     A --> B
                   </code>
-                  <span v-if="$i18n.locale === 'zh'">表示从状态A到状态B的转换</span>
-                  <span v-else>represents a transition from state A to B</span>
+                  <span>{{ $t('docs.state.syntax3') }}</span>
                 </li>
                 <li>
                   <code
                     class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
                     A --> B: Text
                   </code>
-                  <span v-if="$i18n.locale === 'zh'">添加转换说明文本</span>
-                  <span v-else>adds transition description text</span>
+                  <span>{{ $t('docs.state.syntax4') }}</span>
                 </li>
               </ul>
             </div>
@@ -539,40 +510,35 @@
                     class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
                     erDiagram
                   </code>
-                  <span v-if="$i18n.locale === 'zh'">定义一个实体关系图</span>
-                  <span v-else>defines an entity relationship diagram</span>
+                  <span>{{ $t('docs.entity.syntax1') }}</span>
                 </li>
                 <li>
                   <code
                     class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
                     ||--o{
                   </code>
-                  <span v-if="$i18n.locale === 'zh'">表示一对多关系</span>
-                  <span v-else>represents a one-to-many relationship</span>
+                  <span>{{ $t('docs.entity.syntax2') }}</span>
                 </li>
                 <li>
                   <code
                     class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
                     ||--|{
                   </code>
-                  <span v-if="$i18n.locale === 'zh'">表示一对多（强制）关系</span>
-                  <span v-else>represents a one-to-many (mandatory) relationship</span>
+                  <span>{{ $t('docs.entity.syntax3') }}</span>
                 </li>
                 <li>
                   <code
                     class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
                     }|..|{
                   </code>
-                  <span v-if="$i18n.locale === 'zh'">表示多对多关系（虚线）</span>
-                  <span v-else>represents a many-to-many relationship (dashed line)</span>
+                  <span>{{ $t('docs.entity.syntax4') }}</span>
                 </li>
                 <li>
                   <code
                     class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
                     : Text
                   </code>
-                  <span v-if="$i18n.locale === 'zh'">添加关系说明</span>
-                  <span v-else>adds relationship label</span>
+                  <span>{{ $t('docs.entity.syntax5') }}</span>
                 </li>
               </ul>
             </div>
@@ -649,56 +615,49 @@
                     class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
                     gantt
                   </code>
-                  <span v-if="$i18n.locale === 'zh'">定义甘特图</span>
-                  <span v-else>defines a Gantt chart</span>
+                  <span>{{ $t('docs.gantt.syntax1') }}</span>
                 </li>
                 <li>
                   <code
                     class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
                     title Title
                   </code>
-                  <span v-if="$i18n.locale === 'zh'">设置图表标题</span>
-                  <span v-else>sets the chart title</span>
+                  <span>{{ $t('docs.gantt.syntax2') }}</span>
                 </li>
                 <li>
                   <code
                     class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
                     dateFormat Format
                   </code>
-                  <span v-if="$i18n.locale === 'zh'">设置日期格式</span>
-                  <span v-else>sets the date format</span>
+                  <span>{{ $t('docs.gantt.syntax3') }}</span>
                 </li>
                 <li>
                   <code
                     class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
                     section Name
                   </code>
-                  <span v-if="$i18n.locale === 'zh'">创建任务分组</span>
-                  <span v-else>creates a task section</span>
+                  <span>{{ $t('docs.gantt.syntax4') }}</span>
                 </li>
                 <li>
                   <code
                     class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
                     Task Name: ID, Start Date, Duration/End Date
                   </code>
-                  <span v-if="$i18n.locale === 'zh'">定义任务及其时间段</span>
-                  <span v-else>defines a task with its timespan</span>
+                  <span>{{ $t('docs.gantt.syntax5') }}</span>
                 </li>
                 <li>
                   <code
                     class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
                     done/active
                   </code>
-                  <span v-if="$i18n.locale === 'zh'">标记任务状态（已完成/进行中）</span>
-                  <span v-else>marks task status (completed/in progress)</span>
+                  <span>{{ $t('docs.gantt.syntax6') }}</span>
                 </li>
                 <li>
                   <code
                     class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
                     after ID
                   </code>
-                  <span v-if="$i18n.locale === 'zh'">定义任务依赖关系</span>
-                  <span v-else>defines task dependency</span>
+                  <span>{{ $t('docs.gantt.syntax7') }}</span>
                 </li>
               </ul>
             </div>
@@ -775,24 +734,21 @@
                     class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
                     pie
                   </code>
-                  <span v-if="$i18n.locale === 'zh'">定义饼图</span>
-                  <span v-else>defines a pie chart</span>
+                  <span>{{ $t('docs.pie.syntax1') }}</span>
                 </li>
                 <li>
                   <code
                     class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
                     title Title
                   </code>
-                  <span v-if="$i18n.locale === 'zh'">设置图表标题</span>
-                  <span v-else>sets the chart title</span>
+                  <span>{{ $t('docs.pie.syntax2') }}</span>
                 </li>
                 <li>
                   <code
                     class="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded text-red-600 dark:text-red-400 font-mono">
                     "Label" : Value
                   </code>
-                  <span v-if="$i18n.locale === 'zh'">定义饼图的一个切片</span>
-                  <span v-else>defines a slice in the pie chart</span>
+                  <span>{{ $t('docs.pie.syntax3') }}</span>
                 </li>
               </ul>
             </div>
@@ -910,12 +866,10 @@
 
       <div class="max-w-6xl mx-auto relative z-10">
         <h2 class="text-base font-bold text-gray-900 dark:text-white mb-2">
-          {{ locale === 'zh' ? '继续编辑您的 Mermaid 图表' : 'Keep editing your Mermaid diagram' }}
+          {{ $t('docs.continueTitle') }}
         </h2>
         <p class="text-sm text-gray-700 dark:text-gray-300 mb-3">
-          {{ locale === 'zh'
-            ? '选择上方示例，在编辑器中修改代码并查看实时预览，再导出 PNG 或 SVG。无需注册。'
-            : 'Choose an example above, edit its code with a live preview, then export PNG or SVG. No registration required.' }}
+          {{ $t('docs.continueDescription') }}
         </p>
 
         <!-- 返回编辑器按钮 -->
@@ -923,7 +877,7 @@
           <NuxtLink
             to="/"
             class="text-xs text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 underline transition-colors"
-            title="返回编辑器并开始教程">
+            :title="$t('docs.backToEditor')">
             🚀 {{ $t('footer.startTour') }}
           </NuxtLink>
         </div>
@@ -931,22 +885,22 @@
           <NuxtLink
             to="/privacy"
             class="text-xs text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400">
-            {{ locale === 'zh' ? '隐私政策' : 'Privacy' }}
+            {{ $t('homeGuide.privacy') }}
           </NuxtLink>
           <NuxtLink
             to="/terms"
             class="text-xs text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400">
-            {{ locale === 'zh' ? '服务条款' : 'Terms' }}
+            {{ $t('homeGuide.terms') }}
           </NuxtLink>
           <NuxtLink
             to="/contact"
             class="text-xs text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400">
-            {{ locale === 'zh' ? '联系我们' : 'Contact' }}
+            {{ $t('homeGuide.contact') }}
           </NuxtLink>
           <NuxtLink
             to="/faq"
             class="text-xs text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400">
-            {{ locale === 'zh' ? '常见问题' : 'FAQ' }}
+            {{ $t('homeGuide.faq') }}
           </NuxtLink>
         </div>
       </div>
@@ -962,6 +916,7 @@
 
   const { t, locale } = useI18n()
   const router = useRouter()
+  const diagramTypes = ['flowchart', 'sequence', 'class', 'state', 'entity', 'gantt', 'pie']
 
   // 复制状态管理
   const copiedStates = ref({})

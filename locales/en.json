@@ -30,6 +30,7 @@
     "terms": "Terms"
   },
   "editor": {
+    "chooseDiagram": "Choose diagram type",
     "title": "Mermaid Code Editor",
     "documentation": "Mermaid Documentation",
     "clear": "Clear",
@@ -151,59 +152,67 @@
     "officialDocs": "Mermaid Official Documentation",
     "liveEditor": "Mermaid Live Editor",
     "flowchart": {
-      "syntax1": "graph TD - defines a top-down graph (TD = Top Down)",
-      "syntax2": "A[Text] - creates a rectangular node",
-      "syntax3": "B{Text} - creates a diamond node (condition)",
-      "syntax4": "---> - creates an arrow connection",
-      "syntax5": "-->|Text| - creates a labeled arrow"
+      "syntax1": "defines a top-down graph (TD = Top Down)",
+      "syntax2": "creates a rectangular node",
+      "syntax3": "creates a diamond node (condition)",
+      "syntax4": "creates an arrow connection",
+      "syntax5": "creates a labeled arrow"
     },
     "sequence": {
-      "syntax1": "sequenceDiagram - defines a sequence diagram",
-      "syntax2": "participant Name - defines a participant",
-      "syntax3": "A->>B: Text - creates a solid arrow for synchronous messages",
-      "syntax4": "A-->>B: Text - creates a dashed arrow for return/asynchronous messages"
+      "syntax1": "defines a sequence diagram",
+      "syntax2": "defines a participant",
+      "syntax3": "creates a solid arrow for synchronous messages",
+      "syntax4": "creates a dashed arrow for return/asynchronous messages"
     },
     "class": {
-      "syntax1": "classDiagram - defines a class diagram",
-      "syntax2": "class ClassName {} - defines a class with properties/methods",
-      "syntax3": "+ - indicates public properties/methods",
-      "syntax4": "- - indicates private properties/methods",
-      "syntax5": "A <|-- B - indicates B inherits from A (B is a subclass of A)"
+      "syntax1": "defines a class diagram",
+      "syntax2": "defines a class with properties/methods",
+      "syntax3": "indicates public properties/methods",
+      "syntax4": "indicates private properties/methods",
+      "syntax5": "indicates B inherits from A (B is a subclass of A)"
     },
     "state": {
-      "syntax1": "stateDiagram-v2 - defines a state diagram",
-      "syntax2": "[*] - represents the start or end state",
-      "syntax3": "A --> B - creates a transition from A to B",
-      "syntax4": "A --> B: Text - creates a labeled transition"
+      "syntax1": "defines a state diagram",
+      "syntax2": "represents the start or end state",
+      "syntax3": "creates a transition from A to B",
+      "syntax4": "creates a labeled transition"
     },
     "entity": {
-      "syntax1": "erDiagram - defines an entity relationship diagram",
-      "syntax2": "||--o{ - represents a one-to-many relationship",
-      "syntax3": "||--|{ - represents a one-to-many (mandatory) relationship",
-      "syntax4": "}|..|{ - represents a many-to-many relationship (dashed line)",
-      "syntax5": ": Text - defines the relationship description"
+      "syntax1": "defines an entity relationship diagram",
+      "syntax2": "represents a one-to-many relationship",
+      "syntax3": "represents a one-to-many (mandatory) relationship",
+      "syntax4": "represents a many-to-many relationship (dashed line)",
+      "syntax5": "defines the relationship description"
     },
     "gantt": {
-      "syntax1": "gantt - defines a Gantt chart",
-      "syntax2": "title Title - sets the chart title",
-      "syntax3": "dateFormat Format - sets the date format",
-      "syntax4": "section Name - defines a project section",
-      "syntax5": "Task Name: ID, Start Date, Duration/End Date",
-      "syntax6": "done/active - indicates task status",
-      "syntax7": "after ID - indicates after another task"
+      "syntax1": "defines a Gantt chart",
+      "syntax2": "sets the chart title",
+      "syntax3": "sets the date format",
+      "syntax4": "defines a project section",
+      "syntax5": "defines a task, its start date, and its duration or end date",
+      "syntax6": "indicates task status",
+      "syntax7": "indicates after another task"
     },
     "pie": {
-      "syntax1": "pie - defines a pie chart",
-      "syntax2": "title Title - sets the pie chart title",
-      "syntax3": "\"Label\" : Value - defines a slice of the pie chart"
-    }
+      "syntax1": "defines a pie chart",
+      "syntax2": "sets the pie chart title",
+      "syntax3": "defines a slice of the pie chart"
+    },
+    "quickStartTitle": "Mermaid syntax quick start",
+    "quickStartDescription": "Choose a diagram below, copy its plain-text source, and select Try in Editor to preview it. For flowcharts, graph TD and flowchart TD both create a top-down layout; graph LR runs from left to right. Use node IDs to connect steps and quotes around labels containing punctuation. Paste the source without Markdown code fences.",
+    "contents": "On this page",
+    "continueTitle": "Keep editing your Mermaid diagram",
+    "continueDescription": "Choose an example above, edit its code with a live preview, then export PNG or SVG. No registration required."
   },
   "language": {
     "en": "English",
     "zh": "中文",
     "ru": "Русский",
     "fr": "Français",
-    "th": "ไทย"
+    "th": "ไทย",
+    "es": "Español",
+    "pt": "Português",
+    "id": "Bahasa Indonesia"
   },
   "mobile": {
     "title": "Desktop Recommended",
@@ -239,5 +248,15 @@
     "regenerate": "Regenerate",
     "noApiKey": "Please configure API Key to use AI features.",
     "configureNow": "Configure Now"
+  },
+  "theme": {
+    "toLight": "Switch to Light Mode",
+    "toDark": "Switch to Dark Mode"
+  },
+  "cookies": {
+    "message": "We use cookies to analyze usage and show ads via Google AdSense. You can choose whether to consent.",
+    "privacy": "See Privacy Policy",
+    "decline": "Decline",
+    "accept": "Accept"
   }
 }

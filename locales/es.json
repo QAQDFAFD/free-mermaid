@@ -1,0 +1,216 @@
+{
+  "homeGuide": {
+    "headerTitle": "Graph TD en línea — editor gratuito de Mermaid",
+    "headerDescription": "Escribe código Mermaid, previsualiza diagramas y exporta PNG o SVG sin registrarte.",
+    "howToUse": "Cómo usarlo",
+    "title": "Crea un diagrama Graph TD en línea",
+    "intro": "Mermaid convierte texto en diagramas. Empieza con graph TD para crear un diagrama de flujo de arriba abajo y describe los pasos y sus conexiones. La vista previa se actualiza mientras editas, sin necesidad de registrarte.",
+    "step1": "Pega tu código Mermaid en el editor o prueba el ejemplo de la derecha.",
+    "step2": "Cambia los textos, conecta los nodos y revisa la vista previa para detectar errores de sintaxis.",
+    "step3": "Elige «Exportar diagrama» para descargar un PNG o SVG para tus documentos.",
+    "needAnother": "¿Necesitas otro tipo de diagrama?",
+    "browseExamples": "Ver ejemplos de sintaxis de Mermaid",
+    "exampleHeading": "Un diagrama de decisiones que puedes editar",
+    "exampleCode": "graph TD\n    A[Inicio] --> B{'{'}Listo?{'}'}\n    B -->{'|'}Sí{'|'} C[Crear diagrama]\n    B -->{'|'}No{'|'} D[Revisar requisitos]\n    D --> B\n    C --> E[Exportar SVG o PNG]",
+    "tryExample": "Probar este ejemplo Graph TD",
+    "replacesCode": "Reemplaza el código actual del editor.",
+    "syntaxHeading": "Graph TD y flowchart TD: ¿cuál es la diferencia?",
+    "syntaxOverview": "graph TD y flowchart TD crean diagramas de flujo Mermaid de arriba abajo. Cambia TD por LR para un diseño de izquierda a derecha. En el ejemplo, A[Inicio] crea un nodo rectangular, B{'{'}Listo?{'}'} un nodo de decisión y -->{'|'}Sí{'|'} una flecha con texto.",
+    "syntaxTips": "Pega el código Mermaid directamente, sin delimitadores de código Markdown. Encierra entre comillas los textos con paréntesis o signos de puntuación. Consulta la",
+    "syntaxLink": "guía de sintaxis de diagramas de flujo",
+    "syntaxTipsEnd": "para ver más ejemplos.",
+    "moreHeading": "Más diagramas y opciones de exportación",
+    "moreDescription": "Los diagramas de secuencia muestran mensajes entre servicios, los de clases describen relaciones entre objetos y los ER representan bases de datos. Exporta PNG para presentaciones o SVG para imágenes escalables. Puedes editar, previsualizar y exportar sin registrarte.",
+    "exampleNav": "Ejemplos de diagramas",
+    "footerNav": "Navegación del pie de página",
+    "about": "Acerca de",
+    "faq": "Preguntas frecuentes",
+    "contact": "Contacto",
+    "privacy": "Privacidad",
+    "terms": "Términos"
+  },
+  "editor": {
+    "chooseDiagram": "Elegir tipo de diagrama",
+    "title": "Editor de código Mermaid",
+    "documentation": "Documentación de Mermaid",
+    "clear": "Borrar",
+    "export": "Exportar diagrama",
+    "exportPNG": "Exportar diagrama como PNG",
+    "exportSVG": "Exportar diagrama como SVG"
+  },
+  "preview": {
+    "title": "Vista previa del diagrama Mermaid",
+    "zoom": "⌘/Ctrl + rueda del ratón para ampliar",
+    "zoomOut": "Alejar",
+    "resetView": "Restablecer vista",
+    "zoomIn": "Acercar",
+    "placeholder": "Introduce código Mermaid en el editor para ver la vista previa",
+    "loading": "Cargando diagrama…",
+    "typing": "Escribiendo…",
+    "fullscreen": "Pantalla completa",
+    "exitFullscreen": "Salir de pantalla completa",
+    "pressEscToExit": "Pulsa ESC o haz clic para salir de pantalla completa"
+  },
+  "diagramTheme": {
+    "title": "Tema"
+  },
+  "tools": {
+    "flowchart": "Diagrama de flujo",
+    "sequence": "Diagrama de secuencia",
+    "class": "Diagrama de clases",
+    "state": "Diagrama de estados",
+    "entity": "Diagrama entidad-relación",
+    "gantt": "Diagrama de Gantt",
+    "pie": "Gráfico circular"
+  },
+  "footer": {
+    "startTour": "Iniciar tutorial"
+  },
+  "mobile": {
+    "title": "Se recomienda un ordenador",
+    "description": "Para editar diagramas Mermaid con mayor comodidad, recomendamos un ordenador con una pantalla más grande.",
+    "tip": "También puedes usar el editor en el móvil, aunque algunas funciones pueden ser limitadas.",
+    "continue": "Continuar de todos modos"
+  },
+  "ai": {
+    "title": "Asistente de IA",
+    "settings": "Configuración",
+    "selectModel": "Seleccionar modelo",
+    "provider": "Proveedor de IA",
+    "yourApiKey": "Tu clave API de {provider}",
+    "keyPrivacy": "Se guarda en el almacenamiento de sesión de este sitio en tu navegador. Al usar la IA, el navegador la envía directamente al proveedor seleccionado.",
+    "billingNotice": "Tu proveedor puede cobrar por el uso de la API. Este sitio no ofrece créditos gratuitos de IA.",
+    "clearKey": "Eliminar esta clave",
+    "cancel": "Detener solicitud",
+    "enterApiKey": "Introduce la clave API",
+    "saveSettings": "Guardar configuración",
+    "optimizeMode": "Optimizar",
+    "generateMode": "Generar",
+    "optimizeDesc": "La IA analizará y optimizará tu código Mermaid para mejorar la estructura, la legibilidad y el diseño.",
+    "noCode": "No hay código en el editor",
+    "topicLabel": "Describe el diagrama que quieres",
+    "topicPlaceholder": "Ej.: flujo de inicio de sesión, arquitectura de pedidos, cronograma de un proyecto…",
+    "diagramType": "Tipo de diagrama (opcional)",
+    "autoDetect": "Detectar el tipo automáticamente",
+    "output": "Resultado",
+    "applyToEditor": "Aplicar al editor",
+    "generating": "Generando…",
+    "optimize": "Optimizar",
+    "generate": "Generar",
+    "regenerate": "Volver a generar",
+    "noApiKey": "Configura tu clave API para usar las funciones de IA.",
+    "configureNow": "Configurar ahora"
+  },
+  "tour": {
+    "buttons": {
+      "next": "Siguiente",
+      "previous": "Anterior",
+      "done": "Terminar tutorial",
+      "close": "Cerrar",
+      "progress": "{{current}} / {{total}}"
+    },
+    "steps": {
+      "editor": {
+        "title": "🎨 Editor Mermaid",
+        "description": "Introduce aquí el código de tu diagrama Mermaid. Puedes crear diagramas de flujo Graph TD, secuencias, clases y otros tipos."
+      },
+      "preview": {
+        "title": "👀 Vista previa en tiempo real",
+        "description": "Aquí se muestra tu diagrama mientras editas. Puedes ampliar la vista y exportar el resultado."
+      },
+      "ai": {
+        "title": "🤖 Asistente de IA",
+        "description": "Genera u optimiza código Mermaid con tu propia clave API. Describe el diagrama que necesitas y elige un proveedor y un modelo."
+      },
+      "toolbar": {
+        "title": "🛠️ Barra de herramientas",
+        "description": "Inserta plantillas de diagramas de flujo, secuencias, clases y otros tipos para empezar rápidamente."
+      }
+    }
+  },
+  "docs": {
+    "title": "Documentación de Mermaid",
+    "subtitle": "Aprende a crear distintos diagramas con la sintaxis de Mermaid",
+    "backToEditor": "Volver al editor",
+    "basicSyntax": "Sintaxis básica",
+    "copyCode": "Copiar código",
+    "copied": "¡Copiado!",
+    "tryInEditor": "Probar en el editor",
+    "additionalResources": "Más recursos",
+    "resourcesDesc": "Esta página presenta la sintaxis básica de Mermaid. Para funciones avanzadas y más detalles, consulta:",
+    "officialDocs": "Documentación oficial de Mermaid",
+    "liveEditor": "Editor en vivo de Mermaid",
+    "flowchart": {
+      "syntax1": "define un diagrama de arriba abajo",
+      "syntax2": "crea un nodo rectangular",
+      "syntax3": "crea un nodo de decisión con forma de rombo",
+      "syntax4": "crea una conexión con flecha",
+      "syntax5": "crea una flecha con texto"
+    },
+    "sequence": {
+      "syntax1": "define un diagrama de secuencia",
+      "syntax2": "define un participante",
+      "syntax3": "crea una flecha continua para un mensaje síncrono",
+      "syntax4": "crea una flecha discontinua para una respuesta o un mensaje asíncrono"
+    },
+    "class": {
+      "syntax1": "define un diagrama de clases",
+      "syntax2": "define una clase con propiedades y métodos",
+      "syntax3": "indica propiedades o métodos públicos",
+      "syntax4": "indica propiedades o métodos privados",
+      "syntax5": "indica que B hereda de A"
+    },
+    "state": {
+      "syntax1": "define un diagrama de estados",
+      "syntax2": "representa el estado inicial o final",
+      "syntax3": "crea una transición entre estados",
+      "syntax4": "crea una transición con texto"
+    },
+    "entity": {
+      "syntax1": "define un diagrama entidad-relación",
+      "syntax2": "representa una relación de uno a muchos",
+      "syntax3": "representa una relación obligatoria de uno a muchos",
+      "syntax4": "representa una relación de muchos a muchos con línea discontinua",
+      "syntax5": "añade una descripción de la relación"
+    },
+    "gantt": {
+      "syntax1": "define un diagrama de Gantt",
+      "syntax2": "establece el título",
+      "syntax3": "establece el formato de fecha",
+      "syntax4": "define una sección del proyecto",
+      "syntax5": "define una tarea, su inicio y su duración o fecha final",
+      "syntax6": "marca el estado de la tarea",
+      "syntax7": "establece una dependencia entre tareas"
+    },
+    "pie": {
+      "syntax1": "define un gráfico circular",
+      "syntax2": "establece el título",
+      "syntax3": "define una porción del gráfico"
+    },
+    "quickStartTitle": "Introducción a la sintaxis de Mermaid",
+    "quickStartDescription": "Elige un diagrama, copia su código y pruébalo en el editor. graph TD y flowchart TD ordenan los pasos de arriba abajo; graph LR los ordena de izquierda a derecha. Conecta los pasos con los identificadores de los nodos y pon entre comillas los textos con signos de puntuación. Pega el código sin delimitadores Markdown.",
+    "contents": "En esta página",
+    "continueTitle": "Sigue editando tu diagrama Mermaid",
+    "continueDescription": "Elige un ejemplo, edita el código con la vista previa en tiempo real y exporta PNG o SVG sin registrarte."
+  },
+  "cookies": {
+    "message": "Usamos cookies para analizar el uso del sitio y mostrar anuncios de Google AdSense. Puedes elegir si aceptarlas.",
+    "privacy": "Ver política de privacidad",
+    "decline": "Rechazar",
+    "accept": "Aceptar"
+  },
+  "theme": {
+    "toLight": "Cambiar al modo claro",
+    "toDark": "Cambiar al modo oscuro"
+  },
+  "language": {
+    "en": "English",
+    "zh": "中文",
+    "ru": "Русский",
+    "fr": "Français",
+    "th": "ไทย",
+    "es": "Español",
+    "pt": "Português",
+    "id": "Bahasa Indonesia"
+  }
+}

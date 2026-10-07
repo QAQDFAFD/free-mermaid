@@ -30,6 +30,7 @@
     "terms": "使用条款"
   },
   "editor": {
+    "chooseDiagram": "选择图表类型",
     "title": "Mermaid 代码编辑器",
     "documentation": "Mermaid 文档",
     "clear": "清空",
@@ -151,59 +152,67 @@
     "officialDocs": "Mermaid 官方文档",
     "liveEditor": "Mermaid Live Editor",
     "flowchart": {
-      "syntax1": "graph TD - 定义一个自上而下的图表 (TD = Top Down)",
-      "syntax2": "A[文本] - 创建一个矩形节点",
-      "syntax3": "B{文本} - 创建一个菱形节点（条件）",
-      "syntax4": "--> - 创建一个箭头连接",
-      "syntax5": "-->|文本| - 创建一个带标签的箭头"
+      "syntax1": "定义一个自上而下的图表 (TD = Top Down)",
+      "syntax2": "创建一个矩形节点",
+      "syntax3": "创建一个菱形节点（条件）",
+      "syntax4": "创建一个箭头连接",
+      "syntax5": "创建一个带标签的箭头"
     },
     "sequence": {
-      "syntax1": "sequenceDiagram - 定义一个序列图",
-      "syntax2": "participant 名称 - 定义一个参与者",
-      "syntax3": "A->>B: 文本 - 创建实线箭头表示同步消息",
-      "syntax4": "A-->>B: 文本 - 创建虚线箭头表示返回/异步消息"
+      "syntax1": "定义一个序列图",
+      "syntax2": "定义一个参与者",
+      "syntax3": "创建实线箭头表示同步消息",
+      "syntax4": "创建虚线箭头表示返回/异步消息"
     },
     "class": {
-      "syntax1": "classDiagram - 定义一个类图",
-      "syntax2": "class 类名 {} - 定义一个带属性/方法的类",
-      "syntax3": "+ - 表示公共属性/方法",
-      "syntax4": "- - 表示私有属性/方法",
-      "syntax5": "A <|-- B - 表示B继承自A（B是A的子类）"
+      "syntax1": "定义一个类图",
+      "syntax2": "定义一个带属性/方法的类",
+      "syntax3": "表示公共属性/方法",
+      "syntax4": "表示私有属性/方法",
+      "syntax5": "表示B继承自A（B是A的子类）"
     },
     "state": {
-      "syntax1": "stateDiagram-v2 - 定义一个状态图",
-      "syntax2": "[*] - 表示开始或结束状态",
-      "syntax3": "A --> B - 创建从A到B的转换",
-      "syntax4": "A --> B: 文本 - 创建带标签的转换"
+      "syntax1": "定义一个状态图",
+      "syntax2": "表示开始或结束状态",
+      "syntax3": "创建从A到B的转换",
+      "syntax4": "创建带标签的转换"
     },
     "entity": {
-      "syntax1": "erDiagram - 定义一个实体关系图",
-      "syntax2": "||--o{ - 表示一对多关系",
-      "syntax3": "||--|{ - 表示一对多（必须）关系",
-      "syntax4": "}|..|{ - 表示多对多关系（虚线）",
-      "syntax5": ": 文本 - 定义关系描述"
+      "syntax1": "定义一个实体关系图",
+      "syntax2": "表示一对多关系",
+      "syntax3": "表示一对多（必须）关系",
+      "syntax4": "表示多对多关系（虚线）",
+      "syntax5": "定义关系描述"
     },
     "gantt": {
-      "syntax1": "gantt - 定义一个甘特图",
-      "syntax2": "title 标题 - 设置图表标题",
-      "syntax3": "dateFormat 格式 - 设置日期格式",
-      "syntax4": "section 名称 - 定义项目部分",
-      "syntax5": "任务名称: ID, 开始日期, 持续时间/结束日期",
-      "syntax6": "done/active - 表示任务状态",
-      "syntax7": "after ID - 表示在另一个任务之后"
+      "syntax1": "定义一个甘特图",
+      "syntax2": "设置图表标题",
+      "syntax3": "设置日期格式",
+      "syntax4": "定义项目部分",
+      "syntax5": "定义任务、开始日期，以及持续时间或结束日期",
+      "syntax6": "表示任务状态",
+      "syntax7": "表示在另一个任务之后"
     },
     "pie": {
-      "syntax1": "pie - 定义一个饼图",
-      "syntax2": "title 标题 - 设置饼图标题",
-      "syntax3": "\"标签\" : 数值 - 定义饼图的一个切片"
-    }
+      "syntax1": "定义一个饼图",
+      "syntax2": "设置饼图标题",
+      "syntax3": "定义饼图的一个切片"
+    },
+    "quickStartTitle": "Mermaid 语法快速入门",
+    "quickStartDescription": "选择下方图表，复制 Mermaid 源代码并点击“在编辑器中尝试”。graph TD 和 flowchart TD 都表示从上到下排列，graph LR 表示从左到右排列。通过节点 ID 连接各个步骤，含有标点的标签请用引号包住。粘贴源代码时无需添加 Markdown 代码围栏。",
+    "contents": "本页目录",
+    "continueTitle": "继续编辑您的 Mermaid 图表",
+    "continueDescription": "选择上方示例，在编辑器中修改代码并查看实时预览，再导出 PNG 或 SVG。无需注册。"
   },
   "language": {
     "en": "English",
     "zh": "中文",
     "ru": "Русский",
     "fr": "Français",
-    "th": "ไทย"
+    "th": "ไทย",
+    "es": "Español",
+    "pt": "Português",
+    "id": "Bahasa Indonesia"
   },
   "mobile": {
     "title": "推荐使用桌面设备",
@@ -239,5 +248,15 @@
     "regenerate": "重新生成",
     "noApiKey": "请先配置 API Key 才能使用 AI 功能。",
     "configureNow": "立即配置"
+  },
+  "theme": {
+    "toLight": "切换到浅色模式",
+    "toDark": "切换到深色模式"
+  },
+  "cookies": {
+    "message": "我们使用 Cookie 分析网站使用情况并通过 Google AdSense 展示广告。您可以选择是否同意。",
+    "privacy": "查看隐私政策",
+    "decline": "拒绝",
+    "accept": "同意"
   }
 }

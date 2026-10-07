@@ -9,6 +9,7 @@
 		"postgenerate": "npm run check:seo",
 		"check:seo": "node scripts/check-generated-seo.mjs",
 		"test:ai": "node --experimental-strip-types --test tests/aiProviders.test.mjs",
+		"test:i18n": "node --experimental-strip-types --test tests/locales.test.mjs",
 		"preview": "nuxt preview",
 		"postinstall": "nuxt prepare"
 	},

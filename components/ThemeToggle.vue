@@ -2,8 +2,8 @@
 	<button
 		@click="toggleDarkMode"
 		class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-		:aria-label="isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'"
-		:title="isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'">
+		:aria-label="isDarkMode ? t('theme.toLight') : t('theme.toDark')"
+		:title="isDarkMode ? t('theme.toLight') : t('theme.toDark')">
 		<!-- Sun icon for dark mode -->
 		<svg
 			aria-hidden="true"
@@ -40,6 +40,8 @@
 
 <script setup>
 	import { ref, onMounted } from 'vue'
+	import { useI18n } from 'vue-i18n'
+	const { t } = useI18n()
 
 	const isDarkMode = ref(false)
 
