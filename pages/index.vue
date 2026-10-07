@@ -1,12 +1,12 @@
 <template>
   <div class="min-h-screen bg-gray-50 dark:bg-gray-900" :class="{ 'fullscreen-mode': isFullscreen }">
     <div class="editor-workspace flex flex-col">
-    <header v-show="!isFullscreen" lang="en" class="border-b border-blue-100 bg-white px-3 py-2 dark:border-gray-700 dark:bg-gray-900 md:px-4">
+    <header v-show="!isFullscreen" :lang="locale" class="border-b border-blue-100 bg-white px-3 py-2 dark:border-gray-700 dark:bg-gray-900 md:px-4">
       <div class="mx-auto flex max-w-7xl flex-col gap-0.5 sm:flex-row sm:items-baseline sm:gap-3">
-        <h1 class="text-base font-bold text-gray-900 dark:text-white md:text-lg">Graph TD Online — Free Mermaid Editor</h1>
+        <h1 class="text-base font-bold text-gray-900 dark:text-white md:text-lg">{{ t('homeGuide.headerTitle') }}</h1>
         <p class="text-xs text-gray-600 dark:text-gray-300 md:text-sm">
-          Write Mermaid code, preview diagrams, and export PNG or SVG. No registration required.
-          <a href="#graph-td-guide" class="whitespace-nowrap text-blue-700 underline dark:text-blue-400">How to use</a>
+          {{ t('homeGuide.headerDescription') }}
+          <a href="#graph-td-guide" class="whitespace-nowrap text-blue-700 underline dark:text-blue-400">{{ t('homeGuide.howToUse') }}</a>
         </p>
       </div>
     </header>
